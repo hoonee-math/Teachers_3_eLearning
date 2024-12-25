@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<!-- configuration 에는 순서가 있음! 태그 순서가 잘못되면 에러가 발생함! -->
+	<!-- 민감한 정보 저장해서 불러오기 -->
+	<properties resource="/driver.properties"></properties>
+	
+	
+	<!-- DB 접속 환경에 대한 상세 설정, null 값을 넣으면 에러가 나는데 이런 설정을 줄 수 있음 -->
+	<settings>
+		<!-- 제약조건에 대한 허용이 아님! https://mybatis.org/mybatis-3/configuration.html#settings -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	
+	<!-- 클래스 타입의 별칭 부여하기 -->
+	<typeAliases>
+		<typeAlias type="com.ttt.dto.Post1" alias="post1"/>
+		<typeAlias type="com.ttt.dto.School12" alias="school12"/>
+		<typeAlias type="com.ttt.dto.Member1" alias="member1"/>
+		<typeAlias type="com.ttt.dto.Image1" alias="image1"/>
+		<typeAlias type="com.ttt.dto.Comment1" alias="comment1"/>
+	</typeAliases>
+	
+	
+	<!-- DB정보 작성 : DB 보안 정보는 driver.properties에 개별 작성 -->
+	<environments default="teachers">
+		<environment id="teachers">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${user}"/>
+				<property name="password" value="${pw}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 생성한 Mapper 를 전역에서 접근하도록 설정 -->
+	<mappers>
+		<mapper resource="/mappers/post-mapper.xml"/>
+		<mapper resource="/mappers/school-mapper.xml"/>
+		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/image-mapper.xml"/>
+		<mapper resource="/mappers/board-mapper.xml"/>
+	</mappers>
+	
+</configuration>

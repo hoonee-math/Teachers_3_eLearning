@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ttt</groupId>
+  <artifactId>Teachers_3rd</artifactId>
+  <version>1.0</version>
+  <packaging>war</packaging>
+  <name>Teachers_3_elearning</name>
+  <properties>
+  	<java-version>17</java-version>
+  </properties>
+
+  <!-- https://mvnrepository.com/ 이동해서 프로젝트에서 사용할 라이브러리 등록 : 서블릿, jsp, 롬북, jstl, mybatis, ojdbc-->
+  <dependencies>
+  	<!--필요한 라이브러리(jar)을 등록하는 곳-->
+  	<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>4.0.1</version>
+	    <scope>provided</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+	<dependency>
+	    <groupId>javax.servlet.jsp</groupId>
+	    <artifactId>javax.servlet.jsp-api</artifactId>
+	    <version>2.3.3</version>
+	    <scope>provided</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+	<dependency>
+	    <groupId>org.projectlombok</groupId>
+	    <artifactId>lombok</artifactId>
+	    <version>1.18.30</version>
+	    <scope>provided</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc11 -->
+	<dependency>
+	    <groupId>com.oracle.database.jdbc</groupId>
+	    <artifactId>ojdbc11</artifactId>
+	    <version>23.3.0.23.09</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+	    <version>3.5.16</version>
+	</dependency>
+	<!-- 메일 인증 서비스를 위한 의존성 -->
+	<dependency>
+	    <groupId>com.sun.mail</groupId>
+	    <artifactId>javax.mail</artifactId>
+	    <version>1.6.2</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.servlets/cos -->
+	<dependency>
+	    <groupId>com.servlets</groupId>
+	    <artifactId>cos</artifactId>
+	    <version>05Nov2002</version>
+	</dependency>
+  </dependencies>
+  <build>
+	<!--패키징시 이름 설정 -> war 파일 이름이 contextPath가 됨! -->
+	<!--war 파일 패키징-->
+	<finalName>elearning</finalName>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.13.0</version>
+			<configuration>
+				<source>${java-version}</source>
+				<target>${java-version}</target>
+			</configuration>
+		</plugin>
+	</plugins>
+  </build>
+</project>

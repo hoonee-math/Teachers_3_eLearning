@@ -1,24 +1,41 @@
-# Compiled class file
-*.class
+# Eclipse 추가 설정
+.classpath
+.project
+.settings/
+.metadata/
+bin/
+tmp/
 
-# Log file
-*.log
+# IntelliJ 설정 (혹시 모를 경우)
+.idea/
+*.iml
 
-# BlueJ files
-*.ctxt
+# Maven 추가 설정
+target/
+**/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# STS(Spring Tool Suite) 추가 설정
+.springBeans
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# OS 관련 파일
+.DS_Store       # Mac
+Thumbs.db       # Windows
+Desktop.ini     # Windows
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# 현재 설정에서 누락된 웹 관련
+*/web-resources/
+**/WEB-INF/classes/
+
+# Server 설정 파일
+Servers/
+*/Servers/
+**/Servers/
+
+# 민감 정보 저장 위치
+driver.properties
+email.properties
