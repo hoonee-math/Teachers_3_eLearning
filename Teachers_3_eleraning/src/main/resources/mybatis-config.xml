@@ -15,13 +15,8 @@
 	
 	<!-- 클래스 타입의 별칭 부여하기 -->
 	<typeAliases>
-		<typeAlias type="com.ttt.dto.Post1" alias="post1"/>
-		<typeAlias type="com.ttt.dto.School12" alias="school12"/>
-		<typeAlias type="com.ttt.dto.Member1" alias="member1"/>
-		<typeAlias type="com.ttt.dto.Image1" alias="image1"/>
-		<typeAlias type="com.ttt.dto.Comment1" alias="comment1"/>
+		<!-- <typeAlias type="com.ttt.dto.Member3" alias="member3"/> -->
 	</typeAliases>
-	
 	
 	<!-- DB정보 작성 : DB 보안 정보는 driver.properties에 개별 작성 -->
 	<environments default="teachers">
@@ -38,11 +33,7 @@
 	
 	<!-- 생성한 Mapper 를 전역에서 접근하도록 설정 -->
 	<mappers>
-		<mapper resource="/mappers/post-mapper.xml"/>
-		<mapper resource="/mappers/school-mapper.xml"/>
-		<mapper resource="/mappers/member-mapper.xml"/>
-		<mapper resource="/mappers/image-mapper.xml"/>
-		<mapper resource="/mappers/board-mapper.xml"/>
+		<!-- <mapper resource="/mappers/member3-mapper.xml"/> -->
 	</mappers>
 	
 </configuration>
