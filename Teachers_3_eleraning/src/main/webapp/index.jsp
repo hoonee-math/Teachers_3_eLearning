@@ -10,6 +10,7 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="contextPath" content="${pageContext.request.contextPath}">
 	<title>Honey T</title>
 	
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -104,7 +105,7 @@
         .grade-btn {
             width: 100%;
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #FAB350;
             color: white;
             border: none;
             border-radius: 4px;
@@ -176,7 +177,7 @@
         }
 
         .btn-primary {
-            background-color: #007bff;
+            background-color: #FAB350;
             color: white;
         }
 
@@ -242,10 +243,10 @@
 
 .subject-title {
     font-weight: bold;
-    color: #007bff;
+    color: #FAB350;
     margin-bottom: 10px;
     padding-bottom: 5px;
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid #FAB350;
 }
 
 .teacher-list {
@@ -261,7 +262,7 @@
 }
 
 .teacher-item:hover {
-    color: #007bff;
+    color: #FAB350;
 }
 
 .teacher-badge {
@@ -341,7 +342,7 @@ section > div {
 /* 섹션 설명 스타일 */
 .section-description {
     background-color: #f8f9fa;
-    border-left: 4px solid #007bff;
+    border-left: 4px solid #FAB350;
     padding: 15px;
     margin-bottom: 20px;
     font-size: 0.9em;
@@ -392,7 +393,7 @@ section > div {
 }
 
 #layout-section-2 .card-header {
-    background-color: #007bff;
+    background-color: #FAB350;
     color: white;
     padding: 15px;
     font-weight: bold;
@@ -487,11 +488,11 @@ section > div {
 
 .menu-list a:hover {
     background-color: #e9ecef;
-    color: #007bff;
+    color: #FAB350;
 }
 
 .menu-list a.active {
-    background-color: #007bff;
+    background-color: #FAB350;
     color: white;
 }
 
@@ -528,9 +529,9 @@ section > div {
 
 .sub-category button:hover,
 .sub-category button.active {
-    background-color: #007bff;
+    background-color: #FAB350;
     color: white;
-    border-color: #007bff;
+    border-color: #FAB350;
 }
 
 /* 강사/강좌 카드 스타일 */
@@ -641,7 +642,7 @@ section > div {
 }
 
 .accordion-header.active {
-    background-color: #007bff;
+    background-color: #FAB350;
     color: white;
 }
 
@@ -667,11 +668,11 @@ section > div {
 
 .accordion-content a:hover {
     background-color: #f8f9fa;
-    color: #007bff;
+    color: #FAB350;
 }
 
 .accordion-content a.active {
-    color: #007bff;
+    color: #FAB350;
     font-weight: bold;
 }
 
@@ -777,11 +778,11 @@ section > div {
 }
 
 .tab-button:hover {
-    color: #007bff;
+    color: #FAB350;
 }
 
 .tab-button.active {
-    color: #007bff;
+    color: #FAB350;
     font-weight: bold;
 }
 
@@ -792,7 +793,7 @@ section > div {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #007bff;
+    background-color: #FAB350;
 }
 
 /* 반응형 스타일 */
@@ -1246,13 +1247,21 @@ footer {
     </footer>
     <script>
         // 배너 이미지 로드
-        const imagePath = "https://thumbnail.10x10.co.kr/webimage/image/add1/513/A005138696_01.jpg?cmd=thumb&w=400&h=400&fit=true&ws=false";
+        const imagePath = `${contextPath}/resources/images/커비.jpg`;
         
         function loadBanner(imagePath) {
-            if(imagePath) {
-                document.getElementById('bannerContainer').innerHTML = `
-                    <div class="banner-area" style="background-image: url('${imagePath}');"></div>
-                `;
+            const bannerContainer = document.getElementById('bannerContainer');
+            if(imagePath && bannerContainer) {
+                const bannerDiv = document.createElement('div');
+                bannerDiv.className = 'banner-area';
+                bannerDiv.style.backgroundImage = `url('${imagePath}')`;
+                
+                bannerDiv.onerror = () => {
+                    console.warn('배너 이미지를 로드할 수 없습니다:', imagePath);
+                    bannerDiv.style.backgroundColor = '#f8f9fa'; // 기본 배경색
+                };
+                
+                bannerContainer.appendChild(bannerDiv);
             }
         }
 

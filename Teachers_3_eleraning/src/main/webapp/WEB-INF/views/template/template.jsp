@@ -35,7 +35,7 @@
     <!-- 콘텐츠 영역 -->
     <div id="wrap">
         <!-- 헤더 include -->
-        <jsp:include page="../common/header.jsp" />
+        <%-- <jsp:include page="../common/header.jsp" /> --%>
         
         <!-- 메인 콘텐츠 -->
         <main>
@@ -44,7 +44,7 @@
         </main>
 
         <!-- 푸터 include -->
-        <jsp:include page="../common/footer.jsp" />
+        <%-- <jsp:include page="../common/footer.jsp" /> --%>
     </div>
 
     <!-- 6. 공통 JavaScript -->
