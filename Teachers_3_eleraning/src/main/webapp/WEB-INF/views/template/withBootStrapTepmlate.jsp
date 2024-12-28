@@ -19,16 +19,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <!-- 2-3. 직접 제작한 CSS 파일들 (Bootstrap CSS 다음에 위치) -->
-    <link rel="stylesheet" href="<c:url value='/css/common/reset.css'/>">
-    <link rel="stylesheet" href="<c:url value='/css/common/layout.css'/>">
-    <link rel="stylesheet" href="<c:url value='/css/common/utilities.css'/>">
+    <link rel="stylesheet" href="<c:url value='resources/css/common/reset.css'/>">
+    <link rel="stylesheet" href="<c:url value='resources/css/common/layout.css'/>">
+    <link rel="stylesheet" href="<c:url value='resources/css/common/utilities.css'/>">
 
     <!-- 3. 컴포넌트 CSS -->
-    <link rel="stylesheet" href="<c:url value='/css/components/header.css'/>">
-    <link rel="stylesheet" href="<c:url value='/css/components/navigation.css'/>">
-    <link rel="stylesheet" href="<c:url value='/css/components/modal.css'/>">
-    <link rel="stylesheet" href="<c:url value='/css/components/buttons.css'/>">
-    <link rel="stylesheet" href="<c:url value='/css/components/cards.css'/>">
+    <link rel="stylesheet" href="<c:url value='resources/css/components/header.css'/>">
+    <link rel="stylesheet" href="<c:url value='resources/css/components/navigation.css'/>">
+    <link rel="stylesheet" href="<c:url value='resources/css/components/modal.css'/>">
+    <link rel="stylesheet" href="<c:url value='resources/css/components/buttons.css'/>">
+    <link rel="stylesheet" href="<c:url value='resources/css/components/cards.css'/>">
 
     <!-- 4. 페이지별 CSS -->
     <link rel="stylesheet" href="<c:url value='/css/pages/teacher-detail.css'/>">
