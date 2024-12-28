@@ -14,7 +14,6 @@
 	
     <!-- 2. 외부 CSS 파일들 -->
     <!-- 2-1. Bootstrap CSS (다른 CSS보다 먼저) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- 2-2. Bootstrap Icons (필요한 경우) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
@@ -39,7 +38,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- 7. 내부 style 태그 -->
     <style>
@@ -51,8 +49,7 @@
     <!-- 콘텐츠 영역 -->
     <div id="wrap">
         <!-- 헤더 include -->
-        <jsp:include page="/WEB-INF/views/common/modal.jsp" />
-        <jsp:include page="/WEB-INF/views/common/header.jsp" />
+        <jsp:include page="../common/header.jsp" />
         
         <!-- 메인 콘텐츠 -->
         <main>
@@ -61,7 +58,7 @@
         </main>
 
         <!-- 푸터 include -->
-        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+        <jsp:include page="../common/footer.jsp" />
     </div>
 
     <!-- 8. 공통 JavaScript -->
