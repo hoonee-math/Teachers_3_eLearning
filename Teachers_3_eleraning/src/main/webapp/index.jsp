@@ -4,13 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="contextPath" content="${pageContext.request.contextPath}">
 	<title>Honey T</title>
 	
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -1177,11 +1177,11 @@ footer {
                 <!-- 선생님 프로필 -->
                 <div class="teacher-profile">
                     <div class="profile-image">
-                        <img src="/api/placeholder/200/200" alt="강기동 선생님">
+                        <img src="https://i.namu.wiki/i/W-LhGCCNTAE3F7AJ81_DQpGg7XQbQolN76WcFDjbYgkSoOp8NnGgEj8PyGblftQNMKTTv_NJ8lfBz9XzpMlggQ.webp" alt="정승제 선생님">
                     </div>
                     <div class="profile-info">
                         <div class="profile-header">
-                            <h1 class="profile-title">강기동 선생님</h1>
+                            <h1 class="profile-title">정승제 선생님</h1>
                             <p class="profile-subtitle">TITLE 안내문 개념과 지독한 연습이 만점을 만듭니다!</p>
                         </div>
                         <div class="profile-tags">
@@ -1246,10 +1246,14 @@ footer {
         <div id="main-footer"></div>
     </footer>
     <script>
-        // 배너 이미지 로드
-        const imagePath = `${contextPath}/resources/images/커비.jpg`;
+		// 1. JSP 상단에 path 변수 설정
+ 		// 2. JavaScript에서 사용할 전역 변수 설정
+	    // JSP의 path 변수를 JavaScript 전역 변수로 설정
+	    const contextPath = '${path}';
+        /* 3. 기존 이미지 로드 경로 함수 내부로 이동 // 배너 이미지 로드
+        const imagePath = `${contextPath}/resources/images/커비.jpg`; */
         
-        function loadBanner(imagePath) {
+        /* 4. function loadBanner(imagePath) {
             const bannerContainer = document.getElementById('bannerContainer');
             if(imagePath && bannerContainer) {
                 const bannerDiv = document.createElement('div');
@@ -1263,11 +1267,34 @@ footer {
                 
                 bannerContainer.appendChild(bannerDiv);
             }
+        } */
+        
+        // 5. 이미지 로드 함수 수정
+        function loadBanner() {
+            const bannerContainer = document.getElementById('bannerContainer');
+            const bannerDiv = document.createElement('div');
+            bannerDiv.className = 'banner-area';
+            
+            // 이미지 경로에 contextPath 사용
+            const imagePath = contextPath + '/resources/images/커비.jpg';
+            
+            // 이미지 로드 에러 처리 추가
+            const img = new Image();
+            img.onload = () => {
+                bannerDiv.style.backgroundImage = `url('${imagePath}')`;
+                bannerContainer.appendChild(bannerDiv);
+            };
+            img.onerror = () => {
+                console.error('이미지 로드 실패:', imagePath);
+                bannerDiv.style.backgroundColor = '#f8f9fa';  // 기본 배경색 설정
+                bannerContainer.appendChild(bannerDiv);
+            };
+            img.src = imagePath;
         }
 
         $(document).ready(function() {
             // 배너 로드
-            loadBanner(imagePath);
+            loadBanner();
 
             // 서브메뉴 설정
             const subMenus = {
