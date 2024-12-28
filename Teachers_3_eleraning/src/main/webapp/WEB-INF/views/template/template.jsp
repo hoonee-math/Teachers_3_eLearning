@@ -13,7 +13,6 @@
 	<title>Honey T</title>
 	
 	<!-- 2. 외부 CSS 파일들 -->
-	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> -->
 	
 	<!-- 2-3. 직접 제작한 CSS 파일들 (Bootstrap CSS 다음에 위치) -->
 	<link rel="stylesheet" href="$${path}/resources/css/common/reset.css">
@@ -66,6 +65,7 @@
 	
 <!-- 푸터 include -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<!-- 콘텐츠 영역 종료 -->
 </div>
 
 
