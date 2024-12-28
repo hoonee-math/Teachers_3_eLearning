@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -31,7 +32,6 @@
 <link rel="stylesheet" href="${path}/resources/css/components/cards.css">
 
 <!-- 4. 페이지별 CSS -->
-<link rel="stylesheet" href="${path}/resources/css/pages/lectureList.css">
 <link rel="stylesheet" href="${path}/resources/css/pages/teacherListAndDetail.css">
 
 <!-- 5. jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->

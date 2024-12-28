@@ -15,11 +15,14 @@
 	<div class="utility-nav">
 		<div class="utility-container">
 			<div class="left-links">
-				<a href="#">블로그</a> <a href="#">공지사항</a> <a href="#">이벤트</a>
+				<a href="${path }/lecturelist">블로그</a>
+				<a href="${path }/teacherListAndDetail">공지사항</a>
+				<a href="#">이벤트</a>
 			</div>
 			<div class="right-links">
 				<button class="btn-link" onclick="showModal('login')">로그인</button>
-				<a href="#">회원가입</a> <a href="#">고객센터</a>
+				<a href="#">회원가입</a>
+				<a href="#">고객센터</a>
 			</div>
 		</div>
 	</div>
@@ -35,9 +38,11 @@
 			<span class="grade-wrapper">
 				<button class="grade-btn" id="gradeBtn">고1</button>
 				<div class="grade-dropdown" id="gradeDropdown">
-					<a href="#" class="menu-item" data-grade="고1">고1</a> <a href="#"
-						class="menu-item" data-grade="고2">고2</a> <a href="#"
-						class="menu-item" data-grade="고3/N수">고3/N수</a>
+					<a href="#" class="menu-item" data-grade="고1">고1</a>
+					<a href="#" class="menu-item" data-grade="고2">고2</a>
+					<a href="#" class="menu-item" data-grade="고3/N수">고3/N수</a>
+					<a href="${pageContext.request.contextPath }/lecturelist" class="menu-item" data-grade="고3/N수">lectureList.jsp</a>
+					<a href="${pageContext.request.contextPath }/teacherListAndDetail" class="menu-item" data-grade="고3/N수">teacherListAndDetail.jsp</a>
 				</div>
 			</span>
 			<nav class="sub-nav" id="subNav"></nav>
@@ -50,18 +55,17 @@
 			<div class="mega-menu-subject-group">
 				<div class="mega-menu-subject-title">국어</div>
 				<div class="mega-menu-teacher-list">
-					<a href="#" class="mega-menu-teacher-item">최영주</a> <a href="#"
-						class="mega-menu-teacher-item">김현아</a> <a href="#"
-						class="mega-menu-teacher-item">손경화 <span
-						class="mega-menu-teacher-badge">HOT</span></a>
+					<a href="#" class="mega-menu-teacher-item">최영주</a>
+					<a href="#"	class="mega-menu-teacher-item">김현아</a>
+					<a href="#" class="mega-menu-teacher-item">손경화<span class="mega-menu-teacher-badge">HOT</span></a>
 				</div>
 			</div>
 			<div class="mega-menu-subject-group">
 				<div class="mega-menu-subject-title">수학</div>
 				<div class="mega-menu-teacher-list">
-					<a href="#" class="mega-menu-teacher-item">박정은</a> <a href="#"
-						class="mega-menu-teacher-item">윤송실</a> <a href="#"
-						class="mega-menu-teacher-item">김승겸</a>
+					<a href="#" class="mega-menu-teacher-item">박정은</a>
+					<a href="#"class="mega-menu-teacher-item">윤송실</a>
+					<a href="#" class="mega-menu-teacher-item">김승겸</a>
 				</div>
 			</div>
 		</div>
@@ -72,19 +76,17 @@
 			<div class="mega-menu-subject-group">
 				<div class="mega-menu-subject-title">국어</div>
 				<div class="mega-menu-teacher-list">
-					<a href="#" class="mega-menu-teacher-item">문학 기초</a> <a href="#"
-						class="mega-menu-teacher-item">독서 심화</a> <a href="#"
-						class="mega-menu-teacher-item">화법과 작문 <span
-						class="mega-menu-teacher-badge">NEW</span></a>
+					<a href="#" class="mega-menu-teacher-item">문학 기초</a>
+					<a href="#" class="mega-menu-teacher-item">독서 심화</a>
+					<a href="#" class="mega-menu-teacher-item">화법과 작문 <span class="mega-menu-teacher-badge">NEW</span></a>
 				</div>
 			</div>
 			<div class="mega-menu-subject-group">
 				<div class="mega-menu-subject-title">수학</div>
 				<div class="mega-menu-teacher-list">
-					<a href="#" class="mega-menu-teacher-item">수1 개념완성</a> <a href="#"
-						class="mega-menu-teacher-item">수2 문제풀이</a> <a href="#"
-						class="mega-menu-teacher-item">확률과 통계 <span
-						class="mega-menu-teacher-badge">HOT</span></a>
+					<a href="#" class="mega-menu-teacher-item">수1 개념완성</a>
+					<a href="#" class="mega-menu-teacher-item">수2 문제풀이</a>
+					<a href="#" class="mega-menu-teacher-item">확률과 통계 <span class="mega-menu-teacher-badge">HOT</span></a>
 				</div>
 			</div>
 		</div>
