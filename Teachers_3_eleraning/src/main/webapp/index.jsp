@@ -890,7 +890,7 @@ footer {
         <div class="main-nav">
             <div class="nav-container">
                 <div class="logo">
-                    <img src="/api/placeholder/120/40" alt="로고">
+                    <img src="${pageContext.request.contextPath }/resources/images/common/HoneyT_logo_horizontal.png" alt="로고" style="margin-top:8px;">
                 </div>
                 <span class="grade-wrapper">
                     <button class="grade-btn" id="gradeBtn">고1</button>
@@ -1094,11 +1094,11 @@ footer {
                     <!-- 강사 카드 1 -->
                     <div class="teacher-card">
                         <div class="teacher-image">
-                            <img src="/api/placeholder/120/120" alt="강기동 선생님">
+                            <img src="https://i.namu.wiki/i/W-LhGCCNTAE3F7AJ81_DQpGg7XQbQolN76WcFDjbYgkSoOp8NnGgEj8PyGblftQNMKTTv_NJ8lfBz9XzpMlggQ.webp" alt="정승제 선생님">
                         </div>
                         <div class="teacher-info">
                             <h3>
-                                강기동 선생님
+                                정승제 선생님
                                 <span class="teacher-badge">신규</span>
                             </h3>
                             <p class="teacher-description">
@@ -1111,11 +1111,11 @@ footer {
                     <!-- 강사 카드 2 -->
                     <div class="teacher-card">
                         <div class="teacher-image">
-                            <img src="/api/placeholder/120/120" alt="김미선 선생님">
+                            <img src="https://i.namu.wiki/i/PH9KzsC2-ubZ_bgZX2f1LQiDTTd3aXhg9oAgaGqidOb2Wku3WwdjhQ_nUQDZHm2b7jPOc2F1iqvlbxK_80rxuw.webp" alt="이지영 선생님">
                         </div>
                         <div class="teacher-info">
                             <h3>
-                                김미선 선생님
+                                이지영 선생님
                                 <span class="teacher-badge">인기</span>
                             </h3>
                             <p class="teacher-description">
@@ -1128,11 +1128,11 @@ footer {
                     <!-- 강사 카드 3 -->
                     <div class="teacher-card">
                         <div class="teacher-image">
-                            <img src="/api/placeholder/120/120" alt="장재학 선생님">
+                            <img src="https://i.namu.wiki/i/HD37stHzedpVHn3CRooaDUZnpY0lBKnMitQGuxOoLxSGpUBGxqAPhvc6MDjaViQgbHRnI5Q1j3AbTUJWCwW1VQ.webp" alt="우형철 선생님">
                         </div>
                         <div class="teacher-info">
                             <h3>
-                                장재학 선생님
+                                우형철 선생님
                                 <span class="teacher-badge">베스트</span>
                             </h3>
                             <p class="teacher-description">
