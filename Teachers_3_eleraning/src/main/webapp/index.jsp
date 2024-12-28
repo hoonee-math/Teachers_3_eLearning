@@ -15,14 +15,13 @@
 	
     <!-- 2. 외부 CSS 파일들 -->
     <!-- 2-1. Bootstrap CSS (다른 CSS보다 먼저) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- 2-2. Bootstrap Icons (필요한 경우) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <!-- 2-3. 직접 제작한 CSS 파일들 (Bootstrap CSS 다음에 위치) -->
     <link rel="stylesheet" href="${path}/resources/css/common/reset.css">
     <link rel="stylesheet" href="${path}/resources/css/common/layout.css">
     <link rel="stylesheet" href="${path}/resources/css/common/utilities.css">
+    <link rel="stylesheet" href="${path}/resources/css/common/navigator.css">
 
     <!-- 3. 컴포넌트 CSS -->
     <link rel="stylesheet" href="${path}/resources/css/components/header.css">
@@ -37,318 +36,6 @@
 
     <!-- 5. jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <style>
-        /* 광고 배너 스타일 */
-        .banner-area {
-            width: 100%;
-            height: 60px;
-            overflow: hidden;
-            background-color: #f8f9fa;
-            background-repeat: repeat;
-            background-size: auto 100%;
-        }
-
-        .banner-area img {
-            height: 100%;
-            display: block;
-            object-fit: fill;
-        }
-
-        /* 유틸리티 네비게이션 스타일 */
-        .utility-nav {
-            background-color: #f8f9fa;
-            padding: 8px 0;
-            border-bottom: 1px solid #e1e1e1;
-        }
-
-        .utility-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .left-links a, .right-links a, .right-links button {
-            color: #666;
-            font-size: 0.9em;
-            margin-right: 15px;
-        }
-
-        /* 메인 네비게이션 스타일 */
-        .main-nav {
-            border-bottom: 1px solid #e1e1e1;
-            padding: 15px 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        /* 로고 스타일 */
-        .logo {
-            margin-right: 30px;
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-        }
-
-        /* 학년 선택 스타일 */
-        .grade-wrapper {
-            position: relative;
-            width: 200px;
-            margin-right: 20px;
-        }
-
-        .grade-btn {
-            width: 100%;
-            padding: 10px 20px;
-            background-color: #FAB350;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            text-align: left;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.1em;
-        }
-
-        /* 모달 스타일 */
-        .modal-wrapper {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
-
-        .modal-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            width: 90%;
-            max-width: 400px;
-        }
-
-        .modal-header {
-            margin-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-
-        /* 폼 스타일 */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-
-        .form-checkbox {
-            margin-right: 5px;
-        }
-
-        /* 버튼 스타일 */
-        .btn {
-            padding: 8px 16px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9em;
-        }
-
-        .btn-primary {
-            background-color: #FAB350;
-            color: white;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            color: white;
-            margin-right: 10px;
-        }
-
-        .btn-link {
-            background: none;
-            border: none;
-            color: #666;
-            padding: 0;
-            font: inherit;
-            cursor: pointer;
-        }
-
-        /* 메가메뉴 스타일 */
-        .mega-menu-container {
-            display: none;
-            position: absolute;
-            left: 0;
-            width: 100%;
-            background: white;
-            border-bottom: 1px solid #e1e1e1;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 900;
-        }
-
-        .mega-menu-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        /* 서브 네비게이션 스타일 */
-.sub-nav {
-    display: flex;
-    gap: 20px;
-    flex-grow: 1;
-    justify-content: center;
-}
-
-.sub-nav .menu-item {
-    color: #333;
-    padding: 8px 15px;
-    border-radius: 4px;
-    transition: all 0.2s;
-}
-
-.sub-nav .menu-item:hover {
-    background-color: #f8f9fa;
-}
-
-/* 메가메뉴 상세 스타일 */
-.subject-group {
-    width: 100%;
-}
-
-.subject-title {
-    font-weight: bold;
-    color: #FAB350;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid #FAB350;
-}
-
-.teacher-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.teacher-item {
-    color: #333;
-    font-size: 0.9em;
-    padding: 4px 0;
-}
-
-.teacher-item:hover {
-    color: #FAB350;
-}
-
-.teacher-badge {
-    display: inline-block;
-    font-size: 0.8em;
-    padding: 2px 6px;
-    border-radius: 10px;
-    background-color: #f8f9fa;
-    margin-left: 5px;
-}
-
-/* 드롭다운 스타일 */
-.grade-dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    border: 1px solid #e1e1e1;
-    border-radius: 4px;
-    margin-top: 5px;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.grade-btn:after {
-    content: '▼';
-    font-size: 0.8em;
-    margin-left: 10px;
-}
-
-.grade-btn.active:after {
-    content: '▲';
-}
-
-.grade-dropdown .menu-item {
-    display: block;
-    padding: 12px 20px;
-    text-decoration: none;
-    color: #333;
-    cursor: pointer;
-}
-
-.grade-dropdown .menu-item:hover {
-    background-color: #f8f9fa;
-}
-
-/* 모달 푸터 스타일 */
-.modal-footer {
-    margin-top: 15px;
-    text-align: center;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-}
-
-.modal-footer a {
-    margin: 0 10px;
-    color: #666;
-}
-
-.modal-footer span {
-    color: #ddd;
-}
-
-
-
-
-footer {
-    margin-top: 40px;
-    padding: 40px 0;
-    background-color: #f8f9fa;
-    border-top: 1px solid #e1e1e1;
-}
-
-#main-footer {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-    </style>
 	
 </head>
 <body>    <!-- 모달 -->
@@ -424,20 +111,20 @@ footer {
         <!-- 메가메뉴 -->
         <div class="mega-menu-container" id="teacherMegaMenu">
             <div class="mega-menu-content">
-                <div class="subject-group">
-                    <div class="subject-title">국어</div>
-                    <div class="teacher-list">
-                        <a href="#" class="teacher-item">최영주</a>
-                        <a href="#" class="teacher-item">김현아</a>
-                        <a href="#" class="teacher-item">손경화 <span class="teacher-badge">HOT</span></a>
+                <div class="mega-menu-subject-group">
+                    <div class="mega-menu-subject-title">국어</div>
+                    <div class="mega-menu-teacher-list">
+                        <a href="#" class="mega-menu-teacher-item">최영주</a>
+                        <a href="#" class="mega-menu-teacher-item">김현아</a>
+                        <a href="#" class="mega-menu-teacher-item">손경화 <span class="mega-menu-teacher-badge">HOT</span></a>
                     </div>
                 </div>
-                <div class="subject-group">
-                    <div class="subject-title">수학</div>
-                    <div class="teacher-list">
-                        <a href="#" class="teacher-item">박정은</a>
-                        <a href="#" class="teacher-item">윤송실</a>
-                        <a href="#" class="teacher-item">김승겸</a>
+                <div class="mega-menu-subject-group">
+                    <div class="mega-menu-subject-title">수학</div>
+                    <div class="mega-menu-teacher-list">
+                        <a href="#" class="mega-menu-teacher-item">박정은</a>
+                        <a href="#" class="mega-menu-teacher-item">윤송실</a>
+                        <a href="#" class="mega-menu-teacher-item">김승겸</a>
                     </div>
                 </div>
             </div>
@@ -445,20 +132,20 @@ footer {
 
         <div class="mega-menu-container" id="courseMegaMenu">
             <div class="mega-menu-content">
-                <div class="subject-group">
-                    <div class="subject-title">국어</div>
-                    <div class="teacher-list">
-                        <a href="#" class="teacher-item">문학 기초</a>
-                        <a href="#" class="teacher-item">독서 심화</a>
-                        <a href="#" class="teacher-item">화법과 작문 <span class="teacher-badge">NEW</span></a>
+                <div class="mega-menu-subject-group">
+                    <div class="mega-menu-subject-title">국어</div>
+                    <div class="mega-menu-teacher-list">
+                        <a href="#" class="mega-menu-teacher-item">문학 기초</a>
+                        <a href="#" class="mega-menu-teacher-item">독서 심화</a>
+                        <a href="#" class="mega-menu-teacher-item">화법과 작문 <span class="mega-menu-teacher-badge">NEW</span></a>
                     </div>
                 </div>
-                <div class="subject-group">
-                    <div class="subject-title">수학</div>
-                    <div class="teacher-list">
-                        <a href="#" class="teacher-item">수1 개념완성</a>
-                        <a href="#" class="teacher-item">수2 문제풀이</a>
-                        <a href="#" class="teacher-item">확률과 통계 <span class="teacher-badge">HOT</span></a>
+                <div class="mega-menu-subject-group">
+                    <div class="mega-menu-subject-title">수학</div>
+                    <div class="mega-menu-teacher-list">
+                        <a href="#" class="mega-menu-teacher-item">수1 개념완성</a>
+                        <a href="#" class="mega-menu-teacher-item">수2 문제풀이</a>
+                        <a href="#" class="mega-menu-teacher-item">확률과 통계 <span class="mega-menu-teacher-badge">HOT</span></a>
                     </div>
                 </div>
             </div>
@@ -760,6 +447,20 @@ footer {
     </script>
 
     <footer>
+	    <style>
+			footer {
+			    margin-top: 40px;
+			    padding: 40px 0;
+			    background-color: #f8f9fa;
+			    border-top: 1px solid #e1e1e1;
+			}
+			
+			#main-footer {
+			    max-width: 1200px;
+			    margin: 0 auto;
+			    padding: 0 20px;
+			}
+	    </style>
         <div id="main-footer"></div>
     </footer>
     <script>

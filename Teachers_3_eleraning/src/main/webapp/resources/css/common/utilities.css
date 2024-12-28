@@ -1,1 +1,86 @@
 @charset "UTF-8";
+
+
+/* 유틸리티 위 - 광고 배너 스타일 */
+.banner-area {
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+    background-repeat: repeat;
+    background-size: auto 100%;
+}
+
+.banner-area img {
+    height: 100%;
+    display: block;
+    object-fit: fill;
+}
+
+/* 유틸리티 네비게이션 - 블로그,공지사항,이벤트, 로그인, 회원가입, 고객센터 스타일 */
+.utility-nav {
+    background-color: #f8f9fa;
+    padding: 8px 0;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.utility-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.left-links a, .right-links a, .right-links button {
+    color: #666;
+    font-size: 0.9em;
+    margin-right: 15px;
+}
+
+/* 메인 네비게이션 스타일 */
+.main-nav {
+    border-bottom: 1px solid #e1e1e1;
+    padding: 15px 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* 로고 스타일 */
+.logo {
+    margin-right: 30px;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+/* 학년 선택 스타일 */
+.grade-wrapper {
+    position: relative;
+    width: 200px;
+    margin-right: 20px;
+}
+
+.grade-btn {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #FAB350;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+}

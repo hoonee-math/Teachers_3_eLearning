@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+/* 메가메뉴 스타일 */
+.mega-menu-container {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-bottom: 1px solid #e1e1e1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 900;
+}
+
+.mega-menu-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* 고1,고2,고3 선택시 바뀌는 오른쪽 메뉴 - 서브 네비게이션 스타일 */
+.sub-nav {
+    display: flex;
+    gap: 20px;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.sub-nav .menu-item {
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.sub-nav .menu-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* 서브 네비게이션 중 선생님, 강좌 선택시 나타나는 메가메뉴 상세 스타일 */
+.mega-menu-subject-group {
+    width: 100%;
+}
+
+.mega-menu-subject-title {
+    font-weight: bold;
+    color: #FAB350;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #FAB350;
+}
+
+.mega-menu-teacher-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mega-menu-teacher-item {
+    color: #333;
+    font-size: 0.9em;
+    padding: 4px 0;
+}
+
+.mega-menu-teacher-item:hover {
+    color: #FAB350;
+}
+
+.mega-menu-teacher-badge {
+    display: inline-block;
+    font-size: 0.8em;
+    padding: 2px 6px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    margin-left: 5px;
+}
+
+/* 드롭다운 스타일 */
+.grade-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    margin-top: 5px;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.grade-btn:after {
+    content: '▼';
+    font-size: 0.8em;
+    margin-left: 10px;
+}
+
+.grade-btn.active:after {
+    content: '▲';
+}
+
+.grade-dropdown .menu-item {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.grade-dropdown .menu-item:hover {
+    background-color: #f8f9fa;
+}

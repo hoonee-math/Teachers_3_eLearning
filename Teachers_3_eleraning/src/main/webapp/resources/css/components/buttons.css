@@ -1,1 +1,30 @@
 @charset "UTF-8";
+
+/* 버튼 스타일 */
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.btn-primary {
+    background-color: #FAB350;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    margin-right: 10px;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: #666;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+}
