@@ -36,14 +36,16 @@
 				</a>
 			</div>
 			<span class="grade-wrapper">
-				<button class="grade-btn" id="gradeBtn">고1</button>
-				<div class="grade-dropdown" id="gradeDropdown">
-					<a href="#" class="menu-item" data-grade="고1">고1</a>
-					<a href="#" class="menu-item" data-grade="고2">고2</a>
-					<a href="#" class="menu-item" data-grade="고3/N수">고3/N수</a>
-					<a href="${pageContext.request.contextPath }/lecturelist" class="menu-item" data-grade="고3/N수">lectureList.jsp</a>
-					<a href="${pageContext.request.contextPath }/teacherListAndDetail" class="menu-item" data-grade="고3/N수">teacherListAndDetail.jsp</a>
-				</div>
+				<%-- 로그인 정보에 따른 초기 학년 표시 --%>
+			    <button class="grade-btn" id="gradeBtn">
+			        ${empty loginMember ? '고1' : loginMember.grade}
+			    </button>
+			    <div class="grade-dropdown" id="gradeDropdown">
+			        <%-- URL 정보 추가 --%>
+			        <a href="#" class="menu-item" data-grade="고1" data-url="${path}/grade/high1">고1</a>
+			        <a href="#" class="menu-item" data-grade="고2" data-url="${path}/grade/high2">고2</a>
+			        <a href="#" class="menu-item" data-grade="고3/N수" data-url="${path}/grade/high3">고3/N수</a>
+			    </div>
 			</span>
 			<nav class="sub-nav" id="subNav"></nav>
 		</div>
@@ -51,7 +53,7 @@
 
 	<!-- 메가메뉴 -->
 	<div class="mega-menu-container" id="teacherMegaMenu">
-		<div class="mega-menu-content">
+		<!-- <div class="mega-menu-content">
 			<div class="mega-menu-subject-group">
 				<div class="mega-menu-subject-title">국어</div>
 				<div class="mega-menu-teacher-list">
@@ -68,11 +70,14 @@
 					<a href="#" class="mega-menu-teacher-item">김승겸</a>
 				</div>
 			</div>
-		</div>
+		</div> -->
+		<div class="mega-menu-content" id="teacherMegaMenuContent">
+	        <!-- 여기는 JavaScript로 동적 생성 -->
+	    </div>
 	</div>
 
 	<div class="mega-menu-container" id="courseMegaMenu">
-		<div class="mega-menu-content">
+		<!-- <div class="mega-menu-content">
 			<div class="mega-menu-subject-group">
 				<div class="mega-menu-subject-title">국어</div>
 				<div class="mega-menu-teacher-list">
@@ -89,36 +94,39 @@
 					<a href="#" class="mega-menu-teacher-item">확률과 통계 <span class="mega-menu-teacher-badge">HOT</span></a>
 				</div>
 			</div>
-		</div>
+		</div> -->
+	    <div class="mega-menu-content" id="courseMegaMenuContent">
+	        <!-- 여기는 JavaScript로 동적 생성 -->
+	    </div>
 	</div>
 	
 	<script>
-    // JSP가 서버에서 처리될 때 contextPath를 실제 경로로 변환
-    const bannerImage = '${pageContext.request.contextPath}/resources/images/커비.jpg';
-    console.log('설정된 이미지 경로:', bannerImage); // 경로 확인
-    
-    // DOM이 로드된 후 배너 이미지 설정
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM 로드됨'); // DOM 로드 시점 확인
-        
-        const bannerContainer = document.getElementById('bannerContainer');
-        console.log('배너 컨테이너 요소:', bannerContainer); // 요소 존재 여부 확인
-        
-        if(bannerContainer) {
-            console.log('배너 컨테이너 찾음, 이미지 설정 시도');
-            const bannerDiv = document.createElement('div');
-            bannerDiv.className = 'banner-area';
-            // 템플릿 리터럴 대신 일반 문자열 연결 사용
-            bannerDiv.style.backgroundImage = 'url(' + bannerImage + ')';
-            console.log('설정된 background-image:', bannerDiv.style.backgroundImage); // 실제 설정된 스타일 확인
-            
-            bannerContainer.appendChild(bannerDiv);
-            console.log('배너 div 추가 완료');
-        } else {
-            console.log('배너 컨테이너를 찾을 수 없음');
-        }
-    });
-</script>
+	    // JSP가 서버에서 처리될 때 contextPath를 실제 경로로 변환
+	    const bannerImage = '${pageContext.request.contextPath}/resources/images/커비.jpg';
+	    console.log('설정된 이미지 경로:', bannerImage); // 경로 확인
+	    
+	    // DOM이 로드된 후 배너 이미지 설정
+	    document.addEventListener('DOMContentLoaded', function() {
+	        console.log('DOM 로드됨'); // DOM 로드 시점 확인
+	        
+	        const bannerContainer = document.getElementById('bannerContainer');
+	        console.log('배너 컨테이너 요소:', bannerContainer); // 요소 존재 여부 확인
+	        
+	        if(bannerContainer) {
+	            console.log('배너 컨테이너 찾음, 이미지 설정 시도');
+	            const bannerDiv = document.createElement('div');
+	            bannerDiv.className = 'banner-area';
+	            // 템플릿 리터럴 대신 일반 문자열 연결 사용
+	            bannerDiv.style.backgroundImage = 'url(' + bannerImage + ')';
+	            console.log('설정된 background-image:', bannerDiv.style.backgroundImage); // 실제 설정된 스타일 확인
+	            
+	            bannerContainer.appendChild(bannerDiv);
+	            console.log('배너 div 추가 완료');
+	        } else {
+	            console.log('배너 컨테이너를 찾을 수 없음');
+	        }
+	    });
+	</script>
 	
 	
 </header>
