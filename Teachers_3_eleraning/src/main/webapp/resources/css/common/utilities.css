@@ -59,6 +59,8 @@
 }
 
 .logo img {
+	max-width:none;
+ 	margin-top: 4px;
     height: 40px;
-    width: auto;
+    width: 123px !important;
 }
