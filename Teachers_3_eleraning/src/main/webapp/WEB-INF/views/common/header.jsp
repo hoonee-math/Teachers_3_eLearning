@@ -108,8 +108,8 @@
 	// 메뉴 데이터 정의
 	const subMenus = {
 	    '고1': [
-	        {name: '선생님', url: '${path}/teacher/list/high1', megaMenu: 'teacher'},
-	        {name: '모든강좌', url: '${path}/course/list/high1', megaMenu: 'course'},
+	        {name: '선생님', url: '${path }/teacherListAndDetail', megaMenu: 'teacher'},
+	        {name: '모든강좌', url: '${path }/lecturelist', megaMenu: 'course'},
 	        {name: '교재', url: '${path}/book/list/high1'},
 	        {name: '모의고사', url: '${path}/exam/list/high1'},
 	        {name: '기출문제', url: '${path}/previous/high1'},
@@ -117,8 +117,8 @@
 	        {name: '시험응시실', url: '${path}/test/high1'}
 	    ],
 	    '고2': [
-	        {name: '선생님', url: '${path}/teacher/list/high2', megaMenu: 'teacher'},
-	        {name: '전체강좌', url: '${path}/course/list/high2', megaMenu: 'course'},
+	        {name: '선생님', url: '${path }/teacherListAndDetail', megaMenu: 'teacher'},
+	        {name: '모든강좌', url: '${path }/lecturelist', megaMenu: 'course'},
 	        {name: '교재구매', url: '${path}/book/list/high2'},
 	        {name: '모의고사', url: '${path}/exam/list/high2'},
 	        {name: '기출문제', url: '${path}/previous/high2'},
@@ -126,8 +126,8 @@
 	        {name: '학습현황', url: '${path}/status/high2'}
 	    ],
 	    '고3/N수': [
-	        {name: '강사진', url: '${path}/teacher/list/high3', megaMenu: 'teacher'},
-	        {name: '수능강좌', url: '${path}/course/list/high3', megaMenu: 'course'},
+	        {name: '선생님', url: '${path }/teacherListAndDetail', megaMenu: 'teacher'},
+	        {name: '모든강좌', url: '${path }/lecturelist', megaMenu: 'course'},
 	        {name: '수능교재', url: '${path}/book/list/high3'},
 	        {name: '수능모의고사', url: '${path}/exam/list/high3'},
 	        {name: '수능기출', url: '${path}/previous/high3'},
@@ -183,7 +183,7 @@
 	            '<div class="mega-menu-teacher-list">' +
 	            teachers.map(teacher => {
 	                const badge = teacher.badge ? '<span class="mega-menu-teacher-badge">' + teacher.badge + '</span>' : '';
-	                return '<a href="' + path + '/teacher/' + teacher.id + '" class="mega-menu-teacher-item">' +
+	                return '<a href="' + path + '/teacherListAndDetail?teacherName=' + teacher.name + '" class="mega-menu-teacher-item">' +
 	                    teacher.name + badge + '</a>';
 	            }).join('') +
 	            '</div></div>';
