@@ -14,8 +14,8 @@
 		</div>
 		<form id="loginForm" action="/login" method="post">
 			<div class="form-group">
-				<input type="text" name="username" class="form-input" placeholder="아이디" required> 
-				<input type="password" name="password" class="form-input" placeholder="비밀번호" required>
+				<input type="text" name="memberId" class="form-input" placeholder="아이디" required> 
+				<input type="password" name="memberPw" class="form-input" placeholder="비밀번호" required>
 			</div>
 			<div class="form-group">
 				<label> <input type="checkbox" name="remember" class="form-checkbox"> 로그인 상태 유지 </label>

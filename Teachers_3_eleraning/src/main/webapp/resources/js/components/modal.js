@@ -31,6 +31,13 @@ const Modal = (function() {
                 e.stopPropagation();
             });
         });
+		
+		// ESC 키 이벤트 추가
+		document.addEventListener('keydown', function(e) {
+		    if (e.key === 'Escape' || e.key === 'Esc') {
+		        hideAllModals();
+		    }
+		});
     }
     
     // public 함수
@@ -42,6 +49,14 @@ const Modal = (function() {
             if (backdrop && modal) {
                 backdrop.style.display = 'block';
                 modal.style.display = 'block';
+
+				// 로그인 모달일 경우 memberId input에 포커스
+				if(modalType === 'login') {
+				    // 약간의 지연을 주어 모달이 완전히 표시된 후 포커스
+				    setTimeout(() => {
+				        modal.querySelector('input[name="memberId"]').focus();
+				    }, 100);
+				}
             }
         },
         
