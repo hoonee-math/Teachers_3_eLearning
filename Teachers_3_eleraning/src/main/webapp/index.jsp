@@ -44,33 +44,6 @@
     <jsp:include page="/WEB-INF/views/common/section.jsp" />
 
 
-	<script>
-    $(document).ready(function() {
-        // 아코디언 메뉴 기능
-        $('.accordion-header').click(function() {
-            const content = $(this).next('.accordion-content');
-            const isActive = $(this).hasClass('active');
-            
-            // 다른 모든 아코디언 닫기
-            $('.accordion-header').removeClass('active');
-            $('.accordion-content').slideUp(300);
-            
-            // 클릭된 아코디언 토글
-            if (!isActive) {
-                $(this).addClass('active');
-                content.slideDown(300);
-            }
-        });
-
-        // 탭 메뉴 기능
-        $('.tab-button').click(function() {
-            $('.tab-button').removeClass('active');
-            $(this).addClass('active');
-            // 탭 콘텐츠 전환 로직 추가
-        });
-    });
-    </script>
-
     <footer>
 	    <style>
 			footer {
@@ -89,55 +62,8 @@
         <div id="main-footer"></div>
     </footer>
     <script>
-		// 1. JSP 상단에 path 변수 설정
- 		// 2. JavaScript에서 사용할 전역 변수 설정
-	    // JSP의 path 변수를 JavaScript 전역 변수로 설정
-	    const contextPath = '${path}';
-        /* 3. 기존 이미지 로드 경로 함수 내부로 이동 // 배너 이미지 로드
-        const imagePath = `${contextPath}/resources/images/커비.jpg`; */
-        
-        /* 4. function loadBanner(imagePath) {
-            const bannerContainer = document.getElementById('bannerContainer');
-            if(imagePath && bannerContainer) {
-                const bannerDiv = document.createElement('div');
-                bannerDiv.className = 'banner-area';
-                bannerDiv.style.backgroundImage = `url('${imagePath}')`;
-                
-                bannerDiv.onerror = () => {
-                    console.warn('배너 이미지를 로드할 수 없습니다:', imagePath);
-                    bannerDiv.style.backgroundColor = '#f8f9fa'; // 기본 배경색
-                };
-                
-                bannerContainer.appendChild(bannerDiv);
-            }
-        } */
-        
-        // 5. 이미지 로드 함수 수정
-        function loadBanner() {
-            const bannerContainer = document.getElementById('bannerContainer');
-            const bannerDiv = document.createElement('div');
-            bannerDiv.className = 'banner-area';
-            
-            // 이미지 경로에 contextPath 사용
-            const imagePath = contextPath + '/resources/images/커비.jpg';
-            
-            // 이미지 로드 에러 처리 추가
-            const img = new Image();
-            img.onload = () => {
-                bannerDiv.style.backgroundImage = `url('${imagePath}')`;
-                bannerContainer.appendChild(bannerDiv);
-            };
-            img.onerror = () => {
-                console.error('이미지 로드 실패:', imagePath);
-                bannerDiv.style.backgroundColor = '#f8f9fa';  // 기본 배경색 설정
-                bannerContainer.appendChild(bannerDiv);
-            };
-            img.src = imagePath;
-        }
 
         $(document).ready(function() {
-            // 배너 로드
-            loadBanner();
 
             // 서브메뉴 설정
             const subMenus = {
