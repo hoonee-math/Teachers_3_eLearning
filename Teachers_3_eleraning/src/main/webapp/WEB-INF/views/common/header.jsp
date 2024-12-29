@@ -31,7 +31,9 @@
 	<div class="main-nav">
 		<div class="nav-container">
 			<div class="logo">
+				<a href="${pageContext.request.contextPath }">
 				<img src="${pageContext.request.contextPath }/resources/images/common/HoneyT_logo_horizontal.png" alt="로고" style="margin-top: 8px;">
+				</a>
 			</div>
 			<span class="grade-wrapper">
 				<button class="grade-btn" id="gradeBtn">고1</button>
