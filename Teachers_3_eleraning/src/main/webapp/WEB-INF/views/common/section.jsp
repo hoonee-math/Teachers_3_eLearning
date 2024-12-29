@@ -6,6 +6,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
+<!-- 추가 -->
+<div class="sections-wrapper">
 <!-- 본문 섹션 -->
 <!-- 섹션 1: 3단 그리드 레이아웃 -->
 <section id="layout-section-1">
@@ -126,3 +128,5 @@
 		</div>
 	</div>
 </section>
+
+</div>

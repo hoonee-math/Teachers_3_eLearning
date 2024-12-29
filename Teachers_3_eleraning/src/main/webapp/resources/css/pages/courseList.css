@@ -7,10 +7,15 @@
     margin: 0 auto;
 }
 
-.teacher-container {
+.course-content-wrapper{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.course-container {
     display: flex;
     gap: 30px;
-    padding: 0 20px;
 }
 
 /* 왼쪽 메뉴 스타일 */

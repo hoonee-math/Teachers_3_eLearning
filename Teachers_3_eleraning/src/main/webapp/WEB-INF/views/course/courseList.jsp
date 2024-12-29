@@ -16,8 +16,7 @@
 <!-- 2. 외부 CSS 파일들 -->
 <!-- 2-1. Bootstrap CSS (다른 CSS보다 먼저) -->
 <!-- 2-2. Bootstrap Icons (필요한 경우) -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> -->
 
 <!-- 2-3. 직접 제작한 CSS 파일들 (Bootstrap CSS 다음에 위치) -->
 <link rel="stylesheet" href="${path}/resources/css/common/reset.css">
@@ -57,6 +56,8 @@
 			<!-- 페이지 내용 -->
 			<!-- 강사/강좌 목록 섹션 -->
 			<section id="teacher-section">
+				<!-- wrapper div 추가 -->
+   	 			<div class="course-content-wrapper">  
 				<!-- 섹션 설명 -->
 				<div class="section-description">
 					<p>
@@ -67,7 +68,7 @@
 					<p>- 오른쪽: 유동적 너비의 카드 리스트</p>
 				</div>
 				<!-- 실제 콘텐츠 -->
-				<div class="teacher-container">
+				<div class="course-container">
 					<!-- 왼쪽 메뉴 -->
 					<nav class="subject-menu">
 						<h2>과목</h2>
@@ -149,6 +150,7 @@
 						</div>
 					</div>
 				</div>
+    			</div>
 			</section>
 
 		</main>

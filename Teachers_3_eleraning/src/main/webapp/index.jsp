@@ -40,9 +40,9 @@
 
     <jsp:include page="/WEB-INF/views/common/modal.jsp" />
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
-    
-    <jsp:include page="/WEB-INF/views/common/section.jsp" />
-
+    <main>
+	    <jsp:include page="/WEB-INF/views/common/section.jsp" />
+	</main>
 
     <footer>
 	    <style>
