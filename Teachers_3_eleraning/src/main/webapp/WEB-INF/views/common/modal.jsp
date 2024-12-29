@@ -21,7 +21,7 @@
 				<label> <input type="checkbox" name="remember" class="form-checkbox"> 로그인 상태 유지 </label>
 			</div>
 			<div style="text-align: right;">
-				<button type="button" class="btn btn-secondary" onclick="hideModal()">취소</button>
+				<button type="button" class="btn btn-secondary" onclick="Modal.hide()">취소</button>
 				<button type="submit" class="btn btn-primary">로그인</button>
 			</div>
 		</form>

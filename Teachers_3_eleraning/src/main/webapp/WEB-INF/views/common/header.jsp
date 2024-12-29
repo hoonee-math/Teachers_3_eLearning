@@ -20,7 +20,7 @@
 				<a href="#">이벤트</a>
 			</div>
 			<div class="right-links">
-				<button class="btn-link" onclick="showModal('login')">로그인</button>
+				<button class="btn-link" onclick="Modal.show('login')">로그인</button>
 				<a href="#">회원가입</a>
 				<a href="#">고객센터</a>
 			</div>
