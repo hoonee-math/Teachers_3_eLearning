@@ -38,29 +38,15 @@
 </head>
 <body>    
 
+<!-- 콘텐츠 영역 -->
+<div id="wrap">
     <jsp:include page="/WEB-INF/views/common/modal.jsp" />
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <main>
 	    <jsp:include page="/WEB-INF/views/common/section.jsp" />
 	</main>
-
-    <footer>
-	    <style>
-			footer {
-			    margin-top: 40px;
-			    padding: 40px 0;
-			    background-color: #f8f9fa;
-			    border-top: 1px solid #e1e1e1;
-			}
-			
-			#main-footer {
-			    max-width: 1200px;
-			    margin: 0 auto;
-			    padding: 0 20px;
-			}
-	    </style>
-        <div id="main-footer"></div>
-    </footer>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+</div>
     
     <!-- 8. 공통 JavaScript -->
     <script src="${path}/resources/js/common/utils.js"></script>
