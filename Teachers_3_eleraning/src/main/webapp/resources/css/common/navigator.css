@@ -24,9 +24,8 @@
 /* 고1,고2,고3 선택시 바뀌는 오른쪽 메뉴 - 서브 네비게이션 스타일 */
 .sub-nav {
     display: flex;
-    gap: 20px;
     flex-grow: 1;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .sub-nav .menu-item {
@@ -78,6 +77,13 @@
     margin-left: 5px;
 }
 
+/* 학년 선택 스타일 */
+.grade-wrapper {
+    position: relative;
+    width: 140px;
+    margin-right: 20px;
+}
+
 /* 드롭다운 스타일 */
 .grade-dropdown {
     display: none;
@@ -91,6 +97,22 @@
     margin-top: 5px;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.grade-btn {
+    width: 130px;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #FAB350;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
 }
 
 .grade-btn:after {
