@@ -57,6 +57,12 @@
 	    <artifactId>cos</artifactId>
 	    <version>05Nov2002</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+	<dependency>
+	    <groupId>com.google.code.gson</groupId>
+	    <artifactId>gson</artifactId>
+	    <version>2.10.1</version>
+	</dependency>
   </dependencies>
   <build>
 	<!--패키징시 이름 설정 -> war 파일 이름이 contextPath가 됨! -->
