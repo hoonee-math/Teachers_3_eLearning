@@ -64,14 +64,18 @@
 						<div class="accordion-item">
 							<div class="accordion-header active">국어</div>
 							<div class="accordion-content show">
-								<a href="#" class="active">강기동 선생님</a> <a href="#">김미선 선생님</a> <a	href="#">장재학 선생님</a>
+								<a href="#" class="active">강기동 선생님</a>
+								<a href="#">김미선 선생님</a>
+								<a href="#">장재학 선생님</a>
 							</div>
 						</div>
 						<!-- 수학 -->
 						<div class="accordion-item">
 							<div class="accordion-header">수학</div>
 							<div class="accordion-content">
-								<a href="#">박정은 선생님</a> <a href="#">윤송실 선생님</a> <a href="#">김승겸 선생님</a>
+								<a href="#">박정은 선생님</a>
+								<a href="#">윤송실 선생님</a>
+								<a href="#">김승겸 선생님</a>
 							</div>
 						</div>
 						<!-- 과목 추가... -->

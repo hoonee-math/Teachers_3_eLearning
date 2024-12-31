@@ -18,8 +18,8 @@
 	<div class="utility-nav">
 		<div class="utility-container">
 			<div class="left-links">
-				<a href="${path }/Course/list">블로그</a>
-				<a href="${path }/Teacher/list_and_detail">공지사항</a>
+				<a href="${path }/course/list">블로그</a>
+				<a href="${path }/teacher/list_and_detail">공지사항</a>
 				<a href="#">이벤트</a>
 			</div>
 			
@@ -31,12 +31,22 @@
 				<a href="#">고객센터</a>
 			</div>
 			</c:if>
-			
+				
 			<%-- 로그인 후 메뉴 --%>
 			<c:if test="${not empty sessionScope.loginMember}">
 				<div class="right-links">
 					<span class="welcome-msg">${sessionScope.loginMember.memberName}님 환영합니다</span>
-					<a href="${path}/mypage">마이페이지</a>
+					
+					<!-- 나중에 c:choose - when 으로 수정하기 -->
+					<c:if test="${sessionScope.loginMember.memberType != 5}">
+						<a href="${path}/admin/menu">관리자페이지</a>
+					</c:if>
+					<c:if test="${sessionScope.loginMember.memberType != 5}">
+						<a href="${path}/student/mypage/menu">마이페이지</a>
+					</c:if>
+					<c:if test="${sessionScope.loginMember.memberType != 5}">
+						<a href="${path}/teacher/mypage/menu">교사페이지</a>
+					</c:if>
 					<a href="${path}/cart">장바구니</a>
 					<button class="btn-link" onclick="logout()">로그아웃</button>
 					<a href="#">고객센터</a>
@@ -88,9 +98,9 @@
 		const path = '${pageContext.request.contextPath}';
 	</script>
 	
-    <script src="${path}/resources/js/common/headerBanner.js"></script>
-    <script src="${path}/resources/js/common/headerMenu.js"></script>
-    <script src="${path}/resources/js/common/auth.js"></script>
-    <script src="${path}/resources/js/common/headerMegaMenu.js"></script>
+	<script src="${path}/resources/js/common/headerBanner.js"></script>
+	<script src="${path}/resources/js/common/headerMenu.js"></script>
+	<script src="${path}/resources/js/common/auth.js"></script>
+	<script src="${path}/resources/js/common/headerMegaMenu.js"></script>
 	
 </header>

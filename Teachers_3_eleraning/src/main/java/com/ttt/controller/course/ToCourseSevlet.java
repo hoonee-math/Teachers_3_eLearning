@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Course/*")
+@WebServlet("/course/*")
 public class ToCourseSevlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -22,7 +22,7 @@ public class ToCourseSevlet extends HttpServlet {
         String path = uri.substring(request.getContextPath().length());
 
         switch(path) {
-        case "/Course/list":
+        case "/course/list":
         	request.getRequestDispatcher("/WEB-INF/views/course/courseList.jsp").forward(request, response);
             break;
         }
