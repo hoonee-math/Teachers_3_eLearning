@@ -75,7 +75,6 @@
 	<script src="${path}/resources/js/components/tabs.js"></script>
 
 	<!-- 11. 페이지별 JavaScript -->
-	<script src="${path}/resources/js/pages/teacherDetail.js"></script>
 	<script src="${path}/resources/js/components/dDay.js"></script>
 </body>
 </html>

@@ -1,7 +1,40 @@
 /**
  * 
  */
+$(document).ready(function() {
+
+	// 아코디언 클릭 시 선생님 리스트 보이기
+	$('.accordion-header').click(function() {
+	    // 리스트 보이고 디테일 숨기기
+	    $('.teacher-detail-content').hide();
+	    $('.teacher-list-content').show();
+	});
+
+    // 탭 메뉴 기능
+    $('.tab-button').click(function() {
+        $('.tab-button').removeClass('active');
+        $(this).addClass('active');
+    });
+});
 	
+// teacherListAndDetailAccordion.js 수정
+function updateTeacherList(subject) {
+    fetch(`${path}/api/teacher/list?subject=${subject}`)
+        .then(response => response.json())
+        .then(teachers => {
+            // 모든 template 숨기기
+            $('.teacher-card.template').hide();
+            
+            // 해당 과목 선생님만 표시
+            teachers.forEach(teacher => {
+                $(`.teacher-card[data-memberNo="${teacher.memberNo}"]`).show();
+            });
+            
+            // 과목명 업데이트
+            $('#subjectTitle').text(`${getSubjectName(subject)} 선생님`);
+        });
+}
+
 /* Ajax 요청으로 선생님 상세 페이지 확인 */
 document.addEventListener('DOMContentLoaded', function() {
 	// 초기 UI 상태 설정
