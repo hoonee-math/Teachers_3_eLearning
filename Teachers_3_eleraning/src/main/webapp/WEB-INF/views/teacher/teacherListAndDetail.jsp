@@ -60,25 +60,23 @@
 				<div class="teacher-detail-container">
 					<!-- 왼쪽 아코디언 메뉴 -->
 					<nav class="accordion-menu">
-						<!-- 국어 -->
+						<!-- jstl core 태그로 리스트를 받아와서 출력해주기 -->
+					    <c:forEach var="subjectEntry" items="${subjectData}">
 						<div class="accordion-item">
-							<div class="accordion-header active">국어</div>
-							<div class="accordion-content show">
-								<a href="#" class="active">강기동 선생님</a>
-								<a href="#">김미선 선생님</a>
-								<a href="#">장재학 선생님</a>
-							</div>
+						    <div class="accordion-header">
+							${subjectEntry.value} <!-- 과목명 출력 -->
+						    </div>
+						    <div class="accordion-content">
+							<c:forEach var="teacher" items="${teachers}">
+							    <c:if test="${teacher.subject == subjectEntry.key}"> <!-- 과목번호와 과목 키값을 비교 -->
+								<a href="#"  class="teacher-link" data-memberNo="${teacher.memberNo}">
+								    ${teacher.memberName} 선생님
+								</a>
+							    </c:if>
+							</c:forEach>
+						    </div>
 						</div>
-						<!-- 수학 -->
-						<div class="accordion-item">
-							<div class="accordion-header">수학</div>
-							<div class="accordion-content">
-								<a href="#">박정은 선생님</a>
-								<a href="#">윤송실 선생님</a>
-								<a href="#">김승겸 선생님</a>
-							</div>
-						</div>
-						<!-- 과목 추가... -->
+					    </c:forEach>
 					</nav>
 
 					<!-- 오른쪽 상세 내용 -->
@@ -143,33 +141,9 @@
 	<script src="${path}/resources/js/components/tabs.js"></script>
 
 	<!-- 11. 페이지별 JavaScript -->
-	<script src="${path}/resources/js/pages/teacherDetail.js"></script>
-	<script>
-    $(document).ready(function() {
-        // 아코디언 메뉴 기능
-        $('.accordion-header').click(function() {
-            const content = $(this).next('.accordion-content');
-            const isActive = $(this).hasClass('active');
-            
-            // 다른 모든 아코디언 닫기
-            $('.accordion-header').removeClass('active');
-            $('.accordion-content').slideUp(300);
-            
-            // 클릭된 아코디언 토글
-            if (!isActive) {
-                $(this).addClass('active');
-                content.slideDown(300);
-            }
-        });
-
-        // 탭 메뉴 기능
-        $('.tab-button').click(function() {
-            $('.tab-button').removeClass('active');
-            $(this).addClass('active');
-            // 탭 콘텐츠 전환 로직 추가
-        });
-    });
-    </script>
+	<script src="${path}/resources/js/teacher/teacherListAndDetailAccordion.js"></script>
+	<%-- <script src="${path}/resources/js/api/teacherApi.js"></script> --%>
+    
 	
 </body>
 </html>

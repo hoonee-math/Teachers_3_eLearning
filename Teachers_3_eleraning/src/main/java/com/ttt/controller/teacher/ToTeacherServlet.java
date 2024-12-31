@@ -1,6 +1,10 @@
 package com.ttt.controller.teacher;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,9 +27,25 @@ public class ToTeacherServlet extends HttpServlet {
 
         switch(path) {
         case "/teacher/list_and_detail":
-        	request.getRequestDispatcher("/WEB-INF/views/teacher/teacherListAndDetail.jsp").forward(request, response);
-            break;
-        case "/teacher/list":
+        	// 예시 Java Controller 코드
+        	List<Map<String, Object>> teachers = new ArrayList<>();
+        	teachers.add(Map.of("memberName", "강기동", "subject", 1,"memberNo",1));
+        	teachers.add(Map.of("memberName", "김미선", "subject", 1,"memberNo",1));
+        	teachers.add(Map.of("memberName", "장재학", "subject", 1,"memberNo",1));
+        	teachers.add(Map.of("memberName", "존 스미스", "subject", 2,"memberNo",1)); // 영어
+
+        	request.setAttribute("teachers", teachers);
+        	System.out.println(teachers);
+        	// JSP에서 사용할 subject 데이터
+        	Map<Integer, String> subjectData = Map.of(
+        	    1, "국어",
+        	    2, "영어",
+        	    3, "수학",
+        	    4, "사회",
+        	    5, "과학",
+        	    6, "기타"
+        	);
+        	request.setAttribute("subjectData", subjectData);
         	request.getRequestDispatcher("/WEB-INF/views/teacher/teacherListAndDetail.jsp").forward(request, response);
             break;
         }
