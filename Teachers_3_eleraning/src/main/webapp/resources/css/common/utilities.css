@@ -39,6 +39,26 @@
     margin-right: 15px;
 }
 
+/* 로그인 후 메뉴 스타일 */
+.welcome-msg {
+    color: #FAB350;
+    font-weight: 500;
+    margin-right: 15px;
+}
+
+.right-links a, 
+.right-links button {
+    color: #666;
+    font-size: 0.9em;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.right-links a:hover, 
+.right-links button:hover {
+    color: #FAB350;
+}
+
 /* 메인 네비게이션 스타일 */
 .main-nav {
     border-bottom: 1px solid #e1e1e1;
