@@ -33,6 +33,7 @@
 
 <!-- 4. 페이지별 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/pages/teacherListAndDetail.css">
+<link rel="stylesheet" href="${path}/resources/css/pages/courseList.css">
 
 <!-- 5. jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -78,43 +79,108 @@
 						</div>
 					    </c:forEach>
 					</nav>
-
-					<!-- 오른쪽 상세 내용 -->
-					<div class="teacher-detail-content">
-						<!-- 선생님 프로필 -->
-						<div class="teacher-profile">
-							<div class="profile-image">
-								<img src="https://i.namu.wiki/i/W-LhGCCNTAE3F7AJ81_DQpGg7XQbQolN76WcFDjbYgkSoOp8NnGgEj8PyGblftQNMKTTv_NJ8lfBz9XzpMlggQ.webp" alt="정승제 선생님">
-							</div>
-							<div class="profile-info">
-								<div class="profile-header">
-									<h1 class="profile-title">정승제 선생님</h1>
-									<p class="profile-subtitle">TITLE 안내문 개념과 지독한 연습이 만점을 만듭니다!</p>
+	
+					<div style="display:flex; flex-direction: column;">
+						<!-- 오른쪽 상세 내용 섹션 1 : 선생님 프로필-->
+						<div class="teacher-detail-content">
+							<div class="teacher-profile">
+								<div class="profile-image">
+									<img src="https://i.namu.wiki/i/W-LhGCCNTAE3F7AJ81_DQpGg7XQbQolN76WcFDjbYgkSoOp8NnGgEj8PyGblftQNMKTTv_NJ8lfBz9XzpMlggQ.webp" alt="정승제 선생님">
 								</div>
-								<div class="profile-tags">
-									<span class="profile-tag">#개념</span> <span class="profile-tag">#학력과 통계</span> <span class="profile-tag">#수능 대비</span>
+								<div class="profile-info">
+									<div class="profile-header">
+										<h1 class="profile-title">정승제 선생님</h1>
+										<p class="profile-subtitle">TITLE 안내문 개념과 지독한 연습이 만점을 만듭니다!</p>
+									</div>
+									<div class="profile-tags">
+										<span class="profile-tag">#개념</span> <span class="profile-tag">#학력과 통계</span> <span class="profile-tag">#수능 대비</span>
+									</div>
 								</div>
 							</div>
+	
+							<!-- 소개 영상 -->
+							<div class="preview-video">
+								<div class="play-button"></div>
+							</div>
+	
+							<!-- 탭 메뉴 -->
+							<div class="tab-menu">
+								<button class="tab-button active">HOME</button>
+								<button class="tab-button">강의목록</button>
+								<button class="tab-button">공지사항만</button>
+								<button class="tab-button">학습 Q&A</button>
+								<button class="tab-button">학습 자료실</button>
+								<button class="tab-button">수강 후기</button>
+							</div>
+	
+							<!-- 탭 콘텐츠 영역 -->
+							<div class="tab-content">
+								<!-- 탭 별 콘텐츠가 들어갈 영역 -->
+							</div>
 						</div>
-
-						<!-- 소개 영상 -->
-						<div class="preview-video">
-							<div class="play-button"></div>
-						</div>
-
-						<!-- 탭 메뉴 -->
-						<div class="tab-menu">
-							<button class="tab-button active">HOME</button>
-							<button class="tab-button">강의목록</button>
-							<button class="tab-button">공지사항만</button>
-							<button class="tab-button">학습 Q&A</button>
-							<button class="tab-button">학습 자료실</button>
-							<button class="tab-button">수강 후기</button>
-						</div>
-
-						<!-- 탭 콘텐츠 영역 -->
-						<div class="tab-content">
-							<!-- 탭 별 콘텐츠가 들어갈 영역 -->
+						
+						<!-- 오른쪽 상세 내용 섹션 2 : 리스트 헤더 -->
+						<div class="teacher-list-content">
+							<div class="list-header">
+								<h2 class="list-title">국어 선생님</h2>
+								<div class="sub-category">
+									<button class="active">전체</button>
+									<button>문학</button>
+									<button>독서</button>
+									<button>화법과 작문</button>
+								</div>
+							</div>
+		
+							<!-- 강사 리스트 -->
+							<div class="teacher-list">
+								<!-- 강사 카드 1 -->
+								<div class="teacher-card">
+									<div class="teacher-image">
+										<img
+											src="https://i.namu.wiki/i/W-LhGCCNTAE3F7AJ81_DQpGg7XQbQolN76WcFDjbYgkSoOp8NnGgEj8PyGblftQNMKTTv_NJ8lfBz9XzpMlggQ.webp"
+											alt="정승제 선생님">
+									</div>
+									<div class="teacher-info">
+										<h3>
+											정승제 선생님 <span class="teacher-badge">신규</span>
+										</h3>
+										<p class="teacher-description">국어의 달인이 되는 핵심 노하우 대공개! 학습의
+											시작과 마무리를 책임지는 강의</p>
+									</div>
+								</div>
+		
+								<!-- 강사 카드 2 -->
+								<div class="teacher-card">
+									<div class="teacher-image">
+										<img
+											src="https://i.namu.wiki/i/PH9KzsC2-ubZ_bgZX2f1LQiDTTd3aXhg9oAgaGqidOb2Wku3WwdjhQ_nUQDZHm2b7jPOc2F1iqvlbxK_80rxuw.webp"
+											alt="이지영 선생님">
+									</div>
+									<div class="teacher-info">
+										<h3>
+											이지영 선생님 <span class="teacher-badge">인기</span>
+										</h3>
+										<p class="teacher-description">문학의 감동을 전달하는 맛있는 강의! 수능 만점을
+											위한 체계적인 커리큘럼</p>
+									</div>
+								</div>
+		
+								<!-- 강사 카드 3 -->
+								<div class="teacher-card">
+									<div class="teacher-image">
+										<img
+											src="https://i.namu.wiki/i/HD37stHzedpVHn3CRooaDUZnpY0lBKnMitQGuxOoLxSGpUBGxqAPhvc6MDjaViQgbHRnI5Q1j3AbTUJWCwW1VQ.webp"
+											alt="우형철 선생님">
+									</div>
+									<div class="teacher-info">
+										<h3>
+											우형철 선생님 <span class="teacher-badge">베스트</span>
+										</h3>
+										<p class="teacher-description">독서와 문법의 기초부터 실전까지! 개념을 쉽게
+											풀어주는 맞춤형 강의</p>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
