@@ -1,5 +1,22 @@
 @charset "UTF-8";
 
+/* 전체 페이지 레이아웃 */
+#wrap {
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+}
+
+main {
+   flex: 1;
+}
+
+/* footer는 항상 하단에 고정 */
+footer {
+   margin-top: auto;
+}
+
+
 .sections-wrapper {
     max-width: 1200px;
     margin: 0 auto;
