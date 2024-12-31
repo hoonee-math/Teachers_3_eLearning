@@ -4,23 +4,37 @@
 	
 /* Ajax 요청으로 선생님 상세 페이지 확인 */
 document.addEventListener('DOMContentLoaded', function() {
+	// 초기 UI 상태 설정
 	const teacherDetailContent = document.querySelector('.teacher-detail-content');
-	
-	document.querySelectorAll('.teacher-link').forEach(link => {
+	const teacherListContent = document.querySelector('.teacher-list-content');
+	teacherDetailContent.style.display = 'none';
+
+	// 강사 선택 이벤트 처리
+	document.querySelectorAll('.teacher-link, .teacher-card').forEach(link => {
 		link.addEventListener('click', function(e) {
 			e.preventDefault();
 			const memberNo = this.getAttribute('data-memberNo');
 			
 			/* memberNo 값을 이용해서 post 요청 보내기 */
-			fetch('/api/teachers', {
+			fetch(`${path}/api/teachers`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
 				},
 				body: `memberNo=${memberNo}`
 			})
-			.then(response => response.json())
+			.then(response => {
+				if (!response.ok) {
+				    throw new Error('Network response was not ok');
+				}
+				return response.json();
+			})
 			.then(teacher => {
+				// UI 업데이트
+				teacherDetailContent.style.display = 'block';
+				teacherListContent.style.display = 'none';
+	
+				// 선생님 프로필 업데이트
 				teacherDetailContent.innerHTML = `
 					<div class="teacher-profile">
 						<div class="profile-image">
@@ -57,6 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
 						/* 탭 별 콘텐츠가 들어갈 영역 */
 					</div>
 				`;
+			})
+			.catch(error => {
+			    console.error('Error:', error);
 			});
 		});
 	});

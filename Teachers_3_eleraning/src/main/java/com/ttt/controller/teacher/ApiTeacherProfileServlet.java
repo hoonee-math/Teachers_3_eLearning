@@ -27,6 +27,10 @@ public class ApiTeacherProfileServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+        // memberNo 파라미터 받기
+        String memberNo = request.getParameter("memberNo");
+        System.out.println("Requested memberNo: " + memberNo);
+		
 		// 실제 DB 연동 코드 (추후 구현)
         /*
         String teacherId = request.getParameter("teacherId");
@@ -36,11 +40,9 @@ public class ApiTeacherProfileServlet extends HttpServlet {
 
         // 임시 데이터를 Map으로 생성
         Map<String, Object> teacher = new HashMap<>();
-
-        // 더미 데이터
-        teacher.put("id", 1);
+        teacher.put("id", memberNo);
         teacher.put("name", "정승제");
-        teacher.put("imageUrl", "/images/teachers/jung.jpg");
+        teacher.put("imageUrl", "https://i.namu.wiki/i/W-LhGCCNTAE3F7AJ81_DQpGg7XQbQolN76WcFDjbYgkSoOp8NnGgEj8PyGblftQNMKTTv_NJ8lfBz9XzpMlggQ.webp");
         teacher.put("title", "개념과 지독한 연습이 만점을 만듭니다!");
 
         List<String> tags = new ArrayList<>();
@@ -48,7 +50,13 @@ public class ApiTeacherProfileServlet extends HttpServlet {
         tags.add("학력과 통계");
         tags.add("수능 대비");
         teacher.put("tags",tags);
+
+        // CORS 헤더 설정
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
         
+        // 응답 설정
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(gson.toJson(teacher));

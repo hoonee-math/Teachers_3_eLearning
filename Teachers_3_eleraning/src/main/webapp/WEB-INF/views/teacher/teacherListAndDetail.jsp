@@ -208,7 +208,7 @@
 
 	<!-- 11. 페이지별 JavaScript -->
 	<script src="${path}/resources/js/teacher/teacherListAndDetailAccordion.js"></script>
-	<%-- <script src="${path}/resources/js/api/teacherApi.js"></script> --%>
+	<script src="${path}/resources/js/api/teacherApi.js"></script>
     
 	
 </body>
