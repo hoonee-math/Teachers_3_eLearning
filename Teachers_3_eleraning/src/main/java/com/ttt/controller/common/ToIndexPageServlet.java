@@ -21,7 +21,7 @@ public class ToIndexPageServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        
         // 세션 체크 
         HttpSession session = request.getSession();
         
@@ -43,8 +43,8 @@ public class ToIndexPageServlet extends HttpServlet {
             // 세션에 저장
             session.setAttribute("loginMember", memberMap);
         }
-        
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 }

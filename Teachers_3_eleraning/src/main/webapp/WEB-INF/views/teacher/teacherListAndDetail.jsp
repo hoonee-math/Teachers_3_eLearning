@@ -80,7 +80,6 @@
 					    </c:forEach>
 					</nav>
 	
-					<div style="display:flex; flex-direction: column;">
 						<!-- 오른쪽 상세 내용 섹션 1 : 선생님 프로필-->
 						<div class="teacher-detail-content">
 							<div class="teacher-profile">
@@ -120,7 +119,7 @@
 						</div>
 						
 						<!-- 오른쪽 상세 내용 섹션 2 : 리스트 헤더 -->
-						<div class="teacher-list-content">
+						<div class="content-list teacher-list-content">
 							<div class="list-header">
 								<h2 class="list-title">국어 선생님</h2>
 								<div class="sub-category">
@@ -183,7 +182,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
 			</section>
 
 		</main>

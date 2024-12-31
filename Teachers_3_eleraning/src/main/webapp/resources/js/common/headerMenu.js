@@ -3,29 +3,29 @@ const subMenus = {
 	'고1': [
 		{name: '선생님', url: path + '/teacher/list_and_detail', megaMenu: 'teacher'},
 		{name: '모든강좌', url: path + '/course/list', megaMenu: 'course'},
-		{name: '교재', url: path + '/book/list/high1'},
-		{name: '모의고사', url: path + '/exam/list/high1'},
-		{name: '기출문제', url: path + '/previous/high1'},
-		{name: '입시정보', url: path + '/info/high1'},
-		{name: '시험응시실', url: path + '/test/high1'}
+		{name: '교재', url: path + '/homepage'},
+		{name: '모의고사', url: path + '/homepage'},
+		{name: '기출문제', url: path + '/homepage'},
+		{name: '입시정보', url: path + '/homepage'},
+		{name: '시험응시실', url: path + '/homepage'}
 	],
 	'고2': [
 		{name: '선생님', url: path + '/teacher/list_and_detail', megaMenu: 'teacher'},
 		{name: '모든강좌', url: path + '/course/list', megaMenu: 'course'},
-		{name: '교재구매', url: path + '/book/list/high2'},
-		{name: '모의고사', url: path + '/exam/list/high2'},
-		{name: '기출문제', url: path + '/previous/high2'},
-		{name: '입시자료', url: path + '/info/high2'},
-		{name: '학습현황', url: path + '/status/high2'}
+		{name: '교재구매', url: path + '/homepage'},
+		{name: '모의고사', url: path + '/homepage'},
+		{name: '기출문제', url: path + '/homepage'},
+		{name: '입시자료', url: path + '/homepage'},
+		{name: '학습현황', url: path + '/homepage'}
 	],
 	'고3/N수': [
 		{name: '선생님', url: path + '/teacher/list_and_detail', megaMenu: 'teacher'},
 		{name: '모든강좌', url: path + '/course/list', megaMenu: 'course'},
-		{name: '수능교재', url: path + '/book/list/high3'},
-		{name: '수능모의고사', url: path + '/exam/list/high3'},
-		{name: '수능기출', url: path + '/previous/high3'},
-		{name: '입시상담', url: path + '/counsel/high3'},
-		{name: '학습관리', url: path + '/status/high3'}
+		{name: '수능교재', url: path + '/homepage'},
+		{name: '수능모의고사', url: path + '/homepage'},
+		{name: '수능기출', url: path + '/homepage'},
+		{name: '입시상담', url: path + '/homepage'},
+		{name: '학습관리', url: path + '/homepage'}
 	]
 };
 
