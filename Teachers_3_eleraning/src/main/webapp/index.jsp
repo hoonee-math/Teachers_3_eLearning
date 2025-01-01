@@ -33,6 +33,7 @@
 
 	<!-- 4. 페이지별 CSS -->
 	<link rel="stylesheet" href="${path}/resources/css/components/dDay.css">
+    <link rel="stylesheet" href="${path}/resources/css/index/slider.css">
 
 	<!-- 5. jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -46,17 +47,49 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	
 	<main>
-		
+		<!-- 섹션1: D-day section -->
 		<div id="my-dday-container" class="dday-container">
 			<div class="dday-content">
 				<div class="dday-messages"></div>
 				<i class="bi bi-gear-fill dday-settings"></i>
 			</div>
 		</div>
-	
-	
-		<jsp:include page="/WEB-INF/views/common/section.jsp" />
-	</main>
+		
+		<!-- 섹션2: 광고 메인 슬라이더 section -->
+		<section id="mainSlider" class="slider-section">
+			<div class="slider-container">
+				<div class="slider-wrapper">
+					<c:forEach var="slide" items="${mainSlides}">
+						<div class="slide">
+							<a href="${slide.link}"> <img src="${slide.imageUrl}"
+								alt="${slide.title}">
+								<div class="slide-content">
+									<h2>${slide.title}</h2>
+									<p>${slide.description}</p>
+								</div>
+							</a>
+						</div>
+					</c:forEach>
+				</div>
+
+				<!-- 슬라이더 컨트롤 -->
+				<div class="slider-controls">
+					<button class="prev-btn">&lt;</button>
+					<button class="pause-btn">II</button>
+					<button class="next-btn">&gt;</button>
+				</div>
+
+				<!-- 슬라이더 인디케이터 -->
+				<div class="slider-indicators">
+					<c:forEach var="slide" items="${mainSlides}" varStatus="status">
+						<button class="indicator${status.first ? ' active' : ''}"
+							data-slide="${status.index}"></button>
+					</c:forEach>
+				</div>
+			</div>
+		</section>
+
+		</main>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </div>
 	
@@ -76,5 +109,6 @@
 
 	<!-- 11. 페이지별 JavaScript -->
 	<script src="${path}/resources/js/components/dDay.js"></script>
+	<script src="${path}/resources/js/index/slider.js"></script>
 </body>
 </html>
