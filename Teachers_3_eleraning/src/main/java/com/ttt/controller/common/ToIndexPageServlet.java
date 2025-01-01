@@ -121,6 +121,69 @@ public class ToIndexPageServlet extends HttpServlet {
 	    
 	    
 
+	    // (더미데이터) 대표 강사진 생성
+	    List<Map<String, Object>> mainTeachers = new ArrayList<>();
+	    String[] subjects = {"국어", "수학", "영어", "과학", "사회", "국어", "수학", "영어"}; // 8명
+	    
+	    for(int i = 0; i < 8; i++) {
+	        Map<String, Object> teacher = new HashMap<>();
+	        teacher.put("memberNo", i + 1);
+	        teacher.put("memberName", "강사" + (i + 1));
+	        teacher.put("teacherSubject", subjects[i]);
+	        teacher.put("teacherInfoTitle", "열정적인 " + subjects[i] + " 선생님");
+	        teacher.put("imageUrl", request.getContextPath() + "/resources/images/common/HoneyT_logo_vertical.png");
+	        mainTeachers.add(teacher);
+	    }
+	    
+	    request.setAttribute("mainTeachers", mainTeachers);
+	    System.out.println("대표 강사진 데이터 설정: " + mainTeachers);
+	    
+	    
+	    
+	    
+	    // (더미데이터) 인기 강좌 메인 화면에 출력할 데이터
+
+	    // 코스 카테고리 정보
+	    Map<Integer, String> courseCategoryInfo = new HashMap<>();
+	    courseCategoryInfo.put(1, "진도 강좌");
+	    courseCategoryInfo.put(2, "내신대비 강좌");
+	    courseCategoryInfo.put(3, "모의고사 대비 강좌");
+	    courseCategoryInfo.put(4, "수능대비 강좌");
+	    
+	    // 인기 강좌 더미데이터 생성
+	    List<Map<String, Object>> popularCourses = new ArrayList<>();
+		/* String[] subjects = {"국어", "수학", "영어", "과학", "사회"}; */
+	    String[] teacherNames = {"김선생", "이선생", "박선생", "정선생", "최선생"};
+	    
+	    // 각 카테고리별로 5개씩 강좌 생성
+	    for(int category = 1; category <= 4; category++) {
+	        for(int i = 0; i < 5; i++) {
+	            Map<String, Object> course = new HashMap<>();
+	            int courseNo = (category - 1) * 5 + i + 1;
+	            
+	            course.put("courseNo", courseNo);
+	            course.put("courseTitle", subjects[i] + " " + courseCategoryInfo.get(category));
+	            course.put("courseCategoryNo", category);
+	            course.put("grade", (i % 3) + 1); // 1,2,3 학년
+	            course.put("coursePrice", 150000 + (i * 10000));
+	            course.put("coursePriceSale", 10 + (i * 5)); // 10~30% 할인
+	            course.put("totalLectures", 20 + (i * 2));
+	            course.put("teacherName", teacherNames[i]);
+	            course.put("courseDesc", subjects[i] + "의 기초부터 실전까지! " + courseCategoryInfo.get(category));
+	            course.put("teacherInfo", teacherNames[i] + " 선생님과 함께하는 " + subjects[i] + " 마스터");
+	            course.put("rating", 4.5 + (Math.random() * 0.5)); // 4.5~5.0 평점
+	            course.put("studentCount", 100 + (int)(Math.random() * 900)); // 100~1000명
+	            
+	            popularCourses.add(course);
+	        }
+	    }
+	    
+	    request.setAttribute("courseCategoryInfo", courseCategoryInfo);
+	    request.setAttribute("popularCourses", popularCourses);
+	    
+	    System.out.println("인기 강좌 데이터 설정: " + popularCourses);
+	    
+
         request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 

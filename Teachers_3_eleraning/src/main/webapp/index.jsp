@@ -35,6 +35,8 @@
 	<link rel="stylesheet" href="${path}/resources/css/components/dDay.css">
     <link rel="stylesheet" href="${path}/resources/css/index/slider.css">
     <link rel="stylesheet" href="${path}/resources/css/index/studentAndTeacherSection.css">
+    <link rel="stylesheet" href="${path}/resources/css/index/teacherSlider.css">
+    <link rel="stylesheet" href="${path}/resources/css/index/popularCourses.css">
 
 	<!-- 5. jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -112,12 +114,12 @@
 										<div class="progress" style="width: ${course.progressRate}%"></div>
 									</div>
 									<span class="progress-text">${course.progressRate}%
-										수강완료</span>
+										수강완료
+									</span>
 								</div>
 								<div class="next-lecture">
 									<h4>다음 강의</h4>
-									<p>Chapter ${course.nextLectureNo}.
-										${course.nextLectureTitle}</p>
+									<p>Chapter ${course.nextLectureNo}.${course.nextLectureTitle}</p>
 									<span class="lecture-count">(${course.nextLectureNo}/${course.totalLectures}강)</span>
 									<span class="resume-time">이어보기: ${course.stopAt div 60}분
 										${course.stopAt mod 60}초</span>
@@ -145,24 +147,117 @@
 								</div>
 								<div class="upload-progress">
 									<div class="progress-bar">
-										<div class="progress"
-											style="width: ${course.uploadProgress}%"></div>
+										<div class="progress" style="width: ${course.uploadProgress}%"></div>
 									</div>
 									<span class="progress-text">
-										${course.uploadedLectures}/${course.totalLectures}강 업로드 완료 </span>
+										${course.uploadedLectures}/${course.totalLectures}강 업로드 완료
+									</span>
 								</div>
 								<div class="course-schedule">
 									<p>강의 등록 기간</p>
 									<p>${course.startDate}~ ${course.endDate}</p>
 								</div>
-								<a href="${path}/teacher/course/${course.courseNo}"
-									class="course-link">강의 관리하기</a>
+								<a href="${path}/teacher/course/${course.courseNo}" class="course-link">강의 관리하기</a>
 							</div>
 						</c:forEach>
 					</div>
 				</div>
 			</section>
 		</c:if>
+
+
+		<!-- 섹션4: 대표 강사진 슬라이더 -->
+		<section id="mainTeachers" class="teacher-slider-section">
+			<div class="section-container">
+				<h2 class="section-title">대표 강사진</h2>
+				<div class="teacher-slider-container">
+					<div class="teacher-slider">
+						<c:forEach var="teacher" items="${mainTeachers}" varStatus="status">
+							<div class="teacher-slide">
+								<div class="teacher-card">
+									<div class="teacher-image">
+										<img src="${teacher.imageUrl}" alt="${teacher.memberName} 선생님">
+									</div>
+									<div class="teacher-info">
+										<h3>${teacher.memberName}선생님</h3>
+										<p class="subject">${teacher.teacherSubject}</p>
+										<p class="title">${teacher.teacherInfoTitle}</p>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<!-- index.jsp의 섹션5 부분 수정 -->
+		<section id="popularCourses" class="popular-course-section">
+			<div class="popular-course-container">
+				<h2 class="section-title">인기 강좌</h2>
+
+				<div class="popular-category-tabs">
+					<!-- courseCategoryInfo 객체는 카테고리 번호와 이름을 key : value 형식으로 갖고있는 map -->
+					<c:forEach var="category" items="${courseCategoryInfo}">
+						<button
+							class="popular-category-tab ${category.key == 1 ? 'active' : ''}"
+							data-category="${category.key}">${category.value}</button>
+					</c:forEach>
+				</div>
+
+				<div class="popular-course-container">
+					<!-- 상단 카테리 번호에 따라 카테고리 생성 -->
+					<c:forEach var="categoryId" begin="1" end="4">
+						<div
+							class="popular-course-list ${categoryId == 1 ? 'active' : ''}"
+							data-category="${categoryId}">
+							<div class="popular-course-grid">
+								<c:forEach var="course" items="${popularCourses}">
+									<c:if test="${course.courseCategoryNo == categoryId}">
+										<div class="popular-course-card">
+											<div class="popular-course-image">
+												<img
+													src="${path}/resources/images/common/HoneyT_logo_vertical.png"
+													alt="${course.courseTitle}"> <span
+													class="popular-grade-badge">고${course.grade}</span>
+												<div class="popular-course-overlay">
+													<p>${course.courseDesc}</p>
+												</div>
+											</div>
+											<div class="popular-course-content">
+												<h3 class="popular-course-title">${course.courseTitle}</h3>
+												<p class="popular-teacher-name">${course.teacherName}
+													선생님</p>
+												<p class="popular-teacher-info">${course.teacherInfo}</p>
+												<div class="popular-course-info">
+													<div class="popular-rating">
+														<i class="bi bi-star-fill"></i> <span><fmt:formatNumber
+																value="${course.rating}" pattern="#.0" /></span>
+													</div>
+													<div class="popular-student-count">
+														<i class="bi bi-people-fill"></i> <span>${course.studentCount}명</span>
+													</div>
+												</div>
+												<div class="popular-course-price">
+													<span class="popular-discount">${course.coursePriceSale}%</span>
+													<span class="popular-price"> <fmt:formatNumber
+															value="${course.coursePrice * (100 - course.coursePriceSale) / 100}"
+															type="currency" currencySymbol="" maxFractionDigits="0" />원
+													</span>
+												</div>
+											</div>
+											<a href="${path}/course/detail/${course.courseNo}"
+												class="popular-course-link"> 자세히 보기 </a>
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</section>
 	</main>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </div>
@@ -184,5 +279,7 @@
 	<!-- 11. 페이지별 JavaScript -->
 	<script src="${path}/resources/js/components/dDay.js"></script>
 	<script src="${path}/resources/js/index/slider.js"></script>
+	<script src="${path}/resources/js/index/teacherSlider.js"></script>
+	<script src="${path}/resources/js/index/popularCourses.js"></script>
 </body>
 </html>
