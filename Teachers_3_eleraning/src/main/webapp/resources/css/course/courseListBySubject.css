@@ -1,0 +1,306 @@
+@charset "UTF-8";
+
+/* 강좌 카드 스타일 업데이트 */
+.course-card {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	background-color: white;
+	border: 1px solid #e1e1e1;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	transition: all 0.2s;
+}
+
+.course-card:hover {
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-left {
+	display: flex;
+	gap: 20px;
+	flex: 1;
+}
+
+.course-image {
+	width: 200px;
+	height: 120px;
+	border-radius: 8px;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+.course-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.course-info {
+	flex: 1;
+}
+
+.course-info h3 {
+	font-size: 1.2em;
+	margin: 0 0 10px 0;
+	font-weight: bold;
+}
+
+.teacher-name {
+	color: #666;
+	margin-bottom: 10px;
+}
+
+.course-desc {
+	color: #444;
+	font-size: 0.9em;
+	line-height: 1.6;
+	margin-bottom: 10px;
+}
+
+.course-tags {
+	display: flex;
+	gap: 8px;
+}
+
+.course-tag {
+	background-color: #f8f9fa;
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-size: 0.8em;
+	color: #666;
+}
+
+.card-right {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+	min-width: 150px;
+}
+
+.preview-btn {
+	padding: 8px 16px;
+	background-color: #f8f9fa;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.preview-btn:hover {
+	background-color: #e9ecef;
+}
+
+.price-section {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+/* 체크박스 커스텀 스타일 */
+.checkbox-wrapper {
+	position: relative;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+}
+
+.checkbox-wrapper input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 20px;
+	height: 20px;
+	background-color: white;
+	border: 2px solid #ddd;
+	border-radius: 4px;
+}
+
+.checkbox-wrapper input:checked ~ .checkmark {
+	background-color: #FAB350;
+	border-color: #FAB350;
+}
+
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+.checkbox-wrapper input:checked ~ .checkmark:after {
+	display: block;
+}
+
+.checkbox-wrapper .checkmark:after {
+	left: 6px;
+	top: 2px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+.price-info {
+	text-align: right;
+}
+
+.original-price {
+	display: block;
+	color: #999;
+	text-decoration: line-through;
+	font-size: 0.9em;
+}
+
+.discount-rate {
+	color: #ff6b6b;
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+.final-price {
+	display: block;
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #333;
+}
+
+/* 페이징 바 스타일 */
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 30px 0;
+	gap: 10px;
+}
+
+.pagination a {
+	padding: 8px 12px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	color: #666;
+	text-decoration: none;
+	transition: all 0.2s;
+}
+
+.pagination a:hover {
+	background-color: #f8f9fa;
+	color: #FAB350;
+	border-color: #FAB350;
+}
+
+.pagination .current-page {
+	padding: 8px 12px;
+	background-color: #FAB350;
+	color: white;
+	border-radius: 4px;
+	font-weight: bold;
+}
+
+.pagination .page-arrow {
+	font-weight: bold;
+}
+
+/* 장바구니/구매 버튼 영역 */
+.action-buttons {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	margin-top: 20px;
+	padding: 20px 0;
+	border-top: 1px solid #e1e1e1;
+}
+
+.cart-btn, .purchase-btn {
+	padding: 12px 24px;
+	border: none;
+	border-radius: 4px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.cart-btn {
+	background-color: white;
+	border: 1px solid #FAB350;
+	color: #FAB350;
+}
+
+.cart-btn:hover {
+	background-color: #fff3e0;
+}
+
+.purchase-btn {
+	background-color: #FAB350;
+	color: white;
+}
+
+.purchase-btn:hover {
+	background-color: #f9a825;
+}
+
+/* 전체 레이아웃 관련 스타일 */
+#course-section {
+	padding: 20px 0;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.course-container {
+	display: flex;
+	gap: 30px;
+	padding: 0 20px;
+}
+
+/* 왼쪽 메뉴 스타일 */
+.subject-menu {
+	width: 200px;
+	flex-shrink: 0;
+	background-color: #f8f9fa;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.content-list {
+	flex-grow: 1;
+}
+
+/* 리스트 헤더 스타일 */
+.list-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.list-title {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.sub-category {
+	display: flex;
+	gap: 10px;
+}
+
+.sub-category button {
+	padding: 8px 16px;
+	border: 1px solid #ddd;
+	border-radius: 20px;
+	background-color: white;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.sub-category button:hover, .sub-category button.active {
+	background-color: #FAB350;
+	color: white;
+	border-color: #FAB350;
+}
