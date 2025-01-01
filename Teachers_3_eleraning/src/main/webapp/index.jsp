@@ -155,7 +155,7 @@
 								</div>
 								<div class="course-schedule">
 									<p>강의 등록 기간</p>
-									<p>${course.startDate}~ ${course.endDate}</p>
+									<p>${course.beginDate}~ ${course.endDate}</p>
 								</div>
 								<a href="${path}/teacher/course/${course.courseNo}" class="course-link">강의 관리하기</a>
 							</div>

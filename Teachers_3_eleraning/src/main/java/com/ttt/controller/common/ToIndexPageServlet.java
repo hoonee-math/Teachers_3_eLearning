@@ -109,7 +109,7 @@ public class ToIndexPageServlet extends HttpServlet {
 	    uploadCourse1.put("uploadedLectures", 5);
 	    uploadCourse1.put("totalLectures", 30);
 	    uploadCourse1.put("uploadProgress", 16);
-	    uploadCourse1.put("startDate", "2024-03-15");
+	    uploadCourse1.put("beginDate", "2024-03-15");
 	    uploadCourse1.put("endDate", "2024-05-30");
 	    teacherCourses.add(uploadCourse1);
 
