@@ -34,6 +34,7 @@
 	<!-- 4. 페이지별 CSS -->
 	<link rel="stylesheet" href="${path}/resources/css/components/dDay.css">
     <link rel="stylesheet" href="${path}/resources/css/index/slider.css">
+    <link rel="stylesheet" href="${path}/resources/css/index/studentAndTeacherSection.css">
 
 	<!-- 5. jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -89,7 +90,80 @@
 			</div>
 		</section>
 
-		</main>
+
+		<!-- 섹션2: 학생 수강 현황 (memberType == 1) -->
+		<c:if test="${sessionScope.loginMember.memberType != 5}">
+			<section id="studentCourses" class="course-section">
+				<div class="section-container">
+					<h2 class="section-title">나의 학습 현황</h2>
+					<div class="course-grid">
+						<c:forEach var="course" items="${studentCourses}">
+							<div class="course-card">
+								<div class="course-header">
+									<h3>${course.courseTitle}</h3>
+									<span class="teacher-name">${course.teacherName} 선생님</span>
+									<p class="last-view">
+										마지막 수강:
+										<fmt:formatDate value="${course.lastViewTime}" pattern="yyyy-MM-dd HH:mm" />
+									</p>
+								</div>
+								<div class="course-progress">
+									<div class="progress-bar">
+										<div class="progress" style="width: ${course.progressRate}%"></div>
+									</div>
+									<span class="progress-text">${course.progressRate}%
+										수강완료</span>
+								</div>
+								<div class="next-lecture">
+									<h4>다음 강의</h4>
+									<p>Chapter ${course.nextLectureNo}.
+										${course.nextLectureTitle}</p>
+									<span class="lecture-count">(${course.nextLectureNo}/${course.totalLectures}강)</span>
+									<span class="resume-time">이어보기: ${course.stopAt div 60}분
+										${course.stopAt mod 60}초</span>
+								</div>
+								<a href="${path}/course/detail/${course.courseRegisterNo}"
+									class="course-link">이어서 학습하기</a>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</section>
+		</c:if>
+
+		<!-- 섹션3: 교사 강좌 업로드 현황 (memberType == 2) -->
+		<c:if test="${sessionScope.loginMember.memberType != 5}">
+			<section id="teacherCourses" class="course-section">
+				<div class="section-container">
+					<h2 class="section-title">강좌 업로드 현황</h2>
+					<div class="course-grid">
+						<c:forEach var="course" items="${teacherCourses}">
+							<div class="course-card">
+								<div class="course-header">
+									<h3>${course.courseTitle}</h3>
+									<span class="upload-status">업로드 진행중</span>
+								</div>
+								<div class="upload-progress">
+									<div class="progress-bar">
+										<div class="progress"
+											style="width: ${course.uploadProgress}%"></div>
+									</div>
+									<span class="progress-text">
+										${course.uploadedLectures}/${course.totalLectures}강 업로드 완료 </span>
+								</div>
+								<div class="course-schedule">
+									<p>강의 등록 기간</p>
+									<p>${course.startDate}~ ${course.endDate}</p>
+								</div>
+								<a href="${path}/teacher/course/${course.courseNo}"
+									class="course-link">강의 관리하기</a>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</section>
+		</c:if>
+	</main>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </div>
 	
