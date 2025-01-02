@@ -54,11 +54,54 @@
 	
 	
 	
+<!-- 메인 콘텐츠 -->
+<main>
+<div class="sections-wrapper">
+<section id="layout-section-1">
+<!-- 페이지 내용 -->
+<!-- 메인 콘텐츠 -->
+<div>
+	<!-- 왼쪽 공백 -->
+	<div class="content-box" style="border:none;">
+	</div>
+	
 	<!-- 메인 콘텐츠 -->
-	<main>
-	    <!-- 페이지 내용 -->
+	<div class="content-box" style="min-width:500px">
+		<!-- ID/PW 찾기 타이틀 영영 -->
+		<div style="display:flex; justify-content:space-between;">
+			<div><h3>아이디/비밀번호 찾기</h3></div>
+			<div style="margin-top:5px; font-size:small; right:0">HOME > 내정보 > 아이디/비밀번호 찾기</div>
+		</div>
 		
-	</main>
+		<!-- ID/PW 찾기 선택 영역 -->
+		<div style="display:flex; justify-content:space-between;">
+			<div style="width:50%; text-align: center;">아이디 찾기</div>
+			<div style="width:50%; text-align: center;">비밀번호 찾기</div>
+		</div>
+		
+		<!-- ID/PW 찾기 사용자 휴대폰번호 or 이메일 입력 영역 -->
+		<div style="display:flex; flex-direction: column;">
+			<p>가입 시 등록한 <strong>휴대폰 번호</strong>로 아이디를 찾을 수 있습니다.</p>
+			<div>
+				<div style="margin-left:auto;">
+					<label>이름</label>
+					<input type="text" id="memberName" name="memberName">
+				</div>
+				<div style="margin-left:auto;">
+					<label>휴대폰</label>
+					<input type="text" id="phone" name="phone">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 오른쪽 공백 -->
+	<div class="content-box" style="border:none;">
+	</div>
+</div>
+</section>
+</div>
+</main>
 	
 	
 	
