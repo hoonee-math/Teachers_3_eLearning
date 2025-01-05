@@ -12,8 +12,8 @@
 <jsp:include page="/WEB-INF/views/common/head.jsp" />
 
 <!-- 2. 페이지별 CSS -->
-<link rel="stylesheet" href="${path}/resources/css/pages/courseList.css">
-<%-- <link rel="stylesheet" href="${path}/resources/css/페이지명.css"> --%>
+<link rel="stylesheet" href="$${path}/resources/css/pages/courseList.css">
+<%-- <link rel="stylesheet" href="$${path}/resources/css/페이지명.css"> --%>
 
 <title>Honey T</title>
 	
@@ -169,16 +169,16 @@
 			<!-- 왼쪽 아코디언 메뉴 -->
 			<nav class="accordion-menu">
 				<!-- jstl core 태그로 리스트를 받아와서 출력해주기 -->
-			    <c:forEach var="subjectEntry" items="${subjectData}">
+			    <c:forEach var="subjectEntry" items="$${subjectData}">
 				<div class="accordion-item">
 				    <div class="accordion-header">
-					${subjectEntry.value} <!-- 과목명 출력 -->
+					$${subjectEntry.value} <!-- 과목명 출력 -->
 				    </div>
 				    <div class="accordion-content">
-					<c:forEach var="teacher" items="${teachers}">
-					    <c:if test="${teacher.subject == subjectEntry.key}"> <!-- 과목번호와 과목 키값을 비교 -->
-						<a href="#"  class="teacher-link" data-memberNo="${teacher.memberNo}">
-						    ${teacher.memberName} 선생님
+					<c:forEach var="teacher" items="$${teachers}">
+					    <c:if test="$${teacher.subject == subjectEntry.key}"> <!-- 과목번호와 과목 키값을 비교 -->
+						<a href="#"  class="teacher-link" data-memberNo="$${teacher.memberNo}">
+						    $${teacher.memberName} 선생님
 						</a>
 					    </c:if>
 					</c:forEach>
@@ -270,7 +270,7 @@
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <!-- 6. 페이지별 스크립트 APi-컴포넌트-페이지 순 -->
-<%-- <script src="${path}/resources/js/-"></script> --%>
+<%-- <script src="$${path}/resources/js/-"></script> --%>
 	
 </body>
 </html>
