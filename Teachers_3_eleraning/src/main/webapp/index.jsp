@@ -37,9 +37,44 @@
     <link rel="stylesheet" href="${path}/resources/css/index/studentAndTeacherSection.css">
     <link rel="stylesheet" href="${path}/resources/css/index/teacherSlider.css">
     <link rel="stylesheet" href="${path}/resources/css/index/popularCourses.css">
+    
+    <style>
+    .calendar-section {
+    padding: 40px 0;
+    background-color: #fff;
+}
+
+.calendar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Toast UI Calendar 커스텀 스타일 */
+.toastui-calendar-layout {
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.toastui-calendar-day-name {
+    color: #333;
+}
+
+.toastui-calendar-grid-cell {
+    background-color: #fff;
+}
+
+.toastui-calendar-weekday-grid-date {
+    color: #FAB350;
+}
+    </style>
+    
+	<!-- Toast UI Calendar CDN -->
+	<link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
 
 	<!-- 5. jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
 	
 </head>
 <body>	
@@ -258,7 +293,14 @@
 				</div>
 			</div>
 		</section>
-	</main>
+		<!-- 캘린더 섹션 -->
+		<section id="calendarSection" class="calendar-section">
+			<div class="calendar-container">
+				<h2 class="section-title">학습 일정</h2>
+				<div id="calendar" style="height: 600px;"></div>
+			</div>
+		</section>
+		</main>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </div>
 	
@@ -269,6 +311,61 @@
 	<script src="${path}/resources/js/api/apiConfig.js"></script>
 	<script src="${path}/resources/js/api/teacherApi.js"></script>
 	<script src="${path}/resources/js/api/courseApi.js"></script>
+	
+	<script>
+	document.addEventListener('DOMContentLoaded', function() {
+	    // 캘린더 컨테이너
+	    const container = document.getElementById('calendar');
+	    
+	    // 캘린더 초기화
+	    const calendar = new tui.Calendar(container, {
+	        defaultView: 'week', // 주간 뷰 설정
+	        usageStatistics: false,
+	        isReadOnly: false,  // 수정 가능하도록 설정
+	        week: {
+	            startDayOfWeek: 0, // 일요일부터 시작
+	            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+	            workweek: false // 주말 포함
+	        },
+	        theme: {
+	            common: {
+	                backgroundColor: '#ffffff',
+	                border: '1px solid #e5e5e5',
+	                gridSelection: {
+	                    backgroundColor: 'rgba(81, 92, 230, 0.05)',
+	                    border: '1px solid #FAB350'
+	                }
+	            },
+	            week: {
+	                dayName: {
+	                    borderLeft: '1px solid #e5e5e5',
+	                    borderTop: '1px solid #e5e5e5',
+	                    borderBottom: '1px solid #e5e5e5',
+	                    backgroundColor: '#f8f9fa'
+	                },
+	                timeGrid: {
+	                    borderRight: '1px solid #e5e5e5'
+	                }
+	            }
+	        }
+	    });
+
+	    // 샘플 일정 데이터
+	    const schedules = [
+	        {
+	            id: '1',
+	            calendarId: 'study',
+	            title: '수학 기초 개념 학습',
+	            category: 'time',
+	            start: new Date(),
+	            end: new Date(new Date().setHours(new Date().getHours() + 2))
+	        }
+	    ];
+
+	    // 일정 추가
+	    calendar.createSchedules(schedules);
+	});
+	</script>
 
 	<!-- 10. 컴포넌트 JavaScript -->
 	<script src="${path}/resources/js/components/modal.js"></script>

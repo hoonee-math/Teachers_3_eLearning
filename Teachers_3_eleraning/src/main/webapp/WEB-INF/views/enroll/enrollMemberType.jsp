@@ -11,8 +11,8 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="${path }/resources/images/favicon.jpeg">
-	<title>티꿀모아</title>
+	<%-- <link rel="icon" href="${path }/resources/images/favicon.jpeg"> --%>
+	<title>HONEY Y</title>
 	
     <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
