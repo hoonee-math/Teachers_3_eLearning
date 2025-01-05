@@ -1,0 +1,190 @@
+@charset "UTF-8";
+
+/* 전체 컨테이너 스타일링 */
+#enroll-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color:#F9F9F9;
+}
+
+#enroll-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* 테이블 스타일링 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th, td {
+    padding: 15px;
+    vertical-align: top;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+th {
+    width: 150px;
+    text-align: left;
+    color: #555;
+    font-weight: 600;
+}
+
+/* 입력 필드 스타일링 */
+/* 입력 필드 공통 스타일 */
+input {
+    vertical-align: middle;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"] {
+    width: calc(100% - 120px);
+    padding: 8px 12px;
+    border: 2px solid rgb(192, 192, 192);
+    border-radius: 4px;
+    font-size: 14px;
+    background-color:#F9F9F9;
+}
+
+#userId_, #password_, #password_2, #userName, #age, #phone {
+	max-width: 325px;
+}
+
+input[type=text] {
+    -webkit-appearance: none;
+}
+
+input[type="button"] {
+    padding: 8px 12px;
+    border: 2px solid #ddd;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 4px;
+}
+
+input[type="button"]:hover {
+    background-color: #e9ecef;
+}
+
+/* 라디오 버튼과 체크박스 스타일링 */
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+label {
+    margin-right: 15px;
+    color: #666;
+}
+
+/* 제출 및 취소 버튼 스타일링 */
+input[type="submit"],
+input[type="reset"] {
+    width: 120px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+input[type="submit"] {
+    background-color: #D9776A;
+    color: white;
+}
+
+input[type="reset"] {
+    background-color: #F9F9F9;
+    border: 1px solid #ddd;
+}
+
+input[type="submit"]:hover {
+    background-color: #C0655D;
+    font-weight: bold;
+}
+
+input[type="reset"]:hover {
+    background-color: #e9ecef;
+}
+
+/* 유효성 검사 메시지 스타일 */
+#checkResult {
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+.enrollsubmit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 반응형 디자인 */
+@media screen and (max-width: 600px) {
+    th, td {
+        display: block;
+        width: 100%;
+    }
+    
+    th {
+        margin-bottom: 5px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="number"] {
+        width: calc(100% - 24px);
+    }
+    
+    input[type="button"] {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* 이메일 입력 관련 스타일 추가 */
+#emailSelect, .child_school {
+    width: 120px;
+    padding: 6px 12px 11px 12px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-left: 5px;
+    cursor: pointer;
+	background-color: #F9F9F9;
+}
+
+#emailSelect:focus, .child_school:focus{
+    outline: none;
+    border-color: #C0655D;
+}
+
+/* 읽기 전용 상태의 도메인 입력 필드 스타일 */
+#emailDomain[readonly], .child_school[readonly]{
+    background-color: #f8f9fa;
+}
+
+/* 이메일 입력 필드 간격 조정 */
+#emailId, #emailDomain, .child_school{
+    width: 150px;
+}
+
+.child_school {
+	margin-left:0;
+}

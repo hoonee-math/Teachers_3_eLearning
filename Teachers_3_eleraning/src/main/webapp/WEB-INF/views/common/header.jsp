@@ -27,8 +27,8 @@
 			<c:if test="${not empty sessionScope.loginMember}">
 			<div class="right-links">
 				<button class="btn-link" onclick="Modal.show('login')">로그인</button>
-				<a href="#">회원가입</a>
-				<a href="#">고객센터</a>
+				<a href="${path }/enroll/termsofservice">회원가입</a>
+				<a href="${path }">고객센터</a>
 			</div>
 			</c:if>
 				

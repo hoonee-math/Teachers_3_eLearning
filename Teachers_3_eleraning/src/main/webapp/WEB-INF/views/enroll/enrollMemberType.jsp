@@ -11,11 +11,32 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<%-- <link rel="icon" href="${path }/resources/images/favicon.jpeg"> --%>
 	<title>HONEY Y</title>
 	
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	   
+<style>
+.option {
+  display: inline-block;
+  text-align: center;
+  margin: 10px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 10px;
+  transition: border-color 0.3s;
+}
+
+.option img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* 선택된 라벨 강조 */
+.option input:checked + img {
+  border: 2px solid #007bff;
+  border-radius: 10px;
+}
+</style>
+	
 </head>
 <body>
 <!-- 콘텐츠 영역 -->
@@ -24,67 +45,55 @@
 <!-- 메인 콘텐츠 -->
 <main class="main">
 	<div class="main-container">
-        
+
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
-			<!-- 섹션 1 -->
-			<section class="main-section">
-				
-			</section>
-			
-						
-			<header>
-				<div class="menu">
-					<div class="logo-container">
-						<img alt="로고" src="${path}/resources/images/common/HoneyT_logo_square.png">
-						<span class="logo-text">HONEY T</span>
-						<img alt="로고" src="${path}/resources/images/common/HoneyT_logo_square.png">
-					</div>
+
+			<div class="menu">
+				<div class="logo-container">
+					<img alt="로고" src="${path}/resources/images/common/HoneyT_logo_square.png" style="width: 50px;">
+					<span class="logo-text">HONEY T</span> 
+					<img alt="로고" src="${path}/resources/images/common/HoneyT_logo_square.png" style="width: 50px;">
 				</div>
-			</header>
-			<body></body>
-			<div id="bodycontainer">
-			  <div class="logocenter">
-			  </div>
-			
-			  <div class="question">학생/교사 선택해주세요 :)</div>
-			<form name="memberForm" action="${path}/member/enroll" method="post">
-			  <div class="options">
-			    <div class="option" onclick="selectOption('학생')">학생
-						<img alt="학생 꿀벌" src="${path}/resources/images/elements/student.png">
-			    </div>
-			    <div class="option" onclick="selectOption('교사')">교사
-						<img alt="교사 꿀벌" src="${path}/resources/images/elements/teacher.png">
-			    </div>
-			  </div>
-			</form>
 			</div>
-			</body>
-			  <script>
-			  $(document).ready(function() {
-				    $(".option").click(function() {
-				        // 선택된 타입에 따른 값 설정
-				        const selectedType = $(this).text() === "학생" ? "1" : "2";
-				        
-				        // form의 hidden input 초기화 후 추가
-				        $("input[name='memberType']").remove();
-				        $("form[name='memberForm']").append("<input type='hidden' name='memberType' value='" + selectedType + "'>");
-				        $("form[name='memberForm']").submit();
-				    });
-				});
-			  
-			  </script>
-			<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-		</div>
+			
+			<div id="bodycontainer">
+				<div class="logocenter"></div>
+
+				<div class="question">학생/교사 선택해주세요 :)</div>
+				<form name="memberForm" action="${path}/enroll/form"
+					method="post">
+					<div class="options">
+						<label class="option">
+							<input type="radio" name="memberType" value="1" required hidden> 
+							<img alt="학생 꿀벌" src="${path}/resources/images/elements/student.png" style="width: 150px;">
+							학생
+						</label> 
+						<label class="option">
+							<input type="radio" name="memberType" value="2" required hidden> 
+							<img alt="교사 꿀벌" src="${path}/resources/images/elements/teacher.png" style="width: 150px;">
+							교사
+						</label>
+					</div>
+
+					<button type="submit">가입하기</button>
+				</form>
+			</div> <!-- /.bodycontainer -->
+		</div> <!-- /콘텐츠 영역 -->
 	</div>
 </main>
-
-<!-- wrap 태그 종료 -->
-</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+</div><!-- .wrap div 태그 종료 -->
 
 <!-- 8. 공통 JavaScript -->
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
+<script>
+	const path = "${pageContext.request.contextPath}";
+	$(".logo-container").click((e)=>{
+		location.assign("${path}");
+	})
+</script>
 </body>
 </html>
