@@ -1,7 +1,7 @@
-@charset "UTF-8";
+/* @charset "UTF-8"; */
 /* popular-courses.css */
 .popular-course-section {
-	padding: 60px 0;
+	padding: 20px 0;
 	background-color: #fff;
 }
 

@@ -4,11 +4,28 @@
 
 .section-title {
     font-size: 2em;
-    color: #333;
-    text-align: center;
     font-weight: bold;
+    text-align: center;
+    margin: 40px auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
 }
 
+.section-title::before,
+.section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    margin: 0 15px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #FAB350 50%, 
+        transparent
+    );
+}
 .teacher-slider-section {
 	background-color: #f8f9fa;
 	overflow: hidden;
