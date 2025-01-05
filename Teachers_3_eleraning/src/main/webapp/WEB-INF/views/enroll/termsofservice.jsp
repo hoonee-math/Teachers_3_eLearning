@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" href="${path }/resources/images/favicon.jpeg">
 	<title>HONEY T</title>
-	
+
 	<link rel="stylesheet" href="${path}/resources/css/enroll/enrollHeader.css">
 	<link rel="stylesheet" href="${path}/resources/css/enroll/enrollLayout.css">
 	<link rel="stylesheet" href="${path }/resources/css/enroll/termsofservice.css">

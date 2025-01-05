@@ -12,51 +12,31 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>HONEY Y</title>
-	
+
+	<link rel="stylesheet" href="${path}/resources/css/common/reset.css">
+	<link rel="stylesheet" href="${path}/resources/css/enroll/enrollLayout.css">
+	<link rel="stylesheet" href="${path}/resources/css/enroll/enrollHeader.css">
+	<link rel="stylesheet" href="${path}/resources/css/enroll/enrollMemberType.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<style>
-.option {
-  display: inline-block;
-  text-align: center;
-  margin: 10px;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  padding: 10px;
-  transition: border-color 0.3s;
-}
-
-.option img {
-  display: block;
-  margin: 0 auto;
-}
-
-/* 선택된 라벨 강조 */
-.option input:checked + img {
-  border: 2px solid #007bff;
-  border-radius: 10px;
-}
-</style>
 	
 </head>
 <body>
 <!-- 콘텐츠 영역 -->
 <div id="wrap">
-
+<!-- 3.헤더 영역 -->
+<header>
+<div class="menu">
+	<div class="logo-container">
+		<img class="logo-container" src="${path}/resources/images/common/HoneyT_Text_font_Oduba_warning.png" style="width:100px;">
+	</div>
+</div>
+</header>
 <!-- 메인 콘텐츠 -->
 <main class="main">
 	<div class="main-container">
 
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
-
-			<div class="menu">
-				<div class="logo-container">
-					<img alt="로고" src="${path}/resources/images/common/HoneyT_logo_square.png" style="width: 50px;">
-					<span class="logo-text">HONEY T</span> 
-					<img alt="로고" src="${path}/resources/images/common/HoneyT_logo_square.png" style="width: 50px;">
-				</div>
-			</div>
-			
 			<div id="bodycontainer">
 				<div class="logocenter"></div>
 
@@ -66,17 +46,17 @@
 					<div class="options">
 						<label class="option">
 							<input type="radio" name="memberType" value="1" required hidden> 
-							<img alt="학생 꿀벌" src="${path}/resources/images/elements/student.png" style="width: 150px;">
-							학생
+							<img alt="학생 꿀벌" src="${path}/resources/images/elements/student.png">
+							<div class="option-text">학생</div>
 						</label> 
 						<label class="option">
 							<input type="radio" name="memberType" value="2" required hidden> 
-							<img alt="교사 꿀벌" src="${path}/resources/images/elements/teacher.png" style="width: 150px;">
-							교사
+							<img alt="교사 꿀벌" src="${path}/resources/images/elements/teacher.png">
+							<div class="option-text">교사</div>
 						</label>
 					</div>
 
-					<button type="submit">가입하기</button>
+					<button type="submit" class="submit-btn">가입하기</button>
 				</form>
 			</div> <!-- /.bodycontainer -->
 		</div> <!-- /콘텐츠 영역 -->
