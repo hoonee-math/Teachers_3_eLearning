@@ -20,10 +20,12 @@ public class EnrollMemberTypeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 동의 체크 여부를 판단하는 로직
 		String[] values = {
+				// 필수항목만 확인
 	            request.getParameter("checked1"),
 	            request.getParameter("checked2")
 	        };
-		System.out.println(request.getParameter("checked1"));
+		System.out.println("EnrollMemberTypeServlet - checked1 : "+request.getParameter("checked1"));
+		
 		// 하나라도 null이면 동의하지 않은 것으로 처리 -> js 에서 처리하면 보안상 위험이 있을까?
 		for (String value : values) {
             if (value == null) {
