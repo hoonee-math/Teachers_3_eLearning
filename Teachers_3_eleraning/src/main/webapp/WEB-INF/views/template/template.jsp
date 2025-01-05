@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <!-- 1. JSP/JSTL 태그 라이브러리 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -11,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="${path}/resources/images/common/HoneyT_logo_square.png">
 <title>Honey T</title>
 
 <!-- 2. 외부 CSS 파일들 -->
@@ -74,18 +74,11 @@
 
 
 	<!-- 8. 공통 JavaScript -->
-	<script src="$${path}/resources/js/common/utils.js"></script>
-
 	<!-- 9. API/Ajax 관련 JavaScript -->
-	<script src="$${path}/resources/js/api/apiConfig.js"></script>
 	<script src="$${path}/resources/js/api/teacherApi.js"></script>
-	<script src="$${path}/resources/js/api/courseApi.js"></script>
 
 	<!-- 10. 컴포넌트 JavaScript -->
 	<script src="$${path}/resources/js/components/modal.js"></script>
-	<script src="$${path}/resources/js/components/navigation.js"></script>
-	<script src="$${path}/resources/js/components/accordion.js"></script>
-	<script src="$${path}/resources/js/components/tabs.js"></script>
 
 	<!-- 11. 페이지별 JavaScript -->
 	<%-- <script src="${path}/resources/js/-"></script> --%>

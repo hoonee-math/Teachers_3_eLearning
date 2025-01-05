@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="${path}/resources/images/common/HoneyT_logo_square.png">
 <title>Honey T</title>
 
 <!-- 2. 외부 CSS 파일들 -->
@@ -26,24 +27,18 @@
 <link rel="stylesheet" href="${path}/resources/css/common/navigator.css">
 
 <!-- 3. 컴포넌트 CSS -->
-<link rel="stylesheet"
-	href="${path}/resources/css/components/header.css">
-<link rel="stylesheet"
-	href="${path}/resources/css/components/navigation.css">
+<link rel="stylesheet" href="${path}/resources/css/components/header.css">
+<link rel="stylesheet" href="${path}/resources/css/components/navigation.css">
 <link rel="stylesheet" href="${path}/resources/css/components/modal.css">
-<link rel="stylesheet"
-	href="${path}/resources/css/components/buttons.css">
+<link rel="stylesheet" href="${path}/resources/css/components/buttons.css">
 <link rel="stylesheet" href="${path}/resources/css/components/cards.css">
 
 <!-- 4. 페이지별 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/components/dDay.css">
 <link rel="stylesheet" href="${path}/resources/css/index/slider.css">
-<link rel="stylesheet"
-	href="${path}/resources/css/index/studentAndTeacherSection.css">
-<link rel="stylesheet"
-	href="${path}/resources/css/index/teacherSlider.css">
-<link rel="stylesheet"
-	href="${path}/resources/css/index/popularCourses.css">
+<link rel="stylesheet" href="${path}/resources/css/index/studentAndTeacherSection.css">
+<link rel="stylesheet" href="${path}/resources/css/index/teacherSlider.css">
+<link rel="stylesheet" href="${path}/resources/css/index/popularCourses.css">
 
 <style>
 .calendar-section {
@@ -77,13 +72,12 @@
 </style>
 
 <!-- Toast UI Calendar CDN -->
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
+<link rel="stylesheet" href="https://uicdn.toast.com/calendar/v2.1.3/toastui-calendar.min.css" />
+
 
 <!-- 5. jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script
-	src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
+<script src="https://uicdn.toast.com/calendar/v2.1.3/toastui-calendar.min.js"></script>
 
 </head>
 <body>
@@ -108,8 +102,8 @@
 					<div class="slider-wrapper">
 						<c:forEach var="slide" items="${mainSlides}">
 							<div class="slide">
-								<a href="${slide.link}"> <img src="${slide.imageUrl}"
-									alt="${slide.title}">
+								<a href="${slide.link}"> 
+									<img src="${slide.imageUrl}" alt="${slide.title}">
 									<div class="slide-content">
 										<h2>${slide.title}</h2>
 										<p>${slide.description}</p>
@@ -129,8 +123,8 @@
 					<!-- 슬라이더 인디케이터 -->
 					<div class="slider-indicators">
 						<c:forEach var="slide" items="${mainSlides}" varStatus="status">
-							<button class="indicator${status.first ? ' active' : ''}"
-								data-slide="${status.index}"></button>
+							<button class="indicator${status.first ? ' active' : ''}" data-slide="${status.index}">
+							</button>
 						</c:forEach>
 					</div>
 				</div>
@@ -150,27 +144,22 @@
 										<span class="teacher-name">${course.teacherName} 선생님</span>
 										<p class="last-view">
 											마지막 수강:
-											<fmt:formatDate value="${course.lastViewTime}"
-												pattern="yyyy-MM-dd HH:mm" />
+											<fmt:formatDate value="${course.lastViewTime}" pattern="yyyy-MM-dd HH:mm" />
 										</p>
 									</div>
 									<div class="course-progress">
 										<div class="progress-bar">
 											<div class="progress" style="width: ${course.progressRate}%"></div>
 										</div>
-										<span class="progress-text">${course.progressRate}%
-											수강완료 </span>
+										<span class="progress-text">${course.progressRate}% 수강완료 </span>
 									</div>
 									<div class="next-lecture">
 										<h4>다음 강의</h4>
-										<p>Chapter
-											${course.nextLectureNo}.${course.nextLectureTitle}</p>
+										<p>Chapter ${course.nextLectureNo}.${course.nextLectureTitle}</p>
 										<span class="lecture-count">(${course.nextLectureNo}/${course.totalLectures}강)</span>
-										<span class="resume-time">이어보기: ${course.stopAt div 60}분
-											${course.stopAt mod 60}초</span>
+										<span class="resume-time">이어보기: ${course.stopAt div 60}분 ${course.stopAt mod 60}초</span>
 									</div>
-									<a href="${path}/course/detail/${course.courseRegisterNo}"
-										class="course-link">이어서 학습하기</a>
+									<a href="${path}/course/detail/${course.courseRegisterNo}" class="course-link">이어서 학습하기</a>
 								</div>
 							</c:forEach>
 						</div>
@@ -192,18 +181,17 @@
 									</div>
 									<div class="upload-progress">
 										<div class="progress-bar">
-											<div class="progress"
-												style="width: ${course.uploadProgress}%"></div>
+											<div class="progress" style="width: ${course.uploadProgress}%"></div>
 										</div>
 										<span class="progress-text">
-											${course.uploadedLectures}/${course.totalLectures}강 업로드 완료 </span>
+											${course.uploadedLectures}/${course.totalLectures}강 업로드 완료
+										</span>
 									</div>
 									<div class="course-schedule">
 										<p>강의 등록 기간</p>
 										<p>${course.beginDate}~${course.endDate}</p>
 									</div>
-									<a href="${path}/teacher/course/${course.courseNo}"
-										class="course-link">강의 관리하기</a>
+									<a href="${path}/teacher/course/${course.courseNo}" class="course-link">강의 관리하기</a>
 								</div>
 							</c:forEach>
 						</div>
@@ -223,8 +211,7 @@
 								<div class="teacher-slide">
 									<div class="teacher-card">
 										<div class="teacher-image">
-											<img src="${teacher.imageUrl}"
-												alt="${teacher.memberName} 선생님">
+											<img src="${teacher.imageUrl}" alt="${teacher.memberName} 선생님">
 										</div>
 										<div class="teacher-info">
 											<h3>${teacher.memberName}선생님</h3>
@@ -248,18 +235,16 @@
 					<div class="popular-category-tabs">
 						<!-- courseCategoryInfo 객체는 카테고리 번호와 이름을 key : value 형식으로 갖고있는 map -->
 						<c:forEach var="category" items="${courseCategoryInfo}">
-							<button
-								class="popular-category-tab ${category.key == 1 ? 'active' : ''}"
-								data-category="${category.key}">${category.value}</button>
+							<button class="popular-category-tab ${category.key == 1 ? 'active' : ''}" data-category="${category.key}">
+								${category.value}
+							</button>
 						</c:forEach>
 					</div>
 
 					<div class="popular-course-container">
 						<!-- 상단 카테리 번호에 따라 카테고리 생성 -->
 						<c:forEach var="categoryId" begin="1" end="4">
-							<div
-								class="popular-course-list ${categoryId == 1 ? 'active' : ''}"
-								data-category="${categoryId}">
+							<div class="popular-course-list ${categoryId == 1 ? 'active' : ''}" data-category="${categoryId}">
 								<div class="popular-course-grid">
 									<c:forEach var="course" items="${popularCourses}">
 										<c:if test="${course.courseCategoryNo == categoryId}">
@@ -267,21 +252,24 @@
 												<div class="popular-course-image">
 													<img
 														src="${path}/resources/images/common/HoneyT_logo_vertical.png"
-														alt="${course.courseTitle}"> <span
-														class="popular-grade-badge">고${course.grade}</span>
+														alt="${course.courseTitle}">
+													<span class="popular-grade-badge">
+														고${course.grade}
+													</span>
 													<div class="popular-course-overlay">
 														<p>${course.courseDesc}</p>
 													</div>
 												</div>
 												<div class="popular-course-content">
 													<h3 class="popular-course-title">${course.courseTitle}</h3>
-													<p class="popular-teacher-name">${course.teacherName}
-														선생님</p>
+													<p class="popular-teacher-name">${course.teacherName} 선생님</p>
 													<p class="popular-teacher-info">${course.teacherInfo}</p>
 													<div class="popular-course-info">
 														<div class="popular-rating">
-															<i class="bi bi-star-fill"></i> <span><fmt:formatNumber
-																	value="${course.rating}" pattern="#.0" /></span>
+															<i class="bi bi-star-fill"></i>
+															<span>
+																<fmt:formatNumber value="${course.rating}" pattern="#.0" />
+															</span>
 														</div>
 														<div class="popular-student-count">
 															<i class="bi bi-people-fill"></i> <span>${course.studentCount}명</span>
@@ -289,14 +277,15 @@
 													</div>
 													<div class="popular-course-price">
 														<span class="popular-discount">${course.coursePriceSale}%</span>
-														<span class="popular-price"> <fmt:formatNumber
+														<span class="popular-price">
+															<fmt:formatNumber 
 																value="${course.coursePrice * (100 - course.coursePriceSale) / 100}"
-																type="currency" currencySymbol="" maxFractionDigits="0" />원
+																type="currency" currencySymbol="" maxFractionDigits="0" />
+															원
 														</span>
 													</div>
 												</div>
-												<a href="${path}/course/detail/${course.courseNo}"
-													class="popular-course-link"> 자세히 보기 </a>
+												<a href="${path}/course/detail/${course.courseNo}" class="popular-course-link"> 자세히 보기 </a>
 											</div>
 										</c:if>
 									</c:forEach>
@@ -326,116 +315,173 @@
 	<script src="${path}/resources/js/api/courseApi.js"></script>
 
 	<script>
-	document.addEventListener('DOMContentLoaded', function() {
-	    console.log('DOMContentLoaded 이벤트 발생');
-	    
-		// 캘린더 컨테이너
-		const container = document.getElementById('calendar');
-	    console.log('캘린더 컨테이너:', container);
-
-		// 현재 시간 기준 변수 설정
-		const now = new Date();
-	    console.log('현재 시간:', now);
-		
-	    // 캘린더 초기화 전 tui 객체 확인
-	    console.log('tui 객체 확인:', tui);
-	    
-	    try {
-			// 캘린더 초기화
-			const calendar = new tui.Calendar(container, { // 'tui.Calendar' 대신 'toastui.Calendar' 사용
-				defaultView : 'week', // 주간 뷰 설정
-				usageStatistics : false,
-				isReadOnly : false, // 수정 가능하도록 설정
-				week : {
-					startDayOfWeek : 0, // 일요일부터 시작
-					dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
-					workweek : false,
-		            hourStart: 8,
-		            hourEnd: 22
-				// 주말 포함
+		document.addEventListener('DOMContentLoaded', function() {
+			console.log('DOMContentLoaded 이벤트 발생');
+			
+			// 캘린더 컨테이너
+			const container = document.getElementById('calendar');
+			console.log('캘린더 컨테이너:', container);
+	
+			// 현재 시간 기준 변수 설정
+			const now = new Date();
+			console.log('현재 시간:', now);
+			
+			// 캘린더 초기화 전 tui 객체 확인
+			console.log('tui 객체 확인:', tui);
+			
+			// 샘플 일정 데이터 - TUI Calendar 형식에 맞춰 수정
+			// v2.1.3 객체 정보로 수정
+			// 샘플 일정 데이터 - 현재 시점(2025년) 기준으로 수정
+			const events = [{
+				id: '1',
+				calendarId: 'cal1',
+				title: '수학 기초 개념 학습',
+				category: 'time',
+				start: new Date('2025-01-05T10:00:00'),  // 2024 -> 2025
+				end: new Date('2025-01-05T12:00:00'),	// 2024 -> 2025
+				isAllday: false,
+				state: 'busy',
+				raw: {
+					class: 'public'
 				},
-				theme : {
-					common : {
-						backgroundColor : '#ffffff',
-						border : '1px solid #e5e5e5',
-						gridSelection : {
-							backgroundColor : 'rgba(81, 92, 230, 0.05)',
-							border : '1px solid #FAB350'
+				location: '온라인',
+				attendees: ['학생1'],
+				color: '#ffffff',
+				backgroundColor: '#FAB350'
+			}, {
+				id: '2',
+				calendarId: 'cal1',
+				title: '영어 문법 스터디',
+				category: 'time',
+				start: new Date('2025-01-05T14:00:00'),  // 2024 -> 2025
+				end: new Date('2025-01-05T16:00:00'),	// 2024 -> 2025
+				isAllday: false,
+				state: 'busy',
+				raw: {
+					class: 'public'
+				},
+				location: '온라인',
+				attendees: ['학생1'],
+				color: '#ffffff',
+				backgroundColor: '#4A90E2'
+			}, {
+				id: '3',
+				calendarId: 'cal1',
+				title: '과학 실험 보고서 작성',
+				category: 'time',
+				start: new Date('2025-01-06T13:00:00'),  // 2024 -> 2025
+				end: new Date('2025-01-06T15:00:00'),	// 2024 -> 2025
+				isAllday: false,
+				state: 'busy',
+				raw: {
+					class: 'public'
+				},
+				location: '온라인',
+				attendees: ['학생1'],
+				color: '#ffffff',
+				backgroundColor: '#50B766'
+			}];
+	
+			// 샘플 일정 데이터 로깅
+			console.log('이벤트 데이터:', events);
+	
+			let calendar; // calendar 변수를 바깥에서 선언
+	
+			try {
+				// 캘린더 초기화 전 calendar의 메서드들 확인
+				console.log('calendar prototype 사용 가능한 메서드들:', Object.getOwnPropertyNames(tui.Calendar.prototype));
+				/* console.log('calendar instance methods:', Object.getOwnPropertyNames(calendar));
+				console.log('calendar defaultOptions:', calendar.getOptions()); */
+	
+				// 캘린더 초기화, 캘린더 인스턴스 생성
+				calendar = new tui.Calendar(container, { // 'tui.Calendar' 대신 'toastui.Calendar' 사용
+					defaultView : 'week', // 주간 뷰 설정
+					usageStatistics : false,
+					isReadOnly : false, // 수정 가능하도록 설정
+					week : {
+						startDayOfWeek : 0, // 일요일부터 시작
+						dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+						workweek : false,
+						hourStart : 8,
+						hourEnd : 22
+					// 주말 포함
+					},
+					theme : {
+						common : {
+							backgroundColor : '#ffffff',
+							border : '1px solid #e5e5e5',
+							gridSelection : {
+								backgroundColor : 'rgba(81, 92, 230, 0.05)',
+								border : '1px solid #FAB350'
+							}
+						},
+						week : {
+							dayName : {
+								borderLeft : '1px solid #e5e5e5',
+								borderTop : '1px solid #e5e5e5',
+								borderBottom : '1px solid #e5e5e5',
+								backgroundColor : '#f8f9fa'
+							},
+							timeGrid : {
+								borderRight : '1px solid #e5e5e5'
+							}
 						}
 					},
-					week : {
-						dayName : {
-							borderLeft : '1px solid #e5e5e5',
-							borderTop : '1px solid #e5e5e5',
-							borderBottom : '1px solid #e5e5e5',
-							backgroundColor : '#f8f9fa'
-						},
-						timeGrid : {
-							borderRight : '1px solid #e5e5e5'
-						}
+					calendars: [{
+						id: 'cal1',
+						name: '학습일정',
+						color: '#ffffff',
+						backgroundColor: '#FAB350'
+					}]
+				});
+				console.log('캘린더 인스턴스 생성 성공:', calendar);
+				
+				// calendar 인스턴스의 상태 확인
+				console.log('calendar store 상태:', calendar.getStoreState());
+				console.log('calendar 뷰 타입:', calendar.getViewName());
+				console.log('calendar 현재 날짜:', calendar.getDate());
+
+				// 일정 추가 시도
+				try {
+					// 이벤트 추가 전 확인
+					console.log('calendar 인스턴스:', calendar);
+
+					// calendar의 모든 메서드 확인
+					console.log('calendar methods:', Object.getOwnPropertyNames(Object.getPrototypeOf(calendar)));
+					
+					// 이벤트 추가
+					calendar.createEvents(events); // createSchedules 대신 createEvents 사용
+					console.log('일정 추가 성공');
+
+					try {
+						// TUI Calendar v2.1.3에서는 다음 메서드들을 사용
+						// 현재 뷰에 표시된 이벤트 가져오기
+						const currentEvents = calendar.getDisplayEvents();
+						console.log('현재 표시된 이벤트:', currentEvents);
+						
+						// 특정 날짜의 이벤트 가져오기
+						const targetDate = new Date('2025-01-05');
+						const eventsInRange = calendar.getEventsByRange(
+							targetDate, 
+							new Date(targetDate.getTime() + 24 * 60 * 60 * 1000)
+						);
+						console.log('2024-01-05의 이벤트:', eventsInRange);
+					} catch (error) {
+						console.error('이벤트 조회 중 에러:', error);
 					}
+
+					// 날짜 이동
+					calendar.setDate(now);
+					console.log('날짜 설정 성공');
+				} catch (error) {
+					console.error('일정 추가 중 에러:', error);
 				}
-			});
-	        console.log('캘린더 인스턴스 생성 성공:', calendar);
 
-			// 샘플 일정 데이터 로깅
-			console.log('스케줄 데이터:', schedules);
-
-			// 일정 추가 시도
-			try {
-				calendar.createSchedules(schedules);
-				console.log('일정 추가 성공');
 			} catch (error) {
-				console.error('일정 추가 중 에러:', error);
+				console.error('캘린더 에러:', error);
 			}
 
-			// 날짜 이동 시도
-			try {
-				calendar.setDate(new Date('2024-01-05'));
-				console.log('날짜 설정 성공');
-			} catch (error) {
-				console.error('날짜 설정 중 에러:', error);
-			}
-
-		} catch (error) {
-			console.error('캘린더 초기화 중 에러:', error);
-		}
-
-			// 샘플 일정 데이터 - TUI Calendar 형식에 맞춰 수정
-			const schedules = [ {
-				id : '1',
-				calendarId : '1',
-				title : '수학 기초 개념 학습',
-				category : 'time',
-				start : new Date('2024-01-05T10:00:00'),
-				end : new Date('2024-01-05T12:00:00'),
-				backgroundColor : '#FAB350'
-			}, {
-				id : '2',
-				calendarId : '1',
-				title : '영어 문법 스터디',
-				category : 'time',
-				start : new Date('2024-01-05T14:00:00'),
-				end : new Date('2024-01-05T16:00:00'),
-				backgroundColor : '#4A90E2'
-			}, {
-				id : '3',
-				calendarId : '1',
-				title : '과학 실험 보고서 작성',
-				category : 'time',
-				start : new Date('2024-01-06T13:00:00'),
-				end : new Date('2024-01-06T15:00:00'),
-				backgroundColor : '#50B766'
-			} ];
-
-			// 일정 추가
-			calendar.createSchedules(schedules);
-
-			// 현재 날짜로 이동
-			calendar.setDate(now);
-			calendar.setDate(new Date('2024-01-05'));
-
-			/* // 일정 클릭 이벤트
+			// 일정 클릭 이벤트
 			calendar.on('clickSchedule', function(event) {
 				const schedule = event.schedule;
 				alert(
@@ -443,18 +489,15 @@
 					'\n시작: ' + schedule.start.toLocaleString() + 
 					'\n종료: ' + schedule.end.toLocaleString()
 				);
-			}); */
+			});
 		});
 	</script>
 
 	<!-- 10. 컴포넌트 JavaScript -->
 	<script src="${path}/resources/js/components/modal.js"></script>
-	<script src="${path}/resources/js/components/navigation.js"></script>
-	<script src="${path}/resources/js/components/accordion.js"></script>
-	<script src="${path}/resources/js/components/tabs.js"></script>
+	<script src="${path}/resources/js/components/dDay.js"></script>
 
 	<!-- 11. 페이지별 JavaScript -->
-	<script src="${path}/resources/js/components/dDay.js"></script>
 	<script src="${path}/resources/js/index/slider.js"></script>
 	<script src="${path}/resources/js/index/teacherSlider.js"></script>
 	<script src="${path}/resources/js/index/popularCourses.js"></script>
