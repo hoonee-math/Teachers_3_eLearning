@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+/* 전체 레이아웃 설정 */
+*{
+	/* border: 2px solid pink */
+}
+#wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* main 영역 전체 스타일 */
+.main {
+    width: 100%;
+    flex: 1; /* footer를 위한 공간 확보 */
+    margin-top: 30px;
+}
+
+/* main 컨테이너 - header와 동일한 너비(880px) 유지 */
+.main-container {
+    width: 1270px;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px; /* sidebar와 콘텐츠 사이 간격 조정 */
+    padding-left: 27.5px; /* sidebar를 살짝 오른쪽으로 이동 */
+}
+
+/* 메인 콘텐츠 영역 */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 섹션 간 간격 */
+    margin: 0 0 60px 40px;
+}
+
+/* 각 섹션 스타일 */
+.main-section {
+    width: 100%;
+    min-height: 100px; /* 임시 높이 - 실제 콘텐츠에 맞게 조정 필요 */
+}
+
+.row {
+	display:flex;
+}

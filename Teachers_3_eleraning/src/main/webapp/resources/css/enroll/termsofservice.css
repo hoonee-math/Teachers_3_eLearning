@@ -1,75 +1,69 @@
 @charset "UTF-8";
 
-body {
-	background-color: #fffadd;
-	background: linear-gradient(to right, #fffadd, #ffffff);
-	margin: 0;
-}
-
-#logincheck-main-container {
+#agree-header {
 	display: flex;
-	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	height: 970px;
-	padding: 20px;
+	justify-content: flex-start;
+	margin-top: 20px;
 }
 
-.main-content {
-	margin-top: 0px;
-	background: #fff;
-	padding: 0px 30px;
-	border-radius: 30px;
-	box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
-	width: 550px;
-	height: 450px;
-	text-align: center;
+#termsofbtn {
+	margin-left: auto;
 }
 
-#login-font {
-	font-family: Sans-serif;
-	font-style: italic;
-	font-size: 40px;
-	color: grey;
-}
-
-#check-line, #check-line1, #check-line2, #check-line3 {
-	margin-top: 10px;
-	display: flex;
-}
-
-#check-content, #check-content2, #check-content3 {
-	display: flex;
-	justify-content: center;
-}
-
-#check-contentbox, #check-contentbox2, #check-contentbox3 {
-	overflow: auto;
-	max-width: 500px;
-	color: #6f6f6f;
-	font-size: 12px;
-	max-height: 130px;
-	border: 1px solid grey;
-	white-space: pre-line;;
-	border-radius: 3px;
-}
-
-#login-next {
-	margin-top: 30px;
-	background-color: #fffadd;
-	color: #cccccc;
-	border: none;
-	padding: 12px;
-	width: 90px;
-}
-
-.login-mustcheck {
+#agreecolor, #agreecolor2, #agreecolor3 {
 	color: red;
 }
 
-.main-section {
+#terms-contentbox {
+	max-width: 550px;
+	max-height: 300px;
+	color: grey;
+	font-size: 12px;
+}
+
+#terms-content>pre {
+	overflow-y: scroll;
+}
+
+#terms-content {
+	margin-top: 20px;
 	display: flex;
-	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+#agree-header2 {
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+#termsofbtn2 {
+	margin-left: auto;
+}
+
+#termsofbtn2 {
+	margin-left: auto;
+}
+
+#terms-content2 {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+#terms-contentbox2 {
+	max-width: 525px;
+	max-height: 300px;
+	color: grey;
+	font-size: 12px;
+	white-space: pre-line;
+	overflow: auto;
 }
 
 #agree-button {
@@ -79,41 +73,12 @@ body {
 	padding: 20px;
 	gap: 30px;
 }
-
-#logincheck-inner-header {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 30px;
+#agecheckcontainer {
+	margin-top : 40px;
+	display : flex;
+}
+#agecheck {
+	margin-left : auto;
 }
 
-#join {
-	cursor: pointer;
-	height: 50px;
-	background-color: #fffadd;
-	border: none;
-	padding: 10px 20px;
-	font-size: 16px;
-	color: #222;
-	border-radius: 5px;
-}
 
-#cancle {
-	cursor: pointer;
-	height: 50px;
-	background-color: grey;
-	border: none;
-	padding: 10px 20px;
-	font-size: 16px;
-	color: #cccccc;
-	border-radius: 5px;
-}
-
-#cancle:hover {
-	background-color: #cccccc;
-	color: #6f6f6f;
-}
-
-#join:hover {
-	background-color: #fff6c2;
-}

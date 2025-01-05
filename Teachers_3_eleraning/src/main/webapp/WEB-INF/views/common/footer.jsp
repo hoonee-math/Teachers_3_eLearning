@@ -8,20 +8,16 @@
 
 
 <style>
-body {
-    min-height: 100vh; /* 최소 높이를 뷰포트 높이로 설정 */
-    display: flex;
-    flex-direction: column;
-}
-
+/* footer 스타일 */
 footer {
     width: 100%;
-    margin-top: auto; /* 컨텐츠가 적을 때 아래로 밀어줌 */
-    padding: 20px;
+    padding: 20px 0;
+    margin-top: auto; /* 컨텐츠가 적을 때 하단에 고정 */
+    background-color: #fffadd;
+    border-top: 1px solid #eee;
     text-align: center;
     font-size: 14px;
-    background-color: #fff;
-    border-top: 1px solid #eee;
+    color: #6f6f6f;
 }
 
 footer p {

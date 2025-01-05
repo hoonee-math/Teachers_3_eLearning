@@ -63,6 +63,12 @@
 	    <artifactId>gson</artifactId>
 	    <version>2.10.1</version>
 	</dependency>
+	<!-- XSS 방지를 위해 서버 측에서 HTML을 sanitize하는 작업을 위한 jsoup 라이브러리 추가 -->
+	<dependency>
+		<groupId>org.jsoup</groupId>
+		<artifactId>jsoup</artifactId>
+		<version>1.15.3</version>
+	</dependency>
   </dependencies>
   <build>
 	<!--패키징시 이름 설정 -> war 파일 이름이 contextPath가 됨! -->
