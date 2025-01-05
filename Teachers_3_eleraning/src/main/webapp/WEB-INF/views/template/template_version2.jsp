@@ -269,7 +269,7 @@
 </div> <!-- /콘텐츠 영역 -->
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
-<!-- 6. 페이지별 스크립트 -->
+<!-- 6. 페이지별 스크립트 APi-컴포넌트-페이지 순 -->
 <%-- <script src="${path}/resources/js/-"></script> --%>
 	
 </body>

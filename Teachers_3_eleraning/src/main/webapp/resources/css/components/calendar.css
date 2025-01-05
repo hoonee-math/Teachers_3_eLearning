@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.calendar-section {
+	padding: 40px 0;
+	background-color: #fff;
+}
+
+.calendar-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+/* Toast UI Calendar 커스텀 스타일 */
+.toastui-calendar-layout {
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.toastui-calendar-day-name {
+	color: #333;
+}
+
+.toastui-calendar-grid-cell {
+	background-color: #fff;
+}
+
+.toastui-calendar-weekday-grid-date {
+	color: #FAB350;
+}
