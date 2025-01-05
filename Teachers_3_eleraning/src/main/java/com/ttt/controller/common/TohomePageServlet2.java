@@ -1,7 +1,7 @@
 package com.ttt.controller.common;
 
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
