@@ -73,12 +73,169 @@
 	padding: 20px;
 	gap: 30px;
 }
+
 #agecheckcontainer {
-	margin-top : 40px;
-	display : flex;
+	margin-top: 40px;
+	display: flex;
 }
+
 #agecheck {
-	margin-left : auto;
+	margin-left: auto;
 }
 
+body {
+	margin: 0;
+}
 
+#logincheck-main-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 970px;
+	padding: 20px;
+}
+
+.main-content {
+	margin-top: 0px;
+	background: #fff;
+	padding: 0px 30px;
+	border-radius: 30px;
+	box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+	width: 550px;
+	height: 450px;
+}
+
+#login-font {
+	font-size: 2em;
+	color: #333;
+	text-align: center;
+	font-weight: bold;
+}
+
+/* 체크박스 숨기기 */
+.check-line input[type="checkbox"] {
+	display: none;
+}
+.check-line {
+	margin-top: 10px;
+	display: flex;
+}
+/* 기본 아이콘 색상 */
+.check-line i {
+	margin: 16px;
+	color: #dddddd;
+	font-size: 24px;
+	transition: color 0.3s;
+}
+.check-line label{
+	display:flex;
+}
+/* 체크박스가 선택되었을 때 아이콘 색상 변경 */
+input[type="checkbox"]:checked + i {
+	color: #00f000;
+}
+
+.check-content {
+	display: flex;
+	justify-content: center;
+}
+
+.check-contentbox {
+	overflow: auto;
+	min-width: 500px;
+	width: 100%;
+	color: #6f6f6f;
+	max-height: 130px;
+	border: 1px solid #dddddd;
+	border-radius: 3px;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+}
+/* 스크롤바 스타일 (Webkit 전용) */
+.check-contentbox::-webkit-scrollbar {
+	width: 6px;
+}
+
+.check-contentbox::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+.check-contentbox::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 10px;
+}
+
+.check-contentbox::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+.check-contentbox p {
+	margin: 5px 10px;
+}
+
+#login-next {
+	margin-top: 30px;
+	background-color: #fffadd;
+	color: #cccccc;
+	border: none;
+	padding: 12px;
+	width: 90px;
+}
+
+.login-mustcheck {
+	color: red;
+}
+
+.main-section {
+	display: flex;
+	flex-direction: column;
+}
+
+#agree-button {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	padding: 20px;
+	gap: 30px;
+}
+
+#logincheck-inner-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+}
+
+#join {
+	cursor: pointer;
+	height: 50px;
+	background-color: #FAB350;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	color: #222;
+	border-radius: 5px;
+    color: white;
+}
+#join:hover {
+	background-color: #e89f3d;
+    font-weight: bold;
+
+}
+#cancle {
+	cursor: pointer;
+	height: 50px;
+    background-color: #F9F9F9;
+    border: 1px solid #ddd;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	border-radius: 5px;
+}
+#cancle:hover {
+    background-color: #e9ecef;
+    font-weight: bold;
+    font-weight: bold;
+}

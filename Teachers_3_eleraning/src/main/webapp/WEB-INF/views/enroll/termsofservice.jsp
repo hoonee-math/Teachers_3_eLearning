@@ -17,118 +17,10 @@
 	<link rel="stylesheet" href="${path}/resources/css/enroll/enrollHeader.css">
 	<link rel="stylesheet" href="${path}/resources/css/enroll/enrollLayout.css">
 	<link rel="stylesheet" href="${path }/resources/css/enroll/termsofservice.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <style>
-    body {
-    	margin: 0;
-    }
-    #logincheck-main-container {
-		display : flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		height: 970px;
-		padding: 20px;
-	}
-	.main-content {
-		margin-top:0px;
-		background: #fff;
-	    padding: 0px 30px;
-	    border-radius: 30px;
-	    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
-	    width: 550px;
-	    height : 450px;
-/* 	} */
-	#login-font {
-	    font-size: 2em;
-	    color: #333;
-	    text-align: center;
-	    font-weight: bold;
-	}
-	.check-line  {
-		margin-top:10px;
-		display:flex;
-	}
-	.check-content {
-		display:flex;
-		justify-content:center;
-	}
-	.check-contentbox {
-		overflow:auto;
-		min-width: 500px;
-		width:100%;
-	    color: #6f6f6f;
-	    font-size: 12px;
-		max-height : 130px;
-		border : 1px solid grey;
-		border-radius : 3px;
-		text-align: left;
-		margin: 0;
-		padding: 0;
-	}
-    .check-contentbox::before,
-    .check-contentbox::after {
-      content: "";
-      display: block;
-      height: 0;
-    }
-	#login-next {
-		margin-top : 30px;
-		background-color : #fffadd;
-		color : #cccccc;
-		border:none;
-		padding:12px;
-		width: 90px;
-	}
-	.login-mustcheck {
-		color : red;
-	}
-	.main-section {
-		display: flex;
-		flex-direction: column;
-	}
-	#agree-button {
-		display: flex;
-		justify-content: center;
-		margin-top: 20px;
-		padding: 20px;
-		gap: 30px;
-	}
-	#logincheck-inner-header {
-		display:flex;
-		justify-content: center;
-		align-items:center;
-		gap:30px;
-	}
-	#join {
-	    cursor: pointer;
-	    height: 50px;
-	    background-color: #fffadd;
-	    border: none;
-	    padding: 10px 20px;
-	    font-size: 16px;
-	    color: #222;
-	    border-radius: 5px;
-	}
-	#cancle {
-		cursor: pointer;
-	    height: 50px;
-	    background-color: #grey;
-	    border: none;
-	    padding: 10px 20px;
-	    font-size: 16px;
-	    color: #cccccc;
-	    border-radius: 5px;
-	}
-	#cancle:hover {
-		background-color: #cccccc;
-		color: #6f6f6f;
-	}
-
-	#join:hover {
-	    background-color: #fff6c2;
-	}
     </style>
 </head>
 <body>
@@ -157,8 +49,11 @@
 						<img class="logo-container" src="${path}/resources/images/common/HoneyT_logo_square.png" style="width:40px;">
 					</div>
 					<div class="check-line">
+						<label>
 						<p>이용약관 동의</p><p class="login-mustcheck">(필수)</p>
-						<input type="checkbox" name="checked1">
+						<input type="checkbox" class="checkbox" name="checked1">
+						<i class="bi bi-check-circle"></i>
+						</label>
 					</div>
 					<div class="check-content">
 						<div class="check-contentbox">
@@ -167,8 +62,11 @@
 						</div>
 					</div>	
 					<div class="check-line">
+						<label>
 						<p>개인정보 처리방침 동의</p><p class="login-mustcheck">(필수)</p>
-						<input type="checkbox" name="checked2">
+						<input type="checkbox" class="checkbox" name="checked2">
+						<i class="bi bi-check-circle"></i>
+						</label>
 					</div>
 					<div class="check-content">
 						<div class="check-contentbox">
@@ -177,14 +75,25 @@
 						</div>
 					</div>	
 					<div class="check-line">
+						<label>
 						<p>광고성 정보 수신 동의</p>
-						<input type="checkbox" name="checked3">
+						<input type="checkbox" class="checkbox" name="checked3">
+						<i class="bi bi-check-circle"></i>
+						</label>
 					</div>
 					<div class="check-content">
 						<div class="check-contentbox">
 							<!-- 3. 개인정보 처리방침 영역 -->
 							<jsp:include page="/WEB-INF/views/enroll/termsofserviceText3.jsp" />
 						</div>
+					</div>
+					<!-- 전체 선택 체크박스 -->
+					<div class="check-line">
+						<label for="selectAll">
+						<p>전체 동의</p>
+						<input type="checkbox" id="selectAll">
+						<i class="bi bi-check-circle"></i>
+						</label>
 					</div>
 				</div>
 				<div id="agree-button">
@@ -213,6 +122,28 @@
 	$(".logo-container").click(function() {
 		location.assign("${path}");
 	});
+	
+    // DOM 요소 가져오기
+    const selectAllCheckbox = document.getElementById('selectAll');
+    const checkboxes = document.querySelectorAll('.checkbox');
+
+    // 전체 선택 체크박스 이벤트 리스너
+    selectAllCheckbox.addEventListener('change', function() {
+        // 모든 체크박스에 전체 선택 체크박스의 상태를 적용
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
+
+    // 개별 체크박스 이벤트 리스너
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            // 모든 체크박스가 선택되었는지 확인
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            // 전체 선택 체크박스 상태 업데이트
+            selectAllCheckbox.checked = allChecked;
+        });
+    });
 </script>
 <!-- 푸터 include -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
