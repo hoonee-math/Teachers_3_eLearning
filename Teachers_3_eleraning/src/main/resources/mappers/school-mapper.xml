@@ -17,7 +17,7 @@
 		SELECT DISTINCT REGION FROM SCHOOL12
 	</select>
 	
-	<select id="selectDistrict" parameterType="string" resultType="string">
+	<select id="selectDistrictByRegion" parameterType="string" resultType="string">
 		SELECT DISTINCT DISTRICT
 		FROM SCHOOL12
 		WHERE REGION LIKE

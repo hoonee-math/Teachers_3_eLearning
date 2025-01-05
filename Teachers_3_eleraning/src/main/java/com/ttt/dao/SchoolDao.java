@@ -18,4 +18,8 @@ public class SchoolDao {
 	public School12 selectSchoolInfoBySchoolNo(SqlSession session, int schoolNo) {
 		return session.selectOne("school.selectSchoolInfoBySchoolNo",schoolNo);
 	}
+	
+	public List<String> selectDistrictByRegion(SqlSession session, String region) {
+		return session.selectList("school.selectDistrictByRegion",region);
+	}
 }

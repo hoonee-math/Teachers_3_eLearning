@@ -29,4 +29,8 @@ public class SchoolService {
 		
 	}
 
+	public List<String> selectDistrictByRegion(String region){
+		SqlSession session=getSession();
+		return dao.selectDistrictByRegion(session,region);
+	}
 }

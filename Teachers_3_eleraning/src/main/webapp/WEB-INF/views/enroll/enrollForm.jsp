@@ -138,11 +138,9 @@ input[type=search]::-webkit-search-cancel-button {
 				        <label for="teacher"></label>
 				    </td>
 				</tr>
+				<c:if test="${memberType == '1'}">
 				<tr>
-					<c:if test="${memberType == '1'}">
-				    <th>자녀 학교</th></c:if>
-				    <c:if test="${memberType == '2'}">
-				    <th>소속 학교</th></c:if>
+				    <th>학교</th>
 				    <td>
 				        <div style="margin-bottom:10px">
 				            <select class="child_school" name="region" id="region" onchange="districtSearch(event);" style="width:108px">
@@ -169,7 +167,7 @@ input[type=search]::-webkit-search-cancel-button {
 				            </select>
 				        </div>
 				    </td>
-				</tr>
+				</tr></c:if>
 			</table>
 			<div class="enrollsubmit">
 				<input type="reset" value="취소">	<input type="submit" value="가입">

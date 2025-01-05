@@ -208,7 +208,7 @@ function districtSearch(e) {
     if(!region) return;
     
     $.ajax({
-        url: `${path}/post/district`,
+        url: `${path}/Ajax/school/district`,
         type: "GET",
         data: { region: region },
         success: function(data) {
