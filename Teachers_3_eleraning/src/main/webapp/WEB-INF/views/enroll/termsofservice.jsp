@@ -27,6 +27,7 @@
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
 			<section class="row main-section">
+			<form action="${path}/enroll/type" method="post">
 				<!-- 섹션 1 -->
 				<div id="logincheck-inner-container">
 					<div id="logincheck-inner-header">
@@ -36,7 +37,7 @@
 					</div>
 					<div id="check-line1">
 						<p>이용약관 동의</p><p class="login-mustcheck">(필수)</p>
-						<input type="checkbox">
+						<input type="checkbox" name="checked1">
 					</div>
 					<div id="check-content">
 						<div id="check-contentbox">
@@ -46,7 +47,7 @@
 					</div>	
 					<div id="check-line2">
 						<p>개인정보 처리방침 동의</p><p class="login-mustcheck">(필수)</p>
-						<input type="checkbox">
+						<input type="checkbox" name="checked2">
 					</div>
 					<div id="check-content2">
 						<div id="check-contentbox2">
@@ -56,7 +57,7 @@
 					</div>	
 					<div id="check-line3">
 						<p>광고성 정보 수신 동의</p>
-						<input type="checkbox">
+						<input type="checkbox" name="checked3">
 					</div>
 					<div id="check-content3">
 						<div id="check-contentbox3">
@@ -66,13 +67,14 @@
 					</div>
 				</div>
 				<div id="agree-button">
-				<div id="canclediv">
-					<input type="reset" id="cancle" style="cursor: pointer; height:50px; border:none;" value="메인으로">
+					<div id="canclediv">
+						<input type="reset" id="cancle" style="cursor: pointer; height:50px; border:none;" value="메인으로">
+					</div>
+					<div id="joindiv">
+						<input type="submit" id="join" value="회원가입">
+					</div>
 				</div>
-				<div id="joindiv">
-					<input type="submit" id="join" value="회원가입">
-				</div>
-			</div>
+			</form>
 			</section>
 		</div>
 	</div>
@@ -84,16 +86,16 @@
 	</c:if>
 	//메인으로 버튼 클릭시 메인페이지로 이동
 	$("#cancle").click(function() {
-		location.assign("${path}/home");
+		location.assign("${path}");
 	});
 	//로고 버튼 클릭시 메인페이지로 이동
 	$(".logo-container").click(function() {
 		location.assign("${path}");
 	});
-	//회원가입 버튼 클릭시 회원정보입력페이지로 이동
+	/* //회원가입 버튼 클릭시 회원정보입력페이지로 이동
 	$("#join").click(function() {
-		location.assign("${path}/member/enrollmain");
-	});
+		location.assign("${path}/enroll/type");
+	}); */
 </script>
 <!-- 푸터 include -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
