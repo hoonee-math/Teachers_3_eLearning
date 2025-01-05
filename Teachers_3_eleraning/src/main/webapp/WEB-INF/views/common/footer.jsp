@@ -8,20 +8,29 @@
 
 
 <style>
-footer {
-	margin-top: 40px;
-	padding: 40px 0;
-	background-color: #f8f9fa;
-	border-top: 1px solid #e1e1e1;
+body {
+    min-height: 100vh; /* 최소 높이를 뷰포트 높이로 설정 */
+    display: flex;
+    flex-direction: column;
 }
 
-#main-footer {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 20px;
+footer {
+    width: 100%;
+    margin-top: auto; /* 컨텐츠가 적을 때 아래로 밀어줌 */
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+}
+
+footer p {
+    margin: 0;
 }
 </style>
 
 <footer>
-	<div id="main-footer"></div>
+	<div id="main-footer">
+		<p>© 2025 HONEY T | 이용 약관 | 개인정보 보호 정책 | 청소년 보호 정책</p>
+	</div>
 </footer>
