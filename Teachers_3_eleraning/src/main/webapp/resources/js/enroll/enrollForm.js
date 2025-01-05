@@ -31,10 +31,10 @@ function handleEmailSelect() {
 // 회원가입 폼 유효성 검사
 function fn_invalidate() {
 	/*해당 페이지에서는 아이디 사용 x*/
-    /*const userId = $("#userId_").val();
-    if(userId.length < 4) {
+    /*const memberId = $("#memberId_").val();
+    if(memberId.length < 4) {
         alert("아이디는 4글자 이상 입력해 주세요.");
-        $("#userId_").focus();
+        $("#memberId_").focus();
         return false;
     }*/
 
@@ -73,7 +73,7 @@ function validatePasswordMatch(e) {
 
 // 아이디 중복 확인
 function checkDuplicate() {
-    const inputId = $("#userId_").val();
+    const inputId = $("#memberId_").val();
     window.open(
         `${path}/member/idduplicate.do?id=${inputId}`,
         "_blank",
@@ -237,7 +237,7 @@ function schoolSearch(e) {
     if(!district || !schoolType) return;
     
     $.ajax({
-        url: `${path}/school/selectchildschool`,
+        url: `${path}/Ajax/Search/School`,
         type: "GET",
         data: { 
             district: district,

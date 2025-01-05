@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="school">
+
+	<!-- school12 타입과 연결시켜주기 DB 컬럼명을 연결시켜주기 위한 resultMap. config에 type명 선언해서 사용 -->
+	<resultMap id="schoolMap" type="school12">
+		<id column="school_no" property="schoolNo"/>
+		<result column="region" property="region"/>
+		<result column="district" property="district"/>
+		<result column="school_name" property="schoolName"/>
+		<result column="school_type" property="schoolType"/>
+		<result column="region_code" property="regionCode"/>
+		<result column="standard_code" property="standardCode"/>
+	</resultMap>
+
+	<select id="selectRegion" resultType="string">
+		SELECT DISTINCT REGION FROM SCHOOL12
+	</select>
+	
+	<select id="selectDistrict" parameterType="string" resultType="string">
+		SELECT DISTINCT DISTRICT
+		FROM SCHOOL12
+		WHERE REGION LIKE
+		CASE #{region}
+			WHEN '서울' THEN '서울%'
+			WHEN '경기' THEN '경기%'
+			WHEN '인천' THEN '인천%'
+			WHEN '부산' THEN '부산%'
+			WHEN '세종' THEN '세종%'
+			WHEN '광주' THEN '광주%'
+			WHEN '대구' THEN '대구%'
+			WHEN '대전' THEN '대전%'
+			WHEN '울산' THEN '울산%'
+			WHEN '강원' THEN '강원%'
+			WHEN '충남' THEN '충청남도'
+			WHEN '충북' THEN '충청북도'
+			WHEN '경남' THEN '경상남도'
+			WHEN '경북' THEN '경상북도'
+			WHEN '전남' THEN '전라남도'
+			WHEN '전북' THEN '전%북%'
+			WHEN '제주' THEN '제주%'
+		END
+		ORDER BY DISTRICT
+	</select>
+	
+	<select id="selectSchool" parameterType="string" resultType="string">
+		SELECT DISTINCT SCHOOL_NAME
+		FROM SCHOOL12
+		WHERE DISTRICT = #{district}
+		AND SCHOOL_NAME LIKE '%' || #{schoolType}
+		ORDER BY SCHOOL_NAME
+	</select>
+	
+	<!-- 매개변수를 map으로 받아옴. mybatis에 의해 값을 일부만 넣어도 객체로 만들어줌. -->
+	<select id="selectNameAndCode" parameterType="map" resultMap="schoolMap">
+		SELECT SCHOOL_NO, SCHOOL_NAME, STANDARD_CODE, REGION_CODE
+		FROM SCHOOL12
+		WHERE DISTRICT = #{district}
+		AND SCHOOL_TYPE = #{schoolType}
+	</select>
+	
+	<select id="selectSchoolInfoBySchoolNo" parameterType="_int" resultMap="schoolMap">
+		SELECT * FROM SCHOOL12 WHERE SCHOOL_NO=#{schoolNo}
+	</select>
+
+</mapper>

@@ -102,7 +102,7 @@ input[type="reset"] {
 }
 
 input[type="submit"] {
-    background-color: #D9776A;
+    background-color: #FAB350;
     color: white;
 }
 
@@ -112,12 +112,13 @@ input[type="reset"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #C0655D;
+    background-color: #e89f3d;
     font-weight: bold;
 }
 
 input[type="reset"]:hover {
     background-color: #e9ecef;
+    font-weight: bold;
 }
 
 /* 유효성 검사 메시지 스타일 */

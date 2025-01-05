@@ -56,9 +56,7 @@ input[type=search]::-webkit-search-cancel-button {
 <header>
 <div class="menu">
 	<div class="logo-container">
-		<img class="logo-container" src="${path}/resources/images/common/HoneyT_logo_square.png" style="width:30px;">
-		<span class="logo-text">HONEY T 회원가입</span>
-		<img class="logo-container" src="${path}/resources/images/common/HoneyT_logo_square.png" style="width:30px;">
+		<img class="logo-container" src="${path}/resources/images/common/HoneyT_Text_font_Oduba_warning.png" style="width:100px;">
 	</div>
 </div>
 </header>
@@ -73,6 +71,13 @@ input[type=search]::-webkit-search-cancel-button {
 		<!-- onsubmit 값의 return 값이 true 일때 post 로 요청! -->
 		<form action="${path}/enroll/end" method="post" onsubmit="return fn_invalidate();">
 			<table>
+				<tr>
+					<th>아이디 *</th>
+					<td>
+						<input type="text" name="memberId" id="memberId" placeholder="아이디" required>
+						<input type="button" value="중복검사" id="memberId_" onclick="checkDuplicate()">
+					</td>
+				</tr>
 				<tr>
 					<th>이메일 *</th>
 					<td>
