@@ -64,7 +64,7 @@ class TeacherSlider {
 
 		const offset = -this.currentIndex * this.slideWidth;
 		this.slider.style.transform = `translateX(${offset}%)`;
-		console.log('Slider position updated:', offset);
+		/*console.log('Slider position updated:', offset);*/
 	}
 
 	handleTransitionEnd() {
@@ -90,7 +90,7 @@ class TeacherSlider {
 		this.currentIndex++;
 		this.updateSliderPosition(true);
 
-		console.log('Next slide:', this.currentIndex);
+		/*console.log('Next slide:', this.currentIndex);*/
 	}
 
 	startAutoSlide() {

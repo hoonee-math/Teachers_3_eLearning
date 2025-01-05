@@ -40,8 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 초기 UI 상태 설정
 	const teacherDetailContent = document.querySelector('.teacher-detail-content');
 	const teacherListContent = document.querySelector('.teacher-list-content');
-	teacherDetailContent.style.display = 'none';
-
+	try{
+		teacherDetailContent.style.display = 'none';
+	} catch(error) {
+		console.error("teacherDetailContent 를 찾지 못해서 발생한 오류");
+	}
 	// 강사 선택 이벤트 처리
 	document.querySelectorAll('.teacher-link, .teacher-card').forEach(link => {
 		link.addEventListener('click', function(e) {

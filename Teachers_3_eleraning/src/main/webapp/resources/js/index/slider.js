@@ -42,13 +42,13 @@ class MainSlider {
 	}
 
 	nextSlide() {
-		console.log('Moving to next slide');
+		/*console.log('Moving to next slide');*/
 		this.goToSlide(this.currentIndex + 1);
 	}
 
 	goToSlide(index) {
 		const newIndex = (index + this.slideCount) % this.slideCount;
-		console.log(`Going to slide ${newIndex}`);
+		/*console.log(`Going to slide ${newIndex}`);*/
 
 		this.currentIndex = newIndex;
 		const offset = -100 * this.currentIndex;
