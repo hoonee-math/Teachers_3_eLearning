@@ -8,12 +8,17 @@ import java.util.Random;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
+
+import com.ttt.common.SqlSessionTemplate;
+import com.ttt.dao.MemberDao;
 import com.ttt.dto.EmailAuthenticationResult;
 
 public class EmailAuthenticationService {
     private static final int AUTH_NUMBER_LENGTH = 6;
     private static final int MAX_ATTEMPTS = 5;
     private static final int EXPIRY_MINUTES = 5;
+    private MemberDao dao=new MemberDao();
 
     // 인증번호 생성
     public String generateAuthNumber() {
@@ -98,6 +103,12 @@ public class EmailAuthenticationService {
         session.removeAttribute("authCreateTime");
         session.removeAttribute("failCount");
         session.removeAttribute("email");
+    }
+    
+    // 이메일 중복 검사
+    public int checkEmailDuplicate(String email) {
+    	SqlSession session = new SqlSessionTemplate().getSession();
+    	return dao.checkDuplicateEmail(session, email);
     }
 
 }

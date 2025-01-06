@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member">
+
+	<!-- school12 타입과 연결시켜주기 DB 컬럼명을 연결시켜주기 위한 resultMap. config에 type명 선언해서 사용 -->
+	<resultMap id="memberMap" type="member3">
+		<id column="member_no" property="memberNo"/>
+		<result column="member_id" property="memberId"/>
+		<result column="member_pw" property="memberPw"/>
+		<result column="member_name" property="memberName"/>
+		<result column="email" property="email"/>
+		<result column="member_type" property="memberType"/>
+		<result column="enroll_date" property="enrollDate"/>
+		
+		<!-- 학생인 경우 -->
+		<result column="grade" property="grade"/>
+		
+		<!-- 교사인 경우 -->
+		<result column="teacher_subject" property="teacherSubject"/>
+		<result column="teacher_info_title" property="teacherInfoTitle"/>
+		<result column="teacher_info_content" property="teacherInfoContent"/>
+		
+		<!-- School12와 연결 -->
+		<association property="school" resultMap="schoolMap"/>
+	</resultMap>
+
+		<!-- member3 테이블 insert 후 생성된 key값 가져오기 -->
+	<insert id="insertMember" parameterType="member3" useGeneratedKeys="true" keyProperty="memberNo">
+		<selectKey keyProperty="memberNo" resultType="int" order="BEFORE">
+			SELECT SEQ_MEMBER3_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+		INSERT ALL
+		INTO MEMBER3 (
+			MEMBER_NO,		MEMBER_ID,		MEMBER_PW,		MEMBER_NAME,
+			EMAIL,			MEMBER_TYPE,	ENROLL_DATE
+		) VALUES (
+			#{memberNo},	#{memberId},	#{memberPw},	#{memberName},
+			#{email},		#{memberType},	SYSDATE
+		)
+		<!-- memberType이 1(학생)인 경우 -->
+		<if test="memberType == 1">
+			INTO STUDENTS3 (
+				MEMBER_NO,		GRADE,			SCHOOL_NO
+			) VALUES (
+				#{memberNo},	#{grade},		#{school.schoolNo}
+			)
+		</if>
+		<!-- memberType이 2(교사)인 경우 -->
+		<if test="memberType == 2">
+			INTO TEACHERS3 (
+				MEMBER_NO,		TEACHER_SUBJECT,		TEACHER_INFO_TITLE,
+				TEACHER_INFO_CONTENT,		IMAGE_NO
+			) VALUES (
+				#{memberNo},	#{teacherSubject},		#{teacherInfoTitle},
+				#{teacherInfoContent},		#{image.imageNo}
+			)
+		</if>
+		
+		SELECT * FROM DUAL
+	</insert>
+	
+<!-- 	<select id="selectMemberById" parameterType="string" resultMap="memberMap">
+		SELECT * FROM MEMBER1 WHERE EMAIL=#{email}
+	</select> -->
+	
+<!-- 	<select id="selectMemberByNameAndEmail" parameterType="member3" resultMap="memberMap">
+		SELECT * FROM MEMBER1 WHERE EMAIL=#{email} AND MEMBER_NAME=#{memberName}
+	</select> -->
+	
+<!-- 	<update id="updatePassword" parameterType="member3">
+		UPDATE MEMBER1 SET 
+			member_pw=#{memberPw}
+			WHERE email=#{email}
+	</update> -->
+	
+<!-- 	<update id="updateMember" parameterType="member3">
+		UPDATE MEMBER1 SET
+			MEMBER_NAME=#{memberName}, EMAIL=#{email}, MEMBER_PW=#{memberPw} WHERE EMAIL=#{email}			
+	</update> -->
+	
+	
+</mapper>

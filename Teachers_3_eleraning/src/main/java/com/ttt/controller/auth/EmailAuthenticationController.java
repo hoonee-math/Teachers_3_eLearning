@@ -39,6 +39,8 @@ public class EmailAuthenticationController extends HttpServlet {
             case "/complete":
                 handleComplete(request, response);
                 break;
+            case "/checkEmailDuplicate.do":
+            	handleDuplicateCheck(request, response);
             default:
                 response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
@@ -115,6 +117,19 @@ public class EmailAuthenticationController extends HttpServlet {
             response.setContentType("application/json");
             response.getWriter().write("{\"error\": \"" + 
                 e.getMessage() + "\"}");
+        }
+    }
+    
+    private void handleDuplicateCheck(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException  {
+
+        HttpSession session = request.getSession();
+        String email = request.getParameter("email");  // 이메일 파라미터 받기
+        
+        try {
+        	int result = new EmailAuthenticationService().checkEmailDuplicate(email);
+        } catch(Exception e) {
+        	e.printStackTrace();
+        	System.out.println("EmailAuthenticationController : 이메일 중복체크 중 오류 발생");
         }
     }
 
