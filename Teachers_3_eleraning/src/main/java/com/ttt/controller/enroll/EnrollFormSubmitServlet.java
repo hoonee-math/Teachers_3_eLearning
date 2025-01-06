@@ -41,17 +41,16 @@ public class EnrollFormSubmitServlet extends HttpServlet {
 		int schoolNo=0;
 		int grade=0;
 		School12 school=new School12();
-		try {
-			memberType=Integer.parseInt(request.getParameter("memberType"));
-			
-			// 학생인 경우
-			if(memberType==1) {
-				schoolNo=Integer.parseInt(request.getParameter("schoolNo"));
-				school.setSchoolNo(schoolNo);
-				grade=Integer.parseInt(request.getParameter("grade"));
-			}
-		} catch(Exception e) {
-			System.out.println("파싱오류");
+		
+		// 값을 각각 받아오도록 각각 예외처리
+		try {memberType=Integer.parseInt(request.getParameter("memberType"));} 
+			catch(Exception e) {System.out.println("파싱오류");}
+		if(memberType==1) {
+			try {schoolNo=Integer.parseInt(request.getParameter("schoolNo"));}
+				catch(Exception e) {System.out.println("파싱오류1");}
+			try {grade=Integer.parseInt(request.getParameter("grade"));}
+				catch(Exception e) {System.out.println("파싱오류2");}
+			school.setSchoolNo(schoolNo);
 		}
 		
 		// 교사인 경우 
