@@ -33,6 +33,10 @@ body {
 	border-radius: 5px;
 }
 
+.logo-container{
+	cursor: pointer;
+}
+
 .menu .logo {
 	width: 40px;
 	height: auto;

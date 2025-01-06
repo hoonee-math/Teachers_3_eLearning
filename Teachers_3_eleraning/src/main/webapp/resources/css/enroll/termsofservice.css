@@ -135,6 +135,9 @@ body {
 .check-line i:hover {
     transform: scale(1.1);
 }
+.check-line i:active {
+    transform: scale(1.3);
+}
 /* 체크박스가 선택되었을 때 아이콘 색상 변경 */
 input[type="checkbox"]:checked + i {
 	color: #00f000;
@@ -226,7 +229,9 @@ input[type="checkbox"]:checked + i {
 #join:hover {
 	background-color: #e89f3d;
     font-weight: bold;
-
+}
+#join:active {
+    transform: scale(1.1);
 }
 #cancle {
 	cursor: pointer;
@@ -242,4 +247,7 @@ input[type="checkbox"]:checked + i {
     background-color: #e9ecef;
     font-weight: bold;
     font-weight: bold;
+}
+#cancle:active {
+    transform: scale(1.1);
 }

@@ -63,6 +63,10 @@
     filter: grayscale(0%);
 }
 
+.option:active img {
+    transform: scale(1.2);
+    filter: grayscale(0%);
+}
 /* 옵션 텍스트 */
 .option-text {
     margin-top: 20px;
@@ -91,4 +95,7 @@
 
 .submit-btn:hover {
     background-color: #e89f3d;
+}
+.submit-btn:active {
+    transform: scale(1.1);
 }
