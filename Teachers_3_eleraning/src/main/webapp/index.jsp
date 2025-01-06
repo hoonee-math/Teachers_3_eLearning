@@ -29,6 +29,12 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://uicdn.toast.com/calendar/v2.1.3/toastui-calendar.min.js"></script>
 
+<style>
+section {
+	margin-bottom:20px;
+}
+</style>
+
 </head>
 <body>
 

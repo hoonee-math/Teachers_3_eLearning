@@ -22,20 +22,27 @@ public class EnrollMemberTypeServlet extends HttpServlet {
 		String[] values = {
 				// 필수항목만 확인
 	            request.getParameter("checked1"),
-	            request.getParameter("checked2")
+	            request.getParameter("checked2"),
+	            request.getParameter("checked3")
 	        };
-		System.out.println("EnrollMemberTypeServlet - checked1 : "+request.getParameter("checked1"));
+		System.out.println("EnrollMemberTypeServlet - checked List : "+values[0]+","+values[1]+","+values[2]);
 		
 		// 하나라도 null이면 동의하지 않은 것으로 처리 -> js 에서 처리하면 보안상 위험이 있을까?
-		for (String value : values) {
-            if (value == null) {
-                request.setAttribute("errorMessage", "모든 동의 항목에 동의해야 합니다.");
-                request.getRequestDispatcher("/WEB-INF/views/enroll/termsofservice.jsp").forward(request, response);
-                return;
-            }
-        }
-		request.getRequestDispatcher("/WEB-INF/views/enroll/enrollMemberType.jsp").forward(request, response);
-		
+		int i=0;
+		try {
+			if (values[0].equals("on")) ++i;
+			if (values[1].equals("on")) ++i;
+			if (i==2) {
+				if(values[2].equals("on")); // 광고성 정보 수신 동의에 대해서 정보 저장이 필요함.
+				request.getRequestDispatcher("/WEB-INF/views/enroll/enrollMemberType.jsp").forward(request, response);
+			} else {
+				request.setAttribute("errorMessage", "모든 필수 항목에 동의 항목에 동의해야 합니다.");
+				request.getRequestDispatcher("/WEB-INF/views/enroll/termsofservice.jsp").forward(request, response);
+			}
+		} catch(Exception e) {
+			request.setAttribute("errorMessage", "모든 필수 항목에 동의 항목에 동의해야 합니다.");
+			request.getRequestDispatcher("/WEB-INF/views/enroll/termsofservice.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
