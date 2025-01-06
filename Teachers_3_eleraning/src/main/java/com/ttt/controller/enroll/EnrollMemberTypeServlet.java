@@ -31,9 +31,11 @@ public class EnrollMemberTypeServlet extends HttpServlet {
 		int i=0;
 		try {
 			if (values[0].equals("on")) ++i;
+			System.out.println(values[0].equals("on")+", "+i);
 			if (values[1].equals("on")) ++i;
+			System.out.println(values[0].equals("on")+", "+i);
 			if (i==2) {
-				if(values[2].equals("on")); // 광고성 정보 수신 동의에 대해서 정보 저장이 필요함.
+				if(values[2] == null); // (보류) 광고성 정보 수신 동의에 대해서 정보 저장이 필요함.
 				request.getRequestDispatcher("/WEB-INF/views/enroll/enrollMemberType.jsp").forward(request, response);
 			} else {
 				request.setAttribute("errorMessage", "모든 필수 항목에 동의 항목에 동의해야 합니다.");
