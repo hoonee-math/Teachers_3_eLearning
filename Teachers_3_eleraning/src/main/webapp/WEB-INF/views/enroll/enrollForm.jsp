@@ -75,7 +75,7 @@ input[type=search]::-webkit-search-cancel-button {
 					<th>아이디 *</th>
 					<td>
 						<input type="text" name="memberId" id="memberId" placeholder="아이디" required>
-						<input type="button" value="중복검사" id="memberId_" onclick="checkDuplicate()">
+						<input type="button" value="중복검사" id="memberId_">
 					</td>
 				</tr>
 				<tr>
@@ -90,7 +90,7 @@ input[type=search]::-webkit-search-cancel-button {
 							<option value="daum.net">daum.net</option>
 							<option value="hanmail.net">hanmail.net</option>
 							<option value="nate.com">nate.com</option>
-						</select> <input type="button" value="이메일 인증" id="emailCheckBtn" onclick="checkEmail()">
+						</select> <input type="button" value="이메일 인증" id="emailCheckBtn">
 					</td>
 				</tr>
 				<tr>

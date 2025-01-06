@@ -10,7 +10,7 @@ $(document).ready(function() {
 function initializeEventListeners() {
     $(".logo-container").click(() => location.assign(path));
     $("#emailSelect").change(handleEmailSelect);
-    $("#btn_checkDuplicate").click(checkDuplicate);
+    $("#memberId_").click(checkDuplicate);
     $("#password_2").keyup(validatePasswordMatch);
     $("#emailCheckBtn").click(checkEmail);
     $("#postcodeFindBtn").click(sample4_execDaumPostcode);
@@ -119,7 +119,7 @@ function checkEmail() {
 	        }
 	    },
 	    error: function() {
-	        alert("이미 사용중인 이메일 입니다.");
+	        alert("다시 시도해주세요.");
 	    }
 	});
 }
