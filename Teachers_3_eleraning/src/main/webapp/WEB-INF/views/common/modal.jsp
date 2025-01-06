@@ -26,7 +26,7 @@
 			</div>
 		</form>
 		<div class="modal-footer">
-			<a href="${path }/auth/find">아이디 찾기 / 비밀번호 찾기</a> <span>|</span>
+			<a href="${path }/find">아이디 찾기 / 비밀번호 찾기</a> <span>|</span>
 			<a href="${path }/enroll/termsofservice">회원가입</a>
 		</div>
 	</div>
