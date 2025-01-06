@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.ttt.dto.EmailAuthenticationResult;
+import com.ttt.dto.Member3;
 import com.ttt.service.EmailAuthenticationService;
 
 @WebServlet("/auth/*")
@@ -45,6 +46,7 @@ public class EmailAuthenticationController extends HttpServlet {
                 break;
             case "/checkEmailDuplicate.do":
             	handleDuplicateCheck(request, response);
+            	break;
             default:
                 response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
@@ -127,26 +129,38 @@ public class EmailAuthenticationController extends HttpServlet {
     private void handleDuplicateCheck(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException  {
 
         HttpSession session = request.getSession();
-        String email = request.getParameter("email");  // 이메일 파라미터 받기
         Gson gson = new Gson();
+        String email="",searchType="", memberName="";
         
+        // request 로 받아온 값을 변수에 저장
         try {
-            // ContentType 설정 추가
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            
-        	// System.out.println("EmailAuthenticationController.handleDuplicateCheck() : 이메일 서비스로부터 이메일 중복 여부 체크 시작 email : "+email);
-        	int result = new EmailAuthenticationService().checkEmailDuplicate(email);
+	        email = request.getParameter("email");  // 이메일 파라미터 받기
+	        searchType=request.getParameter("searchType"); // 이메일 중복검사로 회원가입, 비밀번호, 아이디 찾기 기능 구현
+	    	memberName=request.getParameter("memberName"); // 아이디,비밀번호 찾기시 필요
+
+			System.out.println(searchType + "," + email + ","+ memberName);
+        } catch(Exception e ) {
+        	System.out.println("이메일 중보검사중 파라미터를 받아오지 못한 값이 존재함");
+        }
+        
+        // 실제 이메일 중복검사 서비스 실행
+        try {
+        	
+        	Member3 m= new Member3();
+        	Member3 result = new Member3();
+    		switch(searchType) {
+    		case "emailDuplicate" : m.setEmail(email); System.out.println(m); 
+    			result = new EmailAuthenticationService().checkEmailDuplicateByEmail(m); break;
+    		case "searchPassword" : m.setEmail(email); m.setMemberName(memberName);; System.out.println(m); 
+    			result = new EmailAuthenticationService().selectMemberByNameAndEmail(m); break;
+    		}
+    		
         	System.out.println("result : "+result);
+        	boolean exists = (result!=null);
+        	System.out.println("exists : "+exists);
 
-            Map<String, Object> jsonResponse = new HashMap<>();
-            // json 데이터로 "existss" : "결과를 불린값으로 변환하여" 전달
-            jsonResponse.put("exists", result == 1);
-            String jsonString = gson.toJson(jsonResponse);
-
-            // 여기에 JSON 응답 로그 추가
-            System.out.println("JSON response: " + jsonString);
-            response.getWriter().write(jsonString);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"exists\": " + exists + "}");
             
         } catch(Exception e) {
         	e.printStackTrace();

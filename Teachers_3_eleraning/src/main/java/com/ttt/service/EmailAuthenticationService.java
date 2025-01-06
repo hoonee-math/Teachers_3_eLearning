@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.ttt.common.SqlSessionTemplate;
 import com.ttt.dao.MemberDao;
 import com.ttt.dto.EmailAuthenticationResult;
+import com.ttt.dto.Member3;
 
 public class EmailAuthenticationService {
     private static final int AUTH_NUMBER_LENGTH = 6;
@@ -106,10 +107,16 @@ public class EmailAuthenticationService {
     }
     
     // 이메일 중복 검사
-    public int checkEmailDuplicate(String email) {
+    public Member3 checkEmailDuplicateByEmail(Member3 m) {
     	SqlSession session = new SqlSessionTemplate().getSession();
     	//MemberDao 의 메소드 이용해서 이메일 중복 체크해서 결과 유무 체크하기 count(*)
-    	return dao.checkEmailDuplicate(session, email);
+    	return dao.checkEmailDuplicateByEmail(session, m);
+    }
+    // 회원 인증 by (이름, 이메일)
+    public Member3 selectMemberByNameAndEmail(Member3 m) {
+    	SqlSession session = new SqlSessionTemplate().getSession();
+    	//MemberDao 의 메소드 이용해서 이메일 중복 체크해서 결과 유무 체크하기 count(*)
+    	return dao.selectMemberByNameAndEmail(session, m);
     }
 
 }

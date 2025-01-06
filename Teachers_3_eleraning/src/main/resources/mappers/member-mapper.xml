@@ -21,7 +21,7 @@
 		<result column="teacher_info_content" property="teacherInfoContent"/>
 		
 		<!-- School12와 연결 -->
-		<association property="school" resultMap="schoolMap"/>
+		<association property="school" resultMap="school.schoolMap"/>
 	</resultMap>
 
 		<!-- member3 테이블 insert 후 생성된 key값 가져오기 -->
@@ -60,9 +60,13 @@
 		SELECT * FROM DUAL
 	</insert>
 	
-	<select id="checkEmailDuplicate" parameterType="string" resultType="int">
-		SELECT COUNT(*) FROM MEMBER3 WHERE EMAIL=#{email}
+	<select id="checkEmailDuplicateByEmail" parameterType="member3" resultMap="memberMap">
+		SELECT EMAIL FROM MEMBER3 WHERE EMAIL=#{email}
 	</select> 
+	
+	<select id="selectMemberByNameAndEmail" parameterType="member3" resultMap="memberMap">
+		SELECT EMAIL FROM MEMBER1 WHERE EMAIL=#{email} AND MEMBER_NAME=#{memberName}
+	</select>
 	
 <!-- 	<select id="selectMemberById" parameterType="string" resultMap="memberMap">
 		SELECT * FROM MEMBER1 WHERE EMAIL=#{email}
