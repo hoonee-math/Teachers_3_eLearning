@@ -15,7 +15,11 @@
 	
 	<!-- 클래스 타입의 별칭 부여하기 -->
 	<typeAliases>
-		<!-- <typeAlias type="com.ttt.dto.Member3" alias="member3"/> -->
+		<typeAlias type="com.ttt.dto.Member3" alias="member3"/>
+		<typeAlias type="com.ttt.dto.School12" alias="School12"/>
+		<typeAlias type="com.ttt.dto.Post3" alias="Post3"/>
+		<typeAlias type="com.ttt.dto.Course3" alias="Course3"/>
+		<typeAlias type="com.ttt.dto.Lecture3" alias="Lecture3"/>
 	</typeAliases>
 	
 	<!-- DB정보 작성 : DB 보안 정보는 driver.properties에 개별 작성 -->
@@ -33,7 +37,7 @@
 	
 	<!-- 생성한 Mapper 를 전역에서 접근하도록 설정 -->
 	<mappers>
-		<!-- <mapper resource="/mappers/member3-mapper.xml"/> -->
+		<mapper resource="/mappers/school-mapper.xml"/>
 	</mappers>
 	
 </configuration>

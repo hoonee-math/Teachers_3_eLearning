@@ -32,7 +32,8 @@ public class AjaxDistrictByRegionServlet extends HttpServlet {
 		
 		try {
 			SqlSession session = SqlSessionTemplate.getSession();
-			districts = session.selectList("school.selectDistrict",region);
+			System.out.println("AjaxDistrictByRegionServlet - region.val :"+region);
+			districts = session.selectList("school.selectDistrictByRegion",region);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -238,7 +238,7 @@ function schoolSearch(e) {
     if(!district || !schoolType) return;
     
     $.ajax({
-        url: `${path}/Ajax/Search/School`,
+        url: `${path}/Ajax/School/Search`,
         type: "GET",
         data: { 
             district: district,

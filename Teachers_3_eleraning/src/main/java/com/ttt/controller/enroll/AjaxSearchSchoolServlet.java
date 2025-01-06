@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.ttt.dto.School12;
 import com.ttt.service.SchoolService;
 
-@WebServlet("/Ajax/Search/School")
+@WebServlet("/Ajax/School/Search")
 public class AjaxSearchSchoolServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,6 +41,7 @@ public class AjaxSearchSchoolServlet extends HttpServlet {
 		List<School12> schools = new SchoolService().selectNameAndCode(params);
 		
 		response.setContentType("application/json;charset=UTF-8");
+		new Gson().toJson(schools, response.getWriter());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
