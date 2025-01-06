@@ -100,7 +100,7 @@
 	
 	<script src="${path}/resources/js/common/headerBanner.js"></script>
 	<script src="${path}/resources/js/common/headerMenu.js"></script>
-	<script src="${path}/resources/js/common/auth.js"></script>
+	<%-- <script src="${path}/resources/js/common/auth.js"></script> --%>
 	<script src="${path}/resources/js/common/headerMegaMenu.js"></script>
 	
 </header>

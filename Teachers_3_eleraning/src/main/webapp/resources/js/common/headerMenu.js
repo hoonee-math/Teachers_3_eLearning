@@ -53,6 +53,13 @@ function updateSubNav(grade) {
 	$('#subNav').html(menuItems);
 }	
 
+function logout() {
+	if(confirm('로그아웃 하시겠습니까?')) {
+		// 추후 로그아웃 서블릿 연동
+		location.assign(`${path}/member/logout`);
+	}
+}
+
 $(document).ready(function() {
 	console.log('Document ready');
 
