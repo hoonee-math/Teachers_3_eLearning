@@ -14,6 +14,7 @@ function initializeEventListeners() {
     $("#password_2").keyup(validatePasswordMatch);
     $("#emailCheckBtn").click(checkEmail);
     $("#postcodeFindBtn").click(sample4_execDaumPostcode);
+	$("input[type='reset']").click(cancelEnroll);
 }
 
 // 이메일 도메인 선택 처리
@@ -257,4 +258,9 @@ function schoolSearch(e) {
             console.error("Error: ", error);
         }
     });
+}
+
+function cancelEnroll(e) {
+	alert("양식을 초기화하고 초기화면으로 아가시겠습니까?");
+	location.assign(path);
 }
