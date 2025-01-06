@@ -90,24 +90,17 @@ function validateEmail(email) {
 
 // 이메일 인증 처리
 function checkEmail() {
-    const emailId = $("#emailId").val();
-    const emailDomain = $("#emailDomain").val();
+	const searchType = $("#searchType").val();
 	const email = searchType === 'emailDuplicate' 
 	       ? $("#emailId").val() + '@' + $("#emailDomain").val()
 	       : $("#email").val();
-	const searchType = $("#searchType").val();
 	
 	// console.log(searchType); // 정상 출력
-    
-    if(!emailId || !emailDomain) {
-        alert("이메일을 입력해주세요.");
-        return;
-    }
-    
-    if(!validateEmail(email)) {
-        alert("유효한 이메일 형식이 아닙니다.");
-        return;
-    }
+
+	if(!validateEmail(email)) {
+		alert("유효한 이메일 형식이 아닙니다.");
+		return;
+	}
 
 	// 이메일 중복 체크
 	$.ajax({
@@ -120,8 +113,12 @@ function checkEmail() {
 	            alert("이미 사용중인 이메일입니다.");
 	            return;
 	        } else {
-	            // 중복이 아닌 경우에만 인증 이메일 발송
-	            sendVerificationEmail(email);
+				// 중복이 아닌 경우에만 인증 이메일 발송
+				if(searchType==="emailDuplicate"){
+					sendVerificationEmail(email,'signup');
+				} else {
+					sendVerificationEmail(email, 'reset');
+				}
 	        }
 	    },
 	    error: function() {
@@ -132,11 +129,11 @@ function checkEmail() {
 }
 
 // 인증 이메일 발송 함수 분리
-function sendVerificationEmail(email) {
+function sendVerificationEmail(email, authType) {
 	//form 태그를 만들어서, email 값을 저장하고, body 태그에 form을 추가해서 submit 한 후 다시 제거하는 로직
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = `${path}/auth/sendEmail`;
+    form.action = `${path}/auth/sendEmail`; // 요청을 처리하는 서블릿 주소
     form.target = 'emailVerify';
     
     const emailInput = document.createElement('input');
@@ -147,7 +144,7 @@ function sendVerificationEmail(email) {
     const typeInput = document.createElement('input');
     typeInput.type = 'hidden';
     typeInput.name = 'authType';
-    typeInput.value = 'signup'; // handleSendEmail 에서 인증 타입이 singup 인 경우 checkEmail.jsp 를 호출
+    typeInput.value = authType; // handleSendEmail 에서 인증 타입이 singup 인 경우 checkEmail.jsp 를 호출
     
     form.appendChild(emailInput);
     form.appendChild(typeInput);
@@ -161,7 +158,7 @@ function sendVerificationEmail(email) {
 
 // 이메일 관련 입력값이 변경될 때마다 인증 상태 초기화
 $("#emailId, #emailDomain, #emailSelect").on("change", function() {
-    const existingHidden = $("input[name='emailVerified']");
+    const existingHidden = $("input[name='emailVerified']"); /* checkAuthNumberForEnrollUseEmail.jsp 에서 create 해서 넘겨준 input 태그 */
     if(existingHidden.length > 0) {
         existingHidden.val("N");
         

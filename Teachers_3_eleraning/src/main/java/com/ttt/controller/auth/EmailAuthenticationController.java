@@ -96,8 +96,8 @@ public class EmailAuthenticationController extends HttpServlet {
         request.setAttribute("message", result.getMessage());
         
         // returnPath를 authType에 따라 분기처리
-        String returnPath = "/WEB-INF/views/register/" + 
-            (authType.equals("reset") ? "checkEmailForFindPassword.jsp" : "checkEmail.jsp");
+        String returnPath = "/WEB-INF/views/enroll/" + 
+            (authType.equals("reset") ? "checkAuthNumberForEmailForFindPassword.jsp" : "checkAuthNumberForEnrollUseEmail.jsp");
            
         request.getRequestDispatcher(returnPath).forward(request, response);
     }
