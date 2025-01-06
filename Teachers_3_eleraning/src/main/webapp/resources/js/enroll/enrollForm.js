@@ -94,6 +94,8 @@ function checkEmail() {
     const emailDomain = $("#emailDomain").val();
 	const email = emailId + '@' + emailDomain;
 	const searchType = $("#searchType").val();
+	
+	console.log(searchType);
     
     if(!emailId || !emailDomain) {
         alert("이메일을 입력해주세요.");
