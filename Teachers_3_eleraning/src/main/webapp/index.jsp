@@ -149,6 +149,13 @@
 				</section>
 			</c:if>
 
+			<!-- 캘린더 섹션 -->
+			<section id="calendarSection" class="calendar-section">
+				<div class="calendar-container">
+					<h2 class="section-title">학습 일정</h2>
+					<div id="calendar" style="height: 600px;"></div>
+				</div>
+			</section>
 
 			<!-- 섹션4: 대표 강사진 슬라이더 -->
 			<section id="mainTeachers" class="teacher-slider-section">
@@ -243,13 +250,6 @@
 							</div>
 						</c:forEach>
 					</div>
-				</div>
-			</section>
-			<!-- 캘린더 섹션 -->
-			<section id="calendarSection" class="calendar-section">
-				<div class="calendar-container">
-					<h2 class="section-title">학습 일정</h2>
-					<div id="calendar" style="height: 600px;"></div>
 				</div>
 			</section>
 		</main>

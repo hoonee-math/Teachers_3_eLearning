@@ -13,8 +13,8 @@ footer {
     width: 100%;
     padding: 20px 0;
     margin-top: auto; /* 컨텐츠가 적을 때 하단에 고정 */
-    background-color: #fffadd;
-    border-top: 1px solid #FAB350;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e1e1e1;
     text-align: center;
     font-size: 14px;
     color: #6f6f6f;
