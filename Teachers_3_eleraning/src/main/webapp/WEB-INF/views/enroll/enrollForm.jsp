@@ -7,48 +7,15 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
 <!-- 1. 공통 head 요소/공통 CSS 포함 -->
 <jsp:include page="/WEB-INF/views/common/head.jsp" />
-
 <!-- 2. 페이지별 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/enroll/enrollMember.css">
 <link rel="stylesheet" href="${path}/resources/css/enroll/enrollHeader.css">
-<style>
-/* 입력 필드 초기화 */
-button, input, select, textarea {
-    margin: 0;
-    padding: 0;
-}
-
-/* 입력 필드 텍스트 스타일 */
-button, input, select, td, textarea, th {
-    font-size: 14px;
-    line-height: 1.5;
-    font-family: 'Malgun Gothic','맑은 고딕',sans-serif;
-    color: #222;
-}
-
-/* IE 브라우저 clear 버튼 숨김 */
-input[type=text]::-ms-clear {
-    display: none;
-}
-
-/* 입력 필드 검색 취소 버튼 숨김 */
-input[type=search]::-webkit-search-cancel-button {
-    -webkit-appearance: none;
-}
-
-/* 우편번호 입력 필드 */
-#sample4_postcode {
-    width: 100px;  /* 우편번호는 짧게 */
-}
-
-</style>
-
+<link rel="stylesheet" href="${path}/resources/css/enroll/enrollForm.css">
 <title>Honey T</title>
-	
 </head>
+
 <body>
 <!-- 콘텐츠 영역 -->
 <div id="wrap">
@@ -182,8 +149,9 @@ input[type=search]::-webkit-search-cancel-button {
 </main> <!-- /메인 콘텐츠 -->
 <!-- 5. 푸터 영역 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
-		
 </div> <!-- /콘텐츠 영역 -->
+
+
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
