@@ -110,6 +110,7 @@ function checkEmail() {
 	    method: "POST",
 	    data: { email: email, searchType: 'emailDuplicate'},
 	    success: function(response) {
+			console.log('Response:', response); // 응답 확인
 	        if(response.exists) {
 	            alert("이미 사용중인 이메일입니다.");
 	            return;
@@ -119,6 +120,7 @@ function checkEmail() {
 	        }
 	    },
 	    error: function() {
+			console.log('Error:', error); // 에러 상세 확인
 	        alert("다시 시도해주세요.");
 	    }
 	});

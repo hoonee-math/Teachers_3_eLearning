@@ -60,7 +60,7 @@
 		SELECT * FROM DUAL
 	</insert>
 	
-	<select id="checkDuplicateEmail" parameterType="string" resultType="_int">
+	<select id="checkEmailDuplicate" parameterType="string" resultType="int">
 		SELECT COUNT(*) FROM MEMBER3 WHERE EMAIL=#{email}
 	</select> 
 	

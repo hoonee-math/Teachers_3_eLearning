@@ -38,6 +38,7 @@
 	<!-- 생성한 Mapper 를 전역에서 접근하도록 설정 -->
 	<mappers>
 		<mapper resource="/mappers/school-mapper.xml"/>
+		<mapper resource="/mappers/member-mapper.xml"/>
 	</mappers>
 	
 </configuration>

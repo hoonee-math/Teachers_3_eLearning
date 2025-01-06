@@ -21,7 +21,7 @@ public class MemberDao {
 	public int updateMember(SqlSession session, Member3 m) {
 		return session.update("member.updateMember", m);
 	}
-	public int checkDuplicateEmail(SqlSession session, String email) {
-		return session.selectOne("member.checkDuplicateEmail",email);
+	public int checkEmailDuplicate(SqlSession session, String email) {
+		return session.selectOne("member.checkEmailDuplicate",email);
 	}
 }

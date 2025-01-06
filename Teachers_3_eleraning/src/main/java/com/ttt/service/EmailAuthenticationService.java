@@ -109,7 +109,7 @@ public class EmailAuthenticationService {
     public int checkEmailDuplicate(String email) {
     	SqlSession session = new SqlSessionTemplate().getSession();
     	//MemberDao 의 메소드 이용해서 이메일 중복 체크해서 결과 유무 체크하기 count(*)
-    	return dao.checkDuplicateEmail(session, email);
+    	return dao.checkEmailDuplicate(session, email);
     }
 
 }
