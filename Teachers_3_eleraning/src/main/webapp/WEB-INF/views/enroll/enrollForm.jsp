@@ -58,6 +58,7 @@
 							<option value="hanmail.net">hanmail.net</option>
 							<option value="nate.com">nate.com</option>
 						</select> 
+						<!-- 이메일 인증 서비스 코드를 모듈화 하기 위한 id 값 searchType : searchPassword/emailDuplicate -->
 						<input type="hidden" id="searchType" value="emailDuplicate">
 						<input type="button" id="emailCheckBtn" value="이메일 인증">
 					</td>

@@ -32,13 +32,17 @@
 				<h2>비밀번호 찾기</h2>
 				<form id="find-form">
 					<div class="input-group">
-						<label for="text">이름</label> <input type="text" id="memberName"
+						<label for="text">이름</label>
+						<input type="text" id="memberName"
 							name="memberName" placeholder="이름을 입력하세요" required>
 					</div>
 					<div class="input-group">
-						<label for="email">이메일</label> <input type="email" id="email"
+						<label for="email">이메일</label>
+						<input type="email" id="email"
 							name="email" placeholder="이메일을 입력하세요" required>
 					</div>
+					<!-- 이메일 인증 서비스 코드를 모듈화 하기 위한 id 값 searchType : searchPassword/emailDuplicate -->
+					<input type="hidden" id="searchType" value="searchPassword">
 					<button type="submit" class="find-button">본인인증</button>
 				</form>
 				<div class="links">
