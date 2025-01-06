@@ -31,6 +31,6 @@ public class Member3 {
 	/* 교사인 경우 포함 필드 */
 	private String teacherSubject;
 	private String teacherInfoTitle;
-	private String TeacherInfoContent;
+	private String teacherInfoContent;
 	private Image3 image;
 }
