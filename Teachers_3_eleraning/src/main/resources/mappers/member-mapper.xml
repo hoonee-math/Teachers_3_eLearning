@@ -69,7 +69,7 @@
 	</select>
 	
 	<select id="selectMemberById" parameterType="string" resultMap="memberMap">
-		SELECT * FROM MEMBER3 WHERE EMAIL=#{memberId}
+		SELECT * FROM MEMBER3 WHERE MEMBER_ID=#{memberId}
 	</select>
 	
 <!-- 	<select id="selectMemberByNameAndEmail" parameterType="member3" resultMap="memberMap">

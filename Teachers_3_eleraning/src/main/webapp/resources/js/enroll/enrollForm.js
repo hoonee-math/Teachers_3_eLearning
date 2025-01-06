@@ -10,7 +10,7 @@ $(document).ready(function() {
 function initializeEventListeners() {
     $(".logo-container").click(() => location.assign(path));
     $("#emailSelect").change(handleEmailSelect);
-    $("#memberIdBtn").click(checkDuplicate);
+    $("#idDuplicateCheckBtn").click(idDuplicateCheckBtn);
     $("#password_2").keyup(validatePasswordMatch);
     $("#emailCheckBtn").click(checkEmail);
     $("#postcodeFindBtn").click(sample4_execDaumPostcode);
@@ -73,12 +73,34 @@ function validatePasswordMatch(e) {
 }
 
 // 아이디 중복 확인
-function checkDuplicate() {
-    const inputId = $("#memberId_").val();
-    window.open(
-        `${path}/enroll/idduplicate.do?id=${inputId}`,
-        "_blank",
-        "width=300,height=200"
+function idDuplicateCheckBtn() {
+	const memberId = $('#memberId_').val();
+	
+	if (!memberId) {
+	    alert('아이디를 입력해주세요.');
+	    return;
+	}
+	
+	$.ajax({
+	    url: path + '/enroll/checkid', 
+	    type: "GET",
+	    data: { memberId: memberId },
+	    dataType: "json",
+	    success: function(response) {
+	        console.log('서버 응답:', response);
+	        if(response === true) {
+	            alert('이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.');
+	        } else {
+	            alert('사용 가능한 아이디입니다.');
+	            $("input[name='idCheckYN']").val("Y");
+	        }
+	    },
+	    error: function(xhr, status, error) {
+	        console.log('에러 상태:', status);
+	        console.log('에러 내용:', error);
+	        alert('아이디 확인 중 오류가 발생했습니다. 다시 시도해주세요.');
+	    }
+	}
     );
 }
 
