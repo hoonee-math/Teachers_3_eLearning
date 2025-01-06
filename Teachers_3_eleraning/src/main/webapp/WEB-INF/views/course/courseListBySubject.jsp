@@ -180,21 +180,9 @@
     	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
 
-	<!-- 8. 공통 JavaScript -->
-	<script src="${path}/resources/js/common/utils.js"></script>
+<jsp:include page="/WEB-INF/views/common/scripts.jsp" />
+<!-- 페이지별 JavaScript -->
+<script src="${path}/resources/js/course/courseListBySubject.js"></script>
 
-	<!-- 9. API/Ajax 관련 JavaScript -->
-	<script src="${path}/resources/js/api/apiConfig.js"></script>
-	<script src="${path}/resources/js/api/teacherApi.js"></script>
-	<script src="${path}/resources/js/api/courseApi.js"></script>
-
-	<!-- 10. 컴포넌트 JavaScript -->
-	<script src="${path}/resources/js/components/modal.js"></script>
-	<script src="${path}/resources/js/components/navigation.js"></script>
-	<script src="${path}/resources/js/components/accordion.js"></script>
-	<script src="${path}/resources/js/components/tabs.js"></script>
-
-	<!-- 11. 페이지별 JavaScript -->
-	<script src="${path}/resources/js/course/courseListBySubject.js"></script>
 </body>
 </html>

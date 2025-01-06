@@ -9,9 +9,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Honey T</title>
-	<jsp:include page="/WEB-INF/views/common/head.jsp" />
-	<link rel="stylesheet" href="${path}/resources/css/pages/mypage-common.css">
+<title>마이 페이지 | Honey T</title>
+<jsp:include page="/WEB-INF/views/common/head.jsp" />
+<link rel="stylesheet" href="${path}/resources/css/pages/mypage-common.css">
 </head>
 
 <body>

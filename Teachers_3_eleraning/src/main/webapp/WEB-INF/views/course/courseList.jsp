@@ -34,16 +34,6 @@
 <!-- 4. 페이지별 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/pages/courseList.css">
 
-<!-- 5. jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-<!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) -->
-
-<!-- 7. 내부 style 태그 -->
-<style>
-/* 페이지 특정 스타일 */
-</style>
-
 </head>
 <body>
 	<!-- 콘텐츠 영역 -->
@@ -159,21 +149,9 @@
     	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
 
-	<!-- 8. 공통 JavaScript -->
-	<script src="${path}/resources/js/common/utils.js"></script>
+<jsp:include page="/WEB-INF/views/common/scripts.jsp" />
+<!-- 페이지별 JavaScript -->
+<script src="${path}/resources/js/pages/teacherDetail.js"></script>
 
-	<!-- 9. API/Ajax 관련 JavaScript -->
-	<script src="${path}/resources/js/api/apiConfig.js"></script>
-	<script src="${path}/resources/js/api/teacherApi.js"></script>
-	<script src="${path}/resources/js/api/courseApi.js"></script>
-
-	<!-- 10. 컴포넌트 JavaScript -->
-	<script src="${path}/resources/js/components/modal.js"></script>
-	<script src="${path}/resources/js/components/navigation.js"></script>
-	<script src="${path}/resources/js/components/accordion.js"></script>
-	<script src="${path}/resources/js/components/tabs.js"></script>
-
-	<!-- 11. 페이지별 JavaScript -->
-	<script src="${path}/resources/js/pages/teacherDetail.js"></script>
 </body>
 </html>
