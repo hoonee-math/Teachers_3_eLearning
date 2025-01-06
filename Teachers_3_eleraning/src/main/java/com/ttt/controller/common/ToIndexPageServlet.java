@@ -45,6 +45,8 @@ public class ToIndexPageServlet extends HttpServlet {
             // 세션에 저장
             session.setAttribute("loginMember", memberMap);
         }
+        
+        System.out.println("현재 로그인 세션 정보 : "+session.getAttribute("loginMember"));
 
 		// (더미데이터) 섹션1: 광고 슬라이드
 		List<Map<String, String>> mainSlides = new ArrayList<>();
@@ -69,7 +71,7 @@ public class ToIndexPageServlet extends HttpServlet {
 		request.setAttribute("mainSlides", mainSlides);
 
 		// 콘솔에 전달된 데이터 확인
-		System.out.println("메인 슬라이드 데이터 설정: " + mainSlides);
+		//System.out.println("메인 슬라이드 데이터 설정: " + mainSlides);
 		
 		
 		
@@ -116,8 +118,8 @@ public class ToIndexPageServlet extends HttpServlet {
 	    request.setAttribute("studentCourses", studentCourses);
 	    request.setAttribute("teacherCourses", teacherCourses);
 	    
-	    System.out.println("학생 강좌 데이터 설정: " + studentCourses);
-	    System.out.println("교사 강좌 데이터 설정: " + teacherCourses);
+	    //System.out.println("학생 강좌 데이터 설정: " + studentCourses);
+	    //System.out.println("교사 강좌 데이터 설정: " + teacherCourses);
 	    
 	    
 
@@ -136,7 +138,7 @@ public class ToIndexPageServlet extends HttpServlet {
 	    }
 	    
 	    request.setAttribute("mainTeachers", mainTeachers);
-	    System.out.println("대표 강사진 데이터 설정: " + mainTeachers);
+	    //System.out.println("대표 강사진 데이터 설정: " + mainTeachers);
 	    
 	    
 	    
@@ -181,7 +183,7 @@ public class ToIndexPageServlet extends HttpServlet {
 	    request.setAttribute("courseCategoryInfo", courseCategoryInfo);
 	    request.setAttribute("popularCourses", popularCourses);
 	    
-	    System.out.println("인기 강좌 데이터 설정: " + popularCourses);
+	    //System.out.println("인기 강좌 데이터 설정: " + popularCourses);
 	    
 
         request.getRequestDispatcher("/index.jsp").forward(request, response);
