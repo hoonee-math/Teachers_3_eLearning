@@ -69,8 +69,8 @@ public class EmailAuthenticationController extends HttpServlet {
             
             // JSP 선택 (회원가입용/비밀번호 재설정용)
             String jspPath = authType.equals("signup") ? 
-                "/WEB-INF/views/register/checkEmail.jsp" :
-                "/WEB-INF/views/register/checkEmailForFindPassword.jsp";
+                "/WEB-INF/views/enroll/checkAuthNumberForEnrollUseEmail.jsp" :
+                "/WEB-INF/views/enroll/checkAuthNumberForEmailForFindPassword.jsp";
             
             request.setAttribute("email", email);
             request.getRequestDispatcher(jspPath).forward(request, response);

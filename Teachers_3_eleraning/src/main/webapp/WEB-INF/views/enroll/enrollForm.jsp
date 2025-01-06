@@ -90,7 +90,9 @@ input[type=search]::-webkit-search-cancel-button {
 							<option value="daum.net">daum.net</option>
 							<option value="hanmail.net">hanmail.net</option>
 							<option value="nate.com">nate.com</option>
-						</select> <input type="button" value="이메일 인증" id="emailCheckBtn">
+						</select> 
+						<input type="hidden" id="searchType" value="emailDuplicate">
+						<input type="button" id="emailCheckBtn" value="이메일 인증">
 					</td>
 				</tr>
 				<tr>

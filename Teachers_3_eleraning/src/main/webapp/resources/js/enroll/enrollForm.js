@@ -93,6 +93,7 @@ function checkEmail() {
     const emailId = $("#emailId").val();
     const emailDomain = $("#emailDomain").val();
 	const email = emailId + '@' + emailDomain;
+	const searchType = $("#searchType").val();
     
     if(!emailId || !emailDomain) {
         alert("이메일을 입력해주세요.");
@@ -108,7 +109,7 @@ function checkEmail() {
 	$.ajax({
 	    url: `${path}/auth/checkEmailDuplicate.do`,
 	    method: "POST",
-	    data: { email: email, searchType: 'emailDuplicate'},
+	    data: { email: email, searchType: searchType},
 	    success: function(response) {
 			console.log('Response:', response); // 응답 확인
 	        if(response.exists) {
@@ -128,6 +129,7 @@ function checkEmail() {
 
 // 인증 이메일 발송 함수 분리
 function sendVerificationEmail(email) {
+	//form 태그를 만들어서, email 값을 저장하고, body 태그에 form을 추가해서 submit 한 후 다시 제거하는 로직
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = `${path}/auth/sendEmail`;
@@ -141,7 +143,7 @@ function sendVerificationEmail(email) {
     const typeInput = document.createElement('input');
     typeInput.type = 'hidden';
     typeInput.name = 'authType';
-    typeInput.value = 'signup';
+    typeInput.value = 'signup'; // handleSendEmail 에서 인증 타입이 singup 인 경우 checkEmail.jsp 를 호출
     
     form.appendChild(emailInput);
     form.appendChild(typeInput);
