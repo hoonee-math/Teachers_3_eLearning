@@ -18,7 +18,14 @@ public class MemberService {
 	    int result = 0;
 	    try {
 	        result = dao.insertMember(session, m);
+	        System.out.println("db에 기본값 저장 후 객체 정보 m : "+m.toString());
 	        if(result > 0) {
+	        	if(m.getMemberType() == 1) {  // 학생
+	                result = dao.insertStudent(session, m);
+	                
+	            } else if(m.getMemberType() == 2) {  // 교사
+	                result = dao.insertTeacher(session, m);
+	            }
 	            session.commit();
 	        } else {
 	            session.rollback();

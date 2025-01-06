@@ -31,7 +31,7 @@ function handleEmailSelect() {
 
 // 회원가입 폼 유효성 검사
 function fn_invalidate() {
-	/* 아이디 중복검사에 사용된 아이디 사용 */
+	/*// 아이디 중복검사에 사용된 아이디 사용
     const memberId = $("#memberId_").val();
     if(memberId.length < 4) {
         alert("아이디는 4글자 이상 입력해 주세요.");
@@ -39,7 +39,7 @@ function fn_invalidate() {
         return false;
     }
 
-	/*이메일 인증 여부 확인*/
+	//이메일 인증 여부 확인
 	const emailVerified = $("input[name='emailVerified']").val();
 	if(emailVerified !== "Y") {
 	    alert("이메일 인증이 필요합니다.");
@@ -52,7 +52,7 @@ function fn_invalidate() {
         alert("비밀번호는 영문자,숫자,특수기호(!@#$%^&*())를 포함한 8글자 이상으로 입력해 주세요");
         return false;
     }
-    return true;
+    return true;*/
 }
 
 // 비밀번호 일치 확인

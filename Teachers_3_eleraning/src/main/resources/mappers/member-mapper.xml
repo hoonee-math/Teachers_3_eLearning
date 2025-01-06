@@ -25,40 +25,41 @@
 	</resultMap>
 
 	<!-- member3 테이블 insert 후 생성된 key값 가져오기 -->
-	<insert id="insertMember" parameterType="member3" useGeneratedKeys="true" keyProperty="memberNo">
+	<insert id="insertMember" parameterType="member3">
 		<selectKey keyProperty="memberNo" resultType="int" order="BEFORE">
 			SELECT SEQ_MEMBER3_NO.NEXTVAL FROM DUAL
 		</selectKey>
 		
-		INSERT ALL
-		INTO MEMBER3 (
+		INSERT INTO MEMBER3 (
 			MEMBER_NO,		MEMBER_ID,		MEMBER_PW,		MEMBER_NAME,
-			EMAIL,			MEMBER_TYPE,	ENROLL_DATE
+			EMAIL,			PHONE,			ADDRESS,		MEMBER_TYPE,	ENROLL_DATE
 		) VALUES (
 			#{memberNo},	#{memberId},	#{memberPw},	#{memberName},
-			#{email},		#{memberType},	SYSDATE
+			#{email},		#{phone},		#{address},		#{memberType},	SYSDATE
 		)
-		<!-- memberType이 1(학생)인 경우 -->
-		<if test="memberType == 1">
-			INTO STUDENTS3 (
-				MEMBER_NO,		GRADE,			SCHOOL_NO
-			) VALUES (
-				#{memberNo},	#{grade},		#{school.schoolNo}
-			)
-		</if>
-		<!-- memberType이 2(교사)인 경우 -->
-		<if test="memberType == 2">
-			INTO TEACHERS3 (
-				MEMBER_NO,		TEACHER_SUBJECT,		TEACHER_INFO_TITLE,
-				TEACHER_INFO_CONTENT,		IMAGE_NO
-			) VALUES (
-				#{memberNo},	#{teacherSubject},		#{teacherInfoTitle},
-				#{teacherInfoContent},		#{image.imageNo}
-			)
-		</if>
-		
-		SELECT * FROM DUAL
 	</insert>
+	
+	<!-- 학생 정보 INSERT -->
+	<insert id="insertStudent" parameterType="member3">
+		INSERT INTO STUDENTS3 (
+			MEMBER_NO,		GRADE,			SCHOOL_NO
+		) VALUES (
+			#{memberNo},	#{grade},		#{school.schoolNo}
+		)
+	</insert>
+
+	<!-- 교사 정보 INSERT -->
+	<insert id="insertTeacher" parameterType="member3">
+		INSERT INTO TEACHERS3 (
+			MEMBER_NO,		TEACHER_SUBJECT,		TEACHER_INFO_TITLE,
+			TEACHER_INFO_CONTENT
+		) VALUES (
+			#{memberNo},	#{teacherSubject},		#{teacherInfoTitle},
+			#{teacherInfoContent}
+		)
+	</insert>
+
+
 	
 	<select id="checkEmailDuplicateByEmail" parameterType="member3" resultMap="memberMap">
 		SELECT EMAIL FROM MEMBER3 WHERE EMAIL=#{email}

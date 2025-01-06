@@ -36,7 +36,7 @@
 		<h2>회원 가입 정보 입력</h2>
 		<!-- onsubmit 발생했을 때 action 속성을 이용해 enrollmemberend.do 로 post 요청. onsubmit 속성을 통해 유효성검사 실시-->
 		<!-- onsubmit 값의 return 값이 true 일때 post 로 요청! -->
-		<form action="${path}/enroll/end" method="post" onsubmit="return fn_invalidate();">
+		<form action="${path}/enroll/form/submit" method="post" onsubmit="return fn_invalidate();">
 			<table>
 				<tr>
 					<th>아이디 *</th>

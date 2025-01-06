@@ -12,7 +12,7 @@ import com.ttt.dto.Member3;
 import com.ttt.dto.School12;
 import com.ttt.service.MemberService;
 
-@WebServlet(name="memberEnroll", urlPatterns="/member/enrollend")
+@WebServlet(name="memberEnroll", urlPatterns="/enroll/form/submit")
 public class EnrollFormSubmitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -74,13 +74,13 @@ public class EnrollFormSubmitServlet extends HttpServlet {
 		String msg, loc="/";
 		
 		try {
-			System.out.println("디비저장시작");
+			System.out.println("디비저장시작 m : "+m.toString());
 			int result = new MemberService().insertMember(m);
 			msg="회원가입에 성공했습니다!";
 		}catch(Exception e) {
 			e.printStackTrace();
 			msg="회원가입에 실패하셨습니다. 다시 시도해주세요.";
-			loc="/member/enrollmain";
+			loc="/enroll/termsofservice";
 		}
 		
 		request.setAttribute("msg",msg);

@@ -10,6 +10,12 @@ public class MemberDao {
 	public int insertMember(SqlSession session, Member3 m) {
 		return session.insert("member.insertMember",m);
 	}
+	public int insertStudent(SqlSession session, Member3 m) {
+		return session.insert("member.insertStudent",m);
+	}
+	public int insertTeacher(SqlSession session, Member3 m) {
+		return session.insert("member.insertTeacher",m);
+	}
 	
 	/* 회원정보 조회-업데이트 관련 */
 	public Member3 selectMemberById(SqlSession session, String memberId) {
