@@ -92,10 +92,12 @@ function validateEmail(email) {
 function checkEmail() {
     const emailId = $("#emailId").val();
     const emailDomain = $("#emailDomain").val();
-	const email = emailId + '@' + emailDomain;
+	const email = searchType === 'emailDuplicate' 
+	       ? $("#emailId").val() + '@' + $("#emailDomain").val()
+	       : $("#email").val();
 	const searchType = $("#searchType").val();
 	
-	console.log(searchType);
+	// console.log(searchType); // 정상 출력
     
     if(!emailId || !emailDomain) {
         alert("이메일을 입력해주세요.");
