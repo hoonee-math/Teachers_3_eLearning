@@ -129,7 +129,11 @@ body {
 	transition: color 0.3s;
 }
 .check-line label{
+	cursor: pointer;
 	display:flex;
+}
+.check-line i:hover {
+    transform: scale(1.1);
 }
 /* 체크박스가 선택되었을 때 아이콘 색상 변경 */
 input[type="checkbox"]:checked + i {
