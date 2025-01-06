@@ -9,37 +9,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Honey T</title>
-	
-	<!-- 2. 외부 CSS 파일들 -->
-	
-	<!-- 2-3. 직접 제작한 CSS 파일들 (Bootstrap CSS 다음에 위치) -->
-	<link rel="stylesheet" href="${path}/resources/css/common/reset.css">
-	<link rel="stylesheet" href="${path}/resources/css/common/layout.css">
-	<link rel="stylesheet" href="${path}/resources/css/common/utilities.css">
-	<link rel="stylesheet" href="${path}/resources/css/common/navigator.css">
-	
-	<!-- 3. 컴포넌트 CSS -->
-	<link rel="stylesheet" href="${path}/resources/css/components/header.css">
-	<link rel="stylesheet" href="${path}/resources/css/components/navigation.css">
-	<link rel="stylesheet" href="${path}/resources/css/components/modal.css">
-	<link rel="stylesheet" href="${path}/resources/css/components/buttons.css">
-	<link rel="stylesheet" href="${path}/resources/css/components/cards.css">
-	
-	<!-- 4. 페이지별 CSS -->
-	<%-- <link rel="stylesheet" href="path/resources/css/-"> --%>
-	
-	<!-- 5. jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	
-	<!-- 6. 외부 JS 파일들 (jQuery 다음, 내부 스타일 전에) -->
-	
-	<!-- 7. 내부 style 태그 -->
-	<style>
-	    /* 페이지 특정 스타일 */
-	</style>
+<!-- 1. 공통 head 요소/공통 CSS 포함 -->
+<jsp:include page="/WEB-INF/views/common/head.jsp" />
+<title>Honey T</title>
 </head>
 
 <body>
@@ -115,6 +87,7 @@
 
 
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <!-- 8. 공통 JavaScript -->
 <script src="${path}/resources/js/common/utils.js"></script>
