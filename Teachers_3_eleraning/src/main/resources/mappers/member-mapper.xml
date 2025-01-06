@@ -60,6 +60,10 @@
 		SELECT * FROM DUAL
 	</insert>
 	
+	<select id="checkDuplicateEmail" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER3 WHERE EMAIL=#{email}
+	</select> 
+	
 <!-- 	<select id="selectMemberById" parameterType="string" resultMap="memberMap">
 		SELECT * FROM MEMBER1 WHERE EMAIL=#{email}
 	</select> -->

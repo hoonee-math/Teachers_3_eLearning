@@ -126,11 +126,14 @@ public class EmailAuthenticationController extends HttpServlet {
         String email = request.getParameter("email");  // 이메일 파라미터 받기
         
         try {
+        	System.out.println("EmailAuthenticationController.handleDuplicateCheck() : 이메일 서비스로부터 이메일 중복 여부 체크 시작");
         	int result = new EmailAuthenticationService().checkEmailDuplicate(email);
+        	System.out.println("result : "+result);
         } catch(Exception e) {
         	e.printStackTrace();
         	System.out.println("EmailAuthenticationController : 이메일 중복체크 중 오류 발생");
         }
+        
     }
 
 }
