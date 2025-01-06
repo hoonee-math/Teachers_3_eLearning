@@ -12,8 +12,8 @@ public class MemberDao {
 	}
 	
 	/* 회원정보 조회-업데이트 관련 */
-	public Member3 selectMemberById(SqlSession session, String email) {
-		return session.selectOne("member.selectMemberById",email);
+	public Member3 selectMemberById(SqlSession session, String memberId) {
+		return session.selectOne("member.selectMemberById",memberId);
 	}
 	public int updatePassword(SqlSession session, Member3 m) {
 		return session.update("member.updatePassword", m);

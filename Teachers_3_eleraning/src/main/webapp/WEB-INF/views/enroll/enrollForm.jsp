@@ -41,8 +41,8 @@
 				<tr>
 					<th>아이디 *</th>
 					<td>
-						<input type="text" name="memberId" id="memberId" placeholder="아이디" required>
-						<input type="button" value="중복검사" id="memberId_">
+						<input type="text" name="memberId" id="memberId_" placeholder="아이디" required>
+						<input type="button" value="중복검사" id="memberIdBtn">
 					</td>
 				</tr>
 				<tr>

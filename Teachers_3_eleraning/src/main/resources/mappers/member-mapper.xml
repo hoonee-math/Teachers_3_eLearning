@@ -24,7 +24,7 @@
 		<association property="school" resultMap="school.schoolMap"/>
 	</resultMap>
 
-		<!-- member3 테이블 insert 후 생성된 key값 가져오기 -->
+	<!-- member3 테이블 insert 후 생성된 key값 가져오기 -->
 	<insert id="insertMember" parameterType="member3" useGeneratedKeys="true" keyProperty="memberNo">
 		<selectKey keyProperty="memberNo" resultType="int" order="BEFORE">
 			SELECT SEQ_MEMBER3_NO.NEXTVAL FROM DUAL
@@ -65,25 +65,25 @@
 	</select> 
 	
 	<select id="selectMemberByNameAndEmail" parameterType="member3" resultMap="memberMap">
-		SELECT EMAIL FROM MEMBER1 WHERE EMAIL=#{email} AND MEMBER_NAME=#{memberName}
+		SELECT EMAIL FROM MEMBER3 WHERE EMAIL=#{email} AND MEMBER_NAME=#{memberName}
 	</select>
 	
-<!-- 	<select id="selectMemberById" parameterType="string" resultMap="memberMap">
-		SELECT * FROM MEMBER1 WHERE EMAIL=#{email}
-	</select> -->
+	<select id="selectMemberById" parameterType="string" resultMap="memberMap">
+		SELECT * FROM MEMBER3 WHERE EMAIL=#{memberId}
+	</select>
 	
 <!-- 	<select id="selectMemberByNameAndEmail" parameterType="member3" resultMap="memberMap">
-		SELECT * FROM MEMBER1 WHERE EMAIL=#{email} AND MEMBER_NAME=#{memberName}
+		SELECT * FROM MEMBER3 WHERE EMAIL=#{email} AND MEMBER_NAME=#{memberName}
 	</select> -->
 	
 <!-- 	<update id="updatePassword" parameterType="member3">
-		UPDATE MEMBER1 SET 
+		UPDATE MEMBER3 SET 
 			member_pw=#{memberPw}
 			WHERE email=#{email}
 	</update> -->
 	
 <!-- 	<update id="updateMember" parameterType="member3">
-		UPDATE MEMBER1 SET
+		UPDATE MEMBER3 SET
 			MEMBER_NAME=#{memberName}, EMAIL=#{email}, MEMBER_PW=#{memberPw} WHERE EMAIL=#{email}			
 	</update> -->
 	

@@ -10,7 +10,7 @@ $(document).ready(function() {
 function initializeEventListeners() {
     $(".logo-container").click(() => location.assign(path));
     $("#emailSelect").change(handleEmailSelect);
-    $("#memberId_").click(checkDuplicate);
+    $("#memberIdBtn").click(checkDuplicate);
     $("#password_2").keyup(validatePasswordMatch);
     $("#emailCheckBtn").click(checkEmail);
     $("#postcodeFindBtn").click(sample4_execDaumPostcode);
@@ -31,13 +31,13 @@ function handleEmailSelect() {
 
 // 회원가입 폼 유효성 검사
 function fn_invalidate() {
-	/*해당 페이지에서는 아이디 사용 x*/
-    /*const memberId = $("#memberId_").val();
+	/* 아이디 중복검사에 사용된 아이디 사용 */
+    const memberId = $("#memberId_").val();
     if(memberId.length < 4) {
         alert("아이디는 4글자 이상 입력해 주세요.");
         $("#memberId_").focus();
         return false;
-    }*/
+    }
 
 	/*이메일 인증 여부 확인*/
 	const emailVerified = $("input[name='emailVerified']").val();
@@ -76,7 +76,7 @@ function validatePasswordMatch(e) {
 function checkDuplicate() {
     const inputId = $("#memberId_").val();
     window.open(
-        `${path}/member/idduplicate.do?id=${inputId}`,
+        `${path}/enroll/idduplicate.do?id=${inputId}`,
         "_blank",
         "width=300,height=200"
     );
