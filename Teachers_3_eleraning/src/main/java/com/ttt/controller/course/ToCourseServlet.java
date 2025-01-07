@@ -26,6 +26,11 @@ public class ToCourseServlet extends HttpServlet {
 		String subjectName = request.getParameter("subjectName");
 		if(subjectName == null) subjectName = "국어";
 		
+		int gradeNum = 1;
+		try {
+			gradeNum = Integer.parseInt(request.getParameter("gradeNum"));
+		} catch (NumberFormatException e) {
+		}
 		
 		// 페이징 처리를 위한 현재 페이지 정보
 		int cpage = 1;
@@ -43,7 +48,8 @@ public class ToCourseServlet extends HttpServlet {
 		Map<String, Object> param = Map.of(
 					"start", start,
 					"end", end,
-					"subjectName", subjectName);
+					"subjectName", subjectName,
+					"gradeNum", gradeNum);
 		
 		List<Course3> courses = new CourseService().selectCourseBySubjectNo(param);
 		

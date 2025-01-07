@@ -26,7 +26,7 @@
 			  FROM (SELECT C.* 
 			  		FROM COURSE3 C
 			  			LEFT JOIN TEACHERS3 T ON C.MEMBER_NO = T.MEMBER_NO
-			  			WHERE T.TEACHER_SUBJECT = #{subjectName}
+			  			WHERE T.TEACHER_SUBJECT = #{subjectName} AND C.GRADE = #{gradeNum}
 			  			ORDER BY C.COURSE_NO DESC) A
 			  		WHERE #{end} >= ROWNUM
 			  ) C

@@ -2,6 +2,30 @@
  * 
  */
 
+//학년에 대한 숫자값 넘겨주기
+//서블릿에서 이용하기 위해 input 태그 안에 넣어주는 로직
+$(document).ready(function() {
+	const gradeNum = parseInt(sessionStorage.getItem('gradeNum'));
+	$('#gradeNum').val(gradeNum);
+	
+	//URL 파라미터에 gradeNum 추가 
+	$('.pagination a').each(function() {
+	    let href = $(this).attr('href');
+	    href += href.includes('?') ? '&' : '?';
+		href += 'gradeNum=' + gradeNum;
+		$(this).attr('href', href);
+	});
+	
+		//과목 링크에 gradeNum 추가
+	$('.menu-list a').each(function() {
+		let href = $(this).attr('href');
+		href += href.includes('?') ? '&' : '?';
+		href += 'gradeNum=' + gradeNum;
+		$(this).attr('href', href);
+	});
+})
+
+
 // DOM이 로드된 후 실행
 document.addEventListener('DOMContentLoaded', function() {
 	// 체크박스 전체 선택/해제 기능 구현 예정
