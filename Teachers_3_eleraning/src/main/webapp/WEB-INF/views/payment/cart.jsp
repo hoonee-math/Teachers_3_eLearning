@@ -39,7 +39,8 @@
 				<nav class="subject-menu">
 					<h2>과목</h2>
 					<ul class="menu-list">
-						<li><a href="#" class="active">국어</a></li>
+						<li><a href="#" class="active">전체</a></li>
+						<li><a href="#">국어</a></li>
 						<li><a href="#">수학</a></li>
 						<li><a href="#">영어</a></li>
 						<li><a href="#">탐구</a></li>
@@ -51,13 +52,6 @@
 					<!-- 리스트 헤더 -->
 					<div class="list-header">
 						<h2 class="list-title">장바구니</h2>
-						<div class="sub-category">
-							<button class="active">전체</button>
-							<button>국어</button>
-							<button>수학</button>
-							<button>영어</button>
-							<button>탐구</button>
-						</div>
 					</div>
 
 					<!-- 강사 리스트 -->
