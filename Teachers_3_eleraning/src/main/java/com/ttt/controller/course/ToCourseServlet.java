@@ -46,7 +46,7 @@ public class ToCourseServlet extends HttpServlet {
 					"subjectName", subjectName);
 		
 		List<Course3> courses = new CourseService().selectCourseBySubjectNo(param);
-
+		
 		// 전체 데이터 수
 		int totalData = courses.size();
 
@@ -66,6 +66,7 @@ public class ToCourseServlet extends HttpServlet {
 		}
 
 		// request에 데이터 저장
+		request.setAttribute("courses", courses);
 		request.setAttribute("pageStart", pageStart);
 		request.setAttribute("pageEnd", pageEnd);
 		request.setAttribute("totalPage", totalPage);

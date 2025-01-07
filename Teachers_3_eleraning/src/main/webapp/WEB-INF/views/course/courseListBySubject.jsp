@@ -79,16 +79,16 @@
 									<div class="card-left">
 										<div class="course-image">
 											<img
-												src="${path}/resources/images/course/${course.imageNo}.jpg"
+												src="${path}/resources/images/course/${course.member.image.imgNo}.jpg"
 												alt="${course.courseTitle}"
 												onerror="this.src='${path}/resources/images/profile/default.png'">
 										</div>
 										<div class="course-info">
 											<h3>${course.courseTitle}</h3>
-											<p class="teacher-name">${course.memberName}선생님</p>
+											<p class="teacher-name">${course.member.memberName}선생님</p>
 											<p class="course-desc">${course.courseDesc}</p>
 											<div class="course-tags">
-												<span class="course-tag">#${course.teacherSubject}</span> <span
+												<span class="course-tag">#${course.member.teacherSubject}</span> <span
 													class="course-tag">#수능대비</span>
 											</div>
 										</div>
