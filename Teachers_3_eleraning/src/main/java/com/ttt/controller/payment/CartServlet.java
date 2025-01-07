@@ -34,6 +34,13 @@ public class CartServlet extends HttpServlet {
 			request.setAttribute("carts", carts);
 		}
 		
+		
+		// 사이드바 색상 전환을 위한 데이터
+		// 파라미터 처리 부분 아래에 추가
+		String subjectName = request.getParameter("subjectName");
+		if(subjectName == null) subjectName = "국어";
+		request.setAttribute("selectedSubject", subjectName != null ? subjectName : "국어");
+		
 		request.getRequestDispatcher("/WEB-INF/views/payment/cart.jsp").forward(request, response);
 	}
 

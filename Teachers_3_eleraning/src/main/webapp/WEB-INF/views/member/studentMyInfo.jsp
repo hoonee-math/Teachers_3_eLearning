@@ -40,48 +40,47 @@
 				<tr>
 					<th>아이디 *</th>
 					<td>
-						<input type="text" name="memberId" id="memberId_" style="width:323px;" required>
+						<input type="text" name="memberId" id="memberId_" value="${loginMember.memberId}" style="width:323px;" readonly>
 					</td>
 				</tr>
 				<tr>
 					<th>이메일 *</th>
 					<td>
-						<input type="text" name="emailId" id="emailId" style="width: 150px;" required> 
-						@ <input type="text" name="emailDomain" id="emailDomain" style="width: 150px;" required>
+						<input type="text" name="emailId" id="emailId" value="${loginMember.email}" style="width: 323px;" readonly> 
 					</td>
 				</tr>
 				<tr>
 					<th>패스워드 *</th>
-					<td><input type="password" name="memberPw" id="password_" placeholder="대소문자, 숫자, 특수문자 포함" required><br>
+					<td><input type="password" name="memberPw" id="password_" placeholder="대소문자, 숫자, 특수문자 포함"><br>
 					</td>
 				</tr>
 				<tr>
 					<th>패스워드확인 *</th>
-					<td><input type="password" id="password_2" required><br>
+					<td><input type="password" id="password_2"><br>
 						<span id="checkResult"></span></td>
 				</tr>
 				<tr>
 					<th>이름 *</th>
-					<td><input type="text" name="memberName" id="userName" required><br>
+					<td><input type="text" name="memberName" id="userName" value="${loginMember.memberName}" readonly><br>
 					</td>
 				</tr>
 				<tr>
-					<th>닉네임</th>
-					<td><input type="text" name="memberNick" id="memberNick" style="width:323px;"><br>
+					<th>전화번호</th>
+					<td><input type="text" name="phone" id="phone" value="${loginMember.phone != null ? loginMember.phone : ''}" placeholder="예)01055556666"><br>
 					</td>
 				</tr>
 				<tr>
 					<th>주소</th>
 					<td>
 						<div style="margin-bottom:10px">
-						<input type="text" id="sample4_postcode" name="addressNo" style="width:323px;" placeholder="우편번호">
+						<input type="text" id="sample4_postcode" name="addressNo" style="width:323px;" value="${addressNo != null ? addressNo : ''}" placeholder="우편번호">
 						<input type="button" id="postcodeFindBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 						</div>
 						<div>
-						<input type="text" id="sample4_roadAddress" name="addressRoad" placeholder="도로명주소" style="width:323px;">
+						<input type="text" id="sample4_roadAddress" name="addressRoad" value="${addressRoad != null ? addressRoad : ''}" placeholder="도로명주소" style="width:323px;">
 						<!-- <input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width: 300px;"> -->
 						<span id="guide" style="color:#999;display:none"></span>
-						<input type="text" id="sample4_detailAddress" name="addressDetail" placeholder="상세주소" style="width: 200px;">
+						<input type="text" id="sample4_detailAddress" name="addressDetail" value="${addressDetail != null ? addressDetail : ''}" placeholder="상세주소" style="width: 200px;">
 						<!-- <input type="text" id="sample4_extraAddress" placeholder="참고항목" style="width: 150px;"> -->
 						</div>
 					</td>
@@ -89,13 +88,11 @@
 				<tr>
 				    <th><!-- 회원 구분 * --></th>
 				    <td>
-				        <input type="hidden" name="memberType" id="parents" value="1" ${memberType == '1' ? 'checked' : ''}>
-				        <label for="parents"></label>
-				        <input type="hidden" name="memberType" id="teacher" value="2" ${memberType == '2' ? 'checked' : ''}>
-				        <label for="teacher"></label>
+				        <input type="hidden" name="memberType" id="memberType" value="${loginMember.memberType}">
+				        <label for="memberType"></label>
 				    </td>
 				</tr>
-				<c:if test="${memberType == '1'}">
+				<c:if test="${loginMember.memberType == '1'}">
 				<tr>
 				    <th>학교</th>
 				    <td>
@@ -121,6 +118,26 @@
 				            <!-- name에 standardCode 를 입력하여 회원정보에는 학교 코드가 저장되도록 설정 -->
 				            <select class="child_school" id="school-name" name="schoolNo" style="width:186px">
 				                <option value="">학교명</option>
+				            </select>
+				        </div>
+				    </td>
+				</tr></c:if>
+				<c:if test="${loginMember.memberType == '2'}">
+				<tr>
+				    <th>과목</th>
+				    <td>
+				        <div style="margin-bottom:10px">
+				            <select class="teacher_subject" name="teacherSubject" id="teacherSubject" onchange="districtSearch(event);" 
+				            	style="width:108px; padding:6px 12px 11px 12px;; border: 2px solid #ddd; border-radius: 4px; color:grey; cursor: pointer; ">
+				                <option value=''>과목선택</option>
+				                <option value="국어">국어</option>
+				                <option value="수학">수학</option>
+								<option value="영어">영어</option>
+								<option value="과학">과학</option>
+								<option value="사회">사회</option>
+								<option value="한국사">한국사</option>
+								<option value="직업">직업</option>
+								<option value="제2외국어">제2외국어</option>
 				            </select>
 				        </div>
 				    </td>

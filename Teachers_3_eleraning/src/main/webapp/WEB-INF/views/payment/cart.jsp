@@ -37,14 +37,17 @@
 			<div class="course-container">
 				<!-- 왼쪽 메뉴 -->
 				<nav class="subject-menu">
-					<h2>과목</h2>
-					<ul class="menu-list">
-						<li><a href="#" class="active">전체</a></li>
-						<li><a href="#">국어</a></li>
-						<li><a href="#">수학</a></li>
-						<li><a href="#">영어</a></li>
-						<li><a href="#">탐구</a></li>
-					</ul>
+				    <h2>과목</h2>
+				    <ul class="menu-list">
+				        <li><a href="${path}/cart?subjectName=국어" class="${selectedSubject == '국어' ? 'active' : ''}">국어</a></li>
+				        <li><a href="${path}/cart?subjectName=수학" class="${selectedSubject == '수학' ? 'active' : ''}">수학</a></li>
+				        <li><a href="${path}/cart?subjectName=영어" class="${selectedSubject == '영어' ? 'active' : ''}">영어</a></li>
+				        <li><a href="${path}/cart?subjectName=과학" class="${selectedSubject == '과학' ? 'active' : ''}">과학</a></li>
+				        <li><a href="${path}/cart?subjectName=사회" class="${selectedSubject == '사회' ? 'active' : ''}">사회</a></li>
+				        <li><a href="${path}/cart?subjectName=한국사" class="${selectedSubject == '한국사' ? 'active' : ''}">한국사</a></li>
+				        <li><a href="${path}/cart?subjectName=직업" class="${selectedSubject == '직업' ? 'active' : ''}">직업</a></li>
+				        <li><a href="${path}/cart?subjectName=제2외국어" class="${selectedSubject == '제2외국어' ? 'active' : ''}">제2외국어</a></li>
+				    </ul>
 				</nav>
 
 				<!-- 오른쪽 리스트 -->

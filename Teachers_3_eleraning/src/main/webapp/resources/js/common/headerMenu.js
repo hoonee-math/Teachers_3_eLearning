@@ -3,11 +3,12 @@ const subMenus = {
 	'고1': [
 		{name: '선생님', url: path + '/teacher/list_and_detail', megaMenu: 'teacher'},
 		{name: '모든강좌', url: path + '/course/list', megaMenu: 'course'},
-		{name: '교재', url: path + '/homepage'},
+		{name: '교재구매', url: path + '/homepage'},
 		{name: '모의고사', url: path + '/homepage'},
 		{name: '기출문제', url: path + '/homepage'},
 		{name: '입시정보', url: path + '/homepage'},
 		{name: '시험응시실', url: path + '/TeacherBoardServlet'}
+		{name: '학습현황', url: path + '/homepage'}
 	],
 	'고2': [
 		{name: '선생님', url: path + '/teacher/list_and_detail', megaMenu: 'teacher'},
@@ -115,13 +116,36 @@ $(document).ready(function() {
 			console.error('잘못된 학년 값:', grade);
 			return;
 		}
+		
+		//grade에서 숫자만 추출
+		let gradeNum;
+		if (grade === '고3/N수') {
+			gradeNum = 3;
+		} else {
+			gradeNum = parseInt(grade.replace('고',''));
+		}
 	
+		//세션 스토리지에 학년 정보 저장
 		currentGrade = grade;
 		$('#gradeBtn').text(grade).removeClass('active');
 		$('#gradeDropdown').slideUp(200);
 		updateSubNav(grade);
 		sessionStorage.setItem('selectedGrade', grade);
+		sessionStorage.setItem('gradeNum', gradeNum);
 		console.log('학년 변경:', grade);
+		
+		//현재 경로 가져오기
+		let currentUrl = window.location.href;
+		
+		if(currentUrl.includes('gradeNum=')) {
+			currentUrl = currentUrl.replace(/gradeNum=\d+/, 'gradeNum=' + gradeNum);
+		} else {
+			currentUrl += (currentUrl.includes('?')? '&' : '?') + 'gradeNum=' + gradeNum;
+		}
+		
+		//페이지 새로고침
+		window.location.href = currentUrl;
+		
 	});
 
 	// 문서 클릭 시 드롭다운 닫기

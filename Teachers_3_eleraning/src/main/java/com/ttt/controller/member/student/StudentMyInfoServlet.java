@@ -1,11 +1,15 @@
 package com.ttt.controller.member.student;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.ttt.dto.Member3;
 
 @WebServlet("/student/myinfo")
 public class StudentMyInfoServlet extends HttpServlet {
@@ -17,8 +21,27 @@ public class StudentMyInfoServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//마이페이지에서 내정보 페이지로 이동
-		request.getRequestDispatcher("/WEB-INF/views/member/studentMyInfo.jsp").forward(request, response);
+		HttpSession session = request.getSession(false); //로그인 세션 가져오기(없으면 생성 하지않음)
+		Member3 m = new Member3();
+		if(session != null) {
+			m = (Member3)session.getAttribute("loginMember");
+			
+			String address = m.getAddress();
+			
+			if(address != null) {
+				String[] addressParts = address.split(":");
+				String addressNo = addressParts[0];
+				String addressRoad = addressParts[1];
+				String addressDetail = addressParts[2];
+				
+				request.setAttribute("addressNo", addressNo);
+				request.setAttribute("addressRoad", addressRoad);
+				request.setAttribute("addressDetail", addressDetail);
+				
+			}
+			
+			request.getRequestDispatcher("/WEB-INF/views/member/studentMyInfo.jsp").forward(request, response);
+		}
 		
 		
 		

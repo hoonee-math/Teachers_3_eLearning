@@ -79,8 +79,8 @@
 					</td>
 				</tr>
 				<tr>
-					<th>닉네임</th>
-					<td><input type="text" name="memberNick" id="memberNick" placeholder="다른 사용자에게 보여줄 닉네임을 입력하세요."><br>
+					<th>전화번호</th>
+					<td><input type="text" name="phone" id="phone" placeholder="예)01055556666"><br>
 					</td>
 				</tr>
 				<tr>
@@ -134,6 +134,26 @@
 				            <!-- name에 standardCode 를 입력하여 회원정보에는 학교 코드가 저장되도록 설정 -->
 				            <select class="child_school" id="school-name" name="schoolNo" style="width:186px">
 				                <option value="">학교명</option>
+				            </select>
+				        </div>
+				    </td>
+				</tr></c:if>
+				<c:if test="${memberType == '2'}">
+				<tr>
+				    <th>과목</th>
+				    <td>
+				        <div style="margin-bottom:10px">
+				            <select class="teacher_subject" name="teacherSubject" id="teacherSubject" onchange="districtSearch(event);" 
+				            	style="width:108px; padding:6px 12px 11px 12px;; border: 2px solid #ddd; border-radius: 4px; color:grey; cursor: pointer; ">
+				                <option value=''>과목선택</option>
+				                <option value="국어">국어</option>
+				                <option value="수학">수학</option>
+								<option value="영어">영어</option>
+								<option value="과학">과학</option>
+								<option value="사회">사회</option>
+								<option value="한국사">한국사</option>
+								<option value="직업">직업</option>
+								<option value="제2외국어">제2외국어</option>
 				            </select>
 				        </div>
 				    </td>
