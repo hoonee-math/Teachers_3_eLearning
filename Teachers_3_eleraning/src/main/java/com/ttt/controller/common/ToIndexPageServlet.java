@@ -27,24 +27,24 @@ public class ToIndexPageServlet extends HttpServlet {
         // 세션 체크 
         HttpSession session = request.getSession();
         
-        // (더미데이터) 세션에 로그인 정보가 없을 경우에만 테스트 데이터 생성
-        if(session.getAttribute("loginMember") == null) {
-            // 테스트용 회원 데이터 Map 생성 (SQL의 USERS, STUDENTS 테이블 구조 참고)
-            Map<String, Object> memberMap = new HashMap<>();
-            memberMap.put("memberNo", 1);
-            memberMap.put("memberId", "testuser");
-            memberMap.put("memberName", "테스트유저");
-            memberMap.put("email", "test@test.com");
-            memberMap.put("memberPhone", "010-1234-5678");
-            memberMap.put("memberType", 1); // 1: 학생
-            memberMap.put("enrollDate", new Date());
-            memberMap.put("memberAddress", "서울시 강남구");
-            memberMap.put("grade", 1); // 고1
-            memberMap.put("schoolNo", 1234);
-            
-            // 세션에 저장
-            session.setAttribute("loginMember", memberMap);
-        }
+//        // (더미데이터) 세션에 로그인 정보가 없을 경우에만 테스트 데이터 생성
+//        if(session.getAttribute("loginMember") == null) {
+//            // 테스트용 회원 데이터 Map 생성 (SQL의 USERS, STUDENTS 테이블 구조 참고)
+//            Map<String, Object> memberMap = new HashMap<>();
+//            memberMap.put("memberNo", 1);
+//            memberMap.put("memberId", "testuser");
+//            memberMap.put("memberName", "테스트유저");
+//            memberMap.put("email", "test@test.com");
+//            memberMap.put("memberPhone", "010-1234-5678");
+//            memberMap.put("memberType", 1); // 1: 학생
+//            memberMap.put("enrollDate", new Date());
+//            memberMap.put("memberAddress", "서울시 강남구");
+//            memberMap.put("grade", 1); // 고1
+//            memberMap.put("schoolNo", 1234);
+//            
+//            // 세션에 저장
+//            session.setAttribute("loginMember", memberMap);
+//        }
         
         System.out.println("현재 로그인 세션 정보 : "+session.getAttribute("loginMember"));
 

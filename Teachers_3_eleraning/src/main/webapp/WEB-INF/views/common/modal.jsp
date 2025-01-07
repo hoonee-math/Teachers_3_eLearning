@@ -12,7 +12,7 @@
 		<div class="modal-header">
 			<h3 class="modal-title">로그인</h3>
 		</div>
-		<form id="loginForm" action="/login" method="post">
+		<form id="loginForm" action="${path }/auth/login.do" method="post">
 			<div class="form-group">
 				<input type="text" name="memberId" class="form-input" placeholder="아이디" required> 
 				<input type="password" name="memberPw" class="form-input" placeholder="비밀번호" required>

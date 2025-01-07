@@ -24,7 +24,7 @@
 			</div>
 			
 			<%-- 로그인 전 메뉴 --%>
-			<c:if test="${not empty sessionScope.loginMember}">
+			<c:if test="${empty sessionScope.loginMember}">
 			<div class="right-links">
 				<button class="btn-link" onclick="Modal.show('login')">로그인</button>
 				<a href="${path }/enroll/termsofservice">회원가입</a>
