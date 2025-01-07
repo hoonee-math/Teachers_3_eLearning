@@ -24,6 +24,8 @@ public class ToCourseServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 파라미터 처리
 		String subjectName = request.getParameter("subjectName");
+		if(subjectName == null) subjectName = "국어";
+		
 		
 		// 페이징 처리를 위한 현재 페이지 정보
 		int cpage = 1;
