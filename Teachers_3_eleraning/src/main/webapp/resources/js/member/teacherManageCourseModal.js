@@ -16,7 +16,7 @@ document.getElementById('newCourseForm').addEventListener('submit', function(e) 
     
     const formData = new FormData(this);
     
-    fetch('${path}/teacher/course/register', {
+    fetch('${path}/member/teacher/course/register', {
         method: 'POST',
         body: formData
     })
