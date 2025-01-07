@@ -12,6 +12,7 @@
 <!-- 2. 페이지별 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/pages/mypage-common.css">
 <link rel="stylesheet" href="${path}/resources/css/member/courseManagement.css">
+<link rel="stylesheet" href="${path}/resources/css/member/teacherManageCourseModal.css">
 <title>강좌 관리 | Honey T</title>
 </head>
 
@@ -21,6 +22,8 @@
 	<!-- 3.헤더 영역 -->
 	<jsp:include page="/WEB-INF/views/common/modal.jsp" />
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<!-- 새 강좌 등록 모달 추가 -->
+	<jsp:include page="/WEB-INF/views/member/teacherManageCourseModal.jsp" />
 
 	<!-- 4.메인 콘텐츠 -->
 	<main>
@@ -52,7 +55,7 @@
 
 				<!-- 강좌 등록 버튼 -->
 				<div class="course-actions">
-					<button onclick="location.href='${path}/teacher/course/register'" class="btn-primary">
+					<button onclick="openModal()" class="btn-primary">
 						<i class="bi bi-plus-circle"></i> 새 강좌 등록
 					</button>
 				</div>
@@ -102,6 +105,7 @@
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <!-- 6. 페이지별 스크립트 -->
+<script src="${path}/resources/js/member/teacherManageCourseModal.js"></script>
 <script>
 	function viewCourseDetail(courseNo) {
 		// 강좌 상세 정보 보기 로직 구현

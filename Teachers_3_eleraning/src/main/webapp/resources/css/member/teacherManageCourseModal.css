@@ -1,0 +1,165 @@
+@charset "UTF-8";
+
+/* modal-styles.css */
+
+/* 기본 모달 레이아웃 */
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 1000;
+}
+
+.modal-dialog {
+	position: relative;
+	width: 90%;
+	max-width: 800px;
+	margin: 50px auto;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+	padding: 30px;
+}
+
+.modal-header {
+	margin-bottom: 30px;
+	position: relative;
+	border-bottom: 2px solid #FAB350;
+	padding-bottom: 15px;
+}
+
+.modal-header h3 {
+	margin: 0;
+	font-size: 1.5em;
+	color: #333;
+}
+
+.close-modal {
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 24px;
+	cursor: pointer;
+	color: #666;
+	transition: color 0.2s;
+}
+
+.close-modal:hover {
+	color: #FAB350;
+}
+
+/* 폼 레이아웃 개선 */
+.form-group {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 20px;
+	gap: 20px;
+}
+
+.form-group label {
+	width: 120px;
+	padding-top: 10px;
+	text-align: right;
+	font-weight: 600;
+	color: #555;
+	flex-shrink: 0;
+}
+
+.input-wrapper {
+	flex: 1;
+	max-width: 500px;
+}
+
+/* 입력 필드 스타일 */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 14px;
+	transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+	border-color: #FAB350;
+	outline: none;
+	box-shadow: 0 0 0 2px rgba(250, 179, 80, 0.1);
+}
+
+/* 가격 영역 특별 스타일 */
+.price-container {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+}
+
+.price-container .price-input-wrapper {
+	flex: 1;
+	position: relative;
+}
+
+.price-container input {
+	width: 100%;
+	padding-right: 30px;
+}
+
+.price-container .price-unit {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #666;
+}
+
+.modal-footer {
+	margin-top: 30px;
+	padding-top: 20px;
+	border-top: 1px solid #eee;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+/* 버튼 스타일 개선 */
+.btn-secondary,
+.btn-primary {
+	padding: 10px 30px;
+	border-radius: 5px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.btn-primary {
+	background-color: #FAB350;
+	color: white;
+	border: none;
+}
+
+.btn-primary:hover {
+	background-color: #e89f3d;
+}
+
+.btn-secondary {
+	background-color: #f8f9fa;
+	color: #666;
+	border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+	background-color: #e9ecef;
+}
