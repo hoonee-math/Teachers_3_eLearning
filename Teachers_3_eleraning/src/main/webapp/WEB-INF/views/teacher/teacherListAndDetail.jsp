@@ -13,7 +13,7 @@
 <title>선생님 | Honey T</title>
 <link rel="stylesheet" href="${path}/resources/css/pages/teacherListAndDetail.css">
 <link rel="stylesheet" href="${path}/resources/css/pages/courseList.css">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="${path}/resources/css/teacher/teacherBoardCommon.css">
 
 </head>
 <body>
@@ -174,8 +174,9 @@
 	</div>
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
-<script src="${path}/resources/js/teacher/teacherListAndDetailAccordion.js"></script>
 <script src="${path}/resources/js/api/teacherApi.js"></script>
+<script src="${path}/resources/js/teacher/teacherListAndDetailAccordion.js"></script>
+<script src="${path}/resources/js/teacher/teacherBoard.js"></script>
 
 </body>
 </html>

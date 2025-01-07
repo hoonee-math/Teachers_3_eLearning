@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+/* 게시판 컨테이너 */
+.board-container {
+	width: 100%;
+	padding: 20px;
+	background: #fff;
+}
+
+/* 게시판 헤더 */
+.board-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.board-header h3 {
+	font-size: 1.5em;
+	color: #333;
+}
+
+.board-util {
+	display: flex;
+	gap: 10px;
+}
+
+.board-select {
+	padding: 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.search-input {
+	padding: 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	width: 200px;
+}
+
+.search-btn {
+	padding: 8px 16px;
+	background-color: #FAB350;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+/* 게시판 목록 */
+.board-list table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.board-list th,
+.board-list td {
+	padding: 12px;
+	text-align: center;
+	border-bottom: 1px solid #eee;
+}
+
+.board-list th {
+	background-color: #f8f9fa;
+	font-weight: bold;
+}
+
+.board-list tr:hover {
+	background-color: #f8f9fa;
+}
+
+.post-title {
+	color: #333;
+	text-decoration: none;
+}
+
+.post-title:hover {
+	color: #FAB350;
+}
+
+/* 페이징 바 */
+.board-pagination {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+.page-link {
+	padding: 8px 12px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	color: #333;
+	text-decoration: none;
+}
+
+.current-page {
+	padding: 8px 12px;
+	background-color: #FAB350;
+	color: white;
+	border-radius: 4px;
+}
+
+.page-link:hover {
+	background-color: #f8f9fa;
+	color: #FAB350;
+}
