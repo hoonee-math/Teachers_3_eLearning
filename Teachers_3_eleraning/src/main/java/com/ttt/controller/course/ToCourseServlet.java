@@ -46,7 +46,7 @@ public class ToCourseServlet extends HttpServlet {
 					"subjectName", subjectName);
 		
 		List<Course3> courses = new CourseService().selectCourseBySubjectNo(param);
-
+		
 		// 전체 데이터 수
 		int totalData = courses.size();
 
@@ -66,10 +66,15 @@ public class ToCourseServlet extends HttpServlet {
 		}
 
 		// request에 데이터 저장
+		request.setAttribute("courses", courses);
 		request.setAttribute("pageStart", pageStart);
 		request.setAttribute("pageEnd", pageEnd);
 		request.setAttribute("totalPage", totalPage);
 		request.setAttribute("cpage", cpage);
+		
+		// 사이드바 색상 전환을 위한 데이터
+		// 파라미터 처리 부분 아래에 추가
+		request.setAttribute("selectedSubject", subjectName != null ? subjectName : "국어");
 
 		request.getRequestDispatcher("/WEB-INF/views/course/courseListBySubject.jsp").forward(request, response);
 	}

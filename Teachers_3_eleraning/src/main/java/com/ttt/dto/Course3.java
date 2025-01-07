@@ -27,4 +27,5 @@ public class Course3 {
 	private Date endDate;			// 강좌촬영완료날짜(예정날짜)
 	private int totalLectures;		// 총강의수
 	private int memberNo;			// 자동부여
+	private Member3 member;
 }
