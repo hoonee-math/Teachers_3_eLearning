@@ -78,7 +78,6 @@
 								<th>강좌명</th>
 								<th>상태</th>
 								<th>등록일</th>
-								<th>수강생</th>
 								<th>관리</th>
 							</tr>
 						</thead>
@@ -97,7 +96,6 @@
 										</span>
 									</td>
 									<td><fmt:formatDate value="${course.createdAt}" pattern="yyyy.MM.dd"/></td>
-									<td>${course.studentCount}명</td>
 									<td>
 										<button onclick="location.href='${path}/teacher/course/edit/${course.courseNo}'" 
 												class="btn-secondary">수정</button>
