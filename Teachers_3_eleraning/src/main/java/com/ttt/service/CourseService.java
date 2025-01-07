@@ -80,4 +80,65 @@ public class CourseService {
 		}
 		return counts;
 	}
+	
+	// 전체유형 수 겁색 (원초적으로 각각 계산해서 넘겨주자..)
+	public int selectCoursesByStatusTotal(int memberNo) {
+		SqlSession session = getSession();
+		int result = 0;
+		try {
+			result = dao.selectCoursesByStatusTotal(session, memberNo);
+			session.commit();
+		}catch(Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result;
+	}
+	// 전체유형 수 겁색 (원초적으로 각각 계산해서 넘겨주자..)
+	public int selectCoursesByStatusPreparing(int memberNo) {
+		SqlSession session = getSession();
+		int result = 0;
+		try {
+			result = dao.selectCoursesByStatusPreparing(session, memberNo);
+			session.commit();
+		}catch(Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result;
+	}
+	// 전체유형 수 겁색 (원초적으로 각각 계산해서 넘겨주자..)
+	public int selectCoursesByStatusInProgress(int memberNo) {
+		SqlSession session = getSession();
+		int result = 0;
+		try {
+			result = dao.selectCoursesByStatusInProgress(session, memberNo);
+			session.commit();
+		}catch(Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result;
+	}
+	// 전체유형 수 겁색 (원초적으로 각각 계산해서 넘겨주자..)
+	public int selectCoursesByStatusCompleted(int memberNo) {
+		SqlSession session = getSession();
+		int result = 0;
+		try {
+			result = dao.selectCoursesByStatusCompleted(session, memberNo);
+			session.commit();
+		}catch(Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result;
+	}
 }

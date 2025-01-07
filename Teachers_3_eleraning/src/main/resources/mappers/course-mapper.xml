@@ -62,11 +62,11 @@
 			CASE 
 				<!--	 시작일이 없는 경우 준비중(0) -->	
 				WHEN BEGIN_DATE IS NULL THEN 0
-				<!--	 시작일이 미래인 경우 준비중(0) -->	
+				<!--	 시작일이 미래인 경우 준비중(0) Preparing-->	
 				WHEN BEGIN_DATE > SYSDATE THEN 0
-				<!--	 종료일이 있고, 종료일이 지난 경우 완료(2) -->	
+				<!--	 종료일이 있고, 종료일이 지난 경우 완료(2) Completed-->	
 				WHEN END_DATE IS NOT NULL AND SYSDATE > END_DATE THEN 2
-				<!--	 시작일이 지났고, 종료일이 없거나 진행중인 경우 진행중(1) -->	
+				<!--	 시작일이 지났고, 종료일이 없거나 진행중인 경우 진행중(1) InProgress-->	
 				WHEN SYSDATE >= BEGIN_DATE AND (END_DATE IS NULL OR END_DATE >= SYSDATE) THEN 1
 			END,
 		UPDATED_AT = SYSDATE
@@ -116,4 +116,25 @@
 		FROM COURSE3
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
+	<select id="selectCoursesByStatusTotal" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM COURSE3
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	<select id="selectCoursesByStatusPreparing" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM COURSE3
+		WHERE MEMBER_NO = #{memberNo} AND COURSE_STATUS = 0
+	</select>
+	<select id="selectCoursesByStatusInProgress" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM COURSE3
+		WHERE MEMBER_NO = #{memberNo} AND COURSE_STATUS = 1 
+	</select>
+	<select id="selectCoursesByStatusCompleted" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM COURSE3
+		WHERE MEMBER_NO = #{memberNo} AND COURSE_STATUS = 2 
+	</select>
+	
 </mapper>

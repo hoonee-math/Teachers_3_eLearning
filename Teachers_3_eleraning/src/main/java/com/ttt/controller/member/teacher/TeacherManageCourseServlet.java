@@ -28,7 +28,7 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		// 페이징 및 필터 파라미터 처리
 		int cpage = 1;
 		int numPerPage = 10; // 기본값
-		String status = request.getParameter("status");
+		String status = request.getParameter("status"); // status 유형에 따른 totalData 계산
 	    if(status == null) status = "all"; // 기본값
 	    System.out.println(status);
 		
@@ -42,46 +42,15 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		Member3 loginMember = (Member3)session.getAttribute("loginMember");
 		System.out.println("TeacherManageCourseRegisterServlet : "+loginMember);
 		
-		// 상태별 카운트 조회
-		Map<String,Integer> counts = new CourseService().selectCourseStatusCount(loginMember.getMemberNo());
-		System.out.println("counts 결과 확인 : "+counts);
-		// Map의 모든 키를 출력해서 정확한 키 값 확인
-		for (String key : counts.keySet()) {
-		    System.out.println("Key: '" + key + "'");
-		}
-		// 방법 2: instanceof 연산자 사용
-		Object value = counts.get("TOTAL");
-		System.out.println("Is Long: " + (value instanceof Long));
-		System.out.println("Is Integer: " + (value instanceof Integer));
-    	System.out.println("Type: " + counts.get("TOTAL").getClass().getName());		
-		// 키의 정확한 문자열 길이 확인
-		for (String key : counts.keySet()) {
-		    System.out.println("Key: '" + key + "', Length: " + key.length());
-		    System.out.println(counts.get(key));
-}
-		// 값 가져오기 
-		int total = counts.get("TOTAL");
-		int inProgress = counts.get("INPROGRESS");
+		int total = new CourseService().selectCoursesByStatusTotal(loginMember.getMemberNo());
+		int preparing = new CourseService().selectCoursesByStatusPreparing(loginMember.getMemberNo());; // 준비중 0
+		int inProgress= new CourseService().selectCoursesByStatusInProgress(loginMember.getMemberNo());; // 진행중 1
+		int completed = new CourseService().selectCoursesByStatusCompleted(loginMember.getMemberNo());; // 완료 2
 
-		System.out.println("Total: " + total + ", In Progress: " + inProgress);
-
-		// 또는 null 체크를 포함하여 더 안전하게:
-		Integer total2 = counts.get("TOTAL");
-		Integer inProgress2 = counts.get("INPROGRESS");
-
-		request.setAttribute("totalCount", counts.get("TOTAL").intValue());
-		request.setAttribute("inProgressCount", counts.get("INPROGRESS"));
-		request.setAttribute("preparingCount", counts.get("PREPARING"));
-		request.setAttribute("completedCount", counts.get("COMPLETED"));
-		// 상태 값에 따라 key값으로 전제 글 count하기
-		String countKey = status.equals("all") ? "TOTAL" : status.toUpperCase();
-		switch(status) {
-		    case "preparing": countKey = "PREPARING"; break;
-		    case "inProgress": countKey = "INPROGRESS"; break;
-		    case "completed": countKey = "COMPLETED"; break;
-		    default: countKey = "TOTAL";
-		}
-		int totalData = Integer.parseInt(counts.get(countKey).toString());  
+		request.setAttribute("totalCount", total);
+		request.setAttribute("inProgressCount", preparing);
+		request.setAttribute("preparingCount", inProgress);
+		request.setAttribute("completedCount", completed);
 		
 		// 상태별 강좌 조회
         int offset = (cpage - 1) * numPerPage;
@@ -95,6 +64,15 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		// 상태에 따른 강좌 목록 조회
 		List<Course3> courses = new CourseService().selectCoursesByStatus(params, loginMember.getMemberNo());
 		
+		
+		int totalData = 0;
+		switch(status) {
+			case "all" : totalData=total; break;
+			case "inProgress" : totalData=inProgress; break;
+			case "preparing" : totalData=preparing; break;
+			case "completed" : totalData=completed; break;
+			default : break;
+		}
 		// 페이징 처리 계산
 		int totalPage = (int)Math.ceil((double)totalData/numPerPage);
 //		int pageBarSize = 5;
