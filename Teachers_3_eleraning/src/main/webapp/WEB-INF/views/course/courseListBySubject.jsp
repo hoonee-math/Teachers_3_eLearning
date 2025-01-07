@@ -47,14 +47,14 @@
 					<nav class="subject-menu">
 						<h2>과목</h2>
 						<ul class="menu-list">
-							<li><a href="${path}/course/list?subjectName=1" class="active">국어</a></li>
-							<li><a href="${path}/course/list?subjectName=2">수학</a></li>
-							<li><a href="${path}/course/list?subjectName=3">영어</a></li>
-							<li><a href="${path}/course/list?subjectName=4">과학</a></li>
-							<li><a href="${path}/course/list?subjectName=5">사회</a></li>
-							<li><a href="${path}/course/list?subjectName=6">한국사</a></li>
-							<li><a href="${path}/course/list?subjectName=7">직업</a></li>
-							<li><a href="${path}/course/list?subjectName=8">제2외국어</a></li>
+							<li><a href="${path}/course/list?subjectName=국어" class="active">국어</a></li>
+							<li><a href="${path}/course/list?subjectName=수학">수학</a></li>
+							<li><a href="${path}/course/list?subjectName=영어">영어</a></li>
+							<li><a href="${path}/course/list?subjectName=과학">과학</a></li>
+							<li><a href="${path}/course/list?subjectName=사회">사회</a></li>
+							<li><a href="${path}/course/list?subjectName=한국사">한국사</a></li>
+							<li><a href="${path}/course/list?subjectName=직업">직업</a></li>
+							<li><a href="${path}/course/list?subjectName=제2외국어">제2외국어</a></li>
 						</ul>
 					</nav>
 

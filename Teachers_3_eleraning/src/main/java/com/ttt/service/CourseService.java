@@ -13,7 +13,7 @@ import com.ttt.dto.Course3;
 public class CourseService {
 	private CourseDao dao = new CourseDao();
 	
-	public List<Course3> selectCourseBySubjectNo(Map<String, Integer> param) {
+	public List<Course3> selectCourseBySubjectNo(Map<String, Object> param) {
 		SqlSession session = getSession();
 		List<Course3> courses = dao.selectCourseBySubjectNo(session, param);
 		session.close();
