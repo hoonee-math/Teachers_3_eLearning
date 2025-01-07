@@ -12,4 +12,11 @@ public class CourseDao {
 		return session.selectList("course.selectCourseBySubjectNo", param);
 	}
 
+	public int updateAllCoursesStatus(SqlSession session, int memberNo) {
+		return session.update("course.updateAllCoursesStatus", memberNo);
+	}
+	
+	public int updateCourseStatus(SqlSession session, int courseNo) {
+		
+	}
 }
