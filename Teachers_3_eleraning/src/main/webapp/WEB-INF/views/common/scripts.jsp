@@ -14,5 +14,4 @@
 <script>
     const path = '${pageContext.request.contextPath}';
 </script>
-<script src="${path}/resources/js/common/utils.js"></script>
 <script src="${path}/resources/js/components/modal.js"></script>

@@ -83,22 +83,22 @@
 	
 							<!-- 탭 콘텐츠 영역 -->
 							<div class="tab-content">
-							<div id="teacherHome" class="tab-pane active">
-								<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherHome.jsp" />
+								<div id="teacherHome" class="tab-pane active">
+									<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherHome.jsp" />
+								</div>
+								<div id="teacherNotice" class="tab-pane">
+									<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherNotice.jsp" />
+								</div>
+								<div id="teacherQna" class="tab-pane">
+									<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherQna.jsp" />
+								</div>
+								<div id="teacherResources" class="tab-pane">
+									<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherResources.jsp" />
+								</div>
+								<div id="teacherReviews" class="tab-pane">
+									<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherReviews.jsp" />
+								</div>
 							</div>
-							<div id="teacherNotice" class="tab-pane">
-								<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherNotice.jsp" />
-							</div>
-							<div id="teacherQna" class="tab-pane">
-								<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherQna.jsp" />
-							</div>
-							<div id="teacherResources" class="tab-pane">
-								<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherResources.jsp" />
-							</div>
-							<div id="teacherReviews" class="tab-pane">
-								<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherReviews.jsp" />
-							</div>
-						</div>
 						</div>
 						
 						<!-- 오른쪽 상세 내용 섹션 2 : 리스트 헤더 -->
@@ -174,8 +174,8 @@
 	</div>
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
-<script src="${path}/resources/js/api/teacherApi.js"></script>
 <script src="${path}/resources/js/teacher/teacherListAndDetailAccordion.js"></script>
+<script src="${path}/resources/js/api/teacherApi.js"></script>
 <script src="${path}/resources/js/teacher/teacherBoard.js"></script>
 
 </body>

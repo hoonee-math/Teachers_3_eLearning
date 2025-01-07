@@ -9,27 +9,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<jsp:include page="/WEB-INF/views/common/head.jsp" />
 <title>Honey T</title>
-
-<!-- 2. 외부 CSS 파일들 -->
-<!-- 2-1. Bootstrap CSS (다른 CSS보다 먼저) -->
-<!-- 2-2. Bootstrap Icons (필요한 경우) -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> -->
-
-<!-- 2-3. 직접 제작한 CSS 파일들 (Bootstrap CSS 다음에 위치) -->
-<link rel="stylesheet" href="${path}/resources/css/common/reset.css">
-<link rel="stylesheet" href="${path}/resources/css/common/layout.css">
-<link rel="stylesheet" href="${path}/resources/css/common/utilities.css">
-<link rel="stylesheet" href="${path}/resources/css/common/navigator.css">
-
-<!-- 3. 컴포넌트 CSS -->
-<link rel="stylesheet" href="${path}/resources/css/components/header.css">
-<link rel="stylesheet" href="${path}/resources/css/components/navigation.css">
-<link rel="stylesheet" href="${path}/resources/css/components/modal.css">
-<link rel="stylesheet" href="${path}/resources/css/components/buttons.css">
-<link rel="stylesheet" href="${path}/resources/css/components/cards.css">
 
 <!-- 4. 페이지별 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/pages/courseList.css">

@@ -133,7 +133,6 @@
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <!-- 페이지별 JavaScript -->
-<script src="${path}/resources/js/pages/teacherDetail.js"></script>
 
 </body>
 </html>
