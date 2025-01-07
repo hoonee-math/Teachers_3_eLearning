@@ -39,18 +39,21 @@
 
 				<!-- 강좌 통계 요약 -->
 				<div class="course-summary">
-					<div class="stat-card">
+					<button class="stat-card" data-status="all" onclick="filterByStatus('all')">
 						<h3>전체 강좌</h3>
 						<p class="stat-number">5개</p>
-					</div>
-					<div class="stat-card">
+					</button>
+					<button class="stat-card" data-status="inProgress" onclick="filterByStatus('inProgress')">
 						<h3>진행중 강좌</h3>
 						<p class="stat-number">3개</p>
-					</div>
-					<div class="stat-card">
+					</button>
+					<button class="stat-card" data-status="preparing" onclick="filterByStatus('preparing')">
 						<h3>준비중 강좌</h3>
 						<p class="stat-number">2개</p>
-					</div>
+					</button>
+					<%-- <button class="filter-btn" data-status="completed" onclick="filterByStatus('completed')">
+						종료된 강좌 <span class="count">${completedCount}</span>
+					</button> --%>
 				</div>
 
 				<!-- 강좌 등록 버튼 -->
@@ -59,7 +62,14 @@
 						<i class="bi bi-plus-circle"></i> 새 강좌 등록
 					</button>
 				</div>
-
+				<!-- 필터 옵션 영역 -->
+				<div class="course-filters">
+					<select id="displayCount" onchange="changeDisplayCount(this.value)">
+						<option value="5">5개씩 보기</option>
+						<option value="10" selected>10개씩 보기</option>
+						<option value="20">20개씩 보기</option>
+					</select>
+				</div>
 				<!-- 강좌 목록 테이블 -->
 				<div class="course-list">
 					<table>	
@@ -75,7 +85,12 @@
 						<tbody>
 							<c:forEach var="course" items="${courses}">
 								<tr>
-									<td>${course.courseTitle}</td>
+									<td>
+										<a href="javascript:void(0)"
+											onclick="goToLectureManage(${course.courseNo})"
+											class="course-title">
+										${course.courseTitle} </a>
+									</td>
 									<td>
 										<span class="status-badge ${course.courseStatus == 0 ? 'draft' : (course.courseStatus == 1 ? 'active' : 'completed')}">
 											${course.courseStatus == 0 ? '준비중' : (course.courseStatus == 1 ? '진행중' : '완료')}
@@ -106,6 +121,8 @@
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <!-- 6. 페이지별 스크립트 -->
 <script src="${path}/resources/js/member/teacherManageCourseModal.js"></script>
+<!-- 필터링과 페이징을 처리할 JavaScript 함수 -->
+<script src="${path}/resources/js/member/teacherManageCourse.js"></script>
 <script>
 	function viewCourseDetail(courseNo) {
 		// 강좌 상세 정보 보기 로직 구현
