@@ -14,10 +14,10 @@ import com.ttt.dto.Course3;
 import com.ttt.service.CourseService;
 
 @WebServlet("/course/list")
-public class ToCourseSevlet extends HttpServlet {
+public class ToCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ToCourseSevlet() {
+	public ToCourseServlet() {
 		super();
 	}
 
