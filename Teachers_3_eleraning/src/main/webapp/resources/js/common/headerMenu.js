@@ -3,7 +3,7 @@ const subMenus = {
 	'고1': [
 		{name: '선생님', url: path + '/teacher/list_and_detail', megaMenu: 'teacher'},
 		{name: '모든강좌', url: path + '/course/list', megaMenu: 'course'},
-		{name: '교재', url: path + '/homepage'},
+		{name: '교재구매', url: path + '/homepage'},
 		{name: '모의고사', url: path + '/homepage'},
 		{name: '기출문제', url: path + '/homepage'},
 		{name: '입시정보', url: path + '/homepage'},
