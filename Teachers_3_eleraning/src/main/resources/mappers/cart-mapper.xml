@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cart">
+
+	<resultMap id="cartMap" type="Cart3">
+		<id column="cart_no" property="cartNo"/>
+		<result column="is_paid" property="isPaid"/>
+		<result column="payment_no" property="paymentNo"/>
+		<result column="cart_added_at" property="cartAddedAt"/>
+		<association property="member" javaType="member3">
+			<id column="member_no" property="memberNo"/>
+		</association>
+		<association property="course" javaType="Course3">
+			<id column="course_no" property="courseNo"/>
+			<result column="course_title" property="courseTitle"/>
+			<result column="course_desc" property="courseDesc"/>
+			<result column="course_category_no" property="courseCategoryNo"/>
+			<result column="course_price" property="coursePrice"/>
+			<result column="course_price_sale" property="coursePriceSale"/>
+			<result column="member_no" property="memberNo"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectCartListByMemberNo" parameterType="_int" resultMap="cartMap">
+		SELECT 
+			CA.CART_NO, CA.IS_PAID, 
+			CO.COURSE_NO, CO.COURSE_TITLE, CO.COURSE_DESC, 
+			CO.COURSE_CATEGORY_NO, CO.COURSE_PRICE, CO.COURSE_PRICE_SALE,
+			CO.MEMBER_NO 
+		FROM CART3 CA
+			LEFT JOIN COURSE3 CO ON CA.COURSE_NO = CO.COURSE_NO
+		WHERE CA.MEMBER_NO = #{memberNo}
+	</select>
+</mapper>
