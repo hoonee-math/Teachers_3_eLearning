@@ -17,5 +17,5 @@ public class Cart3 {
 	private Date cartAddedAt;		// 자동부여 날짜
 	private int isPaid;				// 결제전0결제완료1장바구니에서삭제2
 	private int paymentNo;			// 결제고유번호,결제완료와함께부여
-	private int courseRegisterNo;	// 수강신청 고유 번호
+	private Course3 course;			// 수강신청 고유 번호
 }
