@@ -62,7 +62,7 @@
 										<p class="profile-subtitle">TITLE 안내문 개념과 지독한 연습이 만점을 만듭니다!</p>
 									</div>
 									<div class="profile-tags">
-										<span class="profile-tag">#개념</span> <span class="profile-tag">#학력과 통계</span> <span class="profile-tag">#수능 대비</span>
+										<span class="profile-tag">#개념</span> <span class="profile-tag">#확률과 통계</span> <span class="profile-tag">#수능 대비</span>
 									</div>
 								</div>
 							</div>

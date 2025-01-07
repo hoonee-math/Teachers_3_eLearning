@@ -22,7 +22,7 @@ public class TeacherMypageServlet extends HttpServlet {
         String path = uri.substring(request.getContextPath().length());
 
         switch(path) {
-        case "/teacher/mypage/menu":
+        case "/member/teacher/mypage/menu":
             request.getRequestDispatcher("/WEB-INF/views/member/teacherMypage.jsp").forward(request, response);
             break;
         }
