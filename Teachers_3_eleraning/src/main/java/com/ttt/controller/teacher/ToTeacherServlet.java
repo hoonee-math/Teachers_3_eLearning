@@ -2,6 +2,7 @@ package com.ttt.controller.teacher;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ttt.dto.Member3;
+import com.ttt.service.MemberService;
 
 @WebServlet("/teacher/*")
 public class ToTeacherServlet extends HttpServlet {
@@ -22,6 +26,63 @@ public class ToTeacherServlet extends HttpServlet {
     // "/Teacher/*" 로 들어오는 모든 요청을 분기처리하여 각 페이지로 응답하기
     // 각 페이지에서의 내용은 ajax(post) 요청으로 다른 servlet 으로 재요청 후 응답하기 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 페이징 처리를 위한 현재 페이지 정보
+	    int cpage = 1;
+	    try {
+	        cpage = Integer.parseInt(request.getParameter("cpage"));
+	    } catch (NumberFormatException e) {}
+	
+	    int numPerPage = 2; // 한 페이지당 데이터 수
+	    
+	    // 시작 위치와 끝 위치 계산
+	    int start = (cpage - 1) * numPerPage + 1;
+	    int end = start + numPerPage - 1;
+	    
+	    // 페이징 관련 파라미터를 Map에 저장
+	    Map<String, Integer> param = new HashMap<>();
+	    param.put("start", start);  
+	    param.put("end", end);
+	
+	    /* MemberService를 통해 데이터 조회 
+	       - 전체 데이터 수 
+	       - 현재 페이지 데이터 
+	    */
+	    String teacherSubject = request.getParameter("subject");
+	    if(teacherSubject==null) {
+	    	teacherSubject="국어";
+	    }
+	    List<Member3> teachersBySubject=new MemberService().selectTeachersBySubject(teacherSubject);
+	    int totalData = teachersBySubject.size();
+
+	    
+	    // 페이지 바 사이즈
+	    int pageBarSize = 5;
+	    
+	    // 전체 데이터 수를 기준으로 총 페이지 수 계산 
+	    int totalPage = (int) Math.ceil((double) totalData / numPerPage);
+	
+	    // 페이지 바 시작 번호
+	    int pageStart = (((cpage - 1) / pageBarSize) * pageBarSize) + 1;
+	    
+	    // 페이지 바 종료 번호  
+	    int pageEnd = pageStart + pageBarSize - 1;
+	    if (pageEnd > totalPage) {
+	        pageEnd = totalPage;
+	    }
+	
+//	    // request에 데이터 저장
+//	    request.setAttribute("courses", currentPageData);
+//	    request.setAttribute("pageStart", pageStart);
+//	    request.setAttribute("pageEnd", pageEnd);
+//	    request.setAttribute("totalPage", totalPage);
+//	    request.setAttribute("cpage", cpage);
+//	
+//	    request.getRequestDispatcher("/WEB-INF/views/course/courseListBySubject.jsp").forward(request, response);
+//	
+	    
+		
+		
 		String uri = request.getRequestURI();
         String path = uri.substring(request.getContextPath().length());
 

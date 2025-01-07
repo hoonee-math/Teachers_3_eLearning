@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.ttt.dto.Member3;
+import com.ttt.service.MemberService;
 
 @WebServlet("/api/teacher/list")
 public class ApiTeacherListSevlet extends HttpServlet {
