@@ -22,7 +22,7 @@ public class TohomePageServlet2 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getRequestDispatcher("/WEB-INF/views/template/home.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/template/template_version2.jsp").forward(request, response);
 	}
 
 }
