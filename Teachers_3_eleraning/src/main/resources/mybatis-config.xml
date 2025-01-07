@@ -20,6 +20,7 @@
 		<typeAlias type="com.ttt.dto.Post3" alias="Post3"/>
 		<typeAlias type="com.ttt.dto.Course3" alias="Course3"/>
 		<typeAlias type="com.ttt.dto.Lecture3" alias="Lecture3"/>
+		<typeAlias type="com.ttt.dto.Cart3" alias="Cart3"/>
 	</typeAliases>
 	
 	<!-- DB정보 작성 : DB 보안 정보는 driver.properties에 개별 작성 -->
@@ -39,6 +40,7 @@
 	<mappers>
 		<mapper resource="/mappers/school-mapper.xml"/>
 		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/cart-mapper.xml"/>
 	</mappers>
 	
 </configuration>
