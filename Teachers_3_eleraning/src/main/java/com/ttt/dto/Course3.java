@@ -2,6 +2,15 @@ package com.ttt.dto;
 
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Course3 {
 	private int courseNo;			// 강좌고유번호sequence
 	private String courseTitle;		// 강좌명
