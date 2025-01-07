@@ -60,7 +60,7 @@
 								<p>관리할 수 있습니다.</p>
 							</div>
 							<div>
-								<a href="${path}/member/teacher/mypage/manager/course">강좌 관리하기</a>
+								<a href="${path}/member/teacher/mypage/course">강좌 관리하기</a>
 							</div>
 						</div>
 						<!-- 게시판 관리 카드 -->
