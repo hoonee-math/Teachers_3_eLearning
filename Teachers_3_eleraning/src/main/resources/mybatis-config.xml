@@ -41,6 +41,7 @@
 		<mapper resource="/mappers/school-mapper.xml"/>
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/cart-mapper.xml"/>
+		<mapper resource="/mappers/course-mapper.xml"/>
 	</mappers>
 	
 </configuration>

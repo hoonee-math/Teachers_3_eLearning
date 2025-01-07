@@ -14,16 +14,18 @@ import com.ttt.dto.Course3;
 import com.ttt.service.CourseService;
 
 @WebServlet("/course/list")
-public class ToCourseSevlet extends HttpServlet {
+public class ToCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ToCourseSevlet() {
+	public ToCourseServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 파라미터 처리
-		int subjectNo = Integer.parseInt(request.getParameter("subjectName"));
+		String subjectName = request.getParameter("subjectName");
+		if(subjectName == null) subjectName = "국어";
+		
 		
 		// 페이징 처리를 위한 현재 페이지 정보
 		int cpage = 1;
@@ -31,15 +33,20 @@ public class ToCourseSevlet extends HttpServlet {
 			cpage = Integer.parseInt(request.getParameter("cpage"));
 		} catch (NumberFormatException e) {
 		}
-
+		
 		int numPerPage = 2; // 한 페이지당 데이터 수
 		
-		Map<String, Integer> param = Map.of(
-					"cpage", cpage,
-					"numPerPage", numPerPage,
-					"subjectNo", subjectNo);
+		// 현재 페이지에 해당하는 데이터만 추출
+		int start = (cpage - 1) * numPerPage;
+		int end = start + numPerPage;
+		
+		Map<String, Object> param = Map.of(
+					"start", start,
+					"end", end,
+					"subjectName", subjectName);
+		
 		List<Course3> courses = new CourseService().selectCourseBySubjectNo(param);
-
+		
 		// 전체 데이터 수
 		int totalData = courses.size();
 
@@ -58,13 +65,8 @@ public class ToCourseSevlet extends HttpServlet {
 			pageEnd = totalPage;
 		}
 
-		// 현재 페이지에 해당하는 데이터만 추출
-		int start = (cpage - 1) * numPerPage;
-		int end = Math.min(start + numPerPage, totalData);
-		List<Map<String, Object>> currentPageData = courses.subList(start, end);
-
 		// request에 데이터 저장
-		request.setAttribute("courses", currentPageData);
+		request.setAttribute("courses", courses);
 		request.setAttribute("pageStart", pageStart);
 		request.setAttribute("pageEnd", pageEnd);
 		request.setAttribute("totalPage", totalPage);

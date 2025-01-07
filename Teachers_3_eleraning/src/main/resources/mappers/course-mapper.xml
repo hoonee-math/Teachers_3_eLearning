@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="course">
+	<resultMap id="courseMap" type="Course3">
+		<id column="course_no" property="courseNo"/>
+		<result column="course_title" property="courseTitle"/>
+		<result column="course_desc" property="courseDesc"/>
+		<result column="course_category_no" property="courseCategoryNo"/>
+		<result column="grade" property="grade"/>
+		<result column="course_price" property="coursePrice"/>
+		<result column="course_price_sale" property="coursePriceSale"/>
+		<result column="course_period" property="coursePeriod"/>
+		<result column="course_status" property="courseStatus"/>
+		<result column="created_at" property="createdAt"/>
+		<result column="updated_at" property="updatedAt"/>
+		<result column="begin_date" property="beginDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="total_lectures" property="totalLectures"/>
+		<result column="member_no" property="memberNo"/>
+	</resultMap>
+	
+	<select id="selectCourseBySubjectNo" parameterType="map" resultMap="courseMap">
+		SELECT C.*,
+				I.IMG_NO,  T.TEACHER_SUBJECT
+		FROM (SELECT ROWNUM AS RNUM, A.*
+			  FROM (SELECT C.* 
+			  		FROM COURSE3 C
+			  			LEFT JOIN TEACHERS3 T ON C.MEMBER_NO = T.MEMBER_NO
+			  			WHERE T.TEACHER_SUBJECT = #{subjectName}
+			  			ORDER BY C.COURSE_NO DESC) A
+			  		WHERE #{end} >= ROWNUM
+			  ) C
+		LEFT JOIN TEACHERS3 T ON C.MEMBER_NO = T.MEMBER_NO 
+		LEFT JOIN MEMBER3 M ON C.MEMBER_NO = M.MEMBER_NO
+		LEFT JOIN IMAGE3 I ON M.MEMBER_NO = I.MEMBER_NO
+		WHERE RNUM >= #{start}
+	</select>
+</mapper>
