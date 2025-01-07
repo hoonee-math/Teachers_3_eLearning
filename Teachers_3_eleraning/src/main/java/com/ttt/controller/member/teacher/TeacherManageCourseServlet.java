@@ -46,10 +46,10 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		int preparing = new CourseService().selectCoursesByStatusPreparing(loginMember.getMemberNo());; // 준비중 0
 		int inProgress= new CourseService().selectCoursesByStatusInProgress(loginMember.getMemberNo());; // 진행중 1
 		int completed = new CourseService().selectCoursesByStatusCompleted(loginMember.getMemberNo());; // 완료 2
-
+		System.out.println(total +","+preparing);
 		request.setAttribute("totalCount", total);
-		request.setAttribute("inProgressCount", preparing);
 		request.setAttribute("preparingCount", inProgress);
+		request.setAttribute("inProgressCount", preparing);
 		request.setAttribute("completedCount", completed);
 		
 		// 상태별 강좌 조회

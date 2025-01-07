@@ -41,15 +41,15 @@
 				<div class="course-summary">
 					<button class="stat-card" data-status="all" onclick="filterByStatus('all')">
 						<h3>전체 강좌</h3>
-						<p class="stat-number">5개</p>
+						<p class="stat-number">${totalCount }개</p>
 					</button>
 					<button class="stat-card" data-status="inProgress" onclick="filterByStatus('inProgress')">
 						<h3>진행중 강좌</h3>
-						<p class="stat-number">3개</p>
+						<p class="stat-number">${inProgressCount }개</p>
 					</button>
 					<button class="stat-card" data-status="preparing" onclick="filterByStatus('preparing')">
 						<h3>준비중 강좌</h3>
-						<p class="stat-number">2개</p>
+						<p class="stat-number">${preparingCount }개</p>
 					</button>
 					<%-- <button class="filter-btn" data-status="completed" onclick="filterByStatus('completed')">
 						종료된 강좌 <span class="count">${completedCount}</span>
