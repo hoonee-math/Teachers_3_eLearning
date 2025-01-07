@@ -66,10 +66,11 @@ public class CourseService {
 		Map<String, Integer> counts = null;
 		try {
 			// 모든 강좌의 상태를 먼저 업데이트
-			dao.updateAllCoursesStatus(session, memberNo);
-
+			int updateResult1 = dao.updateAllCoursesStatus(session, memberNo);
+			System.out.println("모든 강좌 상태 업데이트 결과 : "+ updateResult1);
 			// 상태별 카운트 조회
 			counts = dao.selectCourseStatusCount(session, memberNo);
+			System.out.println("상태별 카운트 조회 결과 map counts : "+counts);
 			session.commit();
 		} catch (Exception e) {
 			session.rollback();

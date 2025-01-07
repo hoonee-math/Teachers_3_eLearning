@@ -28,7 +28,7 @@ public class CourseDao {
 	}
 	// 상태별 강좌 수 조회
 	public Map<String,Integer> selectCourseStatusCount(SqlSession session, int memberNo){
-		return session.selectOne("course.selectCoursesByStatus",memberNo);
+		return session.selectOne("course.selectCourseStatusCount",memberNo);
 	}
 	
 }
