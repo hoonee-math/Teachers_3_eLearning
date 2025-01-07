@@ -79,11 +79,6 @@
 					</td>
 				</tr>
 				<tr>
-					<th>닉네임</th>
-					<td><input type="text" name="memberNick" id="memberNick" placeholder="다른 사용자에게 보여줄 닉네임을 입력하세요."><br>
-					</td>
-				</tr>
-				<tr>
 					<th>전화번호</th>
 					<td><input type="text" name="phone" id="phone" placeholder="예)01055556666"><br>
 					</td>
