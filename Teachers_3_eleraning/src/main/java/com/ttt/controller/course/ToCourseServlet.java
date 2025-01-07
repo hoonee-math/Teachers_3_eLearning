@@ -71,6 +71,10 @@ public class ToCourseServlet extends HttpServlet {
 		request.setAttribute("pageEnd", pageEnd);
 		request.setAttribute("totalPage", totalPage);
 		request.setAttribute("cpage", cpage);
+		
+		// 사이드바 색상 전환을 위한 데이터
+		// 파라미터 처리 부분 아래에 추가
+		request.setAttribute("selectedSubject", subjectName != null ? subjectName : "국어");
 
 		request.getRequestDispatcher("/WEB-INF/views/course/courseListBySubject.jsp").forward(request, response);
 	}

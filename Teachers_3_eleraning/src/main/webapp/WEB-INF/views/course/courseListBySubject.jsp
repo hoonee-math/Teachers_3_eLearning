@@ -44,19 +44,19 @@
 				<!-- 실제 콘텐츠 -->
 				<div class="course-container">
 					<!-- 왼쪽 메뉴 -->
-					<nav class="subject-menu">
-						<h2>과목</h2>
-						<ul class="menu-list">
-							<li><a href="${path}/course/list?subjectName=국어" class="active">국어</a></li>
-							<li><a href="${path}/course/list?subjectName=수학">수학</a></li>
-							<li><a href="${path}/course/list?subjectName=영어">영어</a></li>
-							<li><a href="${path}/course/list?subjectName=과학">과학</a></li>
-							<li><a href="${path}/course/list?subjectName=사회">사회</a></li>
-							<li><a href="${path}/course/list?subjectName=한국사">한국사</a></li>
-							<li><a href="${path}/course/list?subjectName=직업">직업</a></li>
-							<li><a href="${path}/course/list?subjectName=제2외국어">제2외국어</a></li>
-						</ul>
-					</nav>
+				<nav class="subject-menu">
+				    <h2>과목</h2>
+				    <ul class="menu-list">
+				        <li><a href="${path}/course/list?subjectName=국어" class="${selectedSubject == '국어' ? 'active' : ''}">국어</a></li>
+				        <li><a href="${path}/course/list?subjectName=수학" class="${selectedSubject == '수학' ? 'active' : ''}">수학</a></li>
+				        <li><a href="${path}/course/list?subjectName=영어" class="${selectedSubject == '영어' ? 'active' : ''}">영어</a></li>
+				        <li><a href="${path}/course/list?subjectName=과학" class="${selectedSubject == '과학' ? 'active' : ''}">과학</a></li>
+				        <li><a href="${path}/course/list?subjectName=사회" class="${selectedSubject == '사회' ? 'active' : ''}">사회</a></li>
+				        <li><a href="${path}/course/list?subjectName=한국사" class="${selectedSubject == '한국사' ? 'active' : ''}">한국사</a></li>
+				        <li><a href="${path}/course/list?subjectName=직업" class="${selectedSubject == '직업' ? 'active' : ''}">직업</a></li>
+				        <li><a href="${path}/course/list?subjectName=제2외국어" class="${selectedSubject == '제2외국어' ? 'active' : ''}">제2외국어</a></li>
+				    </ul>
+				</nav>
 
            			<!-- 오른쪽 리스트 -->
 					<div class="content-list">
