@@ -7,7 +7,7 @@ const subMenus = {
 		{name: '모의고사', url: path + '/homepage'},
 		{name: '기출문제', url: path + '/homepage'},
 		{name: '입시정보', url: path + '/homepage'},
-		{name: '시험응시실', url: path + '/homepage'}
+		{name: '학습현황', url: path + '/homepage'}
 	],
 	'고2': [
 		{name: '선생님', url: path + '/teacher/list_and_detail', megaMenu: 'teacher'},
