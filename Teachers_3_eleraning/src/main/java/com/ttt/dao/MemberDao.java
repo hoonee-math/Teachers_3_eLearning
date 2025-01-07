@@ -1,5 +1,7 @@
 package com.ttt.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.ttt.dto.Member3;
@@ -26,6 +28,10 @@ public class MemberDao {
 	}
 	public int updateMember(SqlSession session, Member3 m) {
 		return session.update("member.updateMember", m);
+	}
+	/* teacherListAndDetail 페이지의 리스트에 교사 출력용 */
+	public List<Member3> selectTeachersBySubject(SqlSession session, String teacherSubject){
+		return session.selectList("member.selectTeachersBySubject", teacherSubject);
 	}
 	
 	/* 이메일 인증 관련 */

@@ -2,6 +2,8 @@ package com.ttt.service;
 
 import static com.ttt.common.SqlSessionTemplate.getSession;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.ttt.dao.MemberDao;
@@ -44,6 +46,13 @@ public class MemberService {
 	public Member3 selectMemberById(String memberId) {
 		SqlSession session=getSession();
 		return dao.selectMemberById(session, memberId);
+	}
+	
+	/* teacherListAndDetail 페이지의 리스트에 교사 출력용 */
+	public List<Member3> selectTeachersBySubject(String teacherSubject){
+		SqlSession session=getSession();
+		return dao.selectTeachersBySubject(session, teacherSubject);
+		
 	}
 	
 }
