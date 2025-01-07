@@ -43,4 +43,9 @@ public class CourseDao {
 		return session.selectOne("course.selectCoursesByStatusCompleted",memberNo);
 	}
 	
+	// 새 강좌 등록
+	public int insertNewCourse(SqlSession session, Course3 c) {
+		return session.insert("course.insertNewCourse",c);
+	}
+	
 }

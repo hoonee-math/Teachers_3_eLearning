@@ -141,4 +141,10 @@ public class CourseService {
 		}
 		return result;
 	}
+	
+	//새 강좌 등록
+	public int insertNewCourse(Course3 c) {
+		SqlSession session = getSession();
+		return dao.insertNewCourse(session, c);
+	}
 }

@@ -19,6 +19,20 @@
 		<result column="member_no" property="memberNo"/>
 	</resultMap>
 	
+	<!-- 새 강좌 등록 로직 -->
+	<insert id="insertNewCourse" parameterMap="course">
+		INSERT INTO COURSE3 (
+			COURSE_NO, 				
+			COURSE_TITLE, 	COURSE_DESC, 	COURSE_CATEGORY_NO,  GRADE, 
+			COURSE_PRICE,	COURSE_PRICE_SALE,	BEGIN_DATE,		CREATE_AT,	   MEMBER_NO
+		) VALUES (
+			SEQ_COURSE3_NO.NEXTVAL, 
+			#{courseTitle},	#{courseDesc},	#{courseCategoryNo}, #{grade},
+			#{coursePrice},	#{coursePriceSale},	#{beginDate},	#{createdAt},  #{memberNo},
+		)
+		
+	</insert>
+	
 	<select id="selectCourseBySubjectNo" parameterType="map" resultMap="courseMap">
 		SELECT C.*,
 				I.IMG_NO,  T.TEACHER_SUBJECT

@@ -9,8 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ttt.dto.Course3;
+import com.ttt.dto.Member3;
+import com.ttt.service.CourseService;
 
 @WebServlet("/member/teacher/course/register")
 public class TeacherManageCourseRegisterServlet extends HttpServlet {
@@ -40,6 +43,9 @@ public class TeacherManageCourseRegisterServlet extends HttpServlet {
 		Date sqlDate = Date.valueOf(localDate);
 		System.out.println("날짜 변환 LocaDate 이용 "+beginCourse+", "+sqlDate);
 		
+		HttpSession session = request.getSession();
+		Member3 m = (Member3)session.getAttribute("loginMember");
+		
 		Course3 course = Course3.builder()
 				.courseTitle(courseTitle)
 				.courseDesc(courseDesc)
@@ -48,11 +54,15 @@ public class TeacherManageCourseRegisterServlet extends HttpServlet {
 				.coursePrice(coursePriceSale)
 				.coursePriceSale(coursePriceSale)
 				.beginDate(sqlDate)
+				.memberNo(m.getMemberNo())
 				.build();
 		
 		System.out.println("강좌 추가 로직 start, course : "+course);
 		
+		int result = new CourseService().insertNewCourse(course);
 		
+		String msg = "강좌가 등록되었습니다.";
+		String loc = "/";
 	}
 
 }
