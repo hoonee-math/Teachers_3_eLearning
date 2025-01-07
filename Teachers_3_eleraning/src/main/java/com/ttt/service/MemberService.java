@@ -55,4 +55,24 @@ public class MemberService {
 		
 	}
 	
+	/* 학생의 회원 정보 수정 서비스*/
+	public int updateStudent(Member3 m) {
+		SqlSession session = getSession();
+		int result = 0;
+		try {
+			if(result > 0) {
+			result = dao.updateMember(session, m);
+			session.commit();
+			}else {
+				session.rollback();
+			}
+			
+		}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				session.close();
+			}
+			return result;
+			}
 }
+	

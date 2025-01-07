@@ -27,6 +27,7 @@ public class MemberDao {
 		return session.update("member.updatePassword", m);
 	}
 	public int updateMember(SqlSession session, Member3 m) {
+		System.out.println("m : "+m);
 		return session.update("member.updateMember", m);
 	}
 	/* teacherListAndDetail 페이지의 리스트에 교사 출력용 */
@@ -41,5 +42,6 @@ public class MemberDao {
 	public Member3 selectMemberByNameAndEmail(SqlSession session, Member3 m) {
 		return session.selectOne("member.selectMemberByNameAndEmail",m);
 	}
+
 	
 }
