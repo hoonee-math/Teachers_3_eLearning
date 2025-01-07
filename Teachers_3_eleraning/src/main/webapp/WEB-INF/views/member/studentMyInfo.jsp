@@ -71,6 +71,11 @@
 					</td>
 				</tr>
 				<tr>
+					<th>전화번호</th>
+					<td><input type="text" name="phone" id="phone" placeholder="예)01055556666"><br>
+					</td>
+				</tr>
+				<tr>
 					<th>주소</th>
 					<td>
 						<div style="margin-bottom:10px">
