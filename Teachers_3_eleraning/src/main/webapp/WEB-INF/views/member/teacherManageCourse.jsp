@@ -11,6 +11,7 @@
 <jsp:include page="/WEB-INF/views/common/head.jsp" />
 <!-- 2. 페이지별 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/pages/mypage-common.css">
+<link rel="stylesheet" href="${path}/resources/css/member/courseManagement.css">
 <title>강좌 관리 | Honey T</title>
 </head>
 
