@@ -57,9 +57,11 @@
 				        <li><a href="${path}/course/list?subjectName=제2외국어" class="${selectedSubject == '제2외국어' ? 'active' : ''}">제2외국어</a></li>
 				    </ul>
 				</nav>
-
            			<!-- 오른쪽 리스트 -->
 					<div class="content-list">
+					
+					<!-- 학년 선택 정보 가져오기 위한 태그 -->
+					<input type="hidden" name="gradeNum" id="gradeNum">
 						<!-- 리스트 헤더 -->
 						<div class="list-header">
 							<h2 class="list-title">전체 강좌</h2>
