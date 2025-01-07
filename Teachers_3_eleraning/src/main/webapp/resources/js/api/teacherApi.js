@@ -19,21 +19,21 @@ $(document).ready(function() {
 	
 // teacherListAndDetailAccordion.js 수정
 function updateTeacherList(subject) {
-    fetch(`${path}/api/teacher/list?subject=${subject}`)
-        .then(response => response.json())
-        .then(teachers => {
-            // 모든 template 숨기기
-            $('.teacher-card.template').hide();
-            
-            // 해당 과목 선생님만 표시
-            teachers.forEach(teacher => {
-                $(`.teacher-card[data-memberNo="${teacher.memberNo}"]`).show();
-            });
-            
-            // 과목명 업데이트
-            $('#subjectTitle').text(`${getSubjectName(subject)} 선생님`);
-        });
+    fetch(`${path}/teacher/list_and_detail?subject=${subject}&cpage=${page}`)
+		.then(response => response.text())
+		.then(html => {
+			$('.teacher-list-content').html(html);
+		})
+		.catch(error => console.error('Error:', error));
 }
+
+// 페이지네이션 클릭 이벤트
+$(document).on('click', '.pagination a', function(e) {
+    e.preventDefault();
+    const page = $(this).data('page');
+    const subject = $('.accordion-header.active').data('subject');
+    updateTeacherList(subject, page);
+});
 
 /* Ajax 요청으로 선생님 상세 페이지 확인 */
 document.addEventListener('DOMContentLoaded', function() {

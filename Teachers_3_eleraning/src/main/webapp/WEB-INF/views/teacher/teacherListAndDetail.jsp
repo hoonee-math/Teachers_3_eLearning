@@ -32,14 +32,14 @@
 					<!-- 왼쪽 아코디언 메뉴 -->
 					<nav class="accordion-menu">
 						<!-- jstl core 태그로 리스트를 받아와서 출력해주기 -->
-					    <c:forEach var="subjectEntry" items="${subjectData}">
+					    <c:forEach var="subject" items="${subjectData}">
 						<div class="accordion-item">
-						    <div class="accordion-header">
-							${subjectEntry.value} <!-- 과목명 출력 -->
+						    <div class="accordion-header" data-subject="${subject}">
+								${subject} <!-- 과목명 출력 -->
 						    </div>
 						    <div class="accordion-content">
 							<c:forEach var="teacher" items="${teachers}">
-							    <c:if test="${teacher.subject == subjectEntry.key}"> <!-- 과목번호와 과목 키값을 비교 -->
+							    <c:if test="${teacher.teacherSubject == subject}"> <!-- 과목번호와 과목 키값을 비교 -->
 								<a href="#"  class="teacher-link" data-memberNo="${teacher.memberNo}">
 								    ${teacher.memberName} 선생님
 								</a>
@@ -113,7 +113,7 @@
 								</div>
 							</div>
 		
-							<!-- 강사 리스트 -->
+							<%-- <!-- 강사 리스트 -->
 							<div class="teacher-list">
 								<!-- 강사 카드 1 -->
 								<div class="teacher-card">
@@ -162,7 +162,56 @@
 											풀어주는 맞춤형 강의</p>
 									</div>
 								</div>
+								<!-- 강사 리스트 아래에 추가 -->
+								<div class="pagination">
+									<c:if test="${pageStart > 1}">
+										<a href="#" class="page-link" data-page="${pageStart-1}">&lt;</a>
+									</c:if>
+		
+									<c:forEach var="i" begin="${pageStart}" end="${pageEnd}">
+										<c:choose>
+											<c:when test="${i == cpage}">
+												<span class="current-page">${i}</span>
+											</c:when>
+											<c:otherwise>
+												<a href="#" class="page-link" data-page="${i}">${i}</a>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+		
+									<c:if test="${pageEnd < totalPage}">
+										<a href="#" class="page-link" data-page="${pageEnd+1}">&gt;</a>
+									</c:if>
+								</div>
+							</div> --%>
+							<!-- 실제 교사 데이터 출력 -->
+							<div class="teacher-list real-data">
+								<c:forEach var="teacher" items="${teachers}">
+									<div class="teacher-card" data-memberNo="${teacher.memberNo}">
+										<div class="teacher-image">
+											<img
+												src="https://i.namu.wiki/i/W-LhGCCNTAE3F7AJ81_DQpGg7XQbQolN76WcFDjbYgkSoOp8NnGgEj8PyGblftQNMKTTv_NJ8lfBz9XzpMlggQ.webp"
+												alt="${teacher.memberName} 선생님">
+										</div>
+										<div class="teacher-info">
+											<h3>
+												${teacher.memberName} 선생님
+												<%-- <c:if test="${not empty teacher.badge}">
+							                        <span class="teacher-badge">${teacher.badge}</span>
+							                    </c:if> --%>
+											</h3>
+											<p class="teacher-description">
+												${teacher.teacherInfoTitle} ${teacher.teacherInfoContent}</p>
+										</div>
+									</div>
+								</c:forEach>
 							</div>
+							<!-- 데이터 확인용 디버깅 출력 -->
+							<div style="display: none;">
+							    <p>Teachers 데이터: ${teachers}</p>
+							    <p>Teachers 크기: ${fn:length(teachers)}</p>
+							</div>
+								
 						</div>
 					</div>
 			</section>

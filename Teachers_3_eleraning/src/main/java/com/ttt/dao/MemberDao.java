@@ -1,6 +1,7 @@
 package com.ttt.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -30,9 +31,16 @@ public class MemberDao {
 		return session.update("member.updateMember", m);
 	}
 	/* teacherListAndDetail 페이지의 리스트에 교사 출력용 */
-	public List<Member3> selectTeachersBySubject(SqlSession session, String teacherSubject){
-		return session.selectList("member.selectTeachersBySubject", teacherSubject);
+	public List<Member3> selectTeachersBySubject(SqlSession session, Map<String, Object> param){
+		return session.selectList("member.selectTeachersBySubject", param);
 	}
+	public int selectTeachersCount(SqlSession session, Map<String, Object> param){
+		return session.selectOne("member.selectTeachersCount", param);
+	}
+	public List<String> selectSubjects(SqlSession session){
+		return session.selectList("member.selectSubjects");
+	}
+	
 	
 	/* 이메일 인증 관련 */
 	public Member3 checkEmailDuplicateByEmail(SqlSession session, Member3 m) {
@@ -41,5 +49,6 @@ public class MemberDao {
 	public Member3 selectMemberByNameAndEmail(SqlSession session, Member3 m) {
 		return session.selectOne("member.selectMemberByNameAndEmail",m);
 	}
+	
 	
 }

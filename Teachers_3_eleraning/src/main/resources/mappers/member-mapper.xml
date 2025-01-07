@@ -73,7 +73,7 @@
 		SELECT * FROM MEMBER3 WHERE MEMBER_ID=#{memberId}
 	</select>
 	<!-- teacherListAndDetail 페이지의 리스트에 교사 출력용 -->
-	<select id="selectTeachersBySubject" parameterType="string" resultMap="memberMap">
+	<select id="selectTeachersBySubject" parameterType="map" resultMap="memberMap">
 		SELECT *
         FROM (
             SELECT ROWNUM AS RNUM, SUB.*
@@ -89,6 +89,13 @@
         ) 
         WHERE RNUM >= #{start}
 	</select>
+	<select id="selectTeachersCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM TEACHERS3 WHERE TEACHER_SUBJECT=#{teacherSubject}
+	</select>
+	<select id="selectSubjects" resultType="string">
+		SELECT DISTINCT TEACHER_SUBJECT FROM TEACHERS3
+	</select>
+	
 <!-- 	<select id="selectMemberByNameAndEmail" parameterType="member3" resultMap="memberMap">
 		SELECT * FROM MEMBER3 WHERE EMAIL=#{email} AND MEMBER_NAME=#{memberName}
 	</select> -->

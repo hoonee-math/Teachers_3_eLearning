@@ -3,6 +3,7 @@ package com.ttt.service;
 import static com.ttt.common.SqlSessionTemplate.getSession;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -49,10 +50,18 @@ public class MemberService {
 	}
 	
 	/* teacherListAndDetail 페이지의 리스트에 교사 출력용 */
-	public List<Member3> selectTeachersBySubject(String teacherSubject){
+	public List<Member3> selectTeachersBySubject(Map<String, Object> param){
 		SqlSession session=getSession();
-		return dao.selectTeachersBySubject(session, teacherSubject);
-		
+		return dao.selectTeachersBySubject(session, param);
+	}
+	public int selectTeachersCount(Map<String, Object> param){
+		SqlSession session=getSession();
+		return dao.selectTeachersCount(session, param);
 	}
 	
+	// 과목을 distinct 로 리스트 출력
+	public List<String> selectSubjects(){
+		SqlSession session=getSession();
+		return dao.selectSubjects(session);
+	}
 }
