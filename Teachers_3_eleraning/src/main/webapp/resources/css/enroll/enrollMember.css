@@ -172,7 +172,7 @@ input[type="reset"]:active {
     border-radius: 4px;
     font-size: 14px;
     margin-left: 5px;
-    cursor: pointer;
+    cursor: pointer;	
 	background-color: #F9F9F9;
 }
 
