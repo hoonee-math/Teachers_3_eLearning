@@ -73,6 +73,12 @@
 		SELECT * FROM MEMBER3 WHERE MEMBER_ID=#{memberId}
 	</select>
 	<!-- teacherListAndDetail 페이지의 리스트에 교사 출력용 -->
+	<select id="selectAllTeachers" resultMap="memberMap">
+		SELECT M.MEMBER_NO, M.MEMBER_NAME, M.ENROLL_DATE, T.*
+		FROM MEMBER3 M
+		JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
+		ORDER BY M.MEMBER_NO
+	</select>
 	<select id="selectTeachersBySubject" parameterType="map" resultMap="memberMap">
 		SELECT *
         FROM (

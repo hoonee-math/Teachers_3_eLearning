@@ -50,6 +50,10 @@ public class MemberService {
 	}
 	
 	/* teacherListAndDetail 페이지의 리스트에 교사 출력용 */
+	public List<Member3> selectAllTeachers(){
+		SqlSession session=getSession();
+		return dao.selectAllTeachers(session);
+	}
 	public List<Member3> selectTeachersBySubject(Map<String, Object> param){
 		SqlSession session=getSession();
 		return dao.selectTeachersBySubject(session, param);

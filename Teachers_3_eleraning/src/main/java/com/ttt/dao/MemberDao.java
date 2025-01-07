@@ -40,6 +40,9 @@ public class MemberDao {
 	public List<String> selectSubjects(SqlSession session){
 		return session.selectList("member.selectSubjects");
 	}
+	public List<Member3> selectAllTeachers(SqlSession session){
+		return session.selectList("member.selectAllTeachers");
+	}
 	
 	
 	/* 이메일 인증 관련 */
