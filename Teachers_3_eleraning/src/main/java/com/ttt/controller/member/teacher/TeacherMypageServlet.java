@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/teacher/mypage/*")
+@WebServlet("/member/teacher/mypage/*")
 public class TeacherMypageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
