@@ -30,6 +30,7 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		int numPerPage = 10; // 기본값
 		String status = request.getParameter("status");
 	    if(status == null) status = "all"; // 기본값
+	    System.out.println(status);
 		
 		try { cpage = Integer.parseInt(request.getParameter("cpage"));
 		} catch (NumberFormatException e) {}
@@ -42,26 +43,45 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		System.out.println("TeacherManageCourseRegisterServlet : "+loginMember);
 		
 		// 상태별 카운트 조회
-//		Map<String,Integer> counts = new CourseService().selectCourseStatusCount(loginMember.getMemberNo());
-//		// 수정된 코드
-//		request.setAttribute("totalCount", ((BigDecimal)counts.get("TOTAL")).intValue());
-//		request.setAttribute("inProgressCount", ((BigDecimal)counts.get("INPROGRESS")).intValue());
-//		request.setAttribute("preparingCount", ((BigDecimal)counts.get("PREPARING")).intValue());
-//		request.setAttribute("completedCount", ((BigDecimal)counts.get("COMPLETED")).intValue());
-//
-//		// 상태 값에 따른 총 데이터 수 계산
-//		String countKey = status.equals("all") ? "TOTAL" : status.toUpperCase();
-//		switch(status) {
-//		    case "preparing": countKey = "PREPARING"; break;
-//		    case "inProgress": countKey = "INPROGRESS"; break;
-//		    case "completed": countKey = "COMPLETED"; break;
-//		    default: countKey = "TOTAL";
-//		}
-//		int totalData = ((BigDecimal)counts.get(countKey)).intValue();
-		
-		Map<String,Integer> counts = new HashMap<>();
-		counts.put("total, null)
-		int preparing = new CourseService().selectCourseStatusCountByStatusAndMemberNo();
+		Map<String,Integer> counts = new CourseService().selectCourseStatusCount(loginMember.getMemberNo());
+		System.out.println("counts 결과 확인 : "+counts);
+		// Map의 모든 키를 출력해서 정확한 키 값 확인
+		for (String key : counts.keySet()) {
+		    System.out.println("Key: '" + key + "'");
+		}
+		// 방법 2: instanceof 연산자 사용
+		Object value = counts.get("TOTAL");
+		System.out.println("Is Long: " + (value instanceof Long));
+		System.out.println("Is Integer: " + (value instanceof Integer));
+    	System.out.println("Type: " + counts.get("TOTAL").getClass().getName());		
+		// 키의 정확한 문자열 길이 확인
+		for (String key : counts.keySet()) {
+		    System.out.println("Key: '" + key + "', Length: " + key.length());
+		    System.out.println(counts.get(key));
+}
+		// 값 가져오기 
+		int total = counts.get("TOTAL");
+		int inProgress = counts.get("INPROGRESS");
+
+		System.out.println("Total: " + total + ", In Progress: " + inProgress);
+
+		// 또는 null 체크를 포함하여 더 안전하게:
+		Integer total2 = counts.get("TOTAL");
+		Integer inProgress2 = counts.get("INPROGRESS");
+
+		request.setAttribute("totalCount", counts.get("TOTAL").intValue());
+		request.setAttribute("inProgressCount", counts.get("INPROGRESS"));
+		request.setAttribute("preparingCount", counts.get("PREPARING"));
+		request.setAttribute("completedCount", counts.get("COMPLETED"));
+		// 상태 값에 따라 key값으로 전제 글 count하기
+		String countKey = status.equals("all") ? "TOTAL" : status.toUpperCase();
+		switch(status) {
+		    case "preparing": countKey = "PREPARING"; break;
+		    case "inProgress": countKey = "INPROGRESS"; break;
+		    case "completed": countKey = "COMPLETED"; break;
+		    default: countKey = "TOTAL";
+		}
+		int totalData = Integer.parseInt(counts.get(countKey).toString());  
 		
 		// 상태별 강좌 조회
         int offset = (cpage - 1) * numPerPage;
