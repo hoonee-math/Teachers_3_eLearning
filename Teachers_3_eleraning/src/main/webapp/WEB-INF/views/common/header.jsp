@@ -91,16 +91,5 @@
 			<!-- 여기는 JavaScript로 동적 생성 -->
 		</div>
 	</div>
-
-
-	<!-- jQuery 로드 후, 다른 스크립트 로드 전에 추가 -->
-	<script>
-		const path = '${pageContext.request.contextPath}';
-	</script>
-	
-	<script src="${path}/resources/js/common/headerBanner.js"></script>
-	<script src="${path}/resources/js/common/headerMenu.js"></script>
-	<%-- <script src="${path}/resources/js/common/auth.js"></script> --%>
-	<script src="${path}/resources/js/common/headerMegaMenu.js"></script>
 	
 </header>
