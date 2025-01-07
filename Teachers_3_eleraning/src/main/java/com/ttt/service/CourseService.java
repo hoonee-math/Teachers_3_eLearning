@@ -22,12 +22,12 @@ public class CourseService {
 	}
 	
 	// 트랜잭션을 통한 강좌 상태 업데이트
-	public boolean updateCourseStatus(int courseNo) {
+	public int updateCourseStatus(int courseNo) {
 		SqlSession session = getSession();
-		boolean result = false;
+		int result = 0;
 		try {
-			result = dao.updateCourseStatus(session, courseNo) > 0;
-			if (result) {
+			result = dao.updateCourseStatus(session, courseNo);
+			if (result>=1) {
 				session.commit();
 			} else {
 				session.rollback();

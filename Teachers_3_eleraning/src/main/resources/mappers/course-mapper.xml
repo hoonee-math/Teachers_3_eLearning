@@ -35,4 +35,65 @@
 		LEFT JOIN IMAGE3 I ON M.MEMBER_NO = I.MEMBER_NO
 		WHERE RNUM >= #{start}
 	</select>
+	<!-- 강좌 상태 확인 및 업데이트 -->
+	<update id="updateCourseStatus">
+		UPDATE COURSE3 
+		SET COURSE_STATUS = 
+			CASE 
+				<!--	 시작일이 없는 경우 준비중(0) -->	
+				WHEN BEGIN_DATE IS NULL THEN 0
+				<!--	 시작일이 미래인 경우 준비중(0) -->	
+				WHEN BEGIN_DATE > SYSDATE THEN 0
+				<!--	 종료일이 있고, 종료일이 지난 경우 완료(2) -->	
+				WHEN END_DATE IS NOT NULL AND SYSDATE > END_DATE THEN 2
+				<!--	 시작일이 지났고, 종료일이 없거나 진행중인 경우 진행중(1) -->	
+				WHEN ESYSDATE >= BEGIN_DAT AND (END_DATE IS NULL OR END_DATE >= SYSDATE) THEN 1
+			END,
+		UPDATED_AT = SYSDATE
+		WHERE COURSE_NO = #{courseNo}
+	</update>
+	
+	<!-- 특정 교사의 강좌 상태별 조회 -->
+	<select id="selectCoursesByStatus" resultType="Course3">
+		SELECT * FROM COURSE3 
+		WHERE MEMBER_NO = #{memberNo}
+		<choose>
+			<when test="status == 'preparing'">
+				AND (COURSE_STATUS = 0 OR BEGIN_DATE > SYSDATE)
+			</when>
+			<when test="status == 'inProgress'">
+				AND COURSE_STATUS = 1 
+				AND (SYSDATE >= BEGIN_DATE)
+				AND (END_DATE IS NULL OR END_DATE >= SYSDATE)
+			</when>
+			<when test="status == 'completed'">
+				AND COURSE_STATUS = 2 
+				AND SYSDATE > END_DATE
+			</when>
+		</choose>
+		ORDER BY CREATED_AT DESC
+	</select>
+	
+	<!-- 각 상태별 강좌 수 조회 -->
+	<select id="selectCourseStatusCount" resultType="map">
+		SELECT
+			COUNT(*) as total,
+			SUM(CASE 
+				WHEN COURSE_STATUS = 0 OR BEGIN_DATE > SYSDATE THEN 1 
+				ELSE 0 
+			END) as preparing,
+			SUM(CASE 
+				WHEN COURSE_STATUS = 1 
+				AND SYSDATE >= BEGIN_DATE
+				AND (END_DATE IS NULL OR END_DATE >= SYSDATE) THEN 1 
+				ELSE 0 
+			END) as inProgress,
+			SUM(CASE 
+				WHEN COURSE_STATUS = 2 
+				AND SYSDATE > END_DATE THEN 1 
+				ELSE 0 
+			END) as completed
+		FROM COURSE3
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
 </mapper>
