@@ -1,7 +1,6 @@
 package com.ttt.controller.member.teacher;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,22 +42,26 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		System.out.println("TeacherManageCourseRegisterServlet : "+loginMember);
 		
 		// 상태별 카운트 조회
-		Map<String,Integer> counts = new CourseService().selectCourseStatusCount(loginMember.getMemberNo());
-		// 수정된 코드
-		request.setAttribute("totalCount", ((BigDecimal)counts.get("TOTAL")).intValue());
-		request.setAttribute("inProgressCount", ((BigDecimal)counts.get("INPROGRESS")).intValue());
-		request.setAttribute("preparingCount", ((BigDecimal)counts.get("PREPARING")).intValue());
-		request.setAttribute("completedCount", ((BigDecimal)counts.get("COMPLETED")).intValue());
-
-		// 상태 값에 따른 총 데이터 수 계산
-		String countKey = status.equals("all") ? "TOTAL" : status.toUpperCase();
-		switch(status) {
-		    case "preparing": countKey = "PREPARING"; break;
-		    case "inProgress": countKey = "INPROGRESS"; break;
-		    case "completed": countKey = "COMPLETED"; break;
-		    default: countKey = "TOTAL";
-		}
-		int totalData = ((BigDecimal)counts.get(countKey)).intValue();
+//		Map<String,Integer> counts = new CourseService().selectCourseStatusCount(loginMember.getMemberNo());
+//		// 수정된 코드
+//		request.setAttribute("totalCount", ((BigDecimal)counts.get("TOTAL")).intValue());
+//		request.setAttribute("inProgressCount", ((BigDecimal)counts.get("INPROGRESS")).intValue());
+//		request.setAttribute("preparingCount", ((BigDecimal)counts.get("PREPARING")).intValue());
+//		request.setAttribute("completedCount", ((BigDecimal)counts.get("COMPLETED")).intValue());
+//
+//		// 상태 값에 따른 총 데이터 수 계산
+//		String countKey = status.equals("all") ? "TOTAL" : status.toUpperCase();
+//		switch(status) {
+//		    case "preparing": countKey = "PREPARING"; break;
+//		    case "inProgress": countKey = "INPROGRESS"; break;
+//		    case "completed": countKey = "COMPLETED"; break;
+//		    default: countKey = "TOTAL";
+//		}
+//		int totalData = ((BigDecimal)counts.get(countKey)).intValue();
+		
+		Map<String,Integer> counts = new HashMap<>();
+		counts.put("total, null)
+		int preparing = new CourseService().selectCourseStatusCountByStatusAndMemberNo();
 		
 		// 상태별 강좌 조회
         int offset = (cpage - 1) * numPerPage;
