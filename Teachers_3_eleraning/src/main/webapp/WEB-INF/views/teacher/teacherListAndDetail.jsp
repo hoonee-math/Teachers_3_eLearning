@@ -74,18 +74,31 @@
 	
 							<!-- 탭 메뉴 -->
 							<div class="tab-menu">
-								<button class="tab-button active">HOME</button>
-								<button class="tab-button">강의목록</button>
-								<button class="tab-button">공지사항만</button>
-								<button class="tab-button">학습 Q&A</button>
-								<button class="tab-button">학습 자료실</button>
-								<button class="tab-button">수강 후기</button>
+								<button class="tab-button active" data-tab="home">HOME</button>
+								<button class="tab-button" data-tab="notice">공지사항</button>
+								<button class="tab-button" data-tab="qna">학습 Q&A</button>
+								<button class="tab-button" data-tab="resources">학습 자료실</button>
+								<button class="tab-button" data-tab="reviews">수강 후기</button>
 							</div>
 	
 							<!-- 탭 콘텐츠 영역 -->
 							<div class="tab-content">
-								<!-- 탭 별 콘텐츠가 들어갈 영역 -->
+							<div id="teacherHome" class="tab-pane active">
+								<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherHome.jsp" />
 							</div>
+							<div id="teacherNotice" class="tab-pane">
+								<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherNotice.jsp" />
+							</div>
+							<div id="teacherQna" class="tab-pane">
+								<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherQna.jsp" />
+							</div>
+							<div id="teacherResources" class="tab-pane">
+								<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherResources.jsp" />
+							</div>
+							<div id="teacherReviews" class="tab-pane">
+								<jsp:include page="${path}/WEB-INF/views/teacher/detailTabs/teacherReviews.jsp" />
+							</div>
+						</div>
 						</div>
 						
 						<!-- 오른쪽 상세 내용 섹션 2 : 리스트 헤더 -->
