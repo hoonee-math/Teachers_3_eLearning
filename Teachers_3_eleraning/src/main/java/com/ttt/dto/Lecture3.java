@@ -21,4 +21,6 @@ public class Lecture3 {
 	private Date createdAt;        // 강의등록날짜
 	private Date updatedAt;        // 강의최종수정날짜
 	private int courseNo;          // 연결된강좌번호
+	
+	private ScheduleEvent3 scheduleEvent; // 이벤트 연결 객체
 }
