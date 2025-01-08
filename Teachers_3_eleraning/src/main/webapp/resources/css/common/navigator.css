@@ -201,19 +201,50 @@
 /* 모바일 대응 미디어 쿼리 */
 @media (max-width: 768px) {
 
-    .mobile-btn-section {
+	.section-title {
+		margin : 0 0 20px 0 !important;
+	}
+	
+	/* 컨텐츠 여백 추가 (모바일 헤더 높이만큼) */
+	.header-container {
+		padding-top: 50px; /* mobile-btn-section 높이만큼 여백 */
+	}
+	
+	.mobile-btn-section {
         display: flex;  /* 모바일에서만 표시 */
         justify-content: space-between;
         align-items: center;
+        padding: 0 20px;
+        background: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    
-    /* 유틸리티 네비게이션 숨김 */
+	/* 모바일 로고 스타일 */
+	.mobile-logo img {
+		height: 30px;
+		width: auto !important;
+	}
+
+	/* 유틸리티 네비게이션 숨김 */
 	.utility-nav {
 		display: none;
 	}
 	.main-nav {
-		display: none;
+		padding: 0;  /* 패딩 제거 */
 		margin-top: 60px;  /* mobile-btn-section 높이만큼 여백 추가 */
+	}
+	/* 모바일 환경에서 main-nav 내부 요소들 숨김 */
+    .main-nav .grade-wrapper,
+    .main-nav .sub-nav {
+        display: none;
+    }
+	/* 모바일에서는 main-nav 로고만 숨김 (mobile-btn-section에 로고가 있으므로) */
+	.main-nav .logo {
+		display: none;
 	}
 	/* 모바일 메뉴 버튼 표시 */
 	.mobile-menu-btn,
@@ -221,6 +252,12 @@
 		position: static; /* absolute 제거 */
 		transform: none; /* transform 제거 */
 		padding: 8px;
+		
+        display: block;
+        font-size: 1.5rem;
+        border: none;
+        background: none;
+        cursor: pointer;
 	}
 	
 	.mobile-menu-btn {
