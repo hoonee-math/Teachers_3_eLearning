@@ -35,7 +35,7 @@
 						<hr style="border: 2px solid #FAB350;">
 						<p>나의 개인정보를 관리할 수 있습니다.</p>
 					</div>
-					<form action="${path}/student/infosave" method="post" onsubmit="return fn_invalidate();">
+					<form action="${path}/member/teacher/profile/save" method="post" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
 					<table>
 						<tr>
 							<th>아이디 *</th>
