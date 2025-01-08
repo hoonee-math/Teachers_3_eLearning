@@ -39,7 +39,6 @@ public class MemberDao {
 	}
 		//이미지 업로드
 	public int insertImage(SqlSession session, Member3 m) {
-		System.out.println("이미지 삽입 시도 : " + m.getImage());
 		return session.insert("image.insertImage", m);
 	}
 	
