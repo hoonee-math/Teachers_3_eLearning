@@ -17,11 +17,11 @@ import com.ttt.dto.Member3;
 import com.ttt.service.MemberService;
 
 @WebServlet("/api/teacher/list")
-public class ApiTeacherListSevlet extends HttpServlet {
+public class ApiTeacherListSevlet이름변경테스트 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private Gson gson = new Gson();
        
-    public ApiTeacherListSevlet() {
+    public ApiTeacherListSevlet이름변경테스트() {
         super();
     }
 
