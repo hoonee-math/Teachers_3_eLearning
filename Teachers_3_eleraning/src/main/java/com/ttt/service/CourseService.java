@@ -73,29 +73,29 @@ public class CourseService {
 		SqlSession session = getSession();
 		try {
 			Map<String, Object> params = new HashMap<>();
-			params.put("memberNo", memberNo);
-			params.put("status", status);
-
-			List<Course3> courses = dao.selectCoursesByTeacher(session, params);
+	        params.put("memberNo", memberNo);
+	        params.put("status", status);
+			
 			Map<String, Object> result = new HashMap<>();
-			result.put("courses", courses);
+			// 강좌 목록 조회
+			List<Course3> courseList = dao.selectCoursesByStatus(session, params);
+			result.put("courses", courseList);
 
-			// 첫 번째 행에서 카운트 정보 추출 (조회 결과가 있는 경우)
-			if (!courses.isEmpty()) {
-				Course3 first = courses.get(0);
-				result.put("totalCount", first.getTotalCount());
-				result.put("preparingCount", first.getPreparingCount());
-				result.put("inProgressCount", first.getInProgressCount());
-				result.put("completedCount", first.getCompletedCount());
-			} else {
-				// 조회 결과가 없는 경우 모든 카운트를 0으로 설정
-				result.put("totalCount", 0);
-				result.put("preparingCount", 0);
-				result.put("inProgressCount", 0);
-				result.put("completedCount", 0);
-			}
+			// 상태별 카운트 조회
+			Map<String, Object> countMap = dao.selectCourseStatusCount(session, memberNo);
 
+			// 각 상태별 카운트를 result에 추가
+			result.put("totalCount", countMap.get("TOTAL"));
+			result.put("preparingCount", countMap.get("PREPARING"));
+			result.put("inProgressCount", countMap.get("INPROGRESS"));
+			result.put("completedCount", countMap.get("COMPLETED"));
+
+			session.commit();
 			return result;
+		} catch (Exception e) {
+			session.rollback();
+			e.printStackTrace();
+			throw e;
 		} finally {
 			session.close();
 		}

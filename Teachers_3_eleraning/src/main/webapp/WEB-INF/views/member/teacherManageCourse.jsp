@@ -51,29 +51,32 @@
 						<h3>준비중 강좌</h3>
 						<p class="stat-number">${preparingCount }개</p>
 					</button>
-					<button class="filter-btn" data-status="completed" onclick="filterByStatus('completed')">
+					<button class="stat-card" data-status="completed" onclick="filterByStatus('completed')">
 						<h3>종료된 강좌</h3>
-						<span class="count">${completedCount}개</span>
+						<p class="stat-number">${completedCount}개</p>
 					</button>
 				</div>
 
 				<!-- 강좌 등록 버튼 -->
 				<div class="course-actions">
-					<button onclick="openModal()" class="btn-primary">
-						<i class="bi bi-plus-circle"></i> 새 강좌 등록
-					</button>
-				</div>
-				<!-- 필터 옵션 영역 -->
-				<div class="course-filters">
 					<select id="displayCount" onchange="changeDisplayCount(this.value)">
 						<option value="5">5개씩 보기</option>
 						<option value="10" selected>10개씩 보기</option>
 						<option value="20">20개씩 보기</option>
 					</select>
+					<button onclick="openModal()" class="btn-primary">
+						<i class="bi bi-plus-circle"></i> 새 강좌 등록
+					</button>
 				</div>
 				<!-- 강좌 목록 테이블 -->
 				<div class="course-list">
 					<table>	
+						<colgroup>
+							<col style="width: 120px;">
+							<col style="width: 60px;">
+							<col style="width: 60px;">
+							<col style="width: 30px;">
+						</colgroup>
 						<thead>
 							<tr>
 								<th>강좌명</th>
