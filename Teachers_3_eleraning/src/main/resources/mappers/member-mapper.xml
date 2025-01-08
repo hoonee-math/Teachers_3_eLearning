@@ -112,10 +112,30 @@
 			WHERE email=#{email}
 	</update> -->
 	
-<!-- 	<update id="updateMember" parameterType="member3">
+	<update id="updateMember" parameterType="member3">
 		UPDATE MEMBER3 SET
-			MEMBER_NAME=#{memberName}, EMAIL=#{email}, MEMBER_PW=#{memberPw} WHERE EMAIL=#{email}			
-	</update> -->
-	
+			MEMBER_NAME=#{memberName}, EMAIL=#{email}, MEMBER_PW=#{memberPw},  MEMBER_ID=#{memberId},
+			PHONE=#{phone}, ADDRESS=#{address}
+		WHERE EMAIL=#{email}			
+	</update>
+	<!-- 학생 정보 UPDATE -->
+	<update id="updateStudent" parameterType="member3">
+		UPDATE STUDENTS3 SET(
+			MEMBER_NO,		GRADE,			SCHOOL_NO
+		) VALUES (
+			#{memberNo},	#{grade},		#{school.schoolNo}
+		)
+	</update>
+
+	<!-- 교사 정보 UPDATE -->
+	<update id="updateTeacher" parameterType="member3">
+		UPDATE TEACHERS3 SET(
+			MEMBER_NO,		TEACHER_SUBJECT,		TEACHER_INFO_TITLE,
+			TEACHER_INFO_CONTENT
+		) VALUES (
+			#{memberNo},	#{teacherSubject},		#{teacherInfoTitle},
+			#{teacherInfoContent}
+		)
+	</update>
 	
 </mapper>
