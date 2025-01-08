@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = {"","/home"})
+@WebServlet(urlPatterns = {"","/home"}, name="indexPage")
 public class ToIndexPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -54,7 +54,7 @@ public class ToIndexPageServlet extends HttpServlet {
 		// 첫 번째 슬라이드
 		Map<String, String> slide1 = new HashMap<>();
 		slide1.put("imageUrl", request.getContextPath() + "/resources/images/common/HoneyT_logo_horizontal.png");
-		slide1.put("title", "2024 수능 대비 얼리버드 할인!");
+		slide1.put("title", "2026 수능 대비 얼리버드 할인!");
 		slide1.put("description", "5월까지 전 강좌 30% 할인된 가격으로 수강하세요.");
 		slide1.put("link", request.getContextPath() + "/event/early-bird");
 		mainSlides.add(slide1);

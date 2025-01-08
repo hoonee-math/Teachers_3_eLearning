@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,8 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = request.getParameter("memberId");
-		String memberPw=request.getParameter("memberPw");
+		String memberPw = request.getParameter("memberPw");
+		String saveId = request.getParameter("remember");
 		
 		Member3 m = new MemberService().selectMemberById(memberId);
 		
@@ -36,6 +38,21 @@ public class LoginServlet extends HttpServlet {
 			// 로그인 유지를 위한 session 정보 저장
 			HttpSession session=request.getSession();
 			session.setAttribute("loginMember", m);
+			
+			// 로그인 유지 체크시 쿠키 생성
+			if(saveId != null) {
+				Cookie c = new Cookie("saveId", m.getMemberId());
+				c.setMaxAge(7*24*60*60);
+				c.setPath("/");
+				response.addCookie(c);
+			} else {
+				// 체크 해제시 쿠키 삭제
+				Cookie c = new Cookie("saveId","");
+				c.setMaxAge(0);
+				c.setPath("/");
+				response.addCookie(c);
+			}
+			
 			// 메인화면으로 리다이렉트 시킴! 이전 주소 날려버리고 재요청!
 			response.sendRedirect(request.getContextPath()); 
 		} else {
