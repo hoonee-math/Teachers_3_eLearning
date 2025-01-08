@@ -1,6 +1,7 @@
 package com.ttt.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -42,5 +43,14 @@ public class LectureDao {
     // 강의와 연결된 일정 조회
     public ScheduleEvent3 selectScheduleEventByLectureNo(SqlSession session, int lectureNo) {
         return session.selectOne("lecture.selectScheduleEventByLectureNo", lectureNo);
+    }
+    
+    // 학생의 수강 강좌 일정 조회
+    public List<Map<String, Object>> selectEventsByStudentNo(SqlSession session, int memberNo) {
+    	return session.selectList("lecture.selectEventsByStudentNo", memberNo);
+    }
+ 	// 교사의 강좌 일정 조회
+    public List<Map<String, Object>> selectEventsByTeacherNo(SqlSession session, int memberNo) {
+    	return session.selectList("lecture.selectEventsByTeacherNo", memberNo);
     }
 }

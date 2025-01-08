@@ -22,25 +22,26 @@
 	<div class="main-container">
 		<div class="main-content">
 			<section class="main-section">
-				<h2>강의 계획 등록</h2>
-				<hr style="border: 2px solid #FAB350;">
-				
 				<!-- 강좌 기본 정보 -->
 				<div class="course-info">
-					<h3>강좌 정보</h3>
+					<h2>${course.courseTitle}</h2>
+					<hr style="border: 2px solid #FAB350;">
 					<div class="info-box">
-						<p><strong>강좌명:</strong> ${course.courseTitle}</p>
 						<p><strong>총 강의 수:</strong> <span id="totalLectures">0</span>회</p>
+						<p><strong>강좌 기간:</strong> 
+							<fmt:formatDate value="${course.beginDate}" pattern="yyyy.MM.dd"/> ~ 
+							<fmt:formatDate value="${course.endDate}" pattern="yyyy.MM.dd"/>
+						</p>
 					</div>
 				</div>
-
+				
 				<!-- 일괄 등록 설정 -->
 				<div class="batch-settings">
 					<h3>일괄 등록 설정</h3>
 					<div class="settings-grid">
 						<div class="setting-group">
 							<label>시작 날짜</label>
-							<input type="date" id="startDate">
+							<input type="date" id="startDate" min="${course.beginDate}" max="${course.endDate}">
 						</div>
 						<div class="setting-group">
 							<label>강의 요일</label>
@@ -56,26 +57,72 @@
 						</div>
 						<div class="setting-group">
 							<label>강의 시간</label>
-							<input type="time" id="lectureTime">
+							<div class="time-selects">
+								<select id="lectureStartTime" class="time-select">
+									<option value="">시작 시간</option>
+									<c:forEach var="hour" begin="9" end="11">
+										<c:forEach var="minute" items="00,30">
+											<option value="${hour}:${minute}">
+												${hour}:${minute}</option>
+										</c:forEach>
+									</c:forEach>
+								</select> <span class="time-separator">~</span> <select
+									id="lectureEndTime" class="time-select">
+									<option value="">종료 시간</option>
+									<c:forEach var="hour" begin="10" end="12">
+										<c:forEach var="minute" items="00,30">
+											<option value="${hour}:${minute}">
+												${hour}:${minute}</option>
+										</c:forEach>
+									</c:forEach>
+								</select>
+							</div>
 						</div>
+						
 						<div class="setting-group">
 							<label>주차 수</label>
 							<input type="number" id="weekCount" min="1" max="16">
 						</div>
+						
 						<button type="button" class="btn-primary" onclick="generateSchedule()">일정 생성</button>
-					</div>
-				</div>
+					</div><!-- /.setting-grid -->
+				</div><!-- /일괄 등록 설정 -->
 
 				<!-- 강의 목록 -->
 				<div class="lecture-list">
 					<h3>강의 목록</h3>
+					<!-- 기존 강의 목록 표시 -->
+					<c:if test="${not empty lectures}">
+						<div id="existingLectureList">
+						<c:forEach items="${lectures}" var="lecture">
+							<div class="lecture-item" data-lecture-no="${lecture.lectureNo}">
+								<div class="lecture-header">
+									<h4>${lecture.lectureOrder}차시</h4>
+									<input type="date" value="${lecture.scheduleEvent.eventStart}" class="lecture-date" readonly>
+									<div class="lecture-time-group">
+										<fmt:formatDate value="${lecture.scheduleEvent.eventStart}" pattern="HH:mm" var="startTime"/>
+										<fmt:formatDate value="${lecture.scheduleEvent.eventEnd}" pattern="HH:mm" var="endTime"/>
+										<input type="text" value="${startTime} ~ ${endTime}" readonly>
+									</div>
+								</div>
+								<div class="lecture-content">
+									<input type="text" class="lecture-title" value="${lecture.lectureTitle}" readonly>
+									<input type="url" class="video-url" value="${lecture.scheduleEvent.videoUrl}" readonly>
+								</div>
+							</div>
+						</c:forEach>
+						</div>
+					</c:if><!-- /기존 강의 목록 표시 -->
+					
+					
+					 <!-- 새로운 강의 추가 영역 -->
 					<button type="button" class="add-lecture-btn" onclick="addLecture()">
 						<i class="bi bi-plus-circle"></i> 강의 추가
 					</button>
 					<div id="lectureContainer">
-						<!-- 여기에 강의가 동적으로 추가됨 -->
+						<!-- 동적으로 강의 아이템이 추가됨 -->
 					</div>
-				</div>
+				</div><!-- /강의 목록 -->
 
 				<!-- 저장 버튼 -->
 				<div class="button-group">
