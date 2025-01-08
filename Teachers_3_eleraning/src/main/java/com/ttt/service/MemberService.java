@@ -75,8 +75,12 @@ public class MemberService {
 	                
 	            } else if(m.getMemberType() == 2) {  // 교사
 	                result = dao.updateTeacher(session, m);
-	                if(result > 0) {
-	                	result = dao.insertImage(session, m);
+	                if(result > 0 && m.getImage() != null) {
+	                	int imageResult = dao.insertImage(session, m);
+	                	
+	                	if(imageResult <= 0) {
+	                		System.out.println("이미지 저장 실패");
+	                	}
 	                }
 	            }
 	            session.commit();

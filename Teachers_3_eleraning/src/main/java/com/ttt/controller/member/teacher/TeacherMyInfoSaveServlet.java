@@ -62,6 +62,11 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 				String originalFileName = mr.getOriginalFileName("profileImageInput");
 				String renamedFileName = mr.getFilesystemName("profileImageInput");
 				
+				System.out.println("==== 파일 업로드 디버깅 ====");
+				System.out.println("원본 파일명: " + originalFileName);
+				System.out.println("변경된 파일명: " + renamedFileName);
+				System.out.println("========================");
+				
 				
 				// Member 객체 업데이트
 				Member3 m = new Member3();
@@ -88,11 +93,15 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 				
 				// 이미지 정보 설정
 				if(originalFileName != null) {
+					System.out.println("이미지 객체 생성 시작");
 					//Map 대신 Image3 객체 사용
 					Image3 image = new Image3();
 					image.setOriname(originalFileName);
 					image.setRenamed(renamedFileName);
 					m.setImage(image);
+					System.out.println("설정된 이미지 정보 : " + image);
+				} else {
+					System.out.println("업로드된 파일이 없음");
 				}
 				
 				// 서비스 호출하여 DB 업데이트
