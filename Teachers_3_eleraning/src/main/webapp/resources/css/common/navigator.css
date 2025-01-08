@@ -245,4 +245,8 @@
 	.logo img {
 		height: 30px; /* 모바일에서는 로고 크기 축소 */
 	}
+	
+	.dday-container {
+		margin-top: 50px;
+	}
 }
