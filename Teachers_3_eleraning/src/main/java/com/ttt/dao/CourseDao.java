@@ -36,18 +36,11 @@ public class CourseDao {
 	public Map<String,Integer> selectCourseStatusCount(SqlSession session, int memberNo){
 		return session.selectOne("course.selectCourseStatusCount",memberNo);
 	}
-	public int selectCoursesByStatusTotal(SqlSession session, int memberNo) {
-		return session.selectOne("course.selectCoursesByStatusTotal",memberNo);
-	}
-	public int selectCoursesByStatusPreparing(SqlSession session, int memberNo) {
-		return session.selectOne("course.selectCoursesByStatusPreparing",memberNo);
-	}
-	public int selectCoursesByStatusInProgress(SqlSession session, int memberNo) {
-		return session.selectOne("course.selectCoursesByStatusInProgress",memberNo);
-	}
-	public int selectCoursesByStatusCompleted(SqlSession session, int memberNo) {
-		return session.selectOne("course.selectCoursesByStatusCompleted",memberNo);
-	}
+
+    // 교사의 강좌 목록 조회 (상태별 필터링 포함)
+    public List<Course3> selectCoursesByTeacher(SqlSession session, Map<String, Object> params) {
+        return session.selectList("course.selectCoursesByTeacher", params);
+    }
 	
 	// 새 강좌 등록
 	public int insertNewCourse(SqlSession session, Course3 c) {

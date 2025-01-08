@@ -51,9 +51,10 @@
 						<h3>준비중 강좌</h3>
 						<p class="stat-number">${preparingCount }개</p>
 					</button>
-					<%-- <button class="filter-btn" data-status="completed" onclick="filterByStatus('completed')">
-						종료된 강좌 <span class="count">${completedCount}</span>
-					</button> --%>
+					<button class="filter-btn" data-status="completed" onclick="filterByStatus('completed')">
+						<h3>종료된 강좌</h3>
+						<span class="count">${completedCount}개</span>
+					</button>
 				</div>
 
 				<!-- 강좌 등록 버튼 -->
@@ -97,15 +98,37 @@
 									</td>
 									<td><fmt:formatDate value="${course.createdAt}" pattern="yyyy.MM.dd"/></td>
 									<td>
-										<button onclick="location.href='${path}/teacher/course/edit/${course.courseNo}'" 
-												class="btn-secondary">수정</button>
-										<button onclick="viewCourseDetail(${course.courseNo})" 
-												class="btn-secondary">상세</button>
+										<button onclick="goToLectureManage(${course.courseNo})" 
+				                                class="btn-primary">강의 관리</button>
 									</td>
 								</tr>
 							</c:forEach>
+							<c:if test="${empty courses}">
+								<tr>
+									<td colspan="4" class="no-data">등록된 강좌가 없습니다.</td>
+								</tr>
+							</c:if>
 						</tbody>
 					</table>
+					
+					<!-- 페이지네이션 -->
+					<div class="pagination">
+						<!-- 이전 페이지 -->
+						<c:if test="${cpage > 1}">
+							<a href="javascript:void(0)" onclick="changePage(${cpage-1})">&laquo;</a>
+						</c:if>
+
+						<!-- 페이지 번호 -->
+						<c:forEach var="i" begin="${pageStart}" end="${pageEnd}">
+							<a href="javascript:void(0)" onclick="changePage(${i})"
+								class="${i == cpage ? 'active' : ''}">${i}</a>
+						</c:forEach>
+
+						<!-- 다음 페이지 -->
+						<c:if test="${cpage < totalPage}">
+							<a href="javascript:void(0)" onclick="changePage(${cpage+1})">&raquo;</a>
+						</c:if>
+					</div>
 				</div>
 			</section>
 		</div>

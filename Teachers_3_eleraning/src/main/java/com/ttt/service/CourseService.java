@@ -2,6 +2,7 @@ package com.ttt.service;
 
 import static com.ttt.common.SqlSessionTemplate.getSession;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,28 +13,29 @@ import com.ttt.dto.Course3;
 
 public class CourseService {
 	private CourseDao dao = new CourseDao();
-	
+
 	// 코스 번호로 해당 코스 전체 정보 조회
 	public Course3 selectCourseByNo(int courseNo) {
 		SqlSession session = getSession();
+		session.close();
 		return dao.selectCourseByNo(session, courseNo);
 	}
-	
+
 	public List<Course3> selectCourseBySubjectNo(Map<String, Object> param) {
 		SqlSession session = getSession();
 		List<Course3> courses = dao.selectCourseBySubjectNo(session, param);
 		session.close();
-		
+
 		return courses;
 	}
-	
+
 	// 트랜잭션을 통한 강좌 상태 업데이트
 	public int updateCourseStatus(int courseNo) {
 		SqlSession session = getSession();
 		int result = 0;
 		try {
 			result = dao.updateCourseStatus(session, courseNo);
-			if (result>=1) {
+			if (result >= 1) {
 				session.commit();
 			} else {
 				session.rollback();
@@ -66,99 +68,50 @@ public class CourseService {
 		return courses;
 	}
 
-	// 상태별 강좌 수 조회
-	public Map<String, Integer> selectCourseStatusCount(int memberNo) {
+	// 교사의 강좌 목록 조회 (상태별 필터링 포함)
+	public Map<String, Object> selectCoursesByTeacher(int memberNo, String status) {
 		SqlSession session = getSession();
-		Map<String, Integer> counts = null;
 		try {
-			// 모든 강좌의 상태를 먼저 업데이트
-			int updateResult1 = dao.updateAllCoursesStatus(session, memberNo);
-			System.out.println("모든 강좌 상태 업데이트 결과 : "+ updateResult1);
-			// 상태별 카운트 조회
-			counts = dao.selectCourseStatusCount(session, memberNo);
-			System.out.println("상태별 카운트 조회 결과 map counts : "+counts);
-			session.commit();
-		} catch (Exception e) {
-			session.rollback();
-			e.printStackTrace();
+			Map<String, Object> params = new HashMap<>();
+			params.put("memberNo", memberNo);
+			params.put("status", status);
+
+			List<Course3> courses = dao.selectCoursesByTeacher(session, params);
+			Map<String, Object> result = new HashMap<>();
+			result.put("courses", courses);
+
+			// 첫 번째 행에서 카운트 정보 추출 (조회 결과가 있는 경우)
+			if (!courses.isEmpty()) {
+				Course3 first = courses.get(0);
+				result.put("totalCount", first.getTotalCount());
+				result.put("preparingCount", first.getPreparingCount());
+				result.put("inProgressCount", first.getInProgressCount());
+				result.put("completedCount", first.getCompletedCount());
+			} else {
+				// 조회 결과가 없는 경우 모든 카운트를 0으로 설정
+				result.put("totalCount", 0);
+				result.put("preparingCount", 0);
+				result.put("inProgressCount", 0);
+				result.put("completedCount", 0);
+			}
+
+			return result;
 		} finally {
 			session.close();
 		}
-		return counts;
 	}
-	
-	// 전체유형 수 겁색 (원초적으로 각각 계산해서 넘겨주자..)
-	public int selectCoursesByStatusTotal(int memberNo) {
-		SqlSession session = getSession();
-		int result = 0;
-		try {
-			result = dao.selectCoursesByStatusTotal(session, memberNo);
-			session.commit();
-		}catch(Exception e) {
-			session.rollback();
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
-		return result;
-	}
-	// 전체유형 수 겁색 (원초적으로 각각 계산해서 넘겨주자..)
-	public int selectCoursesByStatusPreparing(int memberNo) {
-		SqlSession session = getSession();
-		int result = 0;
-		try {
-			result = dao.selectCoursesByStatusPreparing(session, memberNo);
-			session.commit();
-		}catch(Exception e) {
-			session.rollback();
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
-		return result;
-	}
-	// 전체유형 수 겁색 (원초적으로 각각 계산해서 넘겨주자..)
-	public int selectCoursesByStatusInProgress(int memberNo) {
-		SqlSession session = getSession();
-		int result = 0;
-		try {
-			result = dao.selectCoursesByStatusInProgress(session, memberNo);
-			session.commit();
-		}catch(Exception e) {
-			session.rollback();
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
-		return result;
-	}
-	// 전체유형 수 겁색 (원초적으로 각각 계산해서 넘겨주자..)
-	public int selectCoursesByStatusCompleted(int memberNo) {
-		SqlSession session = getSession();
-		int result = 0;
-		try {
-			result = dao.selectCoursesByStatusCompleted(session, memberNo);
-			session.commit();
-		}catch(Exception e) {
-			session.rollback();
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
-		return result;
-	}
-	
-	//새 강좌 등록
+
+	// 새 강좌 등록
 	public int insertNewCourse(Course3 c) {
 		SqlSession session = getSession();
 		return dao.insertNewCourse(session, c);
 	}
 
-	//회원의 강의 존재여부 확인 - 보류
+	// 회원의 강의 존재여부 확인 - 보류
 	public boolean checkEnrollment(int memberNo, int courseNo) {
 		SqlSession session = getSession();
-		//int result = dao.checkEnrollment(session, memberNo);
+		// int result = dao.checkEnrollment(session, memberNo);
 		return false;
 	}
-	
+
 }

@@ -92,7 +92,7 @@
 	</update>
 	
 	<!-- 특정 교사의 강좌 상태별 조회 -->
-	<select id="selectCoursesByStatus" parameterType="int" resultType="Course3">
+	<select id="selectCoursesByStatus" parameterType="map" resultType="Course3">
 		SELECT * FROM COURSE3 
 		WHERE MEMBER_NO = #{memberNo}
 		<choose>
@@ -134,25 +134,31 @@
 		FROM COURSE3
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
-	<select id="selectCoursesByStatusTotal" parameterType="int" resultType="int">
-		SELECT COUNT(*) 
-		FROM COURSE3
-		WHERE MEMBER_NO = #{memberNo}
-	</select>
-	<select id="selectCoursesByStatusPreparing" parameterType="int" resultType="int">
-		SELECT COUNT(*) 
-		FROM COURSE3
-		WHERE MEMBER_NO = #{memberNo} AND COURSE_STATUS = 0
-	</select>
-	<select id="selectCoursesByStatusInProgress" parameterType="int" resultType="int">
-		SELECT COUNT(*) 
-		FROM COURSE3
-		WHERE MEMBER_NO = #{memberNo} AND COURSE_STATUS = 1 
-	</select>
-	<select id="selectCoursesByStatusCompleted" parameterType="int" resultType="int">
-		SELECT COUNT(*) 
-		FROM COURSE3
-		WHERE MEMBER_NO = #{memberNo} AND COURSE_STATUS = 2 
-	</select>
 	
+	<!-- 교사의 강좌 목록 조회 (상태별 카운트 포함) -->
+	<select id="selectCoursesByTeacher" parameterType="map"
+		resultMap="courseMap">
+		SELECT
+			C.*,
+			COUNT(*) OVER() 
+				as total_count,
+			SUM(CASE WHEN C.course_status = 0 THEN 1 ELSE 0 END) OVER() 
+				as preparing_count,
+			SUM(CASE WHEN C.course_status = 1 THEN 1 ELSE 0 END) OVER() 
+				as in_progress_count,
+			SUM(CASE WHEN C.course_status = 2 THEN 1 ELSE 0 END) OVER() 
+				as completed_count
+		FROM COURSE3 C
+		WHERE C.member_no = #{memberNo}
+		<if test="status != null and status != 'all'">
+			AND (
+			CASE
+				WHEN #{status} = 'preparing'  THEN course_status = 0
+				WHEN #{status} = 'inProgress' THEN course_status = 1
+				WHEN #{status} = 'completed'  THEN course_status = 2
+			END
+			)
+		</if>
+		ORDER BY C.created_at DESC
+	</select>	
 </mapper>

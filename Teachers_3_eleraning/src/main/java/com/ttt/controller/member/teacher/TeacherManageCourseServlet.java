@@ -40,56 +40,19 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		// 세션에서 교사 정보 가져오기
 		HttpSession session = request.getSession();
 		Member3 loginMember = (Member3)session.getAttribute("loginMember");
-		// System.out.println("TeacherManageCourseRegisterServlet : "+loginMember);
-		
-		int total = new CourseService().selectCoursesByStatusTotal(loginMember.getMemberNo());
-		int preparing = new CourseService().selectCoursesByStatusPreparing(loginMember.getMemberNo());; // 준비중 0
-		int inProgress= new CourseService().selectCoursesByStatusInProgress(loginMember.getMemberNo());; // 진행중 1
-		int completed = new CourseService().selectCoursesByStatusCompleted(loginMember.getMemberNo());; // 완료 2
-		// System.out.println(total +","+preparing);
-		request.setAttribute("totalCount", total);
-		request.setAttribute("preparingCount", inProgress);
-		request.setAttribute("inProgressCount", preparing);
-		request.setAttribute("completedCount", completed);
-		
-		// 상태별 강좌 조회
-        int offset = (cpage - 1) * numPerPage;
-        Map<String, Object> params = new HashMap<>();
-        params.put("memberNo", loginMember.getMemberNo());
-        params.put("status", status);
-        params.put("offset", offset);
-        params.put("numPerPage", numPerPage);
-        System.out.println("params : "+params);
-		
-		// 상태에 따른 강좌 목록 조회
-		List<Course3> courses = new CourseService().selectCoursesByStatus(params, loginMember.getMemberNo());
-		
-		
-		int totalData = 0;
-		switch(status) {
-			case "all" : totalData=total; break;
-			case "inProgress" : totalData=inProgress; break;
-			case "preparing" : totalData=preparing; break;
-			case "completed" : totalData=completed; break;
-			default : break;
-		}
-		// 페이징 처리 계산
-		int totalPage = (int)Math.ceil((double)totalData/numPerPage);
-//		int pageBarSize = 5;
-//		int pageStart = ((cpage-1)/pageBarSize) * pageBarSize + 1;
-//		int pageEnd = pageStart + pageBarSize - 1;
-//		if(pageEnd > totalPage) {
-//			pageEnd = totalPage;
-//		}
-		
+
+		// 강좌 목록과 상태별 카운트 조회
+		Map<String, Object> result = new CourseService().selectCoursesByTeacher(loginMember.getMemberNo(), status);
+
 		// request에 데이터 저장
-		request.setAttribute("courses", courses);
-//		request.setAttribute("pageStart", pageStart);
-//		request.setAttribute("pageEnd", pageEnd);
-		request.setAttribute("totalPage", totalPage);
-		request.setAttribute("cpage", cpage);
-		request.setAttribute("numPerPage", numPerPage);
-		request.setAttribute("currentStatus", status);
+		request.setAttribute("courses", result.get("courses"));
+        request.setAttribute("totalCount", result.get("totalCount"));
+        request.setAttribute("preparingCount", result.get("preparingCount"));
+        request.setAttribute("inProgressCount", result.get("inProgressCount"));
+        request.setAttribute("completedCount", result.get("completedCount"));
+        request.setAttribute("cpage", cpage);
+        request.setAttribute("numPerPage", numPerPage);
+        request.setAttribute("currentStatus", status);
 		
 		request.getRequestDispatcher("/WEB-INF/views/member/teacherManageCourse.jsp").forward(request, response);
 
