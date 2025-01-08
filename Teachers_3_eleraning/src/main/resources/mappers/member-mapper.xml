@@ -60,7 +60,10 @@
 	</insert>
 
 
-	
+	<select id="selectAllMember" resultMap="memberMap">
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, EMAIL, ENROLL_DATE
+		FROM MEMBER3
+ 	</select>
 	<select id="checkEmailDuplicateByEmail" parameterType="member3" resultMap="memberMap">
 		SELECT EMAIL FROM MEMBER3 WHERE EMAIL=#{email}
 	</select> 

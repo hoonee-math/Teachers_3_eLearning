@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.ttt.dto.Member2;
 import com.ttt.dto.Member3;
 
 public class MemberDao {
@@ -60,6 +61,12 @@ public class MemberDao {
 	}
 	public Member3 selectMemberByNameAndEmail(SqlSession session, Member3 m) {
 		return session.selectOne("member.selectMemberByNameAndEmail",m);
+	}
+	
+	// 관리자 메뉴 : 전체 멤버 리스트 출력
+	public List<Member3> selectAllMember(SqlSession session){
+		System.out.println("DAO - 전체 멤버 리스트 출력 시작");
+		return session.selectList("member3.selectAllMember");
 	}
 	
 	
