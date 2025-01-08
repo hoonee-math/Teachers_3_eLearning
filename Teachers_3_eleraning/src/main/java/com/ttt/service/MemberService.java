@@ -18,9 +18,8 @@ public class MemberService {
 	/* 회원가입 서비스 */
 	public int insertMember(Member3 m) {
 		SqlSession session=getSession();
-	    int result = 0;
+	    int result = dao.insertMember(session, m);
 	    try {
-	        result = dao.insertMember(session, m);
 	        System.out.println("db에 기본값 저장 후 객체 정보 m : "+m.toString());
 	        if(result > 0) {
 	        	if(m.getMemberType() == 1) {  // 학생
@@ -65,23 +64,31 @@ public class MemberService {
 	
 	/* 학생의 회원 정보 수정 서비스*/
 	public int updateStudent(Member3 m) {
-		SqlSession session = getSession();
-		int result = 0;
-		try {
-			if(result > 0) {
-			result = dao.updateMember(session, m);
-			session.commit();
-			}else {
-				session.rollback();
-			}
-			
-		}catch(Exception e) {
-				e.printStackTrace();
-			}finally {
-				session.close();
-			}
-			return result;
-			}
+		SqlSession session=getSession();
+	    int result = 0;
+	    try {
+	    	result = dao.updateMember(session, m);
+	        System.out.println("db에 기본값 저장 후 객체 정보 m : "+m.toString());
+	        if(result > 0) {
+	        	if(m.getMemberType() == 1) {  // 학생
+	                result = dao.updateStudent(session, m);
+	                
+	            } else if(m.getMemberType() == 2) {  // 교사
+	                result = dao.updateTeacher(session, m);
+	            }
+	            session.commit();
+	        } else {
+	            session.rollback();
+	        }
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	        session.rollback();
+	        throw e;
+	    } finally {
+	        session.close();
+	    }
+		return result;
+	}
 	// 과목을 distinct 로 리스트 출력
 	public List<String> selectSubjects(){
 		SqlSession session=getSession();

@@ -1,103 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="lecture">
-	
-	<resultMap id="lectureMap" type="Lecture3">
-		<id column="lecture_no" property="lectureNo"/>
-		<result column="lecture_title" property="lectureTitle"/>
-		<result column="lecture_order" property="lectureOrder"/>
-		<result column="lecture_desc" property="lectureDesc"/>
-		<result column="lecture_status" property="lectureStatus"/>
-		<result column="created_at" property="createdAt"/>
-		<result column="updated_at" property="updatedAt"/>
-		<result column="course_no" property="courseNo"/>
-		<!-- 연관된 일정 정보 -->
-		<association property="scheduleEvent" resultMap="scheduleEventMap"/>
-	</resultMap>
-	
-	<resultMap id="scheduleEventMap" type="ScheduleEvent3">
-		<id column="event_no" property="eventNo"/>
-		<result column="calendar_id" property="calendarId"/>
-		<result column="event_category" property="eventCategory"/>
-		<result column="event_title" property="eventTitle"/>
-		<result column="event_start" property="eventStart"/>
-		<result column="event_end" property="eventEnd"/>
-		<result column="video_url" property="videoUrl"/>
-		<result column="created_at" property="createdAt"/>
-	</resultMap>
-	
-	<!-- 강좌별 강의 목록 조회 -->
-	<select id="selectLecturesByCourseNo" parameterType="int" resultMap="lectureMap">
-		SELECT L.*, 
-			   SE.event_no, SE.calendar_id, SE.event_category,
-			   SE.event_title, SE.event_start, SE.event_end,
-			   SE.video_url, SE.created_at as event_created_at
-		FROM LECTURE3 L
-		LEFT JOIN SCHEDULE_EVENT3 SE ON L.lecture_no = SE.lecture_no
-		WHERE L.course_no = #{courseNo}
-		ORDER BY L.lecture_order
-	</select>
-	
-	<!-- 강의 등록 -->
-	<insert id="insertLecture" parameterType="Lecture3">
-		<selectKey keyProperty="lectureNo" resultType="int" order="BEFORE">
-			SELECT SEQ_LECTURE3_NO.NEXTVAL FROM DUAL
-		</selectKey>
-		INSERT INTO LECTURE3 (
-			lecture_no, lecture_title, lecture_order,
-			lecture_desc, lecture_status, course_no,
-			created_at, updated_at
-		) VALUES (
-			#{lectureNo}, #{lectureTitle}, #{lectureOrder},
-			#{lectureDesc}, #{lectureStatus}, #{courseNo},
-			SYSDATE, SYSDATE
-		)
-	</insert>
-	
-	<!-- 강의 일정 등록 -->
-	<insert id="insertScheduleEvent" parameterType="ScheduleEvent3">
-		<selectKey keyProperty="eventNo" resultType="int" order="BEFORE">
-			SELECT SEQ_SCHEDULE_EVENT3_NO.NEXTVAL FROM DUAL
-		</selectKey>
-		INSERT INTO SCHEDULE_EVENT3 (
-			event_no, calendar_id, event_category,
-			event_title, event_start, event_end,
-			lecture_no, video_url, created_at
-		) VALUES (
-			#{eventNo}, #{calendarId}, 'time',
-			#{eventTitle}, #{eventStart}, #{eventEnd},
-			#{lectureNo}, #{videoUrl}, SYSDATE
-		)
-	</insert>
-	
-	<!-- 강의 수정 -->
-	<update id="updateLecture" parameterType="Lecture3">
-		UPDATE LECTURE3 SET
-			lecture_title = #{lectureTitle},
-			lecture_order = #{lectureOrder},
-			lecture_desc = #{lectureDesc},
-			lecture_status = #{lectureStatus},
-			updated_at = SYSDATE
-		WHERE lecture_no = #{lectureNo}
-	</update>
-	
-	<!-- 일정 수정 -->
+    
+    <resultMap id="lectureMap" type="Lecture3">
+        <id column="lecture_no" property="lectureNo"/>
+        <result column="lecture_title" property="lectureTitle"/>
+        <result column="lecture_order" property="lectureOrder"/>
+        <result column="lecture_desc" property="lectureDesc"/>
+        <result column="lecture_status" property="lectureStatus"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="course_no" property="courseNo"/>
+        <!-- 연관된 일정 정보 -->
+        <association property="scheduleEvent" resultMap="scheduleEventMap"/>
+    </resultMap>
+    
+    <resultMap id="scheduleEventMap" type="ScheduleEvent3">
+        <id column="event_no" property="eventNo"/>
+        <result column="calendar_id" property="calendarId"/>
+        <result column="event_category" property="eventCategory"/>
+        <result column="event_title" property="eventTitle"/>
+        <result column="event_start" property="eventStart"/>
+        <result column="event_end" property="eventEnd"/>
+        <result column="video_url" property="videoUrl"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+    
+    <!-- 강좌별 강의 목록 조회 -->
+    <select id="selectLecturesByCourseNo" parameterType="int" resultMap="lectureMap">
+        SELECT L.*, 
+               SE.event_no, SE.calendar_id, SE.event_category,
+               SE.event_title, SE.event_start, SE.event_end,
+               SE.video_url, SE.created_at as event_created_at
+        FROM LECTURE3 L
+        LEFT JOIN SCHEDULE_EVENT3 SE ON L.lecture_no = SE.lecture_no
+        WHERE L.course_no = #{courseNo}
+        ORDER BY L.lecture_order
+    </select>
+    
+    <!-- 강의 등록 -->
+    <insert id="insertLecture" parameterType="Lecture3">
+        <selectKey keyProperty="lectureNo" resultType="int" order="BEFORE">
+            SELECT SEQ_LECTURE3_NO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO LECTURE3 (
+            lecture_no, lecture_title, lecture_order,
+            lecture_desc, lecture_status, course_no,
+            created_at, updated_at
+        ) VALUES (
+            #{lectureNo}, #{lectureTitle}, #{lectureOrder},
+            #{lectureDesc}, #{lectureStatus}, #{courseNo},
+            SYSDATE, SYSDATE
+        )
+    </insert>
+    
+    <!-- 강의 일정 등록 -->
+    <insert id="insertScheduleEvent" parameterType="ScheduleEvent3">
+        <selectKey keyProperty="eventNo" resultType="int" order="BEFORE">
+            SELECT SEQ_SCHEDULE_EVENT3_NO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO SCHEDULE_EVENT3 (
+            event_no, calendar_id, event_category,
+            event_title, event_start, event_end,
+            lecture_no, video_url, created_at
+        ) VALUES (
+            #{eventNo}, #{calendarId}, 'time',
+            #{eventTitle}, #{eventStart}, #{eventEnd},
+            #{lectureNo}, #{videoUrl}, SYSDATE
+        )
+    </insert>
+    
+    <!-- 강의 수정 -->
+    <update id="updateLecture" parameterType="Lecture3">
+        UPDATE LECTURE3 SET
+            lecture_title = #{lectureTitle},
+            lecture_order = #{lectureOrder},
+            lecture_desc = #{lectureDesc},
+            lecture_status = #{lectureStatus},
+            updated_at = SYSDATE
+        WHERE lecture_no = #{lectureNo}
+    </update>
+    
+    <!-- 일정 수정 -->
 	<update id="updateScheduleEvent" parameterType="ScheduleEvent3">
-		UPDATE SCHEDULE_EVENT3 SET
-			event_title = #{eventTitle},
-			event_start = #{eventStart},
-			event_end = #{eventEnd},
-			video_url = #{videoUrl}
-		WHERE lecture_no = #{lectureNo}
-	</update>
-	
-	<!-- 강의 삭제 (cascade 설정되어 있다고 가정) -->
-	<delete id="deleteLecture" parameterType="int">
-		DELETE FROM LECTURE3 WHERE lecture_no = #{lectureNo}
-	</delete>
-	
-	<!-- 강의 일정 조회 -->
-	<select id="selectScheduleEventByLectureNo" parameterType="int" resultMap="scheduleEventMap">
-		SELECT * FROM SCHEDULE_EVENT3 WHERE lecture_no = #{lectureNo}
-	</select>
+        UPDATE SCHEDULE_EVENT3 SET
+            event_title = #{eventTitle},
+            event_start = #{eventStart},
+            event_end = #{eventEnd},
+            video_url = #{videoUrl}
+        WHERE lecture_no = #{lectureNo}
+    </update>
+    
+    <!-- 강의 삭제 (cascade 설정되어 있다고 가정) -->
+    <delete id="deleteLecture" parameterType="int">
+        DELETE FROM LECTURE3 WHERE lecture_no = #{lectureNo}
+    </delete>
+    
+    <!-- 강의 일정 조회 -->
+    <select id="selectScheduleEventByLectureNo" parameterType="int" resultMap="scheduleEventMap">
+        SELECT * FROM SCHEDULE_EVENT3 WHERE lecture_no = #{lectureNo}
+    </select>
 </mapper>

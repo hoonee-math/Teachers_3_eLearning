@@ -8,6 +8,12 @@ import org.apache.ibatis.session.SqlSession;
 import com.ttt.dto.Course3;
 
 public class CourseDao {
+	
+	// 코스 번호로 해당 코스 전체 정보 조회
+	public Course3 selectCourseByNo(SqlSession session, int courseNo) {
+		return session.selectOne("course.selectCourseByNo",courseNo);
+	}
+	
 	public List<Course3> selectCourseBySubjectNo(SqlSession session, Map<String, Object> param) {
 		return session.selectList("course.selectCourseBySubjectNo", param);
 	}

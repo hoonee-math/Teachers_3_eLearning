@@ -45,7 +45,7 @@ public class StudentMyInfoSaveServlet extends HttpServlet {
 				String schoolNo = request.getParameter("schoolNo");
 				System.out.println(schoolNo);
 				
-				//변경된 것이 있는지 확인 하는 용도
+				//업데이트 완료(1)또는 실패(0)을 받는 함수
 				int updateCount = 0;
 				
 				//새로 들어온 정보와 세션 정보가 일치하지 않으면 새정보 저장
@@ -70,6 +70,7 @@ public class StudentMyInfoSaveServlet extends HttpServlet {
                         School12 school = new School12();
                         school.setSchoolNo(newSchoolNo);
                         m.setSchool(school);
+                        System.out.println("학교번호가져옴");
                     }
                 }
 				}catch(Exception e) {
@@ -99,11 +100,6 @@ public class StudentMyInfoSaveServlet extends HttpServlet {
 			
 		}
 		
-		
-		
-		
-		//저장되었는지 실패하였는지에 대한 메세지를 띄워주는 페이지로 이동
-		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		
 	}
 

@@ -21,6 +21,7 @@ public class Member3 {
 	private int memberType; // 관리자 0, 학생: 1, 선생님: 2
 	private Date enrollDate;
 	private String address;
+	private int schoolNo;
 	
 	/* Student3, Teacher3 클래스 만들지 않고 Member3 만 사용 */
 	
