@@ -63,7 +63,7 @@ public class MemberService {
 	}
 	
 	/* 학생의 회원 정보 수정 서비스*/
-	public int updateStudent(Member3 m) {
+	public int updateMember(Member3 m) {
 		SqlSession session=getSession();
 	    int result = 0;
 	    try {
@@ -94,5 +94,6 @@ public class MemberService {
 		SqlSession session=getSession();
 		return dao.selectSubjects(session);
 	}
+	
 }
 	
