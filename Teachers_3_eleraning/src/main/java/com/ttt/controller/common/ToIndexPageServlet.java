@@ -27,26 +27,7 @@ public class ToIndexPageServlet extends HttpServlet {
         // 세션 체크 
         HttpSession session = request.getSession();
         
-//        // (더미데이터) 세션에 로그인 정보가 없을 경우에만 테스트 데이터 생성
-//        if(session.getAttribute("loginMember") == null) {
-//            // 테스트용 회원 데이터 Map 생성 (SQL의 USERS, STUDENTS 테이블 구조 참고)
-//            Map<String, Object> memberMap = new HashMap<>();
-//            memberMap.put("memberNo", 1);
-//            memberMap.put("memberId", "testuser");
-//            memberMap.put("memberName", "테스트유저");
-//            memberMap.put("email", "test@test.com");
-//            memberMap.put("memberPhone", "010-1234-5678");
-//            memberMap.put("memberType", 1); // 1: 학생
-//            memberMap.put("enrollDate", new Date());
-//            memberMap.put("memberAddress", "서울시 강남구");
-//            memberMap.put("grade", 1); // 고1
-//            memberMap.put("schoolNo", 1234);
-//            
-//            // 세션에 저장
-//            session.setAttribute("loginMember", memberMap);
-//        }
-        
-        System.out.println("현재 로그인 세션 정보 : "+session.getAttribute("loginMember"));
+        //System.out.println("현재 로그인 세션 정보 : "+session.getAttribute("loginMember"));
 
 		// (더미데이터) 섹션1: 광고 슬라이드
 		List<Map<String, String>> mainSlides = new ArrayList<>();
@@ -72,8 +53,6 @@ public class ToIndexPageServlet extends HttpServlet {
 
 		// 콘솔에 전달된 데이터 확인
 		//System.out.println("메인 슬라이드 데이터 설정: " + mainSlides);
-		
-		
 		
 	    // (더미데이터) 학생용 수강중인 강좌
 	    List<Map<String, Object>> studentCourses = new ArrayList<>();
@@ -139,8 +118,6 @@ public class ToIndexPageServlet extends HttpServlet {
 	    
 	    request.setAttribute("mainTeachers", mainTeachers);
 	    //System.out.println("대표 강사진 데이터 설정: " + mainTeachers);
-	    
-	    
 	    
 	    
 	    // (더미데이터) 인기 강좌 메인 화면에 출력할 데이터
