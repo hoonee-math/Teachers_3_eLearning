@@ -16,6 +16,13 @@
 
 <body>
 <style>
+* {
+    /* border: 1px solid pink; */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
 table {
 	margin-top: 40px;
 	table-layout: fixed;
@@ -152,9 +159,9 @@ li>a:hover {
 			<section class="main-section mm-container">
 				<div>
 					<div>
-						<h2>회원 목록</h2>
+						<h2 style="font-size: 1.8em; margin-bottom:10px;">회원 목록</h2>
 						<hr style="border:2px solid #FAB350;">
-						<p>회원을 조회, 경고, 정지 등 관리할 수 있는 페이지 입니다.</p>
+						<p style="margin-top:15px; font-size: 1.1em; color: #666;">회원을 조회, 경고, 정지 등 관리할 수 있습니다.</p>
 					</div>
 				</div>
 				
