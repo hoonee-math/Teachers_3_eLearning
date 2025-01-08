@@ -83,23 +83,34 @@ public class LectureService {
 		return result;
 	}
 	
-	// 학생의 수강 강좌 일정 조회
-	public List<Map<String, Object>> selectEventsByStudentNo(int memberNo) {
+	// 학생의 수강 강좌 일정 조회 (학년 필터 포함)
+	public List<Map<String, Object>> selectEventsByStudentNo(Map<String, Object> params) {
 		SqlSession session = getSession();
 		try {
-			return dao.selectEventsByStudentNo(session, memberNo);
+			return dao.selectEventsByStudentNo(session, params);
+		} finally {
+			session.close();
+		}
+	}
+	
+	// 교사의 강좌 일정 조회 (학년 필터 포함)
+	public List<Map<String, Object>> selectEventsByTeacherNo(Map<String, Object> params) {
+		SqlSession session = getSession();
+		try {
+			return dao.selectEventsByTeacherNo(session, params);
+		} finally {
+			session.close();
+		}
+	}
+	
+	// 학년별 강의 일정 조회
+	public List<Map<String, Object>> selectEventsByGrade(Map<String, Object> params) {
+		SqlSession session = getSession();
+		try {
+			return dao.selectEventsByGrade(session, params);
 		} finally {
 			session.close();
 		}
 	}
 
-	// 교사의 강좌 일정 조회
-	public List<Map<String, Object>> selectEventsByTeacherNo(int memberNo) {
-		SqlSession session = getSession();
-		try {
-			return dao.selectEventsByTeacherNo(session, memberNo);
-		} finally {
-			session.close();
-		}
-	}
 }

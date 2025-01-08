@@ -45,12 +45,16 @@ public class LectureDao {
         return session.selectOne("lecture.selectScheduleEventByLectureNo", lectureNo);
     }
     
-    // 학생의 수강 강좌 일정 조회
-    public List<Map<String, Object>> selectEventsByStudentNo(SqlSession session, int memberNo) {
-    	return session.selectList("lecture.selectEventsByStudentNo", memberNo);
-    }
- 	// 교사의 강좌 일정 조회
-    public List<Map<String, Object>> selectEventsByTeacherNo(SqlSession session, int memberNo) {
-    	return session.selectList("lecture.selectEventsByTeacherNo", memberNo);
-    }
+	// 학생의 수강 강좌 일정 조회 (학년 필터 포함)
+	public List<Map<String, Object>> selectEventsByStudentNo(SqlSession session, Map<String, Object> params) {
+		return session.selectList("lecture.selectEventsByStudentNo");
+	}
+	// 교사의 강좌 일정 조회 (학년 필터 포함)
+	public List<Map<String, Object>> selectEventsByTeacherNo(SqlSession session, Map<String, Object> params) {
+		return session.selectList("lecture.selectEventsByTeacherNo");
+	}
+	// 학년별 강의 일정 조회
+	public List<Map<String, Object>> selectEventsByGrade(SqlSession session, Map<String, Object> params) {
+		return session.selectList("lecture.selectEventsByGrade"); 
+	}
 }

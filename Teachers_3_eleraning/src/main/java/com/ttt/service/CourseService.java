@@ -153,4 +153,12 @@ public class CourseService {
 		SqlSession session = getSession();
 		return dao.insertNewCourse(session, c);
 	}
+
+	//회원의 강의 존재여부 확인 - 보류
+	public boolean checkEnrollment(int memberNo, int courseNo) {
+		SqlSession session = getSession();
+		//int result = dao.checkEnrollment(session, memberNo);
+		return false;
+	}
+	
 }

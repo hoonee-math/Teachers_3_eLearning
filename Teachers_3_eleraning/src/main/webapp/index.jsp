@@ -161,7 +161,7 @@ section {
 				<div class="calendar-controls">
 					<!-- 현재 선택된 학년 표시 -->
 					<div class="current-grade">
-						<span>고${grade} 강의 일정</span>
+						<span>고${gradeNum} 강의 일정</span>
 					</div>
 
 					<!-- 로그인한 경우에만 표시되는 토글 -->
