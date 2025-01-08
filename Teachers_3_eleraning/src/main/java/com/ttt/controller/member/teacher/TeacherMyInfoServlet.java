@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.ttt.dto.Member3;
 
-@WebServlet("/teacher/profile")
+@WebServlet("/member/teacher/profile")
 public class TeacherMyInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

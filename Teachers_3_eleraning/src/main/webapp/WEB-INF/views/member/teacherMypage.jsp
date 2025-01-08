@@ -45,7 +45,7 @@
 								<p>관리할 수 있습니다.</p>
 							</div>
 							<div>
-								<a href="${path}/teacher/profile">프로필 관리하기</a>
+								<a href="${path}/member/teacher/profile">프로필 관리하기</a>
 							</div>
 						</div>
 						<!-- 강좌 관리 카드 -->
@@ -75,7 +75,7 @@
 								<p>관리할 수 있습니다.</p>
 							</div>
 							<div>
-								<a href="${path}/teacher/board">게시판 관리하기</a>
+								<a href="${path}/member/teacher/board">게시판 관리하기</a>
 							</div>
 						</div>
 					</div>
