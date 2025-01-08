@@ -20,7 +20,7 @@ import com.ttt.service.MemberService;
 /* 로그인 여부 확인하는 서블릿 */
 @WebFilter( servletNames= {
 		/* 로그인을 체크할 서블릿에 네이밍 후 서블릿네임 선언하기 */
-		"indexPage"
+		
 })
 public class LoginCheckFilter extends HttpFilter implements Filter {
        
@@ -37,25 +37,6 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 		// HttpSession 에 로그인 정보가 있는지 확인
 		HttpSession session=((HttpServletRequest)request).getSession();
 		Member3 loginMember=(Member3)session.getAttribute("loginMember");
-		
-		// 세션이 없는 경우 쿠키 체크
-	    if(loginMember == null) {
-	        Cookie[] cookies = ((HttpServletRequest)request).getCookies();
-	        if(cookies != null) {
-	            for(Cookie c : cookies) {
-	                if(c.getName().equals("saveId")) {
-	                    String memberId = c.getValue();
-	                    // 저장된 ID로 회원정보 조회
-	                    Member3 m = new MemberService().selectMemberById(memberId); 
-	                    if(m != null) {
-	                        session.setAttribute("loginMember", m);
-	                        loginMember = m;
-	                        break;
-	                    }
-	                }
-	            }
-	        }
-	    }
 		
 		// 로그인 체크 로직
 		// Exception 발생시켜서 에러페이지로 이동 예외처리 - 예외 처리 로직은 꼭 필요한가..?
