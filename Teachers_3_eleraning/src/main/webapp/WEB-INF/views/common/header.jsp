@@ -37,8 +37,7 @@
 				<div class="right-links">
 					<span class="welcome-msg">${sessionScope.loginMember.memberName}님 환영합니다</span>
 					
-					<c:choose>
-					    <c:when test="${not empty loginMember}">
+					    <c:if test="${not empty loginMember}">
 							<c:if test="${sessionScope.loginMember.memberType == 0}">
 								<a href="${path}/member/admin/menu">관리자페이지</a>
 							</c:if>
@@ -48,8 +47,7 @@
 							<c:if test="${sessionScope.loginMember.memberType == 2}">
 								<a href="${path}/member/teacher/mypage/menu">교사페이지</a>
 							</c:if>
-					    </c:when>
-					</c:choose>
+					    </c:if>
 					<a href="${path}/cart">장바구니</a>
 					<button class="btn-link" onclick="logout()">로그아웃</button>
 					<a href="#">고객센터</a>
