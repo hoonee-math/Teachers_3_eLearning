@@ -21,6 +21,7 @@
 		<typeAlias type="com.ttt.dto.Course3" alias="Course3"/>
 		<typeAlias type="com.ttt.dto.Lecture3" alias="Lecture3"/>
 		<typeAlias type="com.ttt.dto.Cart3" alias="Cart3"/>
+		<typeAlias type="com.ttt.dto.Image3" alias="Image3"/>
 	</typeAliases>
 	
 	<!-- DB정보 작성 : DB 보안 정보는 driver.properties에 개별 작성 -->
@@ -42,6 +43,7 @@
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/cart-mapper.xml"/>
 		<mapper resource="/mappers/course-mapper.xml"/>
+		<mapper resource="/mappers/image-mapper.xml"/>
 	</mappers>
 	
 </configuration>
