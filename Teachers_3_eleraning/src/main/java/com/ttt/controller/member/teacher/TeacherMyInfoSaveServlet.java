@@ -16,7 +16,7 @@ import com.ttt.dto.Image3;
 import com.ttt.dto.Member3;
 import com.ttt.service.MemberService;
 
-@WebServlet("/member/teacher/profile/save")
+@WebServlet(name="teacherInfoUpdate", urlPatterns="/member/teacher/profile/save")
 public class TeacherMyInfoSaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -96,11 +96,30 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 				}
 				
 				// 서비스 호출하여 DB 업데이트
-				int memberResult = new MemberService().updateMember(m);
+				int result = new MemberService().updateMember(m);
 				
+				if(result > 0) {
+					//세션의 회원 정보 업데이트
+					Member3 updateMember = new MemberService().selectMemberById(loginMember.getMemberId());
+					session.setAttribute("loginMember", updateMember);
+					
+					response.sendRedirect(request.getContextPath() + "/member/teacher/profile");
+				} else {
+					// DB 업데이트 실패한 경우, 파일 삭제
+					if(renamedFileName != null) {
+						File delFile = new File(path + renamedFileName);
+						if(delFile.exists()) delFile.delete();
+					}
+					request.setAttribute("msg", "회원 정보 수정에 실패하였습니다.");
+					request.setAttribute("loc", "/teacher/profile");
+					request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.setAttribute("msg", "회원 정보 수정 중 오류가 발생하였습니다.");
+			request.setAttribute("loc", "/teacher/profile");
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		}
 	}
 
