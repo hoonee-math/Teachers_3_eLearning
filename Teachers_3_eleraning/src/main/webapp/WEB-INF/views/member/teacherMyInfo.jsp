@@ -93,7 +93,7 @@
 						    <div class="profile-upload" style="margin-bottom:10px">
 						    	<img id="profilePreview" src="${path}/resources/images/profile/${empty loginMember.image ? 'default.png' : loginMember.image.renamed}"  
 				    	        	 alt="프로필 미리보기" style="width: 150px; height: 150px; border-radius: 75px; object-fit: cover;">
-							    <input type="file" id="profileImageInput" accept="image/*" style="display: none;"/>
+							    <input type="file" id="profileImageInput" name="profileImageInput" accept="image/*" style="display: none;"/>
 	       						<button type="button" onclick="document.getElementById('profileImageInput').click()" id="profileChange-btn">									
 									사진변경</button>
 							</div>

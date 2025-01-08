@@ -62,10 +62,23 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 				String originalFileName = mr.getOriginalFileName("profileImageInput");
 				String renamedFileName = mr.getFilesystemName("profileImageInput");
 				
-				
 				// Member 객체 업데이트
 				Member3 m = new Member3();
+				
+				// 로그인된 회원의 기본 정보 설정
 				m.setMemberNo(loginMember.getMemberNo());
+				m.setMemberId(loginMember.getMemberId());
+				m.setMemberName(loginMember.getMemberName());
+				m.setEmail(loginMember.getEmail());
+				m.setMemberType(loginMember.getMemberType());  // 중요! memberType 설정
+				m.setEnrollDate(loginMember.getEnrollDate());
+				
+				// 입력받은 정보들 중 null이 있을 수 있으니까, 모든 정보를 기본 정보로 설정
+				m.setMemberPw(loginMember.getMemberPw());
+				m.setPhone(loginMember.getPhone());
+				m.setAddress(loginMember.getAddress());
+				m.setTeacherInfoTitle(loginMember.getTeacherInfoTitle());
+				m.setTeacherInfoContent(loginMember.getTeacherInfoContent());
 				
 				//모든 정보는 입력된 경우에만 업데이트
 				if(memberPw != null && !memberPw.isEmpty()) {
@@ -93,15 +106,20 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 					image.setOriname(originalFileName);
 					image.setRenamed(renamedFileName);
 					m.setImage(image);
+				} else {
 				}
 				
 				// 서비스 호출하여 DB 업데이트
 				int result = new MemberService().updateMember(m);
-				
+
 				if(result > 0) {
 					//세션의 회원 정보 업데이트
 					Member3 updateMember = new MemberService().selectMemberById(loginMember.getMemberId());
 					session.setAttribute("loginMember", updateMember);
+					
+					request.setAttribute("msg", "회원 정보 수정에 성공하였습니다.");
+					request.setAttribute("loc", "/teacher/profile");
+					request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 					
 					response.sendRedirect(request.getContextPath() + "/member/teacher/profile");
 				} else {
