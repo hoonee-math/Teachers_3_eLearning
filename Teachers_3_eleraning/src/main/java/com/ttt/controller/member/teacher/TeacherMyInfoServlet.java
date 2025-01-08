@@ -40,7 +40,7 @@ public class TeacherMyInfoServlet extends HttpServlet {
 				
 			}
 			
-			request.getRequestDispatcher("/WEB-INF/views/member/studentMyInfo.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/member/teacherMyInfo.jsp").forward(request, response);
 		}
 		
 		
