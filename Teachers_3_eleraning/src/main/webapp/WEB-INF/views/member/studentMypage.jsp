@@ -46,7 +46,7 @@
 								<p>내 정보 페이지로 이동합니다.</p>
 							</div>
 							<div>
-								<a href="${path}/student/myinfo">내 정보 확인하기</a>
+								<a href="${path}/member/student/myinfo">내 정보 확인하기</a>
 							</div>
 						</div>
 						<!-- 수강 관리 카드 -->
@@ -61,7 +61,7 @@
 								<p>확인할 수 있습니다.</p>
 							</div>
 							<div>
-								<a href="${path}/student/enrollment">수강현황 보기</a>
+								<a href="${path}/member/student/enrollment">수강현황 보기</a>
 							</div>
 						</div>
 						<!-- 결제 내역 카드 -->
@@ -76,7 +76,7 @@
 								<p>확인할 수 있습니다.</p>
 							</div>
 							<div>
-								<a href="${path}/student/payment">결제내역 보기</a>
+								<a href="${path}/member/student/payment">결제내역 보기</a>
 							</div>
 						</div>
 						<!-- 작성글 관리 카드 -->
@@ -91,7 +91,7 @@
 								<p>댓글을 관리합니다.</p>
 							</div>
 							<div>
-								<a href="${path}/student/mypost">작성글 보기</a>
+								<a href="${path}/member/student/mypost">작성글 보기</a>
 							</div>
 						</div>
 					</div>

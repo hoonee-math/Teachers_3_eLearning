@@ -13,7 +13,7 @@ import com.ttt.dto.Member3;
 import com.ttt.dto.School12;
 import com.ttt.service.MemberService;
 
-@WebServlet("/student/infosave")
+@WebServlet("/member/student/myinfo/save")
 public class StudentMyInfoSaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
