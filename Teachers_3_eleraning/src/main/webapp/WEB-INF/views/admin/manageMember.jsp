@@ -214,7 +214,7 @@ li>a:hover {
 									<th>아이디</th>
 									<th>이름</th>
 									<th>이메일</th>
-									<th>신고접수</th>
+									<th>구분</th>
 									<th>유효신고</th>
 									<th>경고횟수</th>
 									<th>가입일</th>
@@ -238,9 +238,13 @@ li>a:hover {
 									<td>${m.memberId}</td>
 									<td>${m.memberName}</td>
 									<td>${m.email}</td>
-	  							    <td class="warning-count">1</td>
-									<td class="warning-count">1</td>
-									<td class="warning-count">1</td>
+	  							    <td class="warning-count"><c:choose>
+	  							    								<c:when test="${m.memberType == 0}">관리자</c:when>
+	  							    								<c:when test="${m.memberType == 1}">학생</c:when>
+	  							    								<c:when test="${m.memberType == 2}">교사</c:when>
+	  							    							</c:choose></td>
+									<td class="warning-count">0</td>
+									<td class="warning-count">0</td>
 									<td> 
 										<fmt:formatDate value="${m.enrollDate}" pattern="yyyy-MM-dd" />
 									</td>
