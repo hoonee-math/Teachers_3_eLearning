@@ -75,6 +75,9 @@ public class MemberService {
 	                
 	            } else if(m.getMemberType() == 2) {  // 교사
 	                result = dao.updateTeacher(session, m);
+	                if(result > 0) {
+	                	result = dao.insertImage(session, m);
+	                }
 	            }
 	            session.commit();
 	        } else {

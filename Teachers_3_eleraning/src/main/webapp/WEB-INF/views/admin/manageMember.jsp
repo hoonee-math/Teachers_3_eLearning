@@ -16,6 +16,13 @@
 
 <body>
 <style>
+* {
+    /* border: 1px solid pink; */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
 table {
 	margin-top: 40px;
 	table-layout: fixed;
@@ -99,6 +106,44 @@ table {
 	display: flex;
 	justify-content: center;
 }
+
+#notice-div {
+	color: red;	
+	text-align: center;
+	width: 1140px;
+}
+#categoryTitle {
+	margin: 0 0 0 20px;
+	font-size: 20pt;
+	font-weight: bold;
+}
+ul {
+	list-style-type: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #FAB350;
+	padding: 10px;
+	width: 1140px;
+}
+li {
+	margin: 0 10px;
+	font-size: 13pt;
+}
+li>a {
+	padding: 10px;
+	text-decoration: none;
+	color: #6f6f6f;
+	background-color: #FAB350;
+	width: 50px;
+	height: 50px;
+}
+li>a:hover {
+	background-color: white;
+	border-radius: 50%;
+	font-size: larger;
+	font-weight: bold;
+}
 </style>
 <!-- 콘텐츠 영역 -->
 <div id="wrap">
@@ -114,9 +159,9 @@ table {
 			<section class="main-section mm-container">
 				<div>
 					<div>
-						<h2>회원 목록</h2>
+						<h2 style="font-size: 1.8em; margin-bottom:10px;">회원 목록</h2>
 						<hr style="border:2px solid #FAB350;">
-						<p>회원을 조회, 경고, 정지 등 관리할 수 있는 페이지 입니다.</p>
+						<p style="margin-top:15px; font-size: 1.1em; color: #666;">회원을 조회, 경고, 정지 등 관리할 수 있습니다.</p>
 					</div>
 				</div>
 				
@@ -207,7 +252,7 @@ table {
 						</tbody>
 					</table>
 			        <div id="pageBar">
-			        	${pageBar }
+			        	${pageBar}
 			        </div>
 			    </div>
 			</section>
@@ -230,7 +275,7 @@ function changePage(page) {
     const sortBy = document.getElementById('sortBy').value;
     const keyword = document.getElementById('searchKeyword').value;
     
-    location.href = `${path}/admin/manage/member?cPage=\${page}&numPerPage=\${numPerPage}&sortBy=\${sortBy}&keyword=\${keyword}`;
+    location.href = `${path}/admin/member?cPage=\${page}&numPerPage=\${numPerPage}&sortBy=\${sortBy}&keyword=\${keyword}`;
 }
 
 // 페이지당 표시 개수 변경
@@ -238,7 +283,7 @@ function changeNumPerPage(num) {
     const sortBy = document.getElementById('sortBy').value;
     const keyword = document.getElementById('searchKeyword').value;
     
-    location.href = `${path}/admin/manage/member?cPage=1&numPerPage=\${num}&sortBy=\${sortBy}&keyword=\${keyword}`;
+    location.href = `${path}/admin/member?cPage=1&numPerPage=\${num}&sortBy=\${sortBy}&keyword=\${keyword}`;
 }
 
 // 정렬 기준 변경
@@ -246,7 +291,7 @@ function changeSortBy(sort) {
     const numPerPage = document.getElementById('numPerPage').value;
     const keyword = document.getElementById('searchKeyword').value;
     
-    location.href = `${path}/admin/manage/member?cPage=1&numPerPage=\${numPerPage}&sortBy=\${sort}&keyword=\${keyword}`;
+    location.href = `${path}/admin/member?cPage=1&numPerPage=\${numPerPage}&sortBy=\${sort}&keyword=\${keyword}`;
 }
 
 // 회원 검색
@@ -255,7 +300,7 @@ function searchMembers() {
     const sortBy = document.getElementById('sortBy').value;
     const keyword = document.getElementById('searchKeyword').value;
     
-    location.href = `${path}/admin/manage/member?cPage=1&numPerPage=\${numPerPage}&sortBy=\${sortBy}&keyword=\${keyword}`;
+    location.href = `${path}/admin/member?cPage=1&numPerPage=\${numPerPage}&sortBy=\${sortBy}&keyword=\${keyword}`;
 }
 
 // 전체 체크박스 토글

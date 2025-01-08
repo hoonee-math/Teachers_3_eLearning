@@ -6,9 +6,13 @@
 		<result column="img_type" property="imgType"/>
 		<result column="oriname" property="oriname"/>
 		<result column="renamed" property="renamed"/>
-		<result column="creatd_at" property="creatdAt"/>
+		<result column="created_at" property="createdAt"/>
 		<result column="member_no" property="memberNo"/>
 		<result column="img_order" property="imgOrder"/>
 	</resultMap>
 	
+	<insert id="insertImage" parameterType="member3">
+		INSERT INTO IMAGE3 (IMG_NO, IMG_TYPE, ORINAME, RENAMED, CREATED_AT, MEMBER_NO)
+			VALUES (SEQ_IMAGE3_NO.NEXTVAL, 1, #{image.oriname}, #{image.renamed}, SYSDATE, #{memberNo})
+	</insert>
 </mapper>

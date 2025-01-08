@@ -37,6 +37,10 @@ public class MemberDao {
 	public int updateTeacher(SqlSession session,Member3 m) {
 		return session.update("member.updateTeacher", m);
 	}
+		//이미지 업로드
+	public int insertImage(SqlSession session, Member3 m) {
+		return session.insert("image.insertImage", m);
+	}
 	
 	
 	/* teacherListAndDetail 페이지의 리스트에 교사 출력용 */
