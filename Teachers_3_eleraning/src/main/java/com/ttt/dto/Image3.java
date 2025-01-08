@@ -16,7 +16,7 @@ public class Image3 {
 	private int imgNo;
 	private int imgType;
 	private String oriname;
-	private String Renamed;
+	private String renamed;
 	private Date creatdAt;
 	private int memberNo;
 	private int imgOrder;
