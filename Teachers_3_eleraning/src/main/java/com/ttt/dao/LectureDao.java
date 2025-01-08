@@ -15,6 +15,16 @@ public class LectureDao {
         return session.selectList("lecture.selectLecturesByCourseNo", courseNo);
     }
     
+	// 강의 일괄 등록
+	public int insertLecturesBatch(SqlSession session, List<Lecture3> lectures) {
+		return session.insert("lecture.insertLecturesBatch", lectures);
+	}
+
+	// 일정 일괄 등록
+	public int insertScheduleEventsBatch(SqlSession session, List<ScheduleEvent3> events) {
+		return session.insert("lecture.insertScheduleEventsBatch", events);
+	}
+    
     // 강의 등록 (트랜잭션 처리를 위해 반환값 int)
     public int insertLecture(SqlSession session, Lecture3 lecture) {
         return session.insert("lecture.insertLecture", lecture);

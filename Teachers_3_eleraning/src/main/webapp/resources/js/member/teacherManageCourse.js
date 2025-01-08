@@ -20,5 +20,5 @@ function changeDisplayCount(count) {
 
 // 강의 관리 페이지로 이동
 function goToLectureManage(courseNo) {
-	location.href = `${path}/teacher/course/lecture/manage?courseNo=${courseNo}`;
+	location.href = `${path}/member/teacher/mypage/lecturelist?courseNo=${courseNo}`;
 }

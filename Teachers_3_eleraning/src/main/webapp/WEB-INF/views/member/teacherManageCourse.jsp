@@ -88,7 +88,7 @@
 										<a href="javascript:void(0)"
 											onclick="goToLectureManage(${course.courseNo})"
 											class="course-title">
-										${course.courseTitle} </a>
+										${course.courseTitle}${course.courseNo} 강의 제목</a>
 									</td>
 									<td>
 										<span class="status-badge ${course.courseStatus == 0 ? 'draft' : (course.courseStatus == 1 ? 'active' : 'completed')}">

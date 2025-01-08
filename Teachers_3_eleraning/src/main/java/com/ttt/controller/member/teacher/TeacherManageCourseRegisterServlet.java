@@ -22,7 +22,7 @@ public class TeacherManageCourseRegisterServlet extends HttpServlet {
     public TeacherManageCourseRegisterServlet() {
         super();
     }
-
+    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String courseTitle = request.getParameter("courseTitle");

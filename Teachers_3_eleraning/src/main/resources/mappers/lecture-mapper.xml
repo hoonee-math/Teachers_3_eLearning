@@ -36,7 +36,55 @@
         LEFT JOIN SCHEDULE_EVENT3 SE ON L.lecture_no = SE.lecture_no
         WHERE L.course_no = #{courseNo}
         ORDER BY L.lecture_order
-    </select>
+	</select>
+	
+	<!-- 강의 일괄 등록 -->
+	<insert id="insertLecturesBatch" parameterType="list">
+		INSERT ALL
+		<foreach collection="list" item="lecture">
+			INTO LECTURE3 (
+				LECTURE_NO,		LECTURE_TITLE,
+				LECTURE_ORDER,	LECTURE_DESC,
+				LECTURE_STATUS,	COURSE_NO,			
+				CREATED_AT,		UPDATED_AT
+			) VALUES (
+				SEQ_LECTURE3_NO.NEXTVAL,	#{lecture.lectureTitle},
+				#{lecture.lectureOrder},	#{lecture.lectureDesc},
+				#{lecture.lectureStatus},	#{lecture.courseNo},
+				SYSDATE,	SYSDATE
+			)
+		</foreach>
+		SELECT * FROM DUAL
+	</insert>
+
+	<!-- 일정 일괄 등록 -->
+	<insert id="insertScheduleEventsBatch" parameterType="list">
+		INSERT ALL
+		<foreach collection="list" item="event">
+			INTO SCHEDULE_EVENT3 (
+				EVENT_NO,		
+				LECTURE_NO,
+				EVENT_TITLE,	EVENT_START,	EVENT_END,		VIDEO_URL,
+				CALENDAR_ID,	EVENT_CATEGORY,		CREATED_AT
+			) VALUES (
+				SEQ_SCHEDULE_EVENT3_NO.NEXTVAL,
+				(
+				 SELECT 
+					LECTURE_NO 
+				 FROM 
+				 	LECTURE3 
+				 WHERE 
+				 	COURSE_NO = #{event.courseNo}
+				 AND 
+				 	LECTURE_ORDER = #{event.lectureOrder}
+			 	 <!-- AND CREATED_AT >= SYSDATE - 1/1440) --> <!-- 최근 1분 이내 데이터 -->
+				), <!-- lectureOrder로 매칭 -->
+				#{event.eventTitle},	#{event.eventStart},	#{event.eventEnd},		#{event.videoUrl},
+				#{event.calendarId},	'time',		SYSDATE
+			)
+		</foreach>
+		SELECT * FROM DUAL
+	</insert>
     
     <!-- 강의 등록 -->
     <insert id="insertLecture" parameterType="Lecture3">

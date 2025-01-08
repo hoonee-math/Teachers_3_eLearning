@@ -15,6 +15,32 @@ public class LectureService {
 
 	private LectureDao dao = new LectureDao();
 	
+	// 강의와 일정 일괄 리스트로 받아와서 일괄 등록하도록 설정
+	public int insertLecturesWithSchedules(List<Lecture3> lectures, List<ScheduleEvent3> events) {
+		SqlSession session = getSession();
+		try {
+			// 1. 강의 일괄 등록
+			int result = dao.insertLecturesBatch(session, lectures);
+			if (result != lectures.size()) {
+				throw new RuntimeException("강의 등록 중 오류 발생");
+			}
+
+			// 2. 일정 일괄 등록
+			result = dao.insertScheduleEventsBatch(session, events);
+			if (result != events.size()) {
+				throw new RuntimeException("일정 등록 중 오류 발생");
+			}
+
+			session.commit();
+			return result;
+		} catch (Exception e) {
+			session.rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
+	}
+	
 	// 강좌별 강의 목록 조회
 	public List<Lecture3> selectLecturesByCourseNo(int courseNo) {
 		SqlSession session = getSession();

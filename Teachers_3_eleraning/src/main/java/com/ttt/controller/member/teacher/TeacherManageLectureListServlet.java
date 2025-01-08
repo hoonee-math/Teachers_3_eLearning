@@ -72,6 +72,11 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Map<String, Object> responseData = new HashMap<>();
+	    response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");  // UTF-8 인코딩 명시적 설정
+		
 		try {
 			// 1. 요청 데이터 파싱
 			BufferedReader reader = request.getReader();
@@ -110,20 +115,25 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 			}
 			
 			// 4. 서비스 호출하여 저장
-			int result = 0;
-			for(int i = 0; i < lectures.size(); i++) {
-				result += lectureService.insertLectureWithSchedule(lectures.get(i), events.get(i));
-			}
+			int result = lectureService.insertLecturesWithSchedules(lectures, events);
 			
 			// 5. 결과 응답
-			Map<String, Object> responseData = new HashMap<>();
-			responseData.put("success", result == lectures.size());
-			response.setContentType("application/json");
-			response.getWriter().write(gson.toJson(responseData));
+	        // 성공/실패 여부와 메시지 포함
+	        responseData.put("success", result == lectures.size());
+	        responseData.put("message", result == lectures.size() ? 
+	            "강의 일정이 성공적으로 등록되었습니다." : 
+	            "일부 강의 일정 등록에 실패했습니다.");
+	        responseData.put("count", result);  // 실제 등록된 개수
 			
 		} catch(Exception e) {
+	        // 에러 발생 시 클라이언트에 의미있는 메시지 전달
+	        responseData.put("success", false);
+	        responseData.put("message", "강의 일정 등록 중 오류가 발생했습니다.");
+	        responseData.put("error", e.getMessage());
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
+		
+	    response.getWriter().write(new Gson().toJson(responseData));
 	}
 
 }
