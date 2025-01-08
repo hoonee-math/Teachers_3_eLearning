@@ -13,8 +13,12 @@ public class AdminMemberService {
 
 private MemberDao dao=new MemberDao();
 	
-	public List<Member3> selectAllMember(){
-		SqlSession session=getSession();	
-		return dao.selectAllMember(session);
-	}
+public List<Member3> selectAllMember() {
+    SqlSession session = getSession();
+    try {
+        return dao.selectAllMember(session);
+    } finally {
+        if (session != null) session.close();
+    }
+}
 }

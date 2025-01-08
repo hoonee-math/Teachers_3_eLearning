@@ -193,10 +193,10 @@ table {
 									<td>${m.memberId}</td>
 									<td>${m.memberName}</td>
 									<td>${m.email}</td>
-									<td class="warning-count">${m.reportCheckCount}</td>
+	  							    <td class="warning-count">${m.reportCheckCount}</td>
 									<td class="warning-count">${m.reportValidCount}</td>
 									<td class="warning-count">${m.warningCount}</td>
-									<td>
+									<td> 
 										<fmt:formatDate value="${m.enrollDate}" pattern="yyyy-MM-dd" />
 									</td>
 									<td>
@@ -209,7 +209,6 @@ table {
 							</c:forEach>
 						</tbody>
 					</table>
-			
 			        <div id="pageBar">
 			        	${pageBar }
 			        </div>
