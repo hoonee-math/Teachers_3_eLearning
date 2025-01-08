@@ -44,6 +44,7 @@
 		<mapper resource="/mappers/cart-mapper.xml"/>
 		<mapper resource="/mappers/course-mapper.xml"/>
 		<mapper resource="/mappers/image-mapper.xml"/>
+		<mapper resource="/mappers/lecture-mapper.xml"/>
 	</mappers>
 	
 </configuration>
