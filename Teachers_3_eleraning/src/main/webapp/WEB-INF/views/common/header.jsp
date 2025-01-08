@@ -61,7 +61,7 @@
 	<div class="utility-nav">
 		<div class="utility-container">
 			<div class="left-links">
-				<a href="${path }/course/list">블로그</a>
+				<a href="https://hoonee-math.github.io/web/">블로그</a>
 				<a href="${path }/teacher/list_and_detail">공지사항</a>
 				<a href="#">이벤트</a>
 			</div>
