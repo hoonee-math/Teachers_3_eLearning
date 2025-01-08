@@ -12,7 +12,7 @@
 	<title>Honey T</title>
 	<jsp:include page="/WEB-INF/views/common/head.jsp" />
 	<link rel="stylesheet" href="${path}/resources/css/pages/mypage-common.css">
-	<link rel="stylesheet" href="${path}/resources/css/member/studentMyInfo.css">
+	<link rel="stylesheet" href="${path}/resources/css/member/teacherMyInfo.css">
 </head>
 
 <body>
@@ -73,14 +73,16 @@
 							<th>주소</th>
 							<td>
 								<div style="margin-bottom:10px">
-								<input type="text" id="sample4_postcode" name="addressNo" style="width:323px;" value="${addressNo != null ? addressNo : ''}" placeholder="우편번호">
+								<input type="text" id="sample4_postcode" name="addressNo" style="width:190px;" value="${addressNo != null ? addressNo : ''}" placeholder="우편번호">
 								<input type="button" id="postcodeFindBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 								</div>
-								<div>
+								<div style="margin-bottom:10px">
 								<input type="text" id="sample4_roadAddress" name="addressRoad" value="${addressRoad != null ? addressRoad : ''}" placeholder="도로명주소" style="width:323px;">
 								<!-- <input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width: 300px;"> -->
 								<span id="guide" style="color:#999;display:none"></span>
-								<input type="text" id="sample4_detailAddress" name="addressDetail" value="${addressDetail != null ? addressDetail : ''}" placeholder="상세주소" style="width: 200px;">
+								</div>
+								<div>
+								<input type="text" id="sample4_detailAddress" name="addressDetail" value="${addressDetail != null ? addressDetail : ''}" placeholder="상세주소" style="width: 323px;">
 								<!-- <input type="text" id="sample4_extraAddress" placeholder="참고항목" style="width: 150px;"> -->
 								</div>
 							</td>
@@ -88,16 +90,21 @@
 						<tr>
 						    <th>프로필 사진</th>
 						    <td>
-						        <div style="margin-bottom:10px">
-						            
-						        </div>
+						    <div class="profile-upload" style="margin-bottom:10px">
+						    	        <img id="profilePreview" src="${path}/resources/images/profile/default.png" 
+						    	        	 alt="프로필 미리보기" style="width: 150px; height: 150px; border-radius: 75px; object-fit: cover;">
+							    <input type="file" id="profileImageInput" accept="image/*" style="display: none;"/>
+								
+        						<button type="button" onclick="document.getElementById('profileImageInput').click()"  class="btn-secondary mt-2">									
+								사진변경</button>
+							</div>
 						    </td>
 						</tr>
 						<tr>
 						    <th>소개 타이틀</th>
 						    <td>
 						        <div style="margin-bottom:10px">
-						            
+						            <input type="text" name="teacherInfoTitle" id="teacherInfoTitle" value="${loginMember.teacherInfoTitle}" style="width:323px;">
 						        </div>
 						    </td>
 						</tr>
@@ -105,7 +112,7 @@
 						    <th>소개글</th>
 						    <td>
 						        <div style="margin-bottom:10px">
-						            
+						            <textarea  rows="5" name="teacherInfoContent" id="teacherInfoContent" value="${loginMember.teacherInfoContent}" style="width:323px;resize:none;"></textarea>
 						        </div>
 						    </td>
 						</tr>
@@ -114,9 +121,6 @@
 						<input type="reset" value="취소">	<input type="submit" value="저장">
 					</div>
 					</form>
-					
-					
-					
 					
 				</section>
 			</div>
@@ -133,7 +137,32 @@
 <!-- API/Ajax 관련 JavaScript -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-    const path = '${pageContext.request.contextPath}';
+    
+	// 프로필 이미지 프리뷰 처리
+	function handleProfileImageChange(event) {
+		const file = event.target.files[0];
+		// 파일이 선택됐는지 확
+		if(!file) return;
+		
+		// FileReader를 사용하여 이미지 프리뷰
+		conset reader = new FileReader();
+		reader.onload = function(e) {
+			//프리뷰 이미지 업데이트
+			const previewImg = document.getElementById("profilePreview");
+			previewImg.scr = e.target.result;
+			previewImg.style.display = 'block';
+		};
+		reader.readAsDataURL(file);
+	}
+	
+	// 초기화 시 이벤트 리스너 등록
+	document.addEventListener('DOMContentLoaded', function() {
+		const fileInput = document.getElementById('profileImageInput');
+		if (fileInput) {
+			fileInput.addEventListener('change', handleProfileImageChange);
+		}
+	});
+       
 </script>
 <!-- 6. 페이지별 스크립트 APi-컴포넌트-페이지 순 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음 우편번호 서비스 -->
