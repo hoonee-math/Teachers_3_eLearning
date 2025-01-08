@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 		
 		Member3 m = new MemberService().selectMemberById(memberId);
 		
-		System.out.println("MemberLoginServlet.java : " + m);
+		//System.out.println("MemberLoginServlet.java : " + m);
 		
 		// 로그인 성공시 처리할 로직 (아이디, 비번 일치)
 		if(m!=null && m.getMemberPw().equals(memberPw)) {

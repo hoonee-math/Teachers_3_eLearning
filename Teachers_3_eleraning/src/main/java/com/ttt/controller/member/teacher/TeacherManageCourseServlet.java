@@ -40,13 +40,13 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		// 세션에서 교사 정보 가져오기
 		HttpSession session = request.getSession();
 		Member3 loginMember = (Member3)session.getAttribute("loginMember");
-		System.out.println("TeacherManageCourseRegisterServlet : "+loginMember);
+		// System.out.println("TeacherManageCourseRegisterServlet : "+loginMember);
 		
 		int total = new CourseService().selectCoursesByStatusTotal(loginMember.getMemberNo());
 		int preparing = new CourseService().selectCoursesByStatusPreparing(loginMember.getMemberNo());; // 준비중 0
 		int inProgress= new CourseService().selectCoursesByStatusInProgress(loginMember.getMemberNo());; // 진행중 1
 		int completed = new CourseService().selectCoursesByStatusCompleted(loginMember.getMemberNo());; // 완료 2
-		System.out.println(total +","+preparing);
+		// System.out.println(total +","+preparing);
 		request.setAttribute("totalCount", total);
 		request.setAttribute("preparingCount", inProgress);
 		request.setAttribute("inProgressCount", preparing);
