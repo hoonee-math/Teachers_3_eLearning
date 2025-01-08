@@ -37,16 +37,25 @@
 				<div class="right-links">
 					<span class="welcome-msg">${sessionScope.loginMember.memberName}님 환영합니다</span>
 					
-					<!-- 나중에 c:choose - when 으로 수정하기 -->
-					<c:if test="${sessionScope.loginMember.memberType != 5}">
-						<a href="${path}/member/admin/menu">관리자페이지</a>
-					</c:if>
-					<c:if test="${sessionScope.loginMember.memberType != 5}">
-						<a href="${path}/member/student/mypage/menu">마이페이지</a>
-					</c:if>
-					<c:if test="${sessionScope.loginMember.memberType != 5}">
-						<a href="${path}/member/teacher/mypage/menu">교사페이지</a>
-					</c:if>
+					<c:choose>
+					    <c:when test="${not empty loginMember}">
+					        <c:if test="${loginMember.memberType eq 0}">
+					            <li class="nav-item">
+					                <a class="nav-link" href="${path}/member/admin/menu">관리자페이지</a>
+					            </li>
+					        </c:if>
+					        <c:if test="${loginMember.memberType eq 1}">
+					            <li class="nav-item">
+					                <a class="nav-link" href="${path}/member/student/mypage/menu">마이페이지</a>
+					            </li>
+					        </c:if>
+					        <c:if test="${loginMember.memberType eq 2}">
+					            <li class="nav-item">
+					                <a class="nav-link" href="${path}/member/teacher/mypage/menu">교사페이지</a>
+					            </li>
+					        </c:if>
+					    </c:when>
+					</c:choose>
 					<a href="${path}/cart">장바구니</a>
 					<button class="btn-link" onclick="logout()">로그아웃</button>
 					<a href="#">고객센터</a>
