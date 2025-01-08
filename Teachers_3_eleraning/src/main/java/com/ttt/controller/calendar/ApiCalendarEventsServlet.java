@@ -33,45 +33,29 @@ public class ApiCalendarEventsServlet extends HttpServlet {
 		try {
             // 파라미터 받기
             int grade = Integer.parseInt(request.getParameter("grade"));
-            String view = request.getParameter("view"); // 'all' or 'my'
             
-			// 현재 로그인한 회원 정보 가져오기
+			// 응답 데이터 준비
+			Map<String, Object> responseData = new HashMap<>();
+
+			// 1. 해당 학년의 전체 강의 일정 조회
+			List<Map<String, Object>> events = lectureService.selectEventsByGrade(grade);
+			responseData.put("events", events);
+            
+			// 2. 로그인한 경우 수강 중인 강좌 번호 목록 추가
 			HttpSession session = request.getSession();
 			Member3 loginMember = (Member3) session.getAttribute("loginMember");
 
-			// 응답할 이벤트 목록
-			List<Map<String, Object>> events = new ArrayList<>();
-            
-			// 파라미터로 맵 생성
-			Map<String, Object> params = new HashMap<>();
-			params.put("grade", grade);
-
 			// 회원 유형에 따라 다른 일정 조회
-			if(loginMember != null && "my".equals(view)) {
-                params.put("memberNo", loginMember.getMemberNo());
-                params.put("memberType", loginMember.getMemberType());
-                
+			if(loginMember != null) {
 				if (loginMember.getMemberType() == 1) { // 학생
-					events = lectureService.selectEventsByStudentNo(params);
+					List<Integer> enrolledCourses = courseService.selectEnrolledCourseNos(loginMember.getMemberNo());
+					responseData.put("enrolledCourses", enrolledCourses);
 				} else if (loginMember.getMemberType() == 2) { // 교사
-					events = lectureService.selectEventsByTeacherNo(params);
-				} else {
-					events = lectureService.selectEventsByGrade(params); // 기본: 학년별 조회
-					// 본인 강좌의 일정 조회
-					// events = lectureService.selectEventsByTeacherNo(loginMember.getMemberNo());
+					List<Integer> teachingCourses = courseService.selectTeachingCourseNos(loginMember.getMemberNo());
+					responseData.put("teachingCourses", teachingCourses);
 				}
-			} else {
-				events = lectureService.selectEventsByGrade(params); // 기본: 학년별 조회
 			}
 
-            // 수강신청 여부 추가 - 로그인된 사용자의 강의 데이터 존재 여부 확인
-            if(loginMember != null && loginMember.getMemberType() == 1) {
-                for(Map<String, Object> event : events) {
-                    int courseNo = ((Number)event.get("COURSE_NO")).intValue();
-                    boolean isEnrolled = courseService.checkEnrollment(loginMember.getMemberNo(), courseNo);
-                    event.put("isEnrolled", isEnrolled);
-                }
-            }
 			// JSON 응답 설정
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
