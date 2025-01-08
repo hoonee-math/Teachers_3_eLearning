@@ -17,10 +17,10 @@
 <body>
 <style>
 table {
-			margin-top: 40px;
-			table-layout: fixed;
-			width: 100%;
-		}
+	margin-top: 40px;
+	table-layout: fixed;
+	width: 100%;
+}
 .mm-container {
 }
 
@@ -193,17 +193,14 @@ table {
 									<td>${m.memberId}</td>
 									<td>${m.memberName}</td>
 									<td>${m.email}</td>
-	  							    <td class="warning-count">${m.reportCheckCount}</td>
-									<td class="warning-count">${m.reportValidCount}</td>
-									<td class="warning-count">${m.warningCount}</td>
+	  							    <td class="warning-count">1</td>
+									<td class="warning-count">1</td>
+									<td class="warning-count">1</td>
 									<td> 
 										<fmt:formatDate value="${m.enrollDate}" pattern="yyyy-MM-dd" />
 									</td>
 									<td>
-										<c:choose>
-										<c:when test="${m.isDeleted == 1}">탈퇴</c:when>
-										<c:otherwise>정상</c:otherwise>
-										</c:choose>
+										<p>정상</p>
 									</td>
 								</tr>
 							</c:forEach>
