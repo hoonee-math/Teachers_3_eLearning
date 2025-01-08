@@ -20,7 +20,7 @@
 	</resultMap>
 	
 	<!-- 새 강좌 등록 로직 -->
-	<insert id="insertNewCourse" parameterMap="course">
+	<insert id="insertNewCourse" parameterType="Course3">
 		INSERT INTO COURSE3 (
 			COURSE_NO, 				
 			COURSE_TITLE, 	COURSE_DESC, 	COURSE_CATEGORY_NO,  GRADE, 
