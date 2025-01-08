@@ -33,7 +33,7 @@
 			</c:if>
 				
 			<%-- 로그인 후 메뉴 --%>
-			<c:if test="${not empty sessionScope.loginMember || empty sessionScope.loginMember}">
+			<c:if test="${not empty sessionScope.loginMember}">
 				<div class="right-links">
 					<span class="welcome-msg">${sessionScope.loginMember.memberName}님 환영합니다</span>
 					
