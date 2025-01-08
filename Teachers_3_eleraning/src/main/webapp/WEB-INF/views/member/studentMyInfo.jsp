@@ -92,7 +92,6 @@
 				        <label for="memberType"></label>
 				    </td>
 				</tr>
-				<c:if test="${loginMember.memberType == '1'}">
 				<tr>
 				    <th>학교</th>
 				    <td>
@@ -121,27 +120,7 @@
 				            </select>
 				        </div>
 				    </td>
-				</tr></c:if>
-				<c:if test="${loginMember.memberType == '2'}">
-				<tr>
-				    <th>과목</th>
-				    <td>
-				        <div style="margin-bottom:10px">
-				            <select class="teacher_subject" name="teacherSubject" id="teacherSubject" onchange="districtSearch(event);" 
-				            	style="width:108px; padding:6px 12px 11px 12px;; border: 2px solid #ddd; border-radius: 4px; color:grey; cursor: pointer; ">
-				                <option value=''>과목선택</option>
-				                <option value="국어">국어</option>
-				                <option value="수학">수학</option>
-								<option value="영어">영어</option>
-								<option value="과학">과학</option>
-								<option value="사회">사회</option>
-								<option value="한국사">한국사</option>
-								<option value="직업">직업</option>
-								<option value="제2외국어">제2외국어</option>
-				            </select>
-				        </div>
-				    </td>
-				</tr></c:if>
+				</tr>
 			</table>
 			<div class="enrollsubmit">
 				<input type="reset" value="취소">	<input type="submit" value="저장">
