@@ -13,6 +13,12 @@ import com.ttt.dto.Course3;
 public class CourseService {
 	private CourseDao dao = new CourseDao();
 	
+	// 코스 번호로 해당 코스 전체 정보 조회
+	public Course3 selectCourseByNo(int courseNo) {
+		SqlSession session = getSession();
+		return dao.selectCourseByNo(session, courseNo);
+	}
+	
 	public List<Course3> selectCourseBySubjectNo(Map<String, Object> param) {
 		SqlSession session = getSession();
 		List<Course3> courses = dao.selectCourseBySubjectNo(session, param);
