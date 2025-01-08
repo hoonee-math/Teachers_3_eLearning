@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+.lecture-form {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: bold;
+}
+
+.form-input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.form-textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	resize: vertical;
+}
+
+.form-select {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.video-upload-area {
+	border: 2px dashed #ddd;
+	padding: 40px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.upload-placeholder {
+	color: #666;
+}
+
+.upload-placeholder i {
+	font-size: 48px;
+	color: #FAB350;
+}
+
+.video-preview {
+	position: relative;
+}
+
+.video-preview video {
+	width: 100%;
+	max-height: 400px;
+}
+
+.remove-video {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: rgba(0, 0, 0, 0.5);
+	border: none;
+	color: white;
+	padding: 5px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.button-group {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 30px;
+}
+
+.btn-primary, .btn-secondary {
+	padding: 10px 25px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.btn-primary {
+	background: #FAB350;
+	color: white;
+	border: none;
+}
+
+.btn-secondary {
+	background: white;
+	color: #666;
+	border: 1px solid #ddd;
+}

@@ -9,6 +9,7 @@
 <head>
 <jsp:include page="/WEB-INF/views/common/head.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/pages/mypage-common.css">
+<link rel="stylesheet" href="${path}/resources/css/member/lecturePlan.css">
 <title>강의 계획 등록 | Honey T</title>
 </head>
 
@@ -91,7 +92,7 @@
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <!-- 페이지별 스크립트 APi-컴포넌트-페이지 순 -->
-<script src="${path}/resources/js/teacherManageLectureList.js"></script>
+<script src="${path}/resources/js/member/teacherManageLectureList.js"></script>
 
 </body>
 </html>

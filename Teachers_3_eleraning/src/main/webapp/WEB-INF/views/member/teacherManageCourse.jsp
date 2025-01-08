@@ -11,6 +11,8 @@
 <jsp:include page="/WEB-INF/views/common/head.jsp" />
 <!-- 2. 페이지별 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/pages/mypage-common.css">
+<link rel="stylesheet" href="${path}/resources/css/member/courseManagement.css">
+<link rel="stylesheet" href="${path}/resources/css/member/teacherManageCourseModal.css">
 <title>강좌 관리 | Honey T</title>
 </head>
 
@@ -20,6 +22,8 @@
 	<!-- 3.헤더 영역 -->
 	<jsp:include page="/WEB-INF/views/common/modal.jsp" />
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<!-- 새 강좌 등록 모달 추가 -->
+	<jsp:include page="/WEB-INF/views/member/teacherManageCourseModal.jsp" />
 
 	<!-- 4.메인 콘텐츠 -->
 	<main>
@@ -35,27 +39,37 @@
 
 				<!-- 강좌 통계 요약 -->
 				<div class="course-summary">
-					<div class="stat-card">
+					<button class="stat-card" data-status="all" onclick="filterByStatus('all')">
 						<h3>전체 강좌</h3>
-						<p class="stat-number">5개</p>
-					</div>
-					<div class="stat-card">
+						<p class="stat-number">${totalCount }개</p>
+					</button>
+					<button class="stat-card" data-status="inProgress" onclick="filterByStatus('inProgress')">
 						<h3>진행중 강좌</h3>
-						<p class="stat-number">3개</p>
-					</div>
-					<div class="stat-card">
+						<p class="stat-number">${inProgressCount }개</p>
+					</button>
+					<button class="stat-card" data-status="preparing" onclick="filterByStatus('preparing')">
 						<h3>준비중 강좌</h3>
-						<p class="stat-number">2개</p>
-					</div>
+						<p class="stat-number">${preparingCount }개</p>
+					</button>
+					<%-- <button class="filter-btn" data-status="completed" onclick="filterByStatus('completed')">
+						종료된 강좌 <span class="count">${completedCount}</span>
+					</button> --%>
 				</div>
 
 				<!-- 강좌 등록 버튼 -->
 				<div class="course-actions">
-					<button onclick="location.href='${path}/teacher/course/register'" class="btn-primary">
+					<button onclick="openModal()" class="btn-primary">
 						<i class="bi bi-plus-circle"></i> 새 강좌 등록
 					</button>
 				</div>
-
+				<!-- 필터 옵션 영역 -->
+				<div class="course-filters">
+					<select id="displayCount" onchange="changeDisplayCount(this.value)">
+						<option value="5">5개씩 보기</option>
+						<option value="10" selected>10개씩 보기</option>
+						<option value="20">20개씩 보기</option>
+					</select>
+				</div>
 				<!-- 강좌 목록 테이블 -->
 				<div class="course-list">
 					<table>	
@@ -64,21 +78,24 @@
 								<th>강좌명</th>
 								<th>상태</th>
 								<th>등록일</th>
-								<th>수강생</th>
 								<th>관리</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="course" items="${courses}">
 								<tr>
-									<td>${course.courseTitle}</td>
+									<td>
+										<a href="javascript:void(0)"
+											onclick="goToLectureManage(${course.courseNo})"
+											class="course-title">
+										${course.courseTitle} </a>
+									</td>
 									<td>
 										<span class="status-badge ${course.courseStatus == 0 ? 'draft' : (course.courseStatus == 1 ? 'active' : 'completed')}">
 											${course.courseStatus == 0 ? '준비중' : (course.courseStatus == 1 ? '진행중' : '완료')}
 										</span>
 									</td>
 									<td><fmt:formatDate value="${course.createdAt}" pattern="yyyy.MM.dd"/></td>
-									<td>${course.studentCount}명</td>
 									<td>
 										<button onclick="location.href='${path}/teacher/course/edit/${course.courseNo}'" 
 												class="btn-secondary">수정</button>
@@ -101,6 +118,9 @@
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <!-- 6. 페이지별 스크립트 -->
+<script src="${path}/resources/js/member/teacherManageCourseModal.js"></script>
+<!-- 필터링과 페이징을 처리할 JavaScript 함수 -->
+<script src="${path}/resources/js/member/teacherManageCourse.js"></script>
 <script>
 	function viewCourseDetail(courseNo) {
 		// 강좌 상세 정보 보기 로직 구현

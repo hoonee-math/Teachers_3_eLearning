@@ -32,14 +32,14 @@
 					<!-- 왼쪽 아코디언 메뉴 -->
 					<nav class="accordion-menu">
 						<!-- jstl core 태그로 리스트를 받아와서 출력해주기 -->
-					    <c:forEach var="subjectEntry" items="${subjectData}">
+					    <c:forEach var="subject" items="${subjectData}">
 						<div class="accordion-item">
-						    <div class="accordion-header">
-							${subjectEntry.value} <!-- 과목명 출력 -->
+						    <div class="accordion-header" data-subject="${subject}">
+								${subject} <!-- 과목명 출력 -->
 						    </div>
 						    <div class="accordion-content">
 							<c:forEach var="teacher" items="${teachers}">
-							    <c:if test="${teacher.subject == subjectEntry.key}"> <!-- 과목번호와 과목 키값을 비교 -->
+							    <c:if test="${teacher.teacherSubject == subject}"> <!-- 과목번호와 과목 키값을 비교 -->
 								<a href="#"  class="teacher-link" data-memberNo="${teacher.memberNo}">
 								    ${teacher.memberName} 선생님
 								</a>
@@ -62,7 +62,7 @@
 										<p class="profile-subtitle">TITLE 안내문 개념과 지독한 연습이 만점을 만듭니다!</p>
 									</div>
 									<div class="profile-tags">
-										<span class="profile-tag">#개념</span> <span class="profile-tag">#학력과 통계</span> <span class="profile-tag">#수능 대비</span>
+										<span class="profile-tag">#개념</span> <span class="profile-tag">#확률과 통계</span> <span class="profile-tag">#수능 대비</span>
 									</div>
 								</div>
 							</div>
@@ -112,57 +112,34 @@
 									<button>화법과 작문</button>
 								</div>
 							</div>
-		
-							<!-- 강사 리스트 -->
-							<div class="teacher-list">
-								<!-- 강사 카드 1 -->
-								<div class="teacher-card">
-									<div class="teacher-image">
-										<img
-											src="https://i.namu.wiki/i/W-LhGCCNTAE3F7AJ81_DQpGg7XQbQolN76WcFDjbYgkSoOp8NnGgEj8PyGblftQNMKTTv_NJ8lfBz9XzpMlggQ.webp"
-											alt="정승제 선생님">
+							<!-- 실제 교사 데이터 출력 -->
+							<div class="teacher-list real-data">
+								<c:forEach var="teacher" items="${teachers}">
+									<div class="teacher-card" data-memberNo="${teacher.memberNo}">
+										<div class="teacher-image">
+											<img
+												src="https://i.namu.wiki/i/W-LhGCCNTAE3F7AJ81_DQpGg7XQbQolN76WcFDjbYgkSoOp8NnGgEj8PyGblftQNMKTTv_NJ8lfBz9XzpMlggQ.webp"
+												alt="${teacher.memberName} 선생님">
+										</div>
+										<div class="teacher-info">
+											<h3>
+												${teacher.memberName} 선생님
+												<%-- <c:if test="${not empty teacher.badge}">
+							                        <span class="teacher-badge">${teacher.badge}</span>
+							                    </c:if> --%>
+											</h3>
+											<p class="teacher-description">
+												${teacher.teacherInfoTitle} ${teacher.teacherInfoContent}</p>
+										</div>
 									</div>
-									<div class="teacher-info">
-										<h3>
-											정승제 선생님 <span class="teacher-badge">신규</span>
-										</h3>
-										<p class="teacher-description">국어의 달인이 되는 핵심 노하우 대공개! 학습의
-											시작과 마무리를 책임지는 강의</p>
-									</div>
-								</div>
-		
-								<!-- 강사 카드 2 -->
-								<div class="teacher-card">
-									<div class="teacher-image">
-										<img
-											src="https://i.namu.wiki/i/PH9KzsC2-ubZ_bgZX2f1LQiDTTd3aXhg9oAgaGqidOb2Wku3WwdjhQ_nUQDZHm2b7jPOc2F1iqvlbxK_80rxuw.webp"
-											alt="이지영 선생님">
-									</div>
-									<div class="teacher-info">
-										<h3>
-											이지영 선생님 <span class="teacher-badge">인기</span>
-										</h3>
-										<p class="teacher-description">문학의 감동을 전달하는 맛있는 강의! 수능 만점을
-											위한 체계적인 커리큘럼</p>
-									</div>
-								</div>
-		
-								<!-- 강사 카드 3 -->
-								<div class="teacher-card">
-									<div class="teacher-image">
-										<img
-											src="https://i.namu.wiki/i/HD37stHzedpVHn3CRooaDUZnpY0lBKnMitQGuxOoLxSGpUBGxqAPhvc6MDjaViQgbHRnI5Q1j3AbTUJWCwW1VQ.webp"
-											alt="우형철 선생님">
-									</div>
-									<div class="teacher-info">
-										<h3>
-											우형철 선생님 <span class="teacher-badge">베스트</span>
-										</h3>
-										<p class="teacher-description">독서와 문법의 기초부터 실전까지! 개념을 쉽게
-											풀어주는 맞춤형 강의</p>
-									</div>
-								</div>
+								</c:forEach>
 							</div>
+							<!-- 데이터 확인용 디버깅 출력 -->
+							<div style="display: none;">
+							    <p>Teachers 데이터: ${teachers}</p>
+							    <p>Teachers 크기: ${fn:length(teachers)}</p>
+							</div>
+								
 						</div>
 					</div>
 			</section>

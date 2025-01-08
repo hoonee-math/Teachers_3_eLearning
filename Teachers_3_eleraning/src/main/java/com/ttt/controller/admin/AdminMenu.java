@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name="admin", urlPatterns = "/admin/*")
+@WebServlet(name="admin", urlPatterns = "/member/admin/*")
 public class AdminMenu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -22,25 +22,25 @@ public class AdminMenu extends HttpServlet {
         String path = uri.substring(request.getContextPath().length());
 
         switch(path) {
-        case "/admin/menu":
+        case "/member/admin/menu":
             request.getRequestDispatcher("/WEB-INF/views/admin/adminmenu.jsp").forward(request, response);
             break;
-        case "/admin/myinfo": 
+        case "/member/admin/myinfo": 
         	request.getRequestDispatcher("/WEB-INF/views/admin/adminmenu.jsp").forward(request, response);
         	break;
-        case "/admin/managePost": 
+        case "/member/admin/managePost": 
         	request.getRequestDispatcher("/WEB-INF/views/admin/managePost.jsp").forward(request, response);
         	break;
-        case "/admin/managePayment": 
+        case "/member/admin/managePayment": 
         	request.getRequestDispatcher("/WEB-INF/views/admin/managePayment.jsp").forward(request, response);
         	break;
-        case "/admin/manageMember": 
+        case "/member/admin/manageMember": 
         	request.getRequestDispatcher("/WEB-INF/views/admin/manageMember.jsp").forward(request, response);
         	break;
-        case "/admin/notify/board": 
+        case "/member/admin/notify/board": 
         	request.getRequestDispatcher("/WEB-INF/views/admin/notifyBoard.jsp").forward(request, response);
         	break;
-        case "/admin/notify/write": 
+        case "/member/admin/notify/write": 
         	request.getRequestDispatcher("/WEB-INF/views/admin/notifyWrite.jsp").forward(request, response);
         	break;
         }

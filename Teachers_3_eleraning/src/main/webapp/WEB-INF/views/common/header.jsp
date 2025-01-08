@@ -39,13 +39,13 @@
 					
 					<!-- 나중에 c:choose - when 으로 수정하기 -->
 					<c:if test="${sessionScope.loginMember.memberType != 5}">
-						<a href="${path}/admin/menu">관리자페이지</a>
+						<a href="${path}/member/admin/menu">관리자페이지</a>
 					</c:if>
 					<c:if test="${sessionScope.loginMember.memberType != 5}">
-						<a href="${path}/student/mypage/menu">마이페이지</a>
+						<a href="${path}/member/student/mypage/menu">마이페이지</a>
 					</c:if>
 					<c:if test="${sessionScope.loginMember.memberType != 5}">
-						<a href="${path}/teacher/mypage/menu">교사페이지</a>
+						<a href="${path}/member/teacher/mypage/menu">교사페이지</a>
 					</c:if>
 					<a href="${path}/cart">장바구니</a>
 					<button class="btn-link" onclick="logout()">로그아웃</button>

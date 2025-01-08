@@ -9,6 +9,7 @@
 <head>
 <jsp:include page="/WEB-INF/views/common/head.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/pages/mypage-common.css">
+<link rel="stylesheet" href="${path}/resources/css/member/lectureDetail.css">
 <title>강의 상세 정보 | Honey T</title>
 </head>
 

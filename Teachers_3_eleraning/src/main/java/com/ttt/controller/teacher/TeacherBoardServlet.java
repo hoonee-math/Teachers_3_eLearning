@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+// 선생님 상세보기 페이지에서 각 탭별 메뉴 출력
 @WebServlet("/TeacherBoardServlet")
 public class TeacherBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +23,7 @@ public class TeacherBoardServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pathInfo = request.getPathInfo();
+		String pathInfo = "국어";
 		String boardType = pathInfo.substring(1); // /notice, /qna 등
 		
 		// 페이징 처리를 위한 파라미터
