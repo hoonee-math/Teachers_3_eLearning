@@ -31,6 +31,14 @@ public class MemberDao {
 		System.out.println("m : "+m);
 		return session.update("member.updateMember", m);
 	}
+	public int updateStudent(SqlSession session,Member3 m) {
+		return session.update("member.updateStudent", m);
+	}
+	public int updateTeacher(SqlSession session,Member3 m) {
+		return session.update("member.updateTeacher", m);
+	}
+	
+	
 	/* teacherListAndDetail 페이지의 리스트에 교사 출력용 */
 	public List<Member3> selectTeachersBySubject(SqlSession session, Map<String, Object> param){
 		return session.selectList("member.selectTeachersBySubject", param);
@@ -53,7 +61,7 @@ public class MemberDao {
 	public Member3 selectMemberByNameAndEmail(SqlSession session, Member3 m) {
 		return session.selectOne("member.selectMemberByNameAndEmail",m);
 	}
-
+	
 	
 	
 }
