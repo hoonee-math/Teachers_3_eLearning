@@ -14,6 +14,14 @@
 	<!-- 광고 배너 -->
 	<div id="bannerContainer"></div>
 
+	<!-- 반응형 디자인의 핵심! 반응형 헤더를 추가 -->
+	<button class="mobile-menu-btn">
+		<i class="bi bi-list"></i>
+	</button>
+	<button class="mobile-user-btn">
+		<i class="bi bi-person"></i>
+	</button>
+
 	<!-- 유틸리티 네비게이션 -->
 	<div class="utility-nav">
 		<div class="utility-container">

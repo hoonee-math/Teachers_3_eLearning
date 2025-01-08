@@ -181,3 +181,20 @@ $(document).ready(function() {
 	// 초기화 실행
 	initializeMenus();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileUserBtn = document.querySelector('.mobile-user-btn');
+    const slideMenu = document.querySelector('.slide-menu');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+        slideMenu.classList.toggle('active');
+    });
+    
+    // 외부 클릭시 메뉴 닫기
+    document.addEventListener('click', function(e) {
+        if (!slideMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            slideMenu.classList.remove('active');
+        }
+    });
+});
