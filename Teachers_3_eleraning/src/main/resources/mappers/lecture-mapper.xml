@@ -100,4 +100,36 @@
     <select id="selectScheduleEventByLectureNo" parameterType="int" resultMap="scheduleEventMap">
         SELECT * FROM SCHEDULE_EVENT3 WHERE lecture_no = #{lectureNo}
     </select>
+    
+	<!-- 학생의 수강 강좌 일정 조회 -->
+	<select id="selectEventsByStudentNo" parameterType="int" resultType="map">
+		SELECT 
+			SE.EVENT_NO, SE.EVENT_TITLE, SE.EVENT_START, SE.EVENT_END,
+			SE.VIDEO_URL, L.LECTURE_TITLE, C.COURSE_TITLE,
+			T.TEACHER_SUBJECT, M.MEMBER_NAME as TEACHER_NAME
+		FROM SCHEDULE_EVENT3 SE
+			JOIN LECTURE3 L ON SE.LECTURE_NO = L.LECTURE_NO
+			JOIN COURSE3 C ON L.COURSE_NO = C.COURSE_NO
+			JOIN COURSE_REGISTER3 CR ON C.COURSE_NO = CR.COURSE_NO
+			JOIN MEMBER3 M ON C.MEMBER_NO = M.MEMBER_NO
+			JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
+		WHERE CR.MEMBER_NO = #{memberNo}
+		AND CR.COMPLETION_STATUS != 2  -- 수료되지 않은 강좌만
+		ORDER BY SE.EVENT_START
+	</select>
+	
+	<!-- 교사의 강좌 일정 조회 -->
+	<select id="selectEventsByTeacherNo" parameterType="int" resultType="map">
+		SELECT 
+			SE.EVENT_NO, SE.EVENT_TITLE, SE.EVENT_START, SE.EVENT_END,
+			SE.VIDEO_URL, L.LECTURE_TITLE, C.COURSE_TITLE,
+			T.TEACHER_SUBJECT, M.MEMBER_NAME as TEACHER_NAME
+		FROM SCHEDULE_EVENT3 SE
+			JOIN LECTURE3 L ON SE.LECTURE_NO = L.LECTURE_NO
+			JOIN COURSE3 C ON L.COURSE_NO = C.COURSE_NO
+			JOIN MEMBER3 M ON C.MEMBER_NO = M.MEMBER_NO
+			JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
+		WHERE C.MEMBER_NO = #{memberNo}
+		ORDER BY SE.EVENT_START
+	</select>
 </mapper>

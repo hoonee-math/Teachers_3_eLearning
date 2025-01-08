@@ -3,6 +3,7 @@ package com.ttt.service;
 import static com.ttt.common.SqlSessionTemplate.getSession;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -80,5 +81,25 @@ public class LectureService {
 		}
 		session.close();
 		return result;
+	}
+	
+	// 학생의 수강 강좌 일정 조회
+	public List<Map<String, Object>> selectEventsByStudentNo(int memberNo) {
+		SqlSession session = getSession();
+		try {
+			return dao.selectEventsByStudentNo(session, memberNo);
+		} finally {
+			session.close();
+		}
+	}
+
+	// 교사의 강좌 일정 조회
+	public List<Map<String, Object>> selectEventsByTeacherNo(int memberNo) {
+		SqlSession session = getSession();
+		try {
+			return dao.selectEventsByTeacherNo(session, memberNo);
+		} finally {
+			session.close();
+		}
 	}
 }

@@ -67,7 +67,7 @@ section {
 								</a>
 							</div>
 						</c:forEach>
-					</div>
+					</div><!-- /.slider-wrapper -->
 
 					<!-- 슬라이더 컨트롤 -->
 					<div class="slider-controls">
@@ -83,8 +83,8 @@ section {
 							</button>
 						</c:forEach>
 					</div>
-				</div>
-			</section>
+				</div><!-- /.slider-container -->
+			</section><!-- / 섹션2: 광고 메인 슬라이더 section -->
 
 
 			<!-- 섹션2: 학생 수강 현황 (memberType == 1) -->
@@ -118,10 +118,10 @@ section {
 									<a href="${path}/course/detail/${course.courseRegisterNo}" class="course-link">이어서 학습하기</a>
 								</div>
 							</c:forEach>
-						</div>
-					</div>
-				</section>
-			</c:if>
+						</div><!-- /.course-grid -->
+					</div><!-- /.section-container -->
+				</section><!-- /.course-section -->
+			</c:if><!-- / 섹션2: 학생 수강 현황 (memberType == 1) -->
 
 			<!-- 섹션3: 교사 강좌 업로드 현황 (memberType == 2) -->
 			<c:if test="${sessionScope.loginMember.memberType != 5}">
@@ -150,20 +150,47 @@ section {
 									<a href="${path}/teacher/course/${course.courseNo}" class="course-link">강의 관리하기</a>
 								</div>
 							</c:forEach>
-						</div>
-					</div>
-				</section>
+						</div><!-- /.course-grid -->
+					</div><!-- /.section-container -->
+				</section><!-- /.course-section -->
 			</c:if>
 
-			<!-- 캘린더 섹션 -->
+			<!-- 섹션4: 캘린더 섹션 -->
 			<section id="calendarSection" class="calendar-section">
+				<!-- 캘린더 컨트롤러 -->
+				<div class="calendar-controls">
+					<!-- 현재 선택된 학년 표시 -->
+					<div class="current-grade">
+						<span>고${grade} 강의 일정</span>
+					</div>
+
+					<!-- 로그인한 경우에만 표시되는 토글 -->
+					<c:if test="${not empty loginMember}">
+						<div class="view-toggles">
+							<!-- 전체/내 강의 토글 -->
+							<div class="toggle-switch">
+								<input type="checkbox" id="viewToggle" class="toggle-input">
+								<label for="viewToggle" class="toggle-label"> <span
+									class="toggle-text">전체 강의</span>
+								</label>
+							</div>
+
+							<!-- 학년 필터 -->
+							<select id="gradeFilter" class="grade-select">
+								<option value="1" ${gradeNum == 1 ? 'selected' : ''}>고1</option>
+								<option value="2" ${gradeNum == 2 ? 'selected' : ''}>고2</option>
+								<option value="3" ${gradeNum == 3 ? 'selected' : ''}>고3</option>
+							</select>
+						</div><!-- /.view-toggles -->
+					</c:if>
+				</div><!-- /.calendar-controls -->
 				<div class="calendar-container">
 					<h2 class="section-title">학습 일정</h2>
 					<div id="calendar" style="height: 600px;"></div>
 				</div>
 			</section>
 
-			<!-- 섹션4: 대표 강사진 슬라이더 -->
+			<!-- 섹션5: 대표 강사진 슬라이더 -->
 			<section id="mainTeachers" class="teacher-slider-section">
 				<div class="section-container">
 					<h2 class="section-title">대표 강사진</h2>
@@ -187,10 +214,10 @@ section {
 						</div>
 					</div>
 				</div>
-			</section>
+			</section><!-- / 섹션5: 대표 강사진 슬라이더 -->
 
 
-			<!-- index.jsp의 섹션5 부분 수정 -->
+			<!-- 섹션6: 부분 수정 -->
 			<section id="popularCourses" class="popular-course-section">
 				<div class="popular-course-container">
 					<h2 class="section-title">인기 강좌</h2>
@@ -249,18 +276,18 @@ section {
 													</div>
 												</div>
 												<a href="${path}/course/detail/${course.courseNo}" class="popular-course-link"> 자세히 보기 </a>
-											</div>
+											</div><!-- /.popular-course-card -->
 										</c:if>
 									</c:forEach>
-								</div>
-							</div>
+								</div><!-- /.popular-course-grid -->
+							</div><!-- /.popular-course-list -->
 						</c:forEach>
-					</div>
-				</div>
-			</section>
+					</div><!-- /.popular-course-container ?? 똑같은 클래스가 두개로 묶여있네-->
+				</div><!-- /.popular-course-container -->
+			</section><!-- / 섹션6: 부분 수정 -->
 		</main>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	</div>
+	</div><!-- /콘텐츠 영역 /.wrap -->
 
 	<!-- 6-1. 공통 JavaScript -->
 	<jsp:include page="/WEB-INF/views/common/scripts.jsp" />
