@@ -91,12 +91,11 @@
 						    <th>프로필 사진</th>
 						    <td>
 						    <div class="profile-upload" style="margin-bottom:10px">
-						    	        <img id="profilePreview" src="${path}/resources/images/profile/default.png" 
-						    	        	 alt="프로필 미리보기" style="width: 150px; height: 150px; border-radius: 75px; object-fit: cover;">
+						    	<img id="profilePreview" src="${path}/resources/images/profile/${empty loginMember.image ? 'default.png' : loginMember.image.renamed}"  
+				    	        	 alt="프로필 미리보기" style="width: 150px; height: 150px; border-radius: 75px; object-fit: cover;">
 							    <input type="file" id="profileImageInput" accept="image/*" style="display: none;"/>
-								
-        						<button type="button" onclick="document.getElementById('profileImageInput').click()"  class="btn-secondary mt-2">									
-								사진변경</button>
+	       						<button type="button" onclick="document.getElementById('profileImageInput').click()" id="profileChange-btn">									
+									사진변경</button>
 							</div>
 						    </td>
 						</tr>
@@ -137,32 +136,55 @@
 <!-- API/Ajax 관련 JavaScript -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
+<!-- 프로필 이미지 프리뷰 JavaScript -->
+//프로필 이미지 프리뷰 함수
+function previewImage() {
+    const fileInput = document.getElementById('profileImageInput');
+    const previewContainer = document.querySelector('.profile-upload');
+    const changeButton = document.getElementById('profileChange-btn');
     
-	// 프로필 이미지 프리뷰 처리
-	function handleProfileImageChange(event) {
-		const file = event.target.files[0];
-		// 파일이 선택됐는지 확
-		if(!file) return;
-		
-		// FileReader를 사용하여 이미지 프리뷰
-		conset reader = new FileReader();
-		reader.onload = function(e) {
-			//프리뷰 이미지 업데이트
-			const previewImg = document.getElementById("profilePreview");
-			previewImg.scr = e.target.result;
-			previewImg.style.display = 'block';
-		};
-		reader.readAsDataURL(file);
-	}
-	
-	// 초기화 시 이벤트 리스너 등록
-	document.addEventListener('DOMContentLoaded', function() {
-		const fileInput = document.getElementById('profileImageInput');
-		if (fileInput) {
-			fileInput.addEventListener('change', handleProfileImageChange);
-		}
-	});
-       
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        
+        if (file) {
+            // 파일이 이미지인지 확인
+            if (!file.type.startsWith('image/')) {
+                alert('이미지 파일만 선택할 수 있습니다.');
+                return;
+            }
+            
+            // 기존 이미지와 새 이미지 모두 제거
+            const oldImage = document.getElementById('profilePreview');
+            const existingNewImage = document.getElementById('newProfilePreview');
+            if (existingNewImage) {
+                existingNewImage.remove();
+            }
+            
+            // 새 이미지 생성 및 표시
+            const newImage = document.createElement('img');
+            newImage.id = 'newProfilePreview';
+            newImage.style.width = '150px';
+            newImage.style.height = '150px';
+            newImage.style.borderRadius = '75px';
+            newImage.style.objectFit = 'cover';
+            
+            // FileReader로 이미지 읽기
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                newImage.src = e.target.result;
+                oldImage.style.display = 'none';
+                // 새 이미지를 버튼 앞에 삽입
+                previewContainer.insertBefore(newImage, changeButton);
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+// DOM이 로드된 후 실행
+document.addEventListener('DOMContentLoaded', function() {
+    previewImage();
+});
 </script>
 <!-- 6. 페이지별 스크립트 APi-컴포넌트-페이지 순 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음 우편번호 서비스 -->
