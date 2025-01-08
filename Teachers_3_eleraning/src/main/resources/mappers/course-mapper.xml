@@ -33,6 +33,10 @@
 		
 	</insert>
 	
+	<select id="selectCourseByNo" parameterType="int" resultMap="courseMap">
+		SELECT * FROM COURSE3 WHERE COURSE_NO=#{courseNo}
+	</select>
+	
 	<select id="selectCourseBySubjectNo" parameterType="map" resultMap="courseMap">
 		SELECT C.*,
 				I.IMG_NO,  T.TEACHER_SUBJECT

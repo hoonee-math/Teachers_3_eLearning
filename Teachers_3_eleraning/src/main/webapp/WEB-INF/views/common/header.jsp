@@ -24,29 +24,31 @@
 			</div>
 			
 			<%-- 로그인 전 메뉴 --%>
-			<c:if test="${not empty sessionScope.loginMember || empty sessionScope.loginMember}">
-			<div class="right-links">
-				<button class="btn-link" onclick="Modal.show('login')">로그인</button>
-				<a href="${path }/enroll/termsofservice">회원가입</a>
-				<a href="${path }">고객센터</a>
-			</div>
+			<c:if test="${empty sessionScope.loginMember}">
+				<div class="right-links">
+					<button class="btn-link" onclick="Modal.show('login')">로그인</button>
+					<a href="${path }/enroll/termsofservice">회원가입</a>
+					<a href="${path }">고객센터</a>
+				</div>
 			</c:if>
 				
 			<%-- 로그인 후 메뉴 --%>
-			<c:if test="${not empty sessionScope.loginMember || empty sessionScope.loginMember}">
+			<c:if test="${not empty sessionScope.loginMember}">
 				<div class="right-links">
 					<span class="welcome-msg">${sessionScope.loginMember.memberName}님 환영합니다</span>
 					
-					<!-- 나중에 c:choose - when 으로 수정하기 -->
-					<c:if test="${sessionScope.loginMember.memberType != 5}">
-						<a href="${path}/member/admin/menu">관리자페이지</a>
-					</c:if>
-					<c:if test="${sessionScope.loginMember.memberType != 5}">
-						<a href="${path}/member/student/mypage/menu">마이페이지</a>
-					</c:if>
-					<c:if test="${sessionScope.loginMember.memberType != 5}">
-						<a href="${path}/member/teacher/mypage/menu">교사페이지</a>
-					</c:if>
+				    <c:if test="${not empty loginMember}">
+						<c:if test="${sessionScope.loginMember.memberType == 0}">
+							<a href="${path}/member/admin/menu">관리자페이지</a>
+						</c:if>
+						<c:if test="${sessionScope.loginMember.memberType == 1}">
+							<a href="${path}/member/student/mypage/menu">마이페이지</a>
+						</c:if>
+						<c:if test="${sessionScope.loginMember.memberType == 2}">
+							<a href="${path}/member/teacher/mypage/menu">교사페이지</a>
+						</c:if>
+				    </c:if>
+				    
 					<a href="${path}/cart">장바구니</a>
 					<button class="btn-link" onclick="logout()">로그아웃</button>
 					<a href="#">고객센터</a>
