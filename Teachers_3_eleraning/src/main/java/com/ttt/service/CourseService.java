@@ -104,7 +104,21 @@ public class CourseService {
 	// 새 강좌 등록
 	public int insertNewCourse(Course3 c) {
 		SqlSession session = getSession();
-		return dao.insertNewCourse(session, c);
+		int result = 0;
+		try {
+			result = dao.insertNewCourse(session, c);
+			if (result >= 1) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
+		} catch (Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return result;
 	}
 
 	// 회원의 강의 존재여부 확인 - 보류
@@ -114,4 +128,9 @@ public class CourseService {
 		return false;
 	}
 
+	//카테고리 목록 조회
+	public List<String> selectAllCategories() {
+		SqlSession session = getSession();
+	    return dao.selectAllCategories(session);
+	}
 }

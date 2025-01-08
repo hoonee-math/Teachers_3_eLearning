@@ -47,4 +47,9 @@ public class CourseDao {
 		return session.insert("course.insertNewCourse",c);
 	}
 	
+	//카테고리 목록 조회
+	public List<String> selectAllCategories(SqlSession session) {
+		return session.selectList("course.selectAllCategories");
+	}
+	
 }

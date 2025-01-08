@@ -18,17 +18,30 @@
 		<result column="total_lectures" property="totalLectures"/>
 		<result column="member_no" property="memberNo"/>
 	</resultMap>
+	<!-- 카테고리 조회를 위한 resultMap -->
+	<resultMap id="categoryMap" type="Course3">
+		<id column="course_category_no" property="courseCategoryNo"/>
+		<result column="course_category_title" property="courseCategoryTitle"/>
+		<result column="course_category_desc" property="courseCategoryDesc"/>
+	</resultMap>
 	
+	<!-- 카테고리 목록 조회 -->
+	<select id="selectAllCategories" resultType="string">
+	    SELECT COURSE_CATEGORY_TITLE
+	    FROM COURSE_CATEGORY3
+	    ORDER BY COURSE_CATEGORY_NO
+	</select>
+		
 	<!-- 새 강좌 등록 로직 -->
 	<insert id="insertNewCourse" parameterType="Course3">
 		INSERT INTO COURSE3 (
 			COURSE_NO, 				
 			COURSE_TITLE, 	COURSE_DESC, 	COURSE_CATEGORY_NO,  GRADE, 
-			COURSE_PRICE,	COURSE_PRICE_SALE,	BEGIN_DATE,		CREATE_AT,	   MEMBER_NO
+			COURSE_PRICE,	COURSE_PRICE_SALE,	BEGIN_DATE,		CREATED_AT,	   MEMBER_NO
 		) VALUES (
 			SEQ_COURSE3_NO.NEXTVAL, 
 			#{courseTitle},	#{courseDesc},	#{courseCategoryNo}, #{grade},
-			#{coursePrice},	#{coursePriceSale},	#{beginDate},	#{createdAt},  #{memberNo},
+			#{coursePrice},	#{coursePriceSale},	#{beginDate},	#{createdAt},  #{memberNo}
 		)
 		
 	</insert>

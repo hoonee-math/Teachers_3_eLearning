@@ -41,6 +41,10 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member3 loginMember = (Member3)session.getAttribute("loginMember");
 
+	    // 카테고리 목록 조회
+	    List<String> categories = new CourseService().selectAllCategories();
+	    request.setAttribute("categories", categories);
+		
 		// 강좌 목록과 상태별 카운트 조회
 		Map<String, Object> result = new CourseService().selectCoursesByTeacher(loginMember.getMemberNo(), status);
 
