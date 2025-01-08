@@ -79,7 +79,7 @@ public class StudentMyInfoSaveServlet extends HttpServlet {
 				
 				String msg, loc = "/";
 				
-				updateCount = new MemberService().updateStudent(m);
+				updateCount = new MemberService().updateMember(m);
 				if(updateCount > 0) {
 //					MemberService service = new MemberService();
 					session.setAttribute("loginMember", m);
