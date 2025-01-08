@@ -52,6 +52,7 @@
 .main-nav {
     border-bottom: 1px solid #e1e1e1;
     padding: 15px 0;
+    position: relative; /* 모바일 메뉴 버튼의 기준점 */
 }
 
 .nav-container {

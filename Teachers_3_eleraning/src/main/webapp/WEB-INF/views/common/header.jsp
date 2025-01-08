@@ -8,19 +8,54 @@
 
 <!-- 헤더 -->
 <header class="header-container">
+
+	<!-- 반응형 디자인의 핵심! 반응형 헤더를 추가 -->
+	<div class="mobile-btn-section" >
+		<button class="mobile-menu-btn">
+			<i class="bi bi-list"></i>
+		</button>
+        <div class="logo mobile-logo">
+            <a href="${pageContext.request.contextPath}">
+                <img src="${pageContext.request.contextPath}/resources/images/common/HoneyT_logo_horizontal.png" alt="로고">
+            </a>
+        </div>
+		<button class="mobile-user-btn">
+			<i class="bi bi-person"></i>
+		</button>
+	</div>
+	
 	<c:if test="${not empty loginMember}">
 		<input type="hidden" id="loginMemberGrade" value="${loginMember.grade}" />
 	</c:if>
 	<!-- 광고 배너 -->
 	<div id="bannerContainer"></div>
 
-	<!-- 반응형 디자인의 핵심! 반응형 헤더를 추가 -->
-	<button class="mobile-menu-btn">
-		<i class="bi bi-list"></i>
-	</button>
-	<button class="mobile-user-btn">
-		<i class="bi bi-person"></i>
-	</button>
+	<!-- 모바일 메뉴 추가 -->
+	<div class="slide-menu">
+		<!-- 모바일 메뉴 내용 -->
+		<div class="mobile-menu-content">
+			<!-- 로그인 전 -->
+			<c:if test="${empty sessionScope.loginMember}">
+				<div class="mobile-auth">
+					<button onclick="Modal.show('login')">로그인</button>
+					<a href="${path}/enroll/termsofservice">회원가입</a>
+				</div>
+			</c:if>
+
+			<!-- 로그인 후 -->
+			<c:if test="${not empty sessionScope.loginMember}">
+				<div class="mobile-user-info">
+					<span>${sessionScope.loginMember.memberName}님</span>
+					<button onclick="logout()">로그아웃</button>
+				</div>
+			</c:if>
+
+			<!-- 메뉴 항목들 -->
+			<nav class="mobile-nav">
+				<!-- 기존 메뉴 항목들을 여기에 복제 -->
+			</nav>
+		</div>
+	</div>
 
 	<!-- 유틸리티 네비게이션 -->
 	<div class="utility-nav">
