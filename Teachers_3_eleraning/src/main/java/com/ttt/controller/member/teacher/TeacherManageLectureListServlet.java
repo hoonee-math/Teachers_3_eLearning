@@ -2,7 +2,7 @@ package com.ttt.controller.member.teacher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -94,10 +94,14 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 					.lectureStatus('1')
 					.build();
 				
+				// 날짜 + 시간을 포함하므로 Timestamp 사용
+				String startStr = (String)lectureData.get("eventStart"); // "2024-01-08 09:00"
+				String endStr = (String)lectureData.get("eventEnd");     // "2024-01-08 10:30"
+				
 				ScheduleEvent3 event = ScheduleEvent3.builder()
 					.eventTitle((String)lectureData.get("lectureTitle"))
-					.eventStart(new Date(((String)lectureData.get("eventStart")).replace(" ", "T")))
-					.eventEnd(new Date(((String)lectureData.get("eventEnd")).replace(" ", "T")))
+					.eventStart(Timestamp.valueOf(startStr))
+					.eventEnd(Timestamp.valueOf(endStr))
 					.videoUrl((String)lectureData.get("videoUrl"))
 					.build();
 				

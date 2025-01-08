@@ -1,6 +1,7 @@
 package com.ttt.dto;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,8 +17,8 @@ public class ScheduleEvent3 {
 	private String calendarId;
 	private String eventCategory; // 기본값 'time'
 	private String eventTitle;
-	private Date eventStart;
-	private Date eventEnd;
+	private Timestamp eventStart;
+	private Timestamp eventEnd;
 	private int lectureNo;
 	private int courseNo;
 	private int memberNo;
