@@ -99,6 +99,44 @@ table {
 	display: flex;
 	justify-content: center;
 }
+
+#notice-div {
+	color: red;	
+	text-align: center;
+	width: 1140px;
+}
+#categoryTitle {
+	margin: 0 0 0 20px;
+	font-size: 20pt;
+	font-weight: bold;
+}
+ul {
+	list-style-type: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #FAB350;
+	padding: 10px;
+	width: 1140px;
+}
+li {
+	margin: 0 10px;
+	font-size: 13pt;
+}
+li>a {
+	padding: 10px;
+	text-decoration: none;
+	color: #6f6f6f;
+	background-color: #FAB350;
+	width: 50px;
+	height: 50px;
+}
+li>a:hover {
+	background-color: white;
+	border-radius: 50%;
+	font-size: larger;
+	font-weight: bold;
+}
 </style>
 <!-- 콘텐츠 영역 -->
 <div id="wrap">
@@ -207,7 +245,7 @@ table {
 						</tbody>
 					</table>
 			        <div id="pageBar">
-			        	${pageBar }
+			        	${pageBar}
 			        </div>
 			    </div>
 			</section>
@@ -230,7 +268,7 @@ function changePage(page) {
     const sortBy = document.getElementById('sortBy').value;
     const keyword = document.getElementById('searchKeyword').value;
     
-    location.href = `${path}/admin/manage/member?cPage=\${page}&numPerPage=\${numPerPage}&sortBy=\${sortBy}&keyword=\${keyword}`;
+    location.href = `${path}/admin/member?cPage=\${page}&numPerPage=\${numPerPage}&sortBy=\${sortBy}&keyword=\${keyword}`;
 }
 
 // 페이지당 표시 개수 변경
@@ -238,7 +276,7 @@ function changeNumPerPage(num) {
     const sortBy = document.getElementById('sortBy').value;
     const keyword = document.getElementById('searchKeyword').value;
     
-    location.href = `${path}/admin/manage/member?cPage=1&numPerPage=\${num}&sortBy=\${sortBy}&keyword=\${keyword}`;
+    location.href = `${path}/admin/member?cPage=1&numPerPage=\${num}&sortBy=\${sortBy}&keyword=\${keyword}`;
 }
 
 // 정렬 기준 변경
@@ -246,7 +284,7 @@ function changeSortBy(sort) {
     const numPerPage = document.getElementById('numPerPage').value;
     const keyword = document.getElementById('searchKeyword').value;
     
-    location.href = `${path}/admin/manage/member?cPage=1&numPerPage=\${numPerPage}&sortBy=\${sort}&keyword=\${keyword}`;
+    location.href = `${path}/admin/member?cPage=1&numPerPage=\${numPerPage}&sortBy=\${sort}&keyword=\${keyword}`;
 }
 
 // 회원 검색
@@ -255,7 +293,7 @@ function searchMembers() {
     const sortBy = document.getElementById('sortBy').value;
     const keyword = document.getElementById('searchKeyword').value;
     
-    location.href = `${path}/admin/manage/member?cPage=1&numPerPage=\${numPerPage}&sortBy=\${sortBy}&keyword=\${keyword}`;
+    location.href = `${path}/admin/member?cPage=1&numPerPage=\${numPerPage}&sortBy=\${sortBy}&keyword=\${keyword}`;
 }
 
 // 전체 체크박스 토글
