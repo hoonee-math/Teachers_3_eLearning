@@ -86,13 +86,6 @@
 					</td>
 				</tr>
 				<tr>
-				    <th><!-- 회원 구분 * --></th>
-				    <td>
-				        <input type="hidden" name="memberType" id="memberType" value="${loginMember.memberType}">
-				        <label for="memberType"></label>
-				    </td>
-				</tr>
-				<tr>
 				    <th>학교</th>
 				    <td>
 				        <div style="margin-bottom:10px">
