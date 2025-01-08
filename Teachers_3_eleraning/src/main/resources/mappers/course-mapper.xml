@@ -105,7 +105,7 @@
 	</update>
 	
 	<!-- 특정 교사의 강좌 상태별 조회 -->
-	<select id="selectCoursesByStatus" parameterType="map" resultType="Course3">
+	<select id="selectCoursesByStatus" parameterType="map" resultMap="courseMap">
 		SELECT * FROM COURSE3 
 		WHERE MEMBER_NO = #{memberNo}
 		<choose>

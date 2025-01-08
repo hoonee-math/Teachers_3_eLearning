@@ -1,7 +1,7 @@
 package com.ttt.controller.member.teacher;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ttt.dto.Course3;
 import com.ttt.dto.Member3;
 import com.ttt.service.CourseService;
 
@@ -47,7 +46,21 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		
 		// 강좌 목록과 상태별 카운트 조회
 		Map<String, Object> result = new CourseService().selectCoursesByTeacher(loginMember.getMemberNo(), status);
+		// 페이징 처리
+		BigDecimal totalCountDecimal = (BigDecimal)result.get("totalCount"); // 전체 데이터 수
+		int totalData = totalCountDecimal.intValue(); // 전체 데이터 수
+	    int totalPage = (int)Math.ceil((double)totalData/numPerPage);
+	    int pageBarSize = 5;
+	    int pageStart = (cpage - 1) / pageBarSize * pageBarSize + 1;
+	    int pageEnd = pageStart + pageBarSize - 1;
+	    if(pageEnd > totalPage) {
+	        pageEnd = totalPage;
+	    }
 
+	    // 페이징 관련 데이터도 request에 저장
+	    request.setAttribute("pageStart", pageStart);
+	    request.setAttribute("pageEnd", pageEnd);
+	    request.setAttribute("totalPage", totalPage);
 		// request에 데이터 저장
 		request.setAttribute("courses", result.get("courses"));
         request.setAttribute("totalCount", result.get("totalCount"));

@@ -72,10 +72,10 @@
 				<div class="course-list">
 					<table>	
 						<colgroup>
-							<col style="width: 120px;">
-							<col style="width: 60px;">
-							<col style="width: 60px;">
-							<col style="width: 30px;">
+							<col style="width: 60%;">
+							<col style="width: 10%;">
+							<col style="width: 15%;">
+							<col style="width: 15%;">
 						</colgroup>
 						<thead>
 							<tr>
@@ -88,7 +88,7 @@
 						<tbody>
 							<c:forEach var="course" items="${courses}">
 								<tr>
-									<td>
+									<td style="text-align:left;">
 										<a href="javascript:void(0)"
 											onclick="goToLectureManage(${course.courseNo})"
 											class="course-title">
@@ -118,18 +118,24 @@
 					<div class="pagination">
 						<!-- 이전 페이지 -->
 						<c:if test="${cpage > 1}">
-							<a href="javascript:void(0)" onclick="changePage(${cpage-1})">&laquo;</a>
+							<a href="javascript:void(0)" onclick="changePage(${pageStart-1})" class="page-arrow">&lt;</a>
 						</c:if>
 
 						<!-- 페이지 번호 -->
 						<c:forEach var="i" begin="${pageStart}" end="${pageEnd}">
-							<a href="javascript:void(0)" onclick="changePage(${i})"
-								class="${i == cpage ? 'active' : ''}">${i}</a>
+							<c:choose>
+					            <c:when test="${i == cpage}">
+					                <span class="current-page">${i}</span>
+					            </c:when>
+					            <c:otherwise>
+					                <a href="javascript:void(0)" onclick="changePage(${i})">${i}</a>
+					            </c:otherwise>
+					        </c:choose>
 						</c:forEach>
 
 						<!-- 다음 페이지 -->
 						<c:if test="${cpage < totalPage}">
-							<a href="javascript:void(0)" onclick="changePage(${cpage+1})">&raquo;</a>
+							<a href="javascript:void(0)" onclick="changePage(${cpage+1})" class="page-arrow">&gt;</a>
 						</c:if>
 					</div>
 				</div>
