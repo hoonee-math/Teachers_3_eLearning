@@ -1,4 +1,4 @@
-package com.ttt.controller.teacher;
+package com.ttt.controller.course;
 
 import java.io.IOException;
 import java.util.Arrays;
