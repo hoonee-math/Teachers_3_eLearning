@@ -181,3 +181,32 @@ $(document).ready(function() {
 	// 초기화 실행
 	initializeMenus();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+	const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+	const mobileUserBtn = document.querySelector('.mobile-user-btn');
+	const slideMenu = document.querySelector('.slide-menu');
+	
+	// 메뉴 버튼 클릭시 슬라이드 메뉴 토글
+	mobileMenuBtn.addEventListener('click', function(e) {
+		e.stopPropagation(); // 이벤트 버블링 방지
+		slideMenu.classList.toggle('active');
+	});	
+	
+	// 외부 클릭시 메뉴 닫기
+	document.addEventListener('click', function(e) {
+		if (slideMenu &&
+			slideMenu.classList.contains('active') &&
+			!slideMenu.contains(e.target) &&
+			!mobileMenuBtn.contains(e.target)) {
+			slideMenu.classList.remove('active');
+		}
+	});
+	
+	// ESC 키로 메뉴 닫기
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape' && slideMenu && slideMenu.classList.contains('active')) {
+			slideMenu.classList.remove('active');
+		}
+	});
+});

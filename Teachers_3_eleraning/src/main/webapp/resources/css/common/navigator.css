@@ -1,138 +1,289 @@
 @charset "UTF-8";
 
+/* 1. 최상단에 배너 관련 스타일 추가 (utilities.css에서 이동) */
+.banner-area {
+	width: 100%;
+	height: 60px;
+	overflow: hidden;
+	background-color: #f8f9fa;
+	background-repeat: repeat;
+	background-size: auto 100%;
+}
+
+/* 768px(태블릿 분기점) 이하에서 배너 숨김 */
+@media (max-width: 768px) {
+	.banner-area {
+		display: none; /* 모바일 환경에서는 배너 숨김 */
+	}
+}
+
 /* 메가메뉴 스타일 */
 .mega-menu-container {
-    display: none;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    background: white;
-    border-bottom: 1px solid #e1e1e1;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 900;
+	display: none;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	background: white;
+	border-bottom: 1px solid #e1e1e1;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	z-index: 900;
 }
 
 .mega-menu-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 20px;
 }
 
 /* 고1,고2,고3 선택시 바뀌는 오른쪽 메뉴 - 서브 네비게이션 스타일 */
 .sub-nav {
-    display: flex;
-    flex-grow: 1;
-    justify-content: space-between;
+	display: flex;
+	flex-grow: 1;
+	justify-content: space-between;
 }
 
 .sub-nav .menu-item {
-    color: #333;
-    padding: 8px 15px;
-    border-radius: 4px;
-    transition: all 0.2s;
+	color: #333;
+	padding: 8px 15px;
+	border-radius: 4px;
+	transition: all 0.2s;
 }
 
 .sub-nav .menu-item:hover {
-    background-color: #f8f9fa;
+	background-color: #f8f9fa;
 }
 
 /* 서브 네비게이션 중 선생님, 강좌 선택시 나타나는 메가메뉴 상세 스타일 */
 .mega-menu-subject-group {
-    width: 100%;
+	width: 100%;
 }
 
 .mega-menu-subject-title {
-    font-weight: bold;
-    color: #FAB350;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid #FAB350;
+	font-weight: bold;
+	color: #FAB350;
+	margin-bottom: 10px;
+	padding-bottom: 5px;
+	border-bottom: 2px solid #FAB350;
 }
 
 .mega-menu-teacher-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
 }
 
 .mega-menu-teacher-item {
-    color: #333;
-    font-size: 0.9em;
-    padding: 4px 0;
+	color: #333;
+	font-size: 0.9em;
+	padding: 4px 0;
 }
 
 .mega-menu-teacher-item:hover {
-    color: #FAB350;
+	color: #FAB350;
 }
 
 .mega-menu-teacher-badge {
-    display: inline-block;
-    font-size: 0.8em;
-    padding: 2px 6px;
-    border-radius: 10px;
-    background-color: #f8f9fa;
-    margin-left: 5px;
+	display: inline-block;
+	font-size: 0.8em;
+	padding: 2px 6px;
+	border-radius: 10px;
+	background-color: #f8f9fa;
+	margin-left: 5px;
 }
 
 /* 학년 선택 스타일 */
 .grade-wrapper {
-    position: relative;
-    width: 140px;
-    margin-right: 20px;
+	position: relative;
+	width: 140px;
+	margin-right: 20px;
 }
 
 /* 드롭다운 스타일 */
 .grade-dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    border: 1px solid #e1e1e1;
-    border-radius: 4px;
-    margin-top: 5px;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	background-color: white;
+	border: 1px solid #e1e1e1;
+	border-radius: 4px;
+	margin-top: 5px;
+	z-index: 1000;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .grade-btn {
-    width: 130px;
-    font-weight: bold;
-    padding: 10px 20px;
-    background-color: #FAB350;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.1em;
+	width: 130px;
+	font-weight: bold;
+	padding: 10px 20px;
+	background-color: #FAB350;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	text-align: left;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 1.1em;
 }
 
 .grade-btn:after {
-    content: '▼';
-    font-size: 0.8em;
-    margin-left: 10px;
+	content: '▼';
+	font-size: 0.8em;
+	margin-left: 10px;
 }
 
 .grade-btn.active:after {
-    content: '▲';
+	content: '▲';
 }
 
 .grade-dropdown .menu-item {
-    display: block;
-    padding: 12px 20px;
-    text-decoration: none;
-    color: #333;
-    cursor: pointer;
+	display: block;
+	padding: 12px 20px;
+	text-decoration: none;
+	color: #333;
+	cursor: pointer;
 }
 
 .grade-dropdown .menu-item:hover {
-    background-color: #f8f9fa;
+	background-color: #f8f9fa;
+}
+
+/* mobile-btn-section 추가 및 스타일링 */
+.mobile-btn-section {
+	display: none; /* 기본적으로 숨김 */
+	position: fixed; /* 화면 상단에 고정 */
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 10px 20px;
+	background: white;
+	z-index: 999;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 새로 추가할 모바일 메뉴 관련 스타일 */
+.mobile-menu-btn,
+.mobile-user-btn {
+	display: none;		/* 기본적으로는 숨김 상태 */
+	background: none;	/* 배경 제거 */
+	border: none;		/* 테두리 제거 */
+	font-size: 1.5rem;	/* 아이콘 크기 */
+	cursor: pointer;	/* 클릭 가능 표시 */
+	padding: 8px;		/* 클릭 영역 확보 */
+	color: #333;		/* 아이콘 색상 */
+	transition: color 0.3s ease;	/* 호버 효과 부드럽게 */
+}
+
+/* 슬라이드 메뉴 스타일 */
+.slide-menu {	
+	position: fixed;	/* 화면에 고정 */
+	top: 0;				/* 최상단에 위치 */
+	left: -300px;		/* 초기에는 화면 밖으로 숨김 */
+	width: 300px;		/* 메뉴 너비 */
+	height: 100vh;		/* 전체 화면 높이 */
+	background: white;	/* 배경색 */
+	transition: left 0.3s ease;	/* 슬라이드 애니메이션 */
+	z-index: 1000;		/* 최상위 레이어 */
+	box-shadow: 2px 0 5px rgba(0,0,0,0.1);	/* 그림자 효과 */
+	overflow-y: auto;	/* 내용이 많을 경우 스크롤 */
+}
+
+.slide-menu.active {
+	left: 0;	/* 메뉴 활성화시 화면에 표시 */
+}
+
+/* 모바일 대응 미디어 쿼리 */
+@media (max-width: 768px) {
+
+	.section-title {
+		margin : 0 0 20px 0 !important;
+	}
+	
+	/* 컨텐츠 여백 추가 (모바일 헤더 높이만큼) */
+	.header-container {
+		padding-top: 50px; /* mobile-btn-section 높이만큼 여백 */
+	}
+	
+	.mobile-btn-section {
+        display: flex;  /* 모바일에서만 표시 */
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        background: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+	/* 모바일 로고 스타일 */
+	.mobile-logo img {
+		height: 30px;
+		width: auto !important;
+	}
+
+	/* 유틸리티 네비게이션 숨김 */
+	.utility-nav {
+		display: none;
+	}
+	.main-nav {
+		padding: 0;  /* 패딩 제거 */
+		margin-top: 60px;  /* mobile-btn-section 높이만큼 여백 추가 */
+	}
+	/* 모바일 환경에서 main-nav 내부 요소들 숨김 */
+    .main-nav .grade-wrapper,
+    .main-nav .sub-nav {
+        display: none;
+    }
+	/* 모바일에서는 main-nav 로고만 숨김 (mobile-btn-section에 로고가 있으므로) */
+	.main-nav .logo {
+		display: none;
+	}
+	/* 모바일 메뉴 버튼 표시 */
+	.mobile-menu-btn,
+	.mobile-user-btn  {
+		position: static; /* absolute 제거 */
+		transform: none; /* transform 제거 */
+		padding: 8px;
+		
+        display: block;
+        font-size: 1.5rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+	}
+	
+	.mobile-menu-btn {
+		left: 15px;
+	}
+	
+	.mobile-user-btn {
+		right: 15px;
+	}
+	
+	/* 네비게이션 컨테이너 여백 조정 */
+	.nav-container {
+		padding: 0 50px; /* 양쪽 버튼 공간 확보 */
+	}
+	
+	/* 기존 서브 네비게이션 숨김 */
+	.sub-nav {
+		display: none; /* 모바일에서 기존 메뉴 숨김 */
+	}
+	
+	/* 로고 크기 조정 */
+	.logo img {
+		height: 30px; /* 모바일에서는 로고 크기 축소 */
+	}
+	
+	.dday-container {
+		margin-top: 50px;
+	}
 }
