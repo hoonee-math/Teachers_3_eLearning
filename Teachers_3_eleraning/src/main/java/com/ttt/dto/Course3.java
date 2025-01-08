@@ -1,6 +1,7 @@
 package com.ttt.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,10 +29,16 @@ public class Course3 {
 	private int totalLectures;		// 총강의수
 	private int memberNo;			// 자동부여
 	private Member3 member;
+
+	private List<Lecture3> lectures;
 	
 	// 조회 결과를 담기 위한 추가 필드들
 	private int totalCount; 		// 전체 강좌 수
 	private int preparingCount; 	// 준비중인 강좌 수
 	private int inProgressCount; 	// 진행중인 강좌 수
 	private int completedCount; 	// 완료된 강좌 수
+	
+	// 카테고리를 join 해서 사용할 정보들
+	private String courseCategoryTitle;
+	private String courseCategoryDesc;
 }
