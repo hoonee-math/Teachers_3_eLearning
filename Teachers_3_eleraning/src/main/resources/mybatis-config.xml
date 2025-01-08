@@ -22,6 +22,7 @@
 		<typeAlias type="com.ttt.dto.Lecture3" alias="Lecture3"/>
 		<typeAlias type="com.ttt.dto.Cart3" alias="Cart3"/>
 		<typeAlias type="com.ttt.dto.Image3" alias="Image3"/>
+		<typeAlias type="com.ttt.dto.ScheduleEvent3" alias="ScheduleEvent3"/>
 	</typeAliases>
 	
 	<!-- DB정보 작성 : DB 보안 정보는 driver.properties에 개별 작성 -->
