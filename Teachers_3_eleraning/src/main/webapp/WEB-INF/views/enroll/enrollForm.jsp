@@ -142,9 +142,9 @@
 				            <select class="teacher_subject" name="teacherSubject" id="teacherSubject" onchange="districtSearch(event);" 
 				            	style="width:108px; padding:6px 12px 11px 12px;; border: 2px solid #ddd; border-radius: 4px; color:grey; cursor: pointer; ">
 				                <option value=''>과목선택</option>
-				                <option value="1">국어</option>
-				                <option value="2">수학</option>
-								<option value="3">영어</option>
+				                <option value="국어">국어</option>
+				                <option value="수학">수학</option>
+								<option value="영어">영어</option>
 								<option value="4">과학</option>
 								<option value="5">사회</option>
 								<option value="6">한국사</option>

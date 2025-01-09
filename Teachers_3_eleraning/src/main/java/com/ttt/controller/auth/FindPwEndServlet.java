@@ -34,7 +34,7 @@ public class FindPwEndServlet extends HttpServlet {
 		Member3 m = new Member3();
 		switch(searchType) {
 		case "emailDuplicate" : m.setEmail(email); System.out.println(m); break;
-		case "searchPassword" : m.setEmail(email); m.setMemberId(memberId);; System.out.println(m); break;
+		case "searchPassword" : m.setEmail(email); m.setMemberId(memberId); System.out.println(m); break;
 		}
 		
 		Member3 result=new MemberService().selectMemberByIdAndEmail(m);

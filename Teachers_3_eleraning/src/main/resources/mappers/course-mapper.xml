@@ -17,6 +17,8 @@
 		<result column="end_date" property="endDate"/>
 		<result column="total_lectures" property="totalLectures"/>
 		<result column="member_no" property="memberNo"/>
+		
+		<result column="teacher_subject_name" property="teacherSubjectName"/>
 	</resultMap>
 	<!-- 카테고리 조회를 위한 resultMap -->
 	<resultMap id="categoryMap" type="Course3">
@@ -52,18 +54,20 @@
 	
 	<select id="selectCourseBySubjectNo" parameterType="map" resultMap="courseMap">
 		SELECT C.*,
-				I.IMG_NO,  T.TEACHER_SUBJECT
+				I.IMG_NO,  S.TEACHER_SUBJECT_NAME
 		FROM (SELECT ROWNUM AS RNUM, A.*
 			  FROM (SELECT C.* 
 			  		FROM COURSE3 C
 			  			LEFT JOIN TEACHERS3 T ON C.MEMBER_NO = T.MEMBER_NO
-			  			WHERE T.TEACHER_SUBJECT = #{subjectName} AND C.GRADE = #{gradeNum}
+             			LEFT JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
+			  			WHERE S.TEACHER_SUBJECT_NAME = #{subjectName} AND C.GRADE = #{gradeNum}
 			  			ORDER BY C.COURSE_NO DESC) A
 			  		WHERE #{end} >= ROWNUM
 			  ) C
 		LEFT JOIN TEACHERS3 T ON C.MEMBER_NO = T.MEMBER_NO 
 		LEFT JOIN MEMBER3 M ON C.MEMBER_NO = M.MEMBER_NO
 		LEFT JOIN IMAGE3 I ON M.MEMBER_NO = I.MEMBER_NO
+		LEFT JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
 		WHERE RNUM >= #{start}
 	</select>
 	
