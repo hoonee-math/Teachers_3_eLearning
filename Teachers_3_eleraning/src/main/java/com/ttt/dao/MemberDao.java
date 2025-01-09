@@ -37,14 +37,12 @@ public class MemberDao {
 					member.setTeacherInfoTitle(teacher.getTeacherInfoTitle());
 					member.setTeacherInfoContent(teacher.getTeacherInfoContent());
 					member.setImage(teacher.getImage());
+					member.setTeacherSubject(teacher.getTeacherSubject());
 				}
 			}
 		} 
 		
-		
-		
-		
-		return session.selectOne("member.selectMemberById",memberId);
+		return member;
 	}
 	public int updatePassword(SqlSession session, Member3 m) {
 		return session.update("member.updatePassword", m);
