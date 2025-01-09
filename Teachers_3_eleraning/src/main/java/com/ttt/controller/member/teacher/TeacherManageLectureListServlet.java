@@ -3,6 +3,8 @@ package com.ttt.controller.member.teacher;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -90,6 +92,8 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 			List<Lecture3> lectures = new ArrayList<>();
 			List<ScheduleEvent3> events = new ArrayList<>();
 			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			
 			// 3. 각 강의 데이터를 DTO로 변환
 			for(Map<String, Object> lectureData : lectureDataList) {
 				Lecture3 lecture = Lecture3.builder()
@@ -99,14 +103,16 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 					.lectureStatus('1')
 					.build();
 				
-				// 날짜 + 시간을 포함하므로 Timestamp 사용
-				String startStr = (String)lectureData.get("eventStart"); // "2024-01-08 09:00"
-				String endStr = (String)lectureData.get("eventEnd");     // "2024-01-08 10:30"
+				// 문자열을 LocalDateTime으로 변환
+				LocalDateTime startTime = LocalDateTime.parse(
+					(String)lectureData.get("eventStart"), formatter);
+				LocalDateTime endTime = LocalDateTime.parse(
+					(String)lectureData.get("eventEnd"), formatter);
 				
 				ScheduleEvent3 event = ScheduleEvent3.builder()
 					.eventTitle((String)lectureData.get("lectureTitle"))
-					.eventStart(Timestamp.valueOf(startStr))
-					.eventEnd(Timestamp.valueOf(endStr))
+					.eventStart(startTime)
+					.eventEnd(endTime)
 					.videoUrl((String)lectureData.get("videoUrl"))
 					.build();
 				
