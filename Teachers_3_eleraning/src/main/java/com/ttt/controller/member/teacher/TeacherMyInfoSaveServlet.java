@@ -47,90 +47,80 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 			Member3 loginMember = (Member3)session.getAttribute("loginMember");
 			
 			if(loginMember != null) {
-				String memberPw = mr.getParameter("memberPw");
-				String phone = mr.getParameter("phone");
-				
-				String addressNo = mr.getParameter("addressNo");
-				String addressRoad = mr.getParameter("addressRoad");
-				String addressDetail = mr.getParameter("addressDetail");
-				
-				String address = addressNo+":"+addressRoad+":"+addressDetail;
-				
-				String teacherInfoTitle = mr.getParameter("teacherInfoTitle");
-				String teacherInfoContent = mr.getParameter("teacherInfoContent");
-				
-				String originalFileName = mr.getOriginalFileName("profileImageInput");
-				String renamedFileName = mr.getFilesystemName("profileImageInput");
-				
 				// Member 객체 업데이트
 				Member3 m = new Member3();
 				
-				// 로그인된 회원의 기본 정보 설정
+				// 입력받은 정보들 중 null이 있을 수 있으니까, 모든 정보를 기본 정보로 설정
 				m.setMemberNo(loginMember.getMemberNo());
 				m.setMemberId(loginMember.getMemberId());
 				m.setMemberName(loginMember.getMemberName());
 				m.setEmail(loginMember.getEmail());
-				m.setMemberType(loginMember.getMemberType());  // 중요! memberType 설정
+				m.setMemberType(loginMember.getMemberType());
 				m.setEnrollDate(loginMember.getEnrollDate());
 				m.setTeacherSubject(loginMember.getTeacherSubject());
-				
-				// 입력받은 정보들 중 null이 있을 수 있으니까, 모든 정보를 기본 정보로 설정
 				m.setMemberPw(loginMember.getMemberPw());
 				m.setPhone(loginMember.getPhone());
 				m.setAddress(loginMember.getAddress());
 				m.setTeacherInfoTitle(loginMember.getTeacherInfoTitle());
 				m.setTeacherInfoContent(loginMember.getTeacherInfoContent());
+				m.setImage(loginMember.getImage());
 				
-				//모든 정보는 입력된 경우에만 업데이트
+				// 수정된 정보만 업데이트
+				String memberPw = mr.getParameter("memberPw");
 				if(memberPw != null && !memberPw.isEmpty()) {
 					m.setMemberPw(memberPw);
 					//password 암호화를 위한 설정
 					request.setAttribute("encryptPassword", true);
 				}
+				
+				String phone = mr.getParameter("phone");
 				if(phone != null && !phone.isEmpty()) {
 					m.setPhone(phone);
 				}
-				if(address != null && !address.isEmpty()) {
-					m.setAddress(address);
-				}
+				
+				String addressNo = mr.getParameter("addressNo");
+				String addressRoad = mr.getParameter("addressRoad");
+				String addressDetail = mr.getParameter("addressDetail");
+	            if(addressNo != null && addressRoad != null && !addressNo.isEmpty() && !addressRoad.isEmpty()) {
+	                String address = addressNo+":"+addressRoad+":"+addressDetail;
+	                m.setAddress(address);
+	            }
+				
+				String teacherInfoTitle = mr.getParameter("teacherInfoTitle");
 				if(teacherInfoTitle != null && !teacherInfoTitle.isEmpty()) {
 					m.setTeacherInfoTitle(teacherInfoTitle);
 				}
+				
+				String teacherInfoContent = mr.getParameter("teacherInfoContent");
 				if(teacherInfoContent != null && !teacherInfoContent.isEmpty()) {
 					m.setTeacherInfoContent(teacherInfoContent);
 				}
 				
+				
+				
 				// 이미지 정보 설정
+				String originalFileName = mr.getOriginalFileName("profileImageInput");
 				if(originalFileName != null) {
+					String renamedFileName = mr.getFilesystemName("profileImageInput");
+					
 					//Map 대신 Image3 객체 사용
 					Image3 image = new Image3();
 					image.setOriname(originalFileName);
 					image.setRenamed(renamedFileName);
 					m.setImage(image);
-				} else {
-				}
+				} 
 				
 				// 서비스 호출하여 DB 업데이트
 				int result = new MemberService().updateMember(m);
 
 				if(result > 0) {
-					//세션의 회원 정보 업데이트
-					Member3 updateMember = new MemberService().selectMemberById(loginMember.getMemberId());
-					session.setAttribute("loginMember", updateMember);
-					
+					session.setAttribute("loginMember", m);
 					request.setAttribute("msg", "회원 정보 수정에 성공하였습니다.");
-					request.setAttribute("loc", "/member/teacher/profile");
-					request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 				} else {
-					// DB 업데이트 실패한 경우, 파일 삭제
-					if(renamedFileName != null) {
-						File delFile = new File(path + renamedFileName);
-						if(delFile.exists()) delFile.delete();
-					}
 					request.setAttribute("msg", "회원 정보 수정에 실패하였습니다.");
-					request.setAttribute("loc", "/member/teacher/profile");
-					request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 				}
+				
+				request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

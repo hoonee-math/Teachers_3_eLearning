@@ -36,6 +36,9 @@
 						<p>나의 개인정보를 관리할 수 있습니다.</p>
 					</div>
 					<form action="${path}/member/teacher/profile/save" method="post" enctype="multipart/form-data" onsubmit="return fn_invalidate();">
+					과목 정보 : ${loginMember.teacherSubject }<br>
+					
+					${loginMember }
 					<table>
 						<tr>
 							<th>아이디 *</th>
@@ -66,23 +69,26 @@
 						</tr>
 						<tr>
 							<th>전화번호</th>
-							<td><input type="text" name="phone" id="phone" value="${loginMember.phone != null ? loginMember.phone : ''}" placeholder="예)01055556666"><br>
+							<td><input type="text" name="phone" id="phone" value="${loginMember.phone}" placeholder="예)01055556666"><br>
 							</td>
 						</tr>
 						<tr>
 							<th>주소</th>
 							<td>
 								<div style="margin-bottom:10px">
-								<input type="text" id="sample4_postcode" name="addressNo" style="width:190px;" value="${addressNo != null ? addressNo : ''}" placeholder="우편번호">
+								<input type="text" id="sample4_postcode" name="addressNo" style="width:190px;" 
+										value="${not empty addressNo ? addressNo : ''}" placeholder="우편번호">
 								<input type="button" id="postcodeFindBtn" value="우편번호 찾기"><br>
 								</div>
 								<div style="margin-bottom:10px">
-								<input type="text" id="sample4_roadAddress" name="addressRoad" value="${addressRoad != null ? addressRoad : ''}" placeholder="도로명주소" style="width:323px;">
+								<input type="text" id="sample4_roadAddress" name="addressRoad" style="width:323px;"
+										value="${not empty addressRoad ? addressRoad : ''}" placeholder="도로명주소">
 								<!-- <input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width: 300px;"> -->
 								<span id="guide" style="color:#999;display:none"></span>
 								</div>
 								<div>
-								<input type="text" id="sample4_detailAddress" name="addressDetail" value="${addressDetail != null ? addressDetail : ''}" placeholder="상세주소" style="width: 323px;">
+								<input type="text" id="sample4_detailAddress" name="addressDetail" style="width: 323px;"
+										value="${not empty addressDetail ? addressDetail : ''}" placeholder="상세주소">
 								<!-- <input type="text" id="sample4_extraAddress" placeholder="참고항목" style="width: 150px;"> -->
 								</div>
 							</td>
@@ -91,7 +97,8 @@
 						    <th>프로필 사진</th>
 						    <td>
 						    <div class="profile-upload" style="margin-bottom:10px">
-						    	<img id="profilePreview" src="${path}/resources/images/profile/${empty loginMember.image ? 'default.png' : loginMember.image.renamed}"  
+						    	<img id="profilePreview" 
+						    	src="${path}/resources/images/profile/${empty loginMember.image ? 'default.png' : loginMember.image.renamed}"  
 				    	        	 alt="프로필 미리보기" style="width: 150px; height: 150px; border-radius: 75px; object-fit: cover;">
 							    <input type="file" id="profileImageInput" name="profileImageInput" accept="image/*" style="display: none;"/>
 	       						<button type="button" onclick="document.getElementById('profileImageInput').click()" id="profileChange-btn">									
@@ -111,7 +118,7 @@
 						    <th>소개글</th>
 						    <td>
 						        <div style="margin-bottom:10px">
-						            <textarea  rows="5" name="teacherInfoContent" id="teacherInfoContent" value="${loginMember.teacherInfoContent}" style="width:323px;resize:none;"></textarea>
+						            <textarea  rows="5" name="teacherInfoContent" id="teacherInfoContent" style="padding:5px;width:323px;resize:none;">${loginMember.teacherInfoContent}</textarea>
 						        </div>
 						    </td>
 						</tr>
