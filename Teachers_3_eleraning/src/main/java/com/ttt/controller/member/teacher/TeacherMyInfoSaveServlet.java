@@ -72,6 +72,7 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 				m.setEmail(loginMember.getEmail());
 				m.setMemberType(loginMember.getMemberType());  // 중요! memberType 설정
 				m.setEnrollDate(loginMember.getEnrollDate());
+				m.setTeacherSubject(loginMember.getTeacherSubject());
 				
 				// 입력받은 정보들 중 null이 있을 수 있으니까, 모든 정보를 기본 정보로 설정
 				m.setMemberPw(loginMember.getMemberPw());
