@@ -57,14 +57,16 @@
 		SELECT * FROM DUAL
 	</insert>
 
-	<!-- 일정 일괄 등록 -->
+	<!-- 일정 일괄 등록 - LocalDateTime 처리 -->
 	<insert id="insertScheduleEventsBatch" parameterType="list">
 		INSERT ALL
 		<foreach collection="list" item="event">
 			INTO SCHEDULE_EVENT3 (
 				EVENT_NO,		
 				LECTURE_NO,
-				EVENT_TITLE,	EVENT_START,	EVENT_END,		VIDEO_URL,
+				EVENT_TITLE,	
+				EVENT_START,	EVENT_END,
+				VIDEO_URL,
 				CALENDAR_ID,	EVENT_CATEGORY,		CREATED_AT
 			) VALUES (
 				SEQ_SCHEDULE_EVENT3_NO.NEXTVAL,
@@ -79,7 +81,9 @@
 				 	LECTURE_ORDER = #{event.lectureOrder}
 			 	 <!-- AND CREATED_AT >= SYSDATE - 1/1440) --> <!-- 최근 1분 이내 데이터 -->
 				), <!-- lectureOrder로 매칭 -->
-				#{event.eventTitle},	#{event.eventStart},	#{event.eventEnd},		#{event.videoUrl},
+				#{event.eventTitle},
+				#{event.eventStart},	#{event.eventEnd},	<!-- LocalDateTime은 자동으로 TIMESTAMP로 변환 -->
+				#{event.videoUrl},
 				#{event.calendarId},	'time',		SYSDATE
 			)
 		</foreach>
