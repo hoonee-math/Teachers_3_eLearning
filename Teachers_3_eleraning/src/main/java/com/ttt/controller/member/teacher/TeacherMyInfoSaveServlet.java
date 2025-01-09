@@ -112,12 +112,6 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 	                Image3 image = new Image3();
 	                image.setOriname(normalizedOriginalFileName);
 	                image.setRenamed(normalizedRenamedFileName);
-					/*
-					 * String renamedFileName = mr.getFilesystemName("profileImageInput");
-					 * 
-					 * //Map 대신 Image3 객체 사용 Image3 image = new Image3();
-					 * image.setOriname(originalFileName); image.setRenamed(renamedFileName);
-					 */
 					m.setImage(image);
 				} 
 				
@@ -131,6 +125,7 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 					request.setAttribute("msg", "회원 정보 수정에 실패하였습니다.");
 				}
 				
+				request.setAttribute("loc", "/member/teacher/profile");
 				request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
