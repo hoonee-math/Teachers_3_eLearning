@@ -82,6 +82,7 @@ public class MemberDao {
 	public Member3 checkEmailDuplicateByEmail(SqlSession session, Member3 m) {
 		return session.selectOne("member.checkEmailDuplicateByEmail",m);
 	}
+	
 	public Member3 selectMemberByNameAndEmail(SqlSession session, Member3 m) {
 		return session.selectOne("member.selectMemberByNameAndEmail",m);
 	}
@@ -91,9 +92,15 @@ public class MemberDao {
 		System.out.println("DAO - 전체 멤버 리스트 출력 시작");
 		return session.selectList("member.selectAllMember");
 	}
+	//사용자 메뉴 : 아이디 찾기
 	public String selectMemberIdByNameAndEmail(SqlSession session, Member3 m) {
 		return session.selectOne("member.selectMemberIdByNameAndEmail", m);
 	}
+	//사용자 메뉴 : 비밀번호 찾기
+	// 비밀번호 찾기
+		public Member3 selectMemberByIdAndEmail(SqlSession session, Member3 m) {
+		   return session.selectOne("member2.selectMemberByIdAndEmail", m);
+		}
 	
 	
 }
