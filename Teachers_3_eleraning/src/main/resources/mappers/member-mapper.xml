@@ -11,7 +11,8 @@
 		<result column="email" property="email"/>
 		<result column="member_type" property="memberType"/>
 		<result column="enroll_date" property="enrollDate"/>
-		
+		<result column="phone" property="phone"/>
+		<result column="address" property="address"/>
 		<!-- 학생인 경우 -->
 		<result column="grade" property="grade"/>
 		
@@ -149,7 +150,7 @@
 	<update id="updateTeacher" parameterType="member3">
 		UPDATE TEACHERS3 SET
 			TEACHER_SUBJECT=#{teacherSubject}	,TEACHER_INFO_TITLE=#{teacherInfoTitle},
-			TEACHER_INFO_CONTENT=#{teacherInfoContent}
+			TEACHER_INFO_CONTENT=#{teacherInfoContent}, 
 		WHERE MEMBER_NO=#{memberNo}
 	</update>
 	
