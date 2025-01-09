@@ -100,6 +100,11 @@ public class MemberService {
 		SqlSession session=getSession();
 		return dao.selectSubjects(session);
 	}
+	//아이디 찾기
+	public String selectMemberIdByNameAndEmail(Member3 m) {
+		SqlSession session = getSession();
+	
+	}
 	
 }
 	

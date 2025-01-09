@@ -70,14 +70,14 @@
         color: #6f6f6f;
     }
     #find-id {
+    	background-color: white;
+    	border-radius: 20px;
+    }
+    #find-pw {
 	    background-color: #FAB350;
         border-bottom: 2px solid #fff6c2;
         font-weight: bold;
-        border-radius: 20px 0 0 0;
-    }
-    #find-pw {
-    	background-color: white;
-    	border-radius: 20px;
+        border-radius: 0 20px 0 0;
     }
     
     #input-info {
@@ -87,9 +87,9 @@
         height: 300px;
         margin-top: 100px;
     }
-    #input-email,
-    #input-name {
-        width: 300px;
+    #input-id,
+    #input-email {
+    	width: 300px;
     	border: 1px solid #cccccc;
     	border-radius: 5px;
     	padding: 10px;
@@ -121,9 +121,9 @@
 	
 	<!-- 메인 콘텐츠 -->
 	<div id="main-content">
-			<form id="find-form" action="${path }/auth/findidend" method="POST">
 			<section class="row main-section">
 				<!-- 섹션 1 -->
+				<form id="find-form">
 				<div id="find-content">
 					<div id="find-tab">
 						<div id="find-id">아이디 찾기</div>
@@ -132,15 +132,15 @@
 					<div id="input-info">
 						<h3>가입시 입력한 이메일을 통해 찾으실 수 있습니다.</h3>
 						<br>
-						<input type="text" id="input-name" name="input-name" placeholder="이름을 입력하세요.">
+						<input type="text" id="input-id" placeholder="아이디를 입력하세요.">
 						<br>
-						<input type="text" id="input-email" name="input-email" placeholder="이메일을 입력하세요.">
+						<input type="text" id="input-email" placeholder="이메일을 입력하세요.">
 						<br>
-						<button type="submit" id="email-check">아이디 찾기</button>
+						<button type="submit" id="email-check">이메일 인증</button>
 					</div>
 				</div>
+				</form>
 			</section>
-			</form>
 		</div>
 	
 	<!-- 오른쪽 공백 -->
@@ -179,10 +179,72 @@
 <!-- 11. 페이지별 JavaScript -->
 <%-- <script src="path/resources/js/-"></script> --%>
 <script>
-	$("#find-pw").click(function () {
-		location.assign("${path}/auth/findpw");
+	$("#find-id").click(function() {
+		location.assign("${path}/auth/find");
 	});
 	
+	document.getElementById('find-form').addEventListener('submit',
+			function(e) {
+	       		console.log("Form submit event fired");
+		        e.preventDefault(); // 폼 기본 제출 동작 방지
+		        
+		        const memberId = $("#input-id").val();
+		        const email = $("#input-email").val();
+
+		        if(!email || !memberId) {
+		            alert("아이디와 이메일을 모두 입력해주세요.");
+		            return;
+		        }
+		        // 회원 존재 여부 확인
+		        $.ajax({
+		            url: `${pageContext.request.contextPath }/auth/checkEmailDuplicate.do`,
+		            type: "POST",
+		            data: {
+		            	memberId: memberId,
+		                email: email,
+		                searchType: 'searchPassword'
+		            },
+		            success: function(response) {
+		                if(response.exists) {
+		                    // 회원이 존재하면 이메일 인증 프로세스 시작
+		                    const form = document.createElement('form');
+		                    form.method = 'POST';
+		                    form.action = `${pageContext.request.contextPath }/auth/sendEmail`;
+		                    form.target = 'emailVerify';
+		                    
+		                    const emailInput = document.createElement('input');
+		                    emailInput.type = 'hidden';
+		                    emailInput.name = 'email';
+		                    emailInput.value = email;
+		                    
+		                    const typeInput = document.createElement('input');
+		                    typeInput.type = 'hidden';
+		                    typeInput.name = 'authType';
+		                    typeInput.value = 'reset';
+		                    
+		                    form.appendChild(emailInput);
+		                    form.appendChild(typeInput);
+		                    
+		                    window.open(
+	                            '',
+		                        "emailVerify",
+		                        "width=400,height=300,left=500,top=200"
+		                    );
+		                    
+		                    document.body.appendChild(form);
+		                    form.submit();
+		                    document.body.removeChild(form);
+		                } else {
+		                    alert("일치하는 회원 정보가 없습니다.");
+		                }
+		            },
+		            error: function(xhr, status, error) {
+		                alert("서버 통신 중 오류가 발생했습니다.");
+		                console.error("Error:", error);
+		            }
+		        });
+	       	}
+		);
 </script>
 
 </body>
