@@ -83,8 +83,8 @@
         height: 300px;
         margin-top: 50px;
     }
-    #input-pw,
-    #input-pwcheck {
+    #password_,
+    #password_2 {
     	width: 300px;
     	border: 1px solid #cccccc;
     	border-radius: 5px;
@@ -128,9 +128,9 @@
 						<div><img src="${path}/resources/images/common/HoneyT_logo_vertical.png" style="width:100px; height:100px; margin-bottom:30px;"></div>
 						<h3>비밀번호와 비밀번호확인을 입력하여 주세요.</h3>
 						<br>
-						<input type="password" id="input-pw" placeholder="비밀번호">
+						<input type="password" id="password_" placeholder="비밀번호">
 						<br>
-						<input type="password" id="input-pwcheck" placeholder="비밀번호 확인">
+						<input type="password" id="password_2" placeholder="비밀번호 확인">
 						<br>
 						<button type="submit" id="pw-update">저장</button>
 					</div>
@@ -171,14 +171,12 @@
 <script src="${path}/resources/js/components/navigation.js"></script>
 <script src="${path}/resources/js/components/accordion.js"></script>
 <script src="${path}/resources/js/components/tabs.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/enroll/enrollForm.js"></script>
 
 <!-- 11. 페이지별 JavaScript -->
 <%-- <script src="path/resources/js/-"></script> --%>
-<script>
 
 
-
-</script>
 
 </body>
 
