@@ -41,6 +41,26 @@ function updateSubNav(grade) {
 
 // 메가메뉴 생성 함수
 function updateTeacherMegaMenu() {
+	// 서버에서 전달받은 데이터를 활용 (JSP에서 전달)
+	const teachers = megaMenuTeachers || [];
+	const subjects = megaMenuSubjects || [];
+
+	// 과목별로 교사 데이터 그룹화
+	const teachersBySubject = teachers.reduce(
+		// reduce() 메서드의 첫번째 콜백 함수 파라미터 : (acc, teacher) => { ... }
+		// acc: 누적값 (accumulator), teacher: 현재 처리중인 배열 요소
+		(acc, teacher) => { 
+			
+			const subject = teacher.teacherSubjectName;
+			if (!acc[subject]) {
+				acc[subject] = [];
+			}
+			acc[subject].push(teacher);
+			return acc;
+		}, 
+		// reduce() 메서드의 두번째 파라미터 : 초기값 (여기서는 빈 객체 {})
+		{}
+	);
 	console.log('교사 메가메뉴 업데이트');
 	const menuHTML = Object.entries(teacherData).map(([subject, teachers]) => {
 		return '<div class="mega-menu-subject-group">' +
