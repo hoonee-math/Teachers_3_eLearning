@@ -118,10 +118,8 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 					session.setAttribute("loginMember", updateMember);
 					
 					request.setAttribute("msg", "회원 정보 수정에 성공하였습니다.");
-					request.setAttribute("loc", "/teacher/profile");
+					request.setAttribute("loc", "/member/teacher/profile");
 					request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
-					
-					response.sendRedirect(request.getContextPath() + "/member/teacher/profile");
 				} else {
 					// DB 업데이트 실패한 경우, 파일 삭제
 					if(renamedFileName != null) {
@@ -129,14 +127,14 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 						if(delFile.exists()) delFile.delete();
 					}
 					request.setAttribute("msg", "회원 정보 수정에 실패하였습니다.");
-					request.setAttribute("loc", "/teacher/profile");
+					request.setAttribute("loc", "/member/teacher/profile");
 					request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("msg", "회원 정보 수정 중 오류가 발생하였습니다.");
-			request.setAttribute("loc", "/teacher/profile");
+			request.setAttribute("loc", "/member/teacher/profile");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		}
 	}
