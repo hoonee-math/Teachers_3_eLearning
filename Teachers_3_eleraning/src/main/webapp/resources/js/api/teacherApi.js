@@ -2,22 +2,56 @@
  * 
  */
 $(document).ready(function() {
-
-	// 아코디언 클릭 시 선생님 리스트 보이기
+	// 초기 상태 설정 // 리스트 보이고 디테일 숨기기
+	const teacherDetailContent = $('.teacher-detail-content');
+	const teacherListContent = $('.teacher-list-content');
+	teacherDetailContent.hide();
+	
+	// 아코디언 클릭 시 선생님 리스트 보이기 및 과목 필터링
 	$('.accordion-header').click(function() {
-	    // 리스트 보이고 디테일 숨기기
-	    $('.teacher-detail-content').hide();
-	    $('.teacher-list-content').show();
+		const subject = $(this).data('subject');
+		const listTitle = $('.list-title');
+
+		// UI 상태 업데이트
+		teacherDetailContent.hide();
+		teacherListContent.show();
+
+		// 제목 업데이트
+		listTitle.text(`${subject} 선생님`);
+
+		// 선생님 카드 필터링
+		filterTeachersBySubject(subject);
 	});
+	
+	// 선생님 카드 필터링 함수
+	function filterTeachersBySubject(subject) {
+		console.log('subject',subject);
+		$('.teacher-card').each(function() {
+			const teacherSubjectName = $(this).data('subject');
+			console.log('teacherSubjectName',teacherSubjectName);
+			if (subject === '전체' || teacherSubjectName === subject) {
+				$(this).show();
+			} else {
+				$(this).hide();
+			}
+		});
+	}
 
     // 탭 메뉴 기능
     $('.tab-button').click(function() {
         $('.tab-button').removeClass('active');
         $(this).addClass('active');
     });
+
+	// 강사 선택 이벤트 처리
+	$(document).on('click', '.teacher-card, .teacher-link', function(e) {
+		e.preventDefault();
+		const memberNo = $(this).data('memberNo');
+		loadTeacherDetail(memberNo);
+	});
 });
 	
-// teacherListAndDetailAccordion.js 수정
+/*// teacherListAndDetailAccordion.js 수정
 function updateTeacherList(subject) {
     fetch(`${path}/teacher/list_and_detail?subject=${subject}&cpage=${page}`)
 		.then(response => response.text())
@@ -33,7 +67,26 @@ $(document).on('click', '.pagination a', function(e) {
     const page = $(this).data('page');
     const subject = $('.accordion-header.active').data('subject');
     updateTeacherList(subject, page);
-});
+});*/
+
+
+// 선생님 상세 정보 로드 함수
+function loadTeacherDetail(memberNo) {
+	fetch(`${path}/api/teachers`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+		body: `memberNo=${memberNo}`
+	})
+		.then(response => {
+			if (!response.ok) throw new Error('Network response was not ok');
+			return response.json();
+		})
+		.then(teacher => updateTeacherDetailUI(teacher))
+		.catch(error => console.error('Error:', error));
+}
+
 
 /* Ajax 요청으로 선생님 상세 페이지 확인 */
 document.addEventListener('DOMContentLoaded', function() {

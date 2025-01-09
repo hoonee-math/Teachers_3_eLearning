@@ -115,12 +115,11 @@
 							<!-- 실제 교사 데이터 출력 -->
 							<div class="teacher-list real-data">
 								<c:forEach var="teacher" items="${teachers}">
-									<div class="teacher-card" data-memberNo="${teacher.memberNo}">
+									<div class="teacher-card" data-memberNo="${teacher.memberNo}" data-subject="${teacher.teacherSubjectName}">
 										<div class="teacher-image">
 											<img
 												src="${path }/resources/images/profile/${teacher.image.renamed }"
 												alt="${teacher.memberName} 선생님">
-												1${teacher.image.renamed }
 										</div>
 										<div class="teacher-info">
 											<h3>
