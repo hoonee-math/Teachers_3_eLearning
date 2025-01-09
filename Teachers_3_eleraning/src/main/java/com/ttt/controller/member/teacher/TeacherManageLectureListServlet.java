@@ -82,6 +82,10 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");  // UTF-8 인코딩 명시적 설정
 		
 		try {
+			HttpSession session = request.getSession();
+			Member3 teacher = (Member3)session.getAttribute("loginMember");
+			System.out.println("선생님 정보 : "+teacher);
+						
 			// 1. 요청 데이터 읽기
 			BufferedReader reader = request.getReader();
 			StringBuilder buffer  = new StringBuilder();
@@ -123,6 +127,8 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 					.eventEnd(LocalDateTime.parse(lecture.get("eventEnd").getAsString(), formatter))
 					.videoUrl(lecture.get("videoUrl").isJsonNull() 
 						? null : lecture.get("videoUrl").getAsString())
+					.lecture(lectureObj)
+					.member(teacher)
 					.build();
 
 	            lectures.add(lectureObj);

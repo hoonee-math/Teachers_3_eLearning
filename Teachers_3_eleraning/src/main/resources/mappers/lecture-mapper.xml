@@ -62,7 +62,8 @@
 		INSERT ALL
 		<foreach collection="list" item="event">
 			INTO SCHEDULE_EVENT3 (
-				EVENT_NO,		
+				EVENT_NO,
+				CALENDAR_ID,
 				LECTURE_NO,
 				EVENT_TITLE,	
 				EVENT_START,	EVENT_END,
@@ -78,7 +79,7 @@
 				 WHERE 
 				 	COURSE_NO = #{event.courseNo}
 				 AND 
-				 	LECTURE_ORDER = #{event.lectureOrder}
+				 	LECTURE_ORDER = #{event.lecture.lectureOrder}
 			 	 <!-- AND CREATED_AT >= SYSDATE - 1/1440) --> <!-- 최근 1분 이내 데이터 -->
 				), <!-- lectureOrder로 매칭 -->
 				#{event.eventTitle},

@@ -21,7 +21,6 @@ public class ScheduleEvent3 {
 	private LocalDateTime eventEnd;
 	private int lectureNo;
 	private int courseNo;
-	private int memberNo;
 	private String eventType;
 	private int subjectCode;
 	private int grade;
@@ -30,6 +29,7 @@ public class ScheduleEvent3 {
 	private Date createdAt;
 	
 	// 연관 객체
+	private Member3 member;
 	private Lecture3 lecture;
 	private Course3 course;
 
