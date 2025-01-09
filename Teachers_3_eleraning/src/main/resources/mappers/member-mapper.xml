@@ -63,6 +63,9 @@
 	<select id="selectAllMember" resultMap="memberMap">
 		SELECT * FROM MEMBER3
  	</select>
+ 	<select id="selectMemberIdByNameAndEmail" parameterType="member3" resultMap="memberMap">
+ 		SELECT MEMBER_ID FROM MEMBER3 WHERE MEMBER_NAME=#{memberName} AND EMAIL=#{email}
+ 	</select>
 	<select id="checkEmailDuplicateByEmail" parameterType="member3" resultMap="memberMap">
 		SELECT EMAIL FROM MEMBER3 WHERE EMAIL=#{email}
 	</select> 

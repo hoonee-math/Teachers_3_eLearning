@@ -93,7 +93,9 @@ public class MemberDao {
 		System.out.println("DAO - 전체 멤버 리스트 출력 시작");
 		return session.selectList("member.selectAllMember");
 	}
-	
+	public String selectMemberIdByNameAndEmail(SqlSession session, Member3 m) {
+		return session.selectOne("member.selectMemberIdByNameAndEmail", m);
+	}
 	
 	
 }
