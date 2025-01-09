@@ -2,7 +2,6 @@ package com.ttt.controller.member.teacher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.ttt.dto.Course3;
 import com.ttt.dto.Lecture3;
 import com.ttt.dto.Member3;
@@ -76,70 +78,79 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Map<String, Object> responseData = new HashMap<>();
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");  // UTF-8 인코딩 명시적 설정
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");  // UTF-8 인코딩 명시적 설정
 		
 		try {
-			// 1. 요청 데이터 파싱
+			// 1. 요청 데이터 읽기
 			BufferedReader reader = request.getReader();
-			Gson gson = new Gson();
-			Map<String, Object> data = gson.fromJson(reader, Map.class);
-			
-			// 2. 강의 일정 데이터 변환 및 저장
-			List<Map<String, Object>> lectureDataList = (List<Map<String, Object>>)data.get("lectures");
-			int courseNo = ((Double)data.get("courseNo")).intValue();
-			
+			StringBuilder buffer  = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				buffer .append(line);
+			}
+			System.out.println("받은 JSON 데이터: " + buffer .toString());
+
+			// 2. JSON 파싱
+			JsonObject jsonObject = new Gson().fromJson(buffer.toString(), JsonObject.class);
+			int courseNo = jsonObject.get("courseNo").getAsInt();
+			JsonArray lecturesArray = jsonObject.get("lectures").getAsJsonArray();
+
+			System.out.println("jsonObject: " + jsonObject);
+			System.out.println("lecturesArray: " + lecturesArray);
+
+			// 3. 데이터 변환 및 저장을 위한 리스트 준비
 			List<Lecture3> lectures = new ArrayList<>();
 			List<ScheduleEvent3> events = new ArrayList<>();
-			
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			
-			// 3. 각 강의 데이터를 DTO로 변환
-			for(Map<String, Object> lectureData : lectureDataList) {
-				Lecture3 lecture = Lecture3.builder()
+			// 4. 각 강의 데이터 처리
+			for (JsonElement element : lecturesArray) {
+				JsonObject lecture = element.getAsJsonObject();
+				
+				// 4-1. Lecture 객체 생성
+				Lecture3 lectureObj = Lecture3.builder()
 					.courseNo(courseNo)
-					.lectureTitle((String)lectureData.get("lectureTitle"))
-					.lectureOrder(((Double)lectureData.get("lectureOrder")).intValue())
+					.lectureTitle(lecture.get("lectureTitle").getAsString())
+					.lectureOrder(lecture.get("lectureOrder").getAsInt())
 					.lectureStatus('1')
 					.build();
-				
-				// 문자열을 LocalDateTime으로 변환
-				LocalDateTime startTime = LocalDateTime.parse(
-					(String)lectureData.get("eventStart"), formatter);
-				LocalDateTime endTime = LocalDateTime.parse(
-					(String)lectureData.get("eventEnd"), formatter);
-				
-				ScheduleEvent3 event = ScheduleEvent3.builder()
-					.eventTitle((String)lectureData.get("lectureTitle"))
-					.eventStart(startTime)
-					.eventEnd(endTime)
-					.videoUrl((String)lectureData.get("videoUrl"))
+
+				// 4-2. ScheduleEvent 객체 생성
+				ScheduleEvent3 eventObj = ScheduleEvent3.builder()
+					.eventTitle(lecture.get("lectureTitle").getAsString())
+					.eventStart(LocalDateTime.parse(lecture.get("eventStart").getAsString(), formatter))
+					.eventEnd(LocalDateTime.parse(lecture.get("eventEnd").getAsString(), formatter))
+					.videoUrl(lecture.get("videoUrl").isJsonNull() 
+						? null : lecture.get("videoUrl").getAsString())
 					.build();
-				
-				lectures.add(lecture);
-				events.add(event);
+
+	            lectures.add(lectureObj);
+	            events.add(eventObj);
 			}
-			
+			System.out.println("lectures: "+lectures);
+			System.out.println("events: "+events);
 			// 4. 서비스 호출하여 저장
 			int result = lectureService.insertLecturesWithSchedules(lectures, events);
 			
 			// 5. 결과 응답
-	        // 성공/실패 여부와 메시지 포함
-	        responseData.put("success", result == lectures.size());
-	        responseData.put("message", result == lectures.size() ? 
-	            "강의 일정이 성공적으로 등록되었습니다." : 
-	            "일부 강의 일정 등록에 실패했습니다.");
-	        responseData.put("count", result);  // 실제 등록된 개수
+			// 성공/실패 여부와 메시지 포함
+			responseData.put("success", result == lectures.size());
+			responseData.put("message", result == lectures.size() ? 
+				"강의 일정이 성공적으로 등록되었습니다." : 
+				"일부 강의 일정 등록에 실패했습니다.");
+			responseData.put("count", result);  // 실제 등록된 개수
 			
 		} catch(Exception e) {
-	        // 에러 발생 시 클라이언트에 의미있는 메시지 전달
-	        responseData.put("success", false);
-	        responseData.put("message", "강의 일정 등록 중 오류가 발생했습니다.");
-	        responseData.put("error", e.getMessage());
+			e.printStackTrace();
+			// 에러 발생 시 클라이언트에 의미있는 메시지 전달
+			responseData.put("success", false);
+			responseData.put("message", "강의 일정 등록 중 오류가 발생했습니다.");
+			responseData.put("error", e.getMessage());
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 		
-	    response.getWriter().write(new Gson().toJson(responseData));
+		response.getWriter().write(new Gson().toJson(responseData));
 	}
 
 }

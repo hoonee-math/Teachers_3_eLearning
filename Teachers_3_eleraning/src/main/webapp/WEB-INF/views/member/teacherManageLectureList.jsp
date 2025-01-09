@@ -26,6 +26,7 @@
 				<div class="course-info">
 					<div style="display:flex; justify-content: space-between;">
 						<p style="font-size: 30px; font-weight: bold; margin-bottom:10px;">${course.courseTitle}</p>
+						<div id="courseNo" style="display:none;">${course.courseNo }</div>
 						<a href="${path }/member/teacher/mypage/course">강좌 목록 보기</a>
 					</div>
 					
@@ -143,6 +144,9 @@
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <!-- 페이지별 스크립트 APi-컴포넌트-페이지 순 -->
+<script>
+    const courseNo = ${course.courseNo}; // EL 표현식으로 courseNo 전달
+</script>
 <script src="${path}/resources/js/member/teacherManageLectureList.js"></script>
 
 </body>

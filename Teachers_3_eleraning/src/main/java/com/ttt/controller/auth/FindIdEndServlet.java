@@ -25,8 +25,8 @@ public class FindIdEndServlet extends HttpServlet {
 		String memberName = request.getParameter("input-name");
 		String email = request.getParameter("input-email");
 		
-		Member3 m = new Member3();
-		m = Member3.builder()
+	
+		Member3 m = Member3.builder()
 				.memberName(memberName)
 				.email(email)
 				.build();

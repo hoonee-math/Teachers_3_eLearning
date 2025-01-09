@@ -65,7 +65,7 @@
 		SELECT * FROM MEMBER3
  	</select>
  	<!-- 아이디 찾기 -->
- 	<select id="selectMemberIdByNameAndEmail" parameterType="member3" resultMap="memberMap">
+ 	<select id="selectMemberIdByNameAndEmail" parameterType="member3" resultType="String">
  		SELECT MEMBER_ID FROM MEMBER3 WHERE MEMBER_NAME=#{memberName} AND EMAIL=#{email}
  	</select>
  	<!-- 비밀번호 찾기 -->
