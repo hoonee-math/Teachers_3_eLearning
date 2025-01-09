@@ -119,7 +119,7 @@
 										<div class="teacher-image">
 											<img
 												src="${path }/resources/images/profile/${teacher.image.renamed }"
-												alt="${teacher.memberName} 선생님">
+												alt="${teacher.memberName} 선생님">${teacher.image.renamed }
 										</div>
 										<div class="teacher-info">
 											<h3>

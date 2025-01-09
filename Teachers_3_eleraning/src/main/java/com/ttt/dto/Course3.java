@@ -34,6 +34,7 @@ public class Course3 {
     // 교사 정보 연관 관계 추가
 	private Member3 member;  // 교사 정보 포함
     private String teacherSubject;  // 교사 과목
+    private String teacherSubjectName;  // 교사 과목
     private String teacherName;     // 교사 이름
 	
 	// 조회 결과를 담기 위한 추가 필드들
