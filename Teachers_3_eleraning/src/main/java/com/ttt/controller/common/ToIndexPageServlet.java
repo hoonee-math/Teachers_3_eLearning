@@ -35,8 +35,10 @@ public class ToIndexPageServlet extends HttpServlet {
 		if(loginMember != null) {
 			// 학생인 경우
 			if(loginMember.getMemberType() == 1) {
-				//List<CourseRegister3> studentCourses = courseReisterService.selectStudentCourses(loginMember.getMemberNo());
-				//request.setAttribute("studentCourses", studentCourses);
+				int memberNo=loginMember.getMemberNo();
+				List<CourseRegister3> studentCourses =  new CourseRegisterService().selectIngCourse(memberNo);
+				System.out.println("studentCourses: "+studentCourses);
+				request.setAttribute("studentCourses", studentCourses);
 			}
 			// 교사인 경우
 			else if(loginMember.getMemberType() == 2) {

@@ -12,8 +12,8 @@ import com.ttt.dto.CourseRegister3;
 public class CourseRegisterService {
 	private CourseRegisterDao dao = new CourseRegisterDao();
 	
-	public List<CourseRegister3> selectIngCourse() {
+	public List<CourseRegister3> selectIngCourse(int memberNo) {
 		SqlSession session = getSession();
-		return dao.selectIngCourse(session);
+		return dao.selectIngCourse(session,memberNo);
 	}
 }

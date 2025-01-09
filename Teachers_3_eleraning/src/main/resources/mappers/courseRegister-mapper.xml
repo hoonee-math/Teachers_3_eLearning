@@ -11,16 +11,24 @@
 		<result column="course_price_sale" property="courseScore"/>
 		<result column="course_period" property="reviewContent"/>
 		<result column="member_no" property="memberNo"/>
-		
 		<result column="teacher_subject_name" property="teacherSubjectName"/>
-        <association property="scheduleEvent" resultMap="categoryMap"/>
-        <association property="scheduleEvent" resultMap="scheduleEventMap"/>
-	</resultMap>
-	<!-- 카테고리 조회를 위한 resultMap -->
-	<resultMap id="categoryMap" type="Course3">
-		<id column="course_category_no" property="courseCategoryNo"/>
-		<result column="course_category_title" property="courseCategoryTitle"/>
-		<result column="course_category_desc" property="courseCategoryDesc"/>
+		
+		<association property="Course3" resultMap="course.courseMap"/>
 	</resultMap>
 	
+    <!-- 진행중인 강좌 조회 쿼리 -->
+    <select id="selectIngCourse" parameterType="int" resultMap="courseRegisterMap">
+        SELECT 
+            CR.*, C.COURSE_TITLE, C.TOTAL_LECTURES,
+            M.MEMBER_NAME AS TEACHER_NAME
+        FROM 
+            COURSE_REGISTER3 CR
+            JOIN COURSE3 C ON CR.COURSE_NO = C.COURSE_NO
+            JOIN MEMBER3 M ON C.MEMBER_NO = M.MEMBER_NO
+        WHERE 
+            CR.COMPLETION_STATUS = 0 
+            AND CR.MEMBER_NO = #{memberNo}
+        ORDER BY 
+            CR.LAST_VIEW_TIME DESC
+    </select>
 </mapper>

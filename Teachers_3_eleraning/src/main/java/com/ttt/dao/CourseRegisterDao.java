@@ -8,8 +8,8 @@ import com.ttt.dto.CourseRegister3;
 
 public class CourseRegisterDao {
 	
-	public List<CourseRegister3> selectIngCourse(SqlSession session) {
-		return session.selectList("courseRegister.selectIngCourse");
+	public List<CourseRegister3> selectIngCourse(SqlSession session, int memberNo) {
+		return session.selectList("courseRegister.selectIngCourse",memberNo);
 	}
 
 }
