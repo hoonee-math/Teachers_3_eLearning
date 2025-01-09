@@ -1,34 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- 1. JSP/JSTL 태그 라이브러리 -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Honey T</title>
-	<jsp:include page="/WEB-INF/views/common/head.jsp" />
-	<link rel="stylesheet" href="${path}/resources/css/pages/mypage-common.css">
+<title>Honey T</title>
+<jsp:include page="/WEB-INF/views/common/head.jsp" />
+<link rel="stylesheet"
+	href="${path}/resources/css/pages/mypage-common.css">
 </head>
 
 <body>
-<style>
+	<style>
 * {
-    /* border: 1px solid pink; */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	/* border: 1px solid pink; */
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		'Helvetica Neue', Arial, sans-serif;
 }
+
 table {
 	margin-top: 40px;
 	table-layout: fixed;
 	width: 100%;
 }
+
 .mm-container {
+	
 }
 
 /* 컨트롤 바 영역 */
@@ -37,7 +42,7 @@ table {
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 20px;
-	background:  #FAB350;
+	background: #FAB350;
 	padding: 10px;
 	border-radius: 5px;
 }
@@ -81,7 +86,7 @@ table {
 }
 
 .mm-container table th {
-	background-color:  #FAB350;
+	background-color: #FAB350;
 	font-weight: bold;
 }
 
@@ -108,15 +113,17 @@ table {
 }
 
 #notice-div {
-	color: red;	
+	color: red;
 	text-align: center;
 	width: 1140px;
 }
+
 #categoryTitle {
 	margin: 0 0 0 20px;
 	font-size: 20pt;
 	font-weight: bold;
 }
+
 ul {
 	list-style-type: none;
 	display: flex;
@@ -126,10 +133,12 @@ ul {
 	padding: 10px;
 	width: 1140px;
 }
+
 li {
 	margin: 0 10px;
 	font-size: 13pt;
 }
+
 li>a {
 	padding: 10px;
 	text-decoration: none;
@@ -138,6 +147,7 @@ li>a {
 	width: 50px;
 	height: 50px;
 }
+
 li>a:hover {
 	background-color: white;
 	border-radius: 50%;
@@ -145,134 +155,125 @@ li>a:hover {
 	font-weight: bold;
 }
 </style>
-<!-- 콘텐츠 영역 -->
-<div id="wrap">
-<!-- 헤더 include -->
-<jsp:include page="/WEB-INF/views/common/modal.jsp" />
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<!-- 콘텐츠 영역 -->
+	<div id="wrap">
+		<!-- 헤더 include -->
+		<jsp:include page="/WEB-INF/views/common/modal.jsp" />
+		<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-	<!-- 메인 콘텐츠 -->
-	<main class="main">
-	<!-- 페이지 내용 -->
-	<div class="main-container">
-		<div class="main-content">
-			<section class="main-section mm-container">
-				<div>
-					<div>
-						<h2 style="font-size: 1.8em; margin-bottom:10px;">회원 목록</h2>
-						<hr style="border:2px solid #FAB350;">
-						<p style="margin-top:15px; font-size: 1.1em; color: #666;">회원을 조회, 경고, 정지 등 관리할 수 있습니다.</p>
-					</div>
+		<!-- 메인 콘텐츠 -->
+		<main class="main">
+			<!-- 페이지 내용 -->
+			<div class="main-container">
+				<div class="main-content">
+					<section class="main-section mm-container">
+						<div>
+							<div>
+								<h2 style="font-size: 1.8em; margin-bottom: 10px;">회원 목록</h2>
+								<hr style="border: 2px solid #FAB350;">
+								<p style="margin-top: 15px; font-size: 1.1em; color: #666;">회원을
+									조회, 경고, 정지 등 관리할 수 있습니다.</p>
+							</div>
+						</div>
+
+						<!-- 컨트롤 바 -->
+						<div class="mm-control-bar">
+							<!-- 회원 관리 액션 -->
+							<div class="mm-actions">
+								<button onclick="handleSelectedMembers('warning')">경고</button>
+								<button onclick="handleSelectedMembers('suspend')">활동정지</button>
+								<button onclick="handleSelectedMembers('delete')">회원삭제</button>
+							</div>
+
+							<!-- 검색 및 정렬 -->
+							<div class="mm-search-sort">
+								<select id="numPerPage" onchange="changeNumPerPage(this.value)">
+									<option value="5" ${param.numPerPage == 5 ? 'selected' : ''}>5명씩
+										보기</option>
+									<option value="10" ${param.numPerPage == 10 ? 'selected' : ''}>10명씩
+										보기</option>
+									<option value="20" ${param.numPerPage == 20 ? 'selected' : ''}>20명씩
+										보기</option>
+								</select> <select id="sortBy" onchange="changeSortBy(this.value)">
+									<option value="memberNo">회원번호순</option>
+									<option value="warningCount">경고횟수순</option>
+									<option value="enrollDate">가입일순</option>
+								</select> <input type="text" id="searchKeyword" placeholder="검색어 입력">
+								<button onclick="searchMembers()">검색</button>
+							</div>
+						</div>
+
+						<div id="board-container">
+							<table id="tbl-board">
+								<colgroup>
+									<col style="width: 20px;">
+									<col style="width: 50px;">
+									<col style="width: 60px;">
+									<col style="width: 60px;">
+									<col style="width: 180px;">
+									<col style="width: 60px;">
+									<col style="width: 60px;">
+									<col style="width: 30px;">
+								</colgroup>
+								<thead>
+									<tr>
+										<th class="checkbox-cell"><input type="checkbox"
+											id="selectAll" onclick="toggleAllCheckboxes()"></th>
+										<th>회원번호</th>
+										<th>아이디</th>
+										<th>이름</th>
+										<th>이메일</th>
+										<th>구분</th>
+										<th>가입일</th>
+										<th>상태</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:if test="${empty members }">
+										<tr>
+											<td colspan="8" style="text-align: center;">죄회된 결과가
+												없습니다.</td>
+										</tr>
+									</c:if>
+									<c:forEach var="m" items="${members }">
+										<tr>
+											<td class="checkbox-cell"><input type="checkbox"
+												name="selectedMembers" value="${m.memberNo}"></td>
+											<td>${m.memberNo}</td>
+											<td>${m.memberId}</td>
+											<td>${m.memberName}</td>
+											<td>${m.email}</td>
+											<td class="warning-count"><c:choose>
+													<c:when test="${m.memberType == 0}">관리자</c:when>
+													<c:when test="${m.memberType == 1}">학생</c:when>
+													<c:when test="${m.memberType == 2}">교사</c:when>
+												</c:choose></td>
+											<td><fmt:formatDate value="${m.enrollDate}"
+													pattern="yyyy-MM-dd" /></td>
+											<td>
+												<p>정상</p>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<div id="pageBar">${pageBar}</div>
+						</div>
+					</section>
 				</div>
-				
-				<!-- 컨트롤 바 -->
-                <div class="mm-control-bar">
-                    <!-- 회원 관리 액션 -->
-                    <div class="mm-actions">
-                        <button onclick="handleSelectedMembers('warning')">경고</button>
-                        <button onclick="handleSelectedMembers('suspend')">활동정지</button>
-                        <button onclick="handleSelectedMembers('delete')">회원삭제</button>
-                    </div>
-                    
-                    <!-- 검색 및 정렬 -->
-                    <div class="mm-search-sort">
-                        <select id="numPerPage" onchange="changeNumPerPage(this.value)">
-                            <option value="5" ${param.numPerPage == 5 ? 'selected' : ''}>5명씩 보기</option>
-                            <option value="10" ${param.numPerPage == 10 ? 'selected' : ''}>10명씩 보기</option>
-                            <option value="20" ${param.numPerPage == 20 ? 'selected' : ''}>20명씩 보기</option>
-                        </select>
-                        <select id="sortBy" onchange="changeSortBy(this.value)">
-                            <option value="memberNo">회원번호순</option>
-                            <option value="warningCount">경고횟수순</option>
-                            <option value="enrollDate">가입일순</option>
-                        </select>
-                        <input type="text" id="searchKeyword" placeholder="검색어 입력">
-                        <button onclick="searchMembers()">검색</button>
-                    </div>
-                </div>
-                
-				<div id="board-container">
-					<table id="tbl-board">
-						<colgroup>
-							<col style="width: 20px;">
-							<col style="width: 50px;">
-							<col style="width: 60px;">
-							<col style="width: 60px;">
-							<col style="width: 180px;">
-							<col style="width: 60px;">
-							<col style="width: 60px;">
-							<col style="width: 60px;">
-							<col style="width: 60px;">
-							<col style="width: 30px;">
-						</colgroup>
-						<thead>
-							<tr>
-									<th class="checkbox-cell">
-										<input type="checkbox" id="selectAll" onclick="toggleAllCheckboxes()">
-									</th>
-									<th>회원번호</th>
-									<th>아이디</th>
-									<th>이름</th>
-									<th>이메일</th>
-									<th>구분</th>
-									<th>유효신고</th>
-									<th>경고횟수</th>
-									<th>가입일</th>
-									<th>상태</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="${empty members }">
-				            	<tr>
-				            		<td colspan="8" style="text-align: center;">
-				            			죄회된 결과가 없습니다.
-				            		</td>
-				            	</tr>
-				            </c:if>
-							<c:forEach var="m" items="${members }">
-								<tr>
-									<td class="checkbox-cell">
-										<input type="checkbox" name="selectedMembers" value="${m.memberNo}" >
-									</td>
-									<td>${m.memberNo}</td>
-									<td>${m.memberId}</td>
-									<td>${m.memberName}</td>
-									<td>${m.email}</td>
-	  							    <td class="warning-count"><c:choose>
-	  							    								<c:when test="${m.memberType == 0}">관리자</c:when>
-	  							    								<c:when test="${m.memberType == 1}">학생</c:when>
-	  							    								<c:when test="${m.memberType == 2}">교사</c:when>
-	  							    							</c:choose></td>
-									<td class="warning-count">0</td>
-									<td class="warning-count">0</td>
-									<td> 
-										<fmt:formatDate value="${m.enrollDate}" pattern="yyyy-MM-dd" />
-									</td>
-									<td>
-										<p>정상</p>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-			        <div id="pageBar">
-			        	${pageBar}
-			        </div>
-			    </div>
-			</section>
-		</div>
-	</div> <!-- /페이지 내용 -->
-	</main>
+			</div>
+			<!-- /페이지 내용 -->
+		</main>
 
 
-<!-- 푸터 include -->
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-<!-- 콘텐츠 영역 종료 -->
-</div>
+		<!-- 푸터 include -->
+		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+		<!-- 콘텐츠 영역 종료 -->
+	</div>
 
-<jsp:include page="/WEB-INF/views/common/scripts.jsp" />
-<!-- API/Ajax 관련 JavaScript -->
-<script>
+	<jsp:include page="/WEB-INF/views/common/scripts.jsp" />
+	<!-- API/Ajax 관련 JavaScript -->
+	<script>
 //페이지 변경
 function changePage(page) {
     const numPerPage = document.getElementById('numPerPage').value;
