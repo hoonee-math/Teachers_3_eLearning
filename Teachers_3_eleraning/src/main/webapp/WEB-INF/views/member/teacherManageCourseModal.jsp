@@ -29,16 +29,16 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="courseCategoryNo">카테고리 *</label>
-						<div class="input-wrapper">
-							<select id="courseCategoryNo" name="courseCategoryNo" required>
-								<option value="">카테고리 선택</option>
-								<option value="1">진도 강좌</option>
-								<option value="2">내신대비 강좌</option>
-								<option value="3">모의고사 대비 강좌</option>
-								<option value="4">수능대비 강좌</option>
+					    <label for="courseCategoryNo">카테고리 *</label>
+					    <div class="input-wrapper">
+					        <select id="courseCategoryNo" name="courseCategoryNo" required>
+							 	<option value="">카테고리 선택</option>
+							    <c:forEach items="${categories}" var="category" varStatus="vs">
+							        <!-- index가 0부터 시작하므로 1을 더해줍니다 -->
+							        <option value="${vs.index + 1}">${category}</option>
+							    </c:forEach>
 							</select>
-						</div>
+					    </div>
 					</div>
 					
 					<div class="form-group">
@@ -57,11 +57,11 @@
 						<label for="coursePrice">강좌 가격 *</label>
 						<div class="input-wrapper price-container">
 							<div class="price-input-wrapper">
-								<input type="number" id="coursePrice" name="coursePrice" required min="0" step="1000" placeholder="가격을 입력하세요">
+								<input type="number" id="coursePrice" name="coursePrice" required placeholder="가격을 입력하세요">
 								<span class="price-unit">원</span>
 							</div>
 							<div class="price-input-wrapper">
-								<input type="number" id="coursePriceSale" name="coursePriceSale" min="0" max="100" value="0" placeholder="할인율">
+								<input type="number" id="coursePriceSale" name="coursePriceSale" placeholder="할인율">
 								<span class="price-unit">%</span>
 							</div>
 						</div>

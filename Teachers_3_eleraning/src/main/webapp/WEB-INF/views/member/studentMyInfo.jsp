@@ -74,7 +74,7 @@
 					<td>
 						<div style="margin-bottom:10px">
 						<input type="text" id="sample4_postcode" name="addressNo" style="width:323px;" value="${addressNo != null ? addressNo : ''}" placeholder="우편번호">
-						<input type="button" id="postcodeFindBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="button" id="postcodeFindBtn" value="우편번호 찾기"><br>
 						</div>
 						<div>
 						<input type="text" id="sample4_roadAddress" name="addressRoad" value="${addressRoad != null ? addressRoad : ''}" placeholder="도로명주소" style="width:323px;">
