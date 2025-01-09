@@ -7,10 +7,14 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <%@ page import="com.google.gson.Gson" %>
 <!-- 메가메뉴 데이터 전달을 위한 스크립트 추가 -->
+<%
+    Gson gson = new Gson();
+    String teachersJson = gson.toJson(request.getAttribute("megaMenuTeachers"));
+    String subjectsJson = gson.toJson(request.getAttribute("megaMenuSubjects"));
+%>
 <script>
-	// Java 객체를 JSON 형태로 변환
-	const megaMenuTeachers = ${new Gson().toJson(megaMenuTeachers)};
-	const megaMenuSubjects = ${new Gson().toJson(megaMenuSubjects)};
+    const megaMenuTeachers = <%= teachersJson != null ? teachersJson : "[]" %>;
+    const megaMenuSubjects = <%= subjectsJson != null ? subjectsJson : "[]" %>;
 </script>
 
 <!-- 헤더 -->
