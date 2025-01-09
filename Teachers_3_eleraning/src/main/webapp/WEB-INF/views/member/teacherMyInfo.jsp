@@ -61,7 +61,7 @@
 						</tr>
 						<tr>
 							<th>이름 *</th>
-							<td><input type="text" name="memberName" id="userName" value="${loginMember.memberName}" readonly><br>
+							<td><input type="text" name="memberName" id="userName" value="${loginMember.memberName}"><br>
 							</td>
 						</tr>
 						<tr>

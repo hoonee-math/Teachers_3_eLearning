@@ -69,6 +69,11 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 				m.setImage(loginMember.getImage());
 				
 				// 수정된 정보만 업데이트
+				String memberName = mr.getParameter("memberName");
+				if(memberName != null && !memberName.isEmpty()) {
+					m.setMemberName(memberName);
+				}
+				
 				String memberPw = mr.getParameter("memberPw");
 				if(memberPw != null && !memberPw.isEmpty()) {
 					m.setMemberPw(memberPw);
