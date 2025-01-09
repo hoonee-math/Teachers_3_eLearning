@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.ttt.common.TextNormalizer;
 import com.ttt.dto.Image3;
 import com.ttt.dto.Member3;
 import com.ttt.service.MemberService;
@@ -19,6 +20,8 @@ import com.ttt.service.MemberService;
 @WebServlet(name="teacherInfoUpdate", urlPatterns="/member/teacher/profile/save")
 public class TeacherMyInfoSaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+    // TextNormalizer 인스턴스 생성
+    private final TextNormalizer textNormalizer = new TextNormalizer();
        
     public TeacherMyInfoSaveServlet() {
         super();
@@ -101,12 +104,20 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 				// 이미지 정보 설정
 				String originalFileName = mr.getOriginalFileName("profileImageInput");
 				if(originalFileName != null) {
-					String renamedFileName = mr.getFilesystemName("profileImageInput");
-					
-					//Map 대신 Image3 객체 사용
-					Image3 image = new Image3();
-					image.setOriname(originalFileName);
-					image.setRenamed(renamedFileName);
+	                // 파일명도 정규화 처리
+	                String normalizedOriginalFileName = textNormalizer.normalizeText(originalFileName);
+	                String renamedFileName = mr.getFilesystemName("profileImageInput");
+	                String normalizedRenamedFileName = textNormalizer.normalizeText(renamedFileName);
+	                
+	                Image3 image = new Image3();
+	                image.setOriname(normalizedOriginalFileName);
+	                image.setRenamed(normalizedRenamedFileName);
+					/*
+					 * String renamedFileName = mr.getFilesystemName("profileImageInput");
+					 * 
+					 * //Map 대신 Image3 객체 사용 Image3 image = new Image3();
+					 * image.setOriname(originalFileName); image.setRenamed(renamedFileName);
+					 */
 					m.setImage(image);
 				} 
 				
