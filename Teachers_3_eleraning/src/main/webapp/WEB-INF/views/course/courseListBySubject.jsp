@@ -90,7 +90,7 @@
 											<p class="teacher-name">${course.member.memberName}선생님</p>
 											<p class="course-desc">${course.courseDesc}</p>
 											<div class="course-tags">
-												<span class="course-tag">#${course.member.teacherSubject}</span> <span
+												<span class="course-tag">#${course.member.teacherSubjectName}</span> <span
 													class="course-tag">#수능대비</span>
 											</div>
 										</div>

@@ -100,9 +100,10 @@
 	</select>
 	<!-- teacherListAndDetail 페이지의 리스트에 교사 출력용 -->
 	<select id="selectAllTeachers" resultMap="memberMap">
-		SELECT M.MEMBER_NO, M.MEMBER_NAME, M.ENROLL_DATE, T.*
+		SELECT M.MEMBER_NO, M.MEMBER_NAME, M.ENROLL_DATE, T.*, S.SUBJECT_NAME
 		FROM MEMBER3 M
 		JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
+		JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.SUBJECTNO
 		ORDER BY M.MEMBER_NO
 	</select>
 	<select id="selectTeachersBySubject" parameterType="map" resultMap="memberMap">
@@ -111,9 +112,10 @@
             SELECT ROWNUM AS RNUM, SUB.*
             FROM (
                 SELECT M.MEMBER_NO, M.MEMBER_NAME, M.ENROLL_DATE, 
-                       T.TEACHER_SUBJECT, T.TEACHER_INFO_TITLE, T.TEACHER_INFO_CONTENT
+                       T.TEACHER_SUBJECT, T.TEACHER_INFO_TITLE, T.TEACHER_INFO_CONTENT, S.SUBJECT_NAME
                 FROM MEMBER3 M
                 JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
+				JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.SUBJECTNO
                 WHERE T.TEACHER_SUBJECT = #{teacherSubject}
                 ORDER BY M.MEMBER_NO
             ) SUB

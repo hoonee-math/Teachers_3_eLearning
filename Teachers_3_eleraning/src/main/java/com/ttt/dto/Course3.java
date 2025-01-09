@@ -28,9 +28,13 @@ public class Course3 {
 	private Date endDate;			// 강좌촬영완료날짜(예정날짜)
 	private int totalLectures;		// 총강의수
 	private int memberNo;			// 자동부여
-	private Member3 member;
 
 	private List<Lecture3> lectures;
+
+    // 교사 정보 연관 관계 추가
+	private Member3 member;  // 교사 정보 포함
+    private String teacherSubject;  // 교사 과목
+    private String teacherName;     // 교사 이름
 	
 	// 조회 결과를 담기 위한 추가 필드들
 	private int totalCount; 		// 전체 강좌 수
