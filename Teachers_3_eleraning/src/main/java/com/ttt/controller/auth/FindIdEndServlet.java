@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ttt.dto.Member3;
+import com.ttt.service.MemberService;
 
 @WebServlet("/auth/findidend")
 public class FindIdEndServlet extends HttpServlet {
@@ -30,7 +31,7 @@ public class FindIdEndServlet extends HttpServlet {
 				.email(email)
 				.build();
 		
-		String memberId = new memberService().selectMemberIdByNameAndEmail(m);
+		String memberId = new MemberService().selectMemberIdByNameAndEmail(m);
 		
 		String msg, loc;
 		

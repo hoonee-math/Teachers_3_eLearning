@@ -103,8 +103,17 @@ public class MemberService {
 	//아이디 찾기
 	public String selectMemberIdByNameAndEmail(Member3 m) {
 		SqlSession session = getSession();
-	
+		String memberId = dao.selectMemberIdByNameAndEmail(session, m);
+		return memberId;
 	}
+	
+	//비밀번호 찾기 
+		public Member3 selectMemberByIdAndEmail(Member3 m) {
+			SqlSession session=getSession();
+		    Member3 result = dao.selectMemberByIdAndEmail(session, m);
+		    System.out.println("Service layer result: " + result);
+		    return result;
+		}
 	
 }
 	
