@@ -101,10 +101,11 @@
 	</select>
 	<!-- teacherListAndDetail 페이지의 리스트에 교사 출력용 -->
 	<select id="selectAllTeachers" resultMap="memberMap">
-		SELECT M.MEMBER_NO, M.MEMBER_NAME, M.ENROLL_DATE, T.*, S.*
+		SELECT M.MEMBER_NO, M.MEMBER_NAME, M.ENROLL_DATE, T.*, S.*, I.*
 		FROM MEMBER3 M
 		JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
 		JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
+		JOIN IMAGE3 I ON M.MEMBER_NO = I.MEMBER_NO
 		ORDER BY M.MEMBER_NO
 	</select>
 	<select id="selectTeachersBySubject" parameterType="map" resultMap="memberMap">
