@@ -251,7 +251,7 @@ section {
 													</div>
 												</div>
 												<div class="popular-course-content">
-													<h3 class="popular-course-title">${course.courseTitle}</h3>
+													<h3 class="popular-course-title">${course.course.courseTitle}</h3>
 													<p class="popular-teacher-name">${course.teacherName} 선생님</p>
 													<p class="popular-teacher-info">${course.teacherInfo}</p>
 													<div class="popular-course-info">

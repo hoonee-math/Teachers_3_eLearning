@@ -13,22 +13,35 @@
         <result column="MEMBER_NO" property="memberNo"/>
 		<result column="teacher_subject_name" property="teacherSubjectName"/>
 		
-		<association property="Course3" resultMap="course.courseMap"/>
+		<result column="MEMBER_NAME" property="teacherName"/>
+		<result column="COURSE_TITLE" property="courseTitle"/>
+		<association property="course" resultMap="course.courseMap"/>
 	</resultMap>
 	
     <!-- 진행중인 강좌 조회 쿼리 -->
-    <select id="selectIngCourse" parameterType="int" resultMap="courseRegisterMap">
-        SELECT 
-            CR.*, C.COURSE_TITLE, C.TOTAL_LECTURES,
-            M.MEMBER_NAME AS TEACHER_NAME
-        FROM 
-            COURSE_REGISTER3 CR
-            JOIN COURSE3 C ON CR.COURSE_NO = C.COURSE_NO
-            JOIN MEMBER3 M ON C.MEMBER_NO = M.MEMBER_NO
-        WHERE 
-            CR.COMPLETION_STATUS = 0 
-            AND CR.MEMBER_NO = #{memberNo}
-        ORDER BY 
-            CR.LAST_VIEW_TIME DESC
+	<select id="selectIngCourse" parameterType="int" resultMap="courseRegisterMap">
+		SELECT 
+			CR.COURSE_REGISTER_NO,
+			CR.COURSE_REGISTER_DATE,
+			CR.PROGRESS_RATE,
+			CR.LAST_VIEW_TIME,
+			CR.COMPLETION_STATUS,
+			CR.COURSE_NO,
+			CR.COURSE_SCORE,
+			CR.REVIEW_CONTENT,
+			CR.MEMBER_NO,
+			C.COURSE_TITLE,
+			C.TOTAL_LECTURES,
+			M.MEMBER_NAME AS TEACHER_NAME,
+			S.TEACHER_SUBJECT_NAME
+		FROM 
+			COURSE_REGISTER3 CR
+			JOIN COURSE3 C ON CR.COURSE_NO = C.COURSE_NO
+			JOIN TEACHERS3 T ON C.MEMBER_NO = T.MEMBER_NO
+			JOIN MEMBER3 M ON T.MEMBER_NO = M.MEMBER_NO
+			JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
+		WHERE 
+			CR.COMPLETION_STATUS = 0
+			AND CR.MEMBER_NO = #{memberNo}
     </select>
 </mapper>
