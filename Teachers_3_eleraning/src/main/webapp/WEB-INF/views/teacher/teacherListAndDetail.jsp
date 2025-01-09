@@ -118,8 +118,9 @@
 									<div class="teacher-card" data-memberNo="${teacher.memberNo}">
 										<div class="teacher-image">
 											<img
-												src="/resources/images/profile/${teacher.image.renamed }"
+												src="${path }/resources/images/profile/${teacher.image.renamed }"
 												alt="${teacher.memberName} 선생님">
+												1${teacher.image.renamed }
 										</div>
 										<div class="teacher-info">
 											<h3>
