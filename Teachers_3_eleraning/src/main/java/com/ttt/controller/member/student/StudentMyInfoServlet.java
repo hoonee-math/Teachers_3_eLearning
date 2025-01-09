@@ -30,21 +30,23 @@ public class StudentMyInfoServlet extends HttpServlet {
 			
 			if(address != null) {
 				String[] addressParts = address.split(":");
-				String addressNo = addressParts[0];
-				String addressRoad = addressParts[1];
-				String addressDetail = addressParts[2];
 				
-				request.setAttribute("addressNo", addressNo);
-				request.setAttribute("addressRoad", addressRoad);
-				request.setAttribute("addressDetail", addressDetail);
-				
+				if(addressParts.length > 0) {
+					String addressNo = addressParts[0];
+					String addressRoad = addressParts[1];
+					String addressDetail = "";
+					
+					if(addressParts.length > 2) {
+						addressDetail = addressParts[2];
+					}
+					
+					request.setAttribute("addressNo", addressNo);
+					request.setAttribute("addressRoad", addressRoad);
+					request.setAttribute("addressDetail", addressDetail);
+				}
 			}
-			
 			request.getRequestDispatcher("/WEB-INF/views/member/studentMyInfo.jsp").forward(request, response);
 		}
-		
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
