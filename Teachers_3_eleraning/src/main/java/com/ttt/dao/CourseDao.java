@@ -52,4 +52,13 @@ public class CourseDao {
 		return session.selectList("course.selectAllCategories");
 	}
 	
+	// 학생이 수강 중인 강좌 번호 목록 조회
+	public List<Integer> selectEnrolledCourseNos(SqlSession session, int memberNo) {
+		return session.selectList("course.selectEnrolledCourseNos", memberNo);
+	}
+	
+	// 교사가 가르치는 강좌 번호 목록 조회
+	public List<Integer> selectTeachingCourseNos(SqlSession session, int memberNo) {
+		return session.selectList("course.selectTeachingCourseNos", memberNo);
+	}
 }

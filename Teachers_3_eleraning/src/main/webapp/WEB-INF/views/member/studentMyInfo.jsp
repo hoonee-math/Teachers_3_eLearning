@@ -66,7 +66,7 @@
 				</tr>
 				<tr>
 					<th>전화번호</th>
-					<td><input type="text" name="phone" id="phone" value="${loginMember.phone != null ? loginMember.phone : ''}" placeholder="예)01055556666"><br>
+					<td><input type="text" name="phone" id="phone" value="${loginMember.phone}" placeholder="예)01055556666"><br>
 					</td>
 				</tr>
 				<tr>
@@ -101,11 +101,7 @@
 				                <option value=''>구/군</option>
 				            </select>
 				            <select class="child_school" id="school-type" onchange="schoolSearch({target:document.getElementById('district')});" style="width:108px">
-				                <option value="">초중고</option>
-				                <option value="초등학교">초등학교</option>
-				                <option value="중학교">중학교</option>
 				                <option value="고등학교">고등학교</option>
-				                <option value="고등학교">기타학교</option>
 				            </select>
 				            <!-- name에 standardCode 를 입력하여 회원정보에는 학교 코드가 저장되도록 설정 -->
 				            <select class="child_school" id="school-name" name="schoolNo" style="width:186px">

@@ -1,6 +1,7 @@
 package com.ttt.dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,4 +24,6 @@ public class Lecture3 {
 	private int courseNo;          // 연결된강좌번호
 	
 	private ScheduleEvent3 scheduleEvent; // 이벤트 연결 객체
+	private LocalDateTime eventStart;
+	private LocalDateTime eventEnd;
 }

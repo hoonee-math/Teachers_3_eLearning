@@ -1,21 +1,44 @@
 /**
  * 
  */
+
+// 시간 관련 유틸리티 함수
+function combineDateTime(date, time) {
+    const [hours, minutes] = time.split(':');
+    const dateTime = new Date(date);
+    dateTime.setHours(parseInt(hours), parseInt(minutes), 0);
+    return dateTime.toISOString().slice(0, 19).replace('T', ' ');
+}
+
+function calculateEndTime(startTime) {
+    // 기본 강의 시간을 90분으로 설정
+    const [hours, minutes] = startTime.split(':');
+    let endDate = new Date();
+    endDate.setHours(parseInt(hours));
+    endDate.setMinutes(parseInt(minutes) + 90);
+    return `${String(endDate.getHours()).padStart(2, '0')}:${String(endDate.getMinutes()).padStart(2, '0')}`;
+}
+
 // 강의 일정 동적 생성을 위한 템플릿
-function createLectureTemplate(index, date = '') {
+function createLectureTemplate(index, date = '', time = '') {
+	// 종료 시간 계산
+	const endTime = time ? calculateEndTime(time) : '';
+
 	return `
 		<div class="lecture-item" data-index="\${index}">
 			<div class="lecture-header">
-				<h4>\${index}차시</h4>
-				<input type="date" value="\${date}" class="lecture-date">
-				<input type="time" class="lecture-time">
+				<h4>${index}차시</h4>
+				<input type="date" value="${date}" class="lecture-date">
+				<div class="lecture-time-group">
+					<input type="time" value="${time}" class="lecture-start-time">
+					<span>~</span>
+					<input type="time" value="${endTime}" class="lecture-end-time" readonly>
+				</div>
 			</div>
-			<div class="lecture-preview">
-				<span>제목과 설명은 나중에 입력 가능합니다</span>
+			<div class="lecture-content">
+				<input type="text" class="lecture-title" placeholder="강의 제목" value="${index}차시 강의">
+				<input type="url" class="video-url" placeholder="강의 영상 URL">
 			</div>
-			<button type="button" class="remove-lecture" onclick="removeLecture(\${index})">
-				<i class="bi bi-trash"></i>
-			</button>
 		</div>
 	`;
 }
@@ -26,9 +49,9 @@ function generateSchedule() {
 	const selectedDays = Array.from(document.querySelectorAll('.day-checkboxes input:checked'))
 							 .map(cb => parseInt(cb.value));
 	const weekCount = parseInt(document.getElementById('weekCount').value);
-	const lectureTime = document.getElementById('lectureTime').value;
+	const lectureStartTime = document.getElementById('lectureStartTime').value;
 	
-	if(!startDate || selectedDays.length === 0 || !weekCount || !lectureTime) {
+	if(!startDate || selectedDays.length === 0 || !weekCount || !lectureStartTime) {
 		alert('모든 설정을 입력해주세요.');
 		return;
 	}
@@ -45,16 +68,54 @@ function generateSchedule() {
 			currentDate.setDate(startDate.getDate() + (week * 7) + ((7 + day - startDate.getDay()) % 7));
 			
 			const dateStr = currentDate.toISOString().split('T')[0];
-			const template = createLectureTemplate(lectureCount++, dateStr);
+			const template = createLectureTemplate(lectureCount++, dateStr, lectureStartTime);
 			document.getElementById('lectureContainer').insertAdjacentHTML('beforeend', template);
-			
-			// 시간 설정
-			const lastAdded = document.querySelector('.lecture-item:last-child');
-			lastAdded.querySelector('.lecture-time').value = lectureTime;
 		}
 	}
 	
 	updateTotalLectures();
+}
+
+// 강의 계획 저장
+function saveLecturePlan() {
+	const lectures = Array.from(document.querySelectorAll('.lecture-item')).map(item => {
+		const date = item.querySelector('.lecture-date').value;
+		const startTime = item.querySelector('.lecture-start-time').value;
+		const endTime = item.querySelector('.lecture-end-time').value;
+		
+		return {
+			lectureOrder: parseInt(item.getAttribute('data-index')),
+			lectureTitle: item.querySelector('.lecture-title').value,
+			eventStart: combineDateTime(date, startTime),
+			eventEnd: combineDateTime(date, endTime),
+			videoUrl: item.querySelector('.video-url').value || null
+		};
+	});
+	
+	// AJAX로 서버에 저장
+	fetch(`${path}/member/teacher/mypage/lecturelist`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				courseNo: courseNo, // jsp에서 전달받은 강좌 번호
+				lectures: lectures
+			})
+		})
+		.then(response => response.json())
+		.then(data => {
+			if(data.success) {
+				alert(data.message);
+				location.href = `${path}/member/teacher/mypage/course`;
+			} else {
+				alert(data.message);
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+			alert('저장 중 오류가 발생했습니다.');
+		});
 }
 
 // 개별 강의 추가
@@ -86,34 +147,4 @@ function reorderLectures() {
 function updateTotalLectures() {
 	const count = document.querySelectorAll('.lecture-item').length;
 	document.getElementById('totalLectures').textContent = count;
-}
-
-// 강의 계획 저장
-function saveLecturePlan() {
-	const lectures = Array.from(document.querySelectorAll('.lecture-item')).map(item => ({
-		lectureOrder: parseInt(item.getAttribute('data-index')),
-		lectureDate: item.querySelector('.lecture-date').value,
-		lectureTime: item.querySelector('.lecture-time').value
-	}));
-
-	// AJAX로 서버에 저장
-	fetch('${path}/teacher/course/saveLecturePlan', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-			courseNo: '${course.courseNo}',
-			lectures: lectures
-		})
-	})
-	.then(response => response.json())
-	.then(data => {
-		if(data.success) {
-			alert('강의 계획이 저장되었습니다.');
-			location.href = '${path}/teacher/course/management';
-		} else {
-			alert('저장에 실패했습니다.');
-		}
-	});
 }

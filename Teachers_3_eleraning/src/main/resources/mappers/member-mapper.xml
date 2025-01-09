@@ -19,7 +19,7 @@
 		<result column="teacher_subject" property="teacherSubject"/>
 		<result column="teacher_info_title" property="teacherInfoTitle"/>
 		<result column="teacher_info_content" property="teacherInfoContent"/>
-		
+		<association property="image" resultMap="image.imageMap"/>
 		<!-- School12와 연결 -->
 		<association property="school" resultMap="school.schoolMap"/>
 	</resultMap>
@@ -73,6 +73,21 @@
 	
 	<select id="selectMemberById" parameterType="string" resultMap="memberMap">
 		SELECT * FROM MEMBER3 WHERE MEMBER_ID=#{memberId}
+	</select>
+	<select id="selectStudentById" parameterType="string" resultMap="memberMap">
+		SELECT M.MEMBER_ID, S.GRADE, S.SCHOOL_NO, SC.SCHOOL_NAME, SC.REGION
+		FROM MEMBER3 M 
+		LEFT JOIN STUDENTS3 S ON M.MEMBER_NO = S.MEMBER_NO
+		LEFT JOIN SCHOOL12 SC ON S.SCHOOL_NO = SC.SCHOOL_NO
+		WHERE M.MEMBER_ID=#{memberId}
+	</select>
+	<select id="selectTeacherById" parameterType="string" resultMap="memberMap">
+		SELECT M.MEMBER_ID, T.TEACHER_INFO_TITLE, T.TEACHER_INFO_CONTENT,
+			I.IMG_NO, I.RENAMED
+		FROM MEMBER3 M
+		LEFT JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
+		LEFT JOIN IMAGE3 I ON T.IMAGE_NO = I.IMG_NO
+		WHERE M.MEMBER_ID=#{memberId}
 	</select>
 	<!-- teacherListAndDetail 페이지의 리스트에 교사 출력용 -->
 	<select id="selectAllTeachers" resultMap="memberMap">

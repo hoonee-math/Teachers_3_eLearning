@@ -174,4 +174,19 @@
 		</if>
 		ORDER BY C.created_at DESC
 	</select>	
+	
+	<!-- 학생이 수강 중인 강좌 번호 목록 조회 -->
+	<select id="selectEnrolledCourseNos" parameterType="int" resultType="int">
+	    SELECT COURSE_NO 
+	    FROM COURSE_REGISTER3 
+	    WHERE MEMBER_NO = #{memberNo}
+	    AND COMPLETION_STATUS != 2
+	</select>
+	
+	<!-- 교사가 가르치는 강좌 번호 목록 조회 -->
+	<select id="selectTeachingCourseNos" parameterType="int" resultType="int">
+	    SELECT COURSE_NO 
+	    FROM COURSE3 
+	    WHERE MEMBER_NO = #{memberNo}
+	</select>
 </mapper>

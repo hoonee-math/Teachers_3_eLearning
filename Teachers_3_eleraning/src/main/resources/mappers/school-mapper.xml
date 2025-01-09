@@ -56,7 +56,7 @@
 		SELECT SCHOOL_NO, SCHOOL_NAME, STANDARD_CODE, REGION_CODE
 		FROM SCHOOL12
 		WHERE DISTRICT = #{district}
-		AND SCHOOL_TYPE = #{schoolType}
+		AND SCHOOL_TYPE = 3
 	</select>
 	
 	<select id="selectSchoolInfoBySchoolNo" parameterType="_int" resultMap="schoolMap">
