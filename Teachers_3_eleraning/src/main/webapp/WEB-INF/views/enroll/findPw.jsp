@@ -199,7 +199,7 @@
 		        }
 		        // 회원 존재 여부 확인
 		        $.ajax({
-		            url: `${pageContext.request.contextPath }/auth/checkEmailDuplicate.do`,
+		            url: `${pageContext.request.contextPath }/auth/checkEmailDuplicate`,
 		            type: "POST",
 		            data: {
 		            	memberId: memberId,

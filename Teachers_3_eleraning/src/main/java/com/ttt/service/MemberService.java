@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.ttt.dao.MemberDao;
+import com.ttt.dto.Member2;
 import com.ttt.dto.Member3;
 
 /* Connection 과 MemberDao 객체를 만들어서 서버와 db 서버가 서로 통신할 수 있게 서비스를 제공하는 클래스 */
@@ -106,6 +107,14 @@ public class MemberService {
 		String memberId = dao.selectMemberIdByNameAndEmail(session, m);
 		return memberId;
 	}
+	
+	//비밀번호 찾기 
+		public Member3 selectMemberByIdAndEmail(Member3 m) {
+			SqlSession session=getSession();
+		    Member3 result = dao.selectMemberByIdAndEmail(session, m);
+		    System.out.println("Service layer result: " + result);
+		    return result;
+		}
 	
 }
 	
