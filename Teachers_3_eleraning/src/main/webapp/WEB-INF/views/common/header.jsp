@@ -8,8 +8,9 @@
 <%@ page import="com.google.gson.Gson" %>
 <!-- 메가메뉴 데이터 전달을 위한 스크립트 추가 -->
 <script>
-	const megaMenuTeachers = ${not empty megaMenuTeachers ? new Gson().toJson(megaMenuTeachers) : '[]'};
-	const megaMenuSubjects = ${not empty megaMenuSubjects ? new Gson().toJson(megaMenuSubjects) : '[]'};
+	// Java 객체를 JSON 형태로 변환
+	const megaMenuTeachers = ${new Gson().toJson(megaMenuTeachers)};
+	const megaMenuSubjects = ${new Gson().toJson(megaMenuSubjects)};
 </script>
 
 <!-- 헤더 -->

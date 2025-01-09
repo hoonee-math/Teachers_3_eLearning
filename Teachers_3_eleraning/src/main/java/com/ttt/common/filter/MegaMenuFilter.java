@@ -1,6 +1,7 @@
 package com.ttt.common.filter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.Filter;
@@ -24,15 +25,22 @@ public class MegaMenuFilter extends HttpFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// place your code here
 		try {
-			// 교사 목록과 과목 데이터를 가져옴
-			List<Member3> teachers = new MemberService().selectAllTeachers();
-			List<String> subjects = new MemberService().selectSubjects();
+        	if (request.getAttribute("megaMenuTeachers") == null) {
+				// 교사 목록과 과목 데이터를 가져옴
+				List<Member3> teachers = new MemberService().selectAllTeachers();
+				request.setAttribute("megaMenuTeachers", teachers);
+        	}
 
-			// request에 데이터 저장
-			request.setAttribute("megaMenuTeachers", teachers);
-			request.setAttribute("megaMenuSubjects", subjects);
+            if (request.getAttribute("megaMenuSubjects") == null) {
+            	// request에 데이터 저장
+				List<String> subjects = new MemberService().selectSubjects();
+				request.setAttribute("megaMenuSubjects", subjects);
+            }
 
 		} catch (Exception e) {
+            // 오류 발생시 빈 리스트로 초기화
+            request.setAttribute("megaMenuTeachers", new ArrayList<>());
+            request.setAttribute("megaMenuSubjects", new ArrayList<>());
 			e.printStackTrace();
 		}
         
