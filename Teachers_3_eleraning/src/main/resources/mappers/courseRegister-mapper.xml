@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="courseRegister">
+	<resultMap id="courseRegisterMap" type="courseRegister3">
+		<id column="course_no" property="courseRegisterNo"/>
+		<result column="course_title" property="courseRegisterDate"/>
+		<result column="course_desc" property="progressRate"/>
+		<result column="course_category_no" property="lastViewTime"/>
+		<result column="grade" property="completionStatus"/>
+		<result column="course_price" property="courseNo"/>
+		<result column="course_price_sale" property="courseScore"/>
+		<result column="course_period" property="reviewContent"/>
+		<result column="member_no" property="memberNo"/>
+		
+		<result column="teacher_subject_name" property="teacherSubjectName"/>
+        <association property="scheduleEvent" resultMap="categoryMap"/>
+        <association property="scheduleEvent" resultMap="scheduleEventMap"/>
+	</resultMap>
+	<!-- 카테고리 조회를 위한 resultMap -->
+	<resultMap id="categoryMap" type="Course3">
+		<id column="course_category_no" property="courseCategoryNo"/>
+		<result column="course_category_title" property="courseCategoryTitle"/>
+		<result column="course_category_desc" property="courseCategoryDesc"/>
+	</resultMap>
+	
+</mapper>

@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ttt.dto.CourseRegister3;
+import com.ttt.dto.Member3;
+import com.ttt.service.CourseRegisterService;
+
 @WebServlet(urlPatterns = {"","/home"}, name="indexPage")
 public class ToIndexPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,9 +29,21 @@ public class ToIndexPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         // 세션 체크 
-        HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
+        Member3 loginMember = (Member3)session.getAttribute("loginMember");
         
-        //System.out.println("현재 로그인 세션 정보 : "+session.getAttribute("loginMember"));
+		if(loginMember != null) {
+			// 학생인 경우
+			if(loginMember.getMemberType() == 1) {
+				//List<CourseRegister3> studentCourses = courseReisterService.selectStudentCourses(loginMember.getMemberNo());
+				//request.setAttribute("studentCourses", studentCourses);
+			}
+			// 교사인 경우
+			else if(loginMember.getMemberType() == 2) {
+				//List<Course3> teacherCourses = courseReisterService.selectTeacherCourses(loginMember.getMemberNo());
+				//request.setAttribute("teacherCourses", teacherCourses);
+			}
+		}
 
 		// (더미데이터) 섹션1: 광고 슬라이드
 		List<Map<String, String>> mainSlides = new ArrayList<>();
@@ -39,7 +55,7 @@ public class ToIndexPageServlet extends HttpServlet {
 		slide1.put("description", "5월까지 전 강좌 30% 할인된 가격으로 수강하세요.");
 		slide1.put("link", request.getContextPath() + "/event/early-bird");
 		mainSlides.add(slide1);
-
+		
 		// 두 번째 슬라이드
 		Map<String, String> slide2 = new HashMap<>();
 		slide2.put("imageUrl", request.getContextPath() + "/resources/images/common/HoneyT_logo_horizontal.png");
@@ -51,11 +67,10 @@ public class ToIndexPageServlet extends HttpServlet {
 		// request에 데이터 저장
 		request.setAttribute("mainSlides", mainSlides);
 
-		// 콘솔에 전달된 데이터 확인
-		//System.out.println("메인 슬라이드 데이터 설정: " + mainSlides);
-		
 	    // (더미데이터) 학생용 수강중인 강좌
 	    List<Map<String, Object>> studentCourses = new ArrayList<>();
+	    // (학생 로그인 데이터)
+	    //List<CourseRegister3> cr = new CourseRegisterService().selectIngCourse();
 	    
 	    Map<String, Object> course1 = new HashMap<>();
 	    course1.put("courseRegisterNo", 1);                 // 변경: enrollmentNo → courseRegisterNo
@@ -68,7 +83,7 @@ public class ToIndexPageServlet extends HttpServlet {
 	    course1.put("lastViewTime", new Date()); 			// 추가: 마지막 수강 시간
 	    course1.put("stopAt", 720);                         // 추가: 마지막 재생 위치(초)
 	    studentCourses.add(course1);
-
+	    
 	    Map<String, Object> course2 = new HashMap<>();
 	    course1.put("courseRegisterNo", 2);                 // 변경: enrollmentNo → courseRegisterNo
 	    course2.put("courseTitle", "국어 독해의 비밀");

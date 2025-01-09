@@ -37,6 +37,7 @@
 		<typeAlias type="com.ttt.dto.Cart3" alias="Cart3"/>
 		<typeAlias type="com.ttt.dto.Image3" alias="Image3"/>
 		<typeAlias type="com.ttt.dto.ScheduleEvent3" alias="ScheduleEvent3"/>
+		<typeAlias type="com.ttt.dto.CourseRegister3" alias="CourseRegister3"/>
 	</typeAliases>
 	
 	<!-- MyBatis 매퍼 처리 -->
@@ -66,6 +67,7 @@
 		<mapper resource="/mappers/course-mapper.xml"/>
 		<mapper resource="/mappers/image-mapper.xml"/>
 		<mapper resource="/mappers/lecture-mapper.xml"/>
+		<mapper resource="/mappers/courseRegister-mapper.xml"/>
 	</mappers>
 	
 </configuration>

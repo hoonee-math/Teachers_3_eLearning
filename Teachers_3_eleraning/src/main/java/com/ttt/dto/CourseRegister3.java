@@ -11,5 +11,7 @@ public class CourseRegister3 {
 	private int courseNo;         // 강좌참조키
 	private int courseScore;      // 수강평점
 	private String reviewContent;  // 진도율80%이상만작성가능
-	private int memberNo;         // 자동부여}
+	private int memberNo;         // 자동부여
+	
+	private Course3 course;
 }
