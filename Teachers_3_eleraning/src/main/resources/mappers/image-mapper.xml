@@ -14,5 +14,9 @@
 	<insert id="insertImage" parameterType="member3">
 		INSERT INTO IMAGE3 (IMG_NO, IMG_TYPE, ORINAME, RENAMED, CREATED_AT, MEMBER_NO)
 			VALUES (SEQ_IMAGE3_NO.NEXTVAL, 1, #{image.oriname}, #{image.renamed}, SYSDATE, #{memberNo})
+	
+		<selectKey keyProperty="image.imgNo" resultType='_int' order="AFTER">
+			SELECT SEQ_IMAGE3_NO.CURRVAL FROM DUAL
+		</selectKey>
 	</insert>
 </mapper>
