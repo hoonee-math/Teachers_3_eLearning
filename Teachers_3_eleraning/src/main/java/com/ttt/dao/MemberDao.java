@@ -97,9 +97,8 @@ public class MemberDao {
 		return session.selectOne("member.selectMemberIdByNameAndEmail", m);
 	}
 	//사용자 메뉴 : 비밀번호 찾기
-	// 비밀번호 찾기
 		public Member3 selectMemberByIdAndEmail(SqlSession session, Member3 m) {
-		   return session.selectOne("member2.selectMemberByIdAndEmail", m);
+		   return session.selectOne("member.selectMemberByIdAndEmail", m);
 		}
 	
 	
