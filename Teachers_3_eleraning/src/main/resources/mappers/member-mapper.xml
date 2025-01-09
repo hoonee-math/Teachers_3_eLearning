@@ -18,9 +18,9 @@
 		
 		<!-- 교사인 경우 -->
 		<result column="teacher_subject" property="teacherSubject"/>
+		<result column="teacher_subject_name" property="teacherSubjectName"/>
 		<result column="teacher_info_title" property="teacherInfoTitle"/>
 		<result column="teacher_info_content" property="teacherInfoContent"/>
-		<result column="subject_name" property="teacherSubjectName"/>
 		<association property="image" resultMap="image.imageMap"/>
 		<!-- School12와 연결 -->
 		<association property="school" resultMap="school.schoolMap"/>
@@ -128,7 +128,7 @@
 		SELECT COUNT(*) FROM TEACHERS3 WHERE TEACHER_SUBJECT=#{teacherSubject}
 	</select>
 	<select id="selectSubjects" resultType="string">
-		SELECT DISTINCT TEACHER_SUBJECT FROM TEACHERS3
+		SELECT TEACHER_SUBJECT_NAME FROM SUBJECT3
 	</select>
 	
 <!-- 	<select id="selectMemberByNameAndEmail" parameterType="member3" resultMap="memberMap">

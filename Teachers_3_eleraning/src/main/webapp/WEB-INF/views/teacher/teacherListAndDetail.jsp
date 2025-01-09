@@ -39,7 +39,7 @@
 						    </div>
 						    <div class="accordion-content">
 							<c:forEach var="teacher" items="${teachers}">
-							    <c:if test="${teacher.teacherSubject == subject}"> <!-- 과목번호와 과목 키값을 비교 -->
+							    <c:if test="${teacher.teacherSubjectName == subject}"> <!-- 과목번호와 과목 키값을 비교 -->
 								<a href="#"  class="teacher-link" data-memberNo="${teacher.memberNo}">
 								    ${teacher.memberName} 선생님
 								</a>
@@ -118,7 +118,7 @@
 									<div class="teacher-card" data-memberNo="${teacher.memberNo}">
 										<div class="teacher-image">
 											<img
-												src="https://i.namu.wiki/i/W-LhGCCNTAE3F7AJ81_DQpGg7XQbQolN76WcFDjbYgkSoOp8NnGgEj8PyGblftQNMKTTv_NJ8lfBz9XzpMlggQ.webp"
+												src="/resources/images/profile/${teacher.image.renamed }"
 												alt="${teacher.memberName} 선생님">
 										</div>
 										<div class="teacher-info">
