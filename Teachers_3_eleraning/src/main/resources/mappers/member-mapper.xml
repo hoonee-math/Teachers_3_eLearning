@@ -63,9 +63,14 @@
 	<select id="selectAllMember" resultMap="memberMap">
 		SELECT * FROM MEMBER3
  	</select>
+ 	<!-- 아이디 찾기 -->
  	<select id="selectMemberIdByNameAndEmail" parameterType="member3" resultMap="memberMap">
  		SELECT MEMBER_ID FROM MEMBER3 WHERE MEMBER_NAME=#{memberName} AND EMAIL=#{email}
  	</select>
+ 	<!-- 비밀번호 찾기 -->
+	<select id="selectMemberByIdAndEmail" parameterType="member3" resultMap="memberMap">
+		SELECT * FROM MEMBER3 WHERE EMAIL=#{email} AND MEMBER_ID=#{memberId}
+	</select>
 	<select id="checkEmailDuplicateByEmail" parameterType="member3" resultMap="memberMap">
 		SELECT EMAIL FROM MEMBER3 WHERE EMAIL=#{email}
 	</select> 
