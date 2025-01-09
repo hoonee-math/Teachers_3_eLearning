@@ -2,7 +2,7 @@
  * 
  */
 // 더미 교사 데이터
-const teacherData = {
+/*const teacherData = {
 	'국어': [
 		{name: '최영주', id: 1},
 		{name: '김현아', id: 2, badge: 'HOT'},
@@ -27,7 +27,7 @@ const courseData = {
 		{name: '수2 문제풀이', id: 5},
 		{name: '확률과 통계', id: 6, badge: 'HOT'}
 	]
-};
+};*/
 
 // subNav 업데이트 함수
 function updateSubNav(grade) {
@@ -41,9 +41,16 @@ function updateSubNav(grade) {
 
 // 메가메뉴 생성 함수
 function updateTeacherMegaMenu() {
-	// 서버에서 전달받은 데이터를 활용 (JSP에서 전달)
-	const teachers = megaMenuTeachers || [];
-	const subjects = megaMenuSubjects || [];
+	try {
+		// 서버에서 전달받은 데이터를 활용 (JSP에서 전달)
+		const teachers = (typeof megaMenuTeachers !== 'undefined') ? megaMenuTeachers : [];
+		const subjects = (typeof megaMenuSubjects !== 'undefined') ? megaMenuSubjects : [];
+		
+	
+		if (teachers.length === 0 || subjects.length === 0) {
+			console.log('메가메뉴 데이터가 아직 로드되지 않았습니다.');
+			return;
+		}
 
 	// 과목별로 교사 데이터 그룹화
 	const teachersBySubject = teachers.reduce(
@@ -78,6 +85,10 @@ function updateTeacherMegaMenu() {
 	        `;
 	}).join('');
 	$('#teacherMegaMenuContent').html(menuHTML);
+	
+	} catch (error) {
+		console.error('메가메뉴 업데이트 중 오류 발생:', error);
+	}
 }
 
 function updateCourseMegaMenu() {
@@ -96,9 +107,3 @@ function updateCourseMegaMenu() {
 	$('#courseMegaMenuContent').html(menuHTML);
 }
 
-
-// 페이지 로드시 메가메뉴 초기화
-$(document).ready(function() {
-    updateTeacherMegaMenu();
-    updateCourseMegaMenu();
-});

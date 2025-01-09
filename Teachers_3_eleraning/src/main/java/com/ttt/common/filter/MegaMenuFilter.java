@@ -14,7 +14,7 @@ import javax.servlet.http.HttpFilter;
 import com.ttt.dto.Member3;
 import com.ttt.service.MemberService;
 
-@WebFilter("/MegaMenuFilter")
+@WebFilter("/*")
 public class MegaMenuFilter extends HttpFilter implements Filter {
        
     public MegaMenuFilter() {

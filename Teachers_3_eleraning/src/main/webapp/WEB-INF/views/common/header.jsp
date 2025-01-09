@@ -5,6 +5,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<%@ page import="com.google.gson.Gson" %>
+<!-- 메가메뉴 데이터 전달을 위한 스크립트 추가 -->
+<script>
+	const megaMenuTeachers = ${not empty megaMenuTeachers ? new Gson().toJson(megaMenuTeachers) : '[]'};
+	const megaMenuSubjects = ${not empty megaMenuSubjects ? new Gson().toJson(megaMenuSubjects) : '[]'};
+</script>
 
 <!-- 헤더 -->
 <header class="header-container">
@@ -136,11 +142,4 @@
 			<!-- 여기는 JavaScript로 동적 생성 -->
 		</div>
 	</div>
-	
-<!-- 메가메뉴 데이터 전달 -->
-<script>
-	const megaMenuTeachers = ${megaMenuTeachers != null ? megaMenuTeachers : 'null'};
-	const megaMenuSubjects = ${megaMenuSubjects != null ? megaMenuSubjects : 'null'};
-</script>
-	
 </header>
