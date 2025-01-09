@@ -137,4 +137,10 @@
 		</div>
 	</div>
 	
+<!-- 메가메뉴 데이터 전달 -->
+<script>
+	const megaMenuTeachers = ${megaMenuTeachers != null ? megaMenuTeachers : 'null'};
+	const megaMenuSubjects = ${megaMenuSubjects != null ? megaMenuSubjects : 'null'};
+</script>
+	
 </header>
