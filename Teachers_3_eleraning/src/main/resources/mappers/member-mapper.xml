@@ -11,7 +11,8 @@
 		<result column="email" property="email"/>
 		<result column="member_type" property="memberType"/>
 		<result column="enroll_date" property="enrollDate"/>
-		
+		<result column="phone" property="phone"/>
+		<result column="address" property="address"/>
 		<!-- 학생인 경우 -->
 		<result column="grade" property="grade"/>
 		
@@ -64,7 +65,7 @@
 		SELECT * FROM MEMBER3
  	</select>
  	<!-- 아이디 찾기 -->
- 	<select id="selectMemberIdByNameAndEmail" parameterType="member3" resultMap="memberMap">
+ 	<select id="selectMemberIdByNameAndEmail" parameterType="member3" resultType="String">
  		SELECT MEMBER_ID FROM MEMBER3 WHERE MEMBER_NAME=#{memberName} AND EMAIL=#{email}
  	</select>
  	<!-- 비밀번호 찾기 -->
@@ -90,7 +91,7 @@
 		WHERE M.MEMBER_ID=#{memberId}
 	</select>
 	<select id="selectTeacherById" parameterType="string" resultMap="memberMap">
-		SELECT M.MEMBER_ID, T.TEACHER_SUBJECT, T.TEACHER_INFO_TITLE, T.TEACHER_INFO_CONTENT
+		SELECT M.MEMBER_ID, T.TEACHER_SUBJECT, T.TEACHER_INFO_TITLE, T.TEACHER_INFO_CONTENT,
 			I.IMG_NO, I.RENAMED
 		FROM MEMBER3 M
 		LEFT JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
@@ -153,8 +154,8 @@
 	<!-- 교사 정보 UPDATE -->
 	<update id="updateTeacher" parameterType="member3">
 		UPDATE TEACHERS3 SET
-			TEACHER_SUBJECT=#{teacherSubject}	,TEACHER_INFO_TITLE=#{teacherInfoTitle},
-			TEACHER_INFO_CONTENT=#{teacherInfoContent}
+			TEACHER_INFO_TITLE=#{teacherInfoTitle},
+			TEACHER_INFO_CONTENT=#{teacherInfoContent}, IMAGE_NO=#{image.imgNo}
 		WHERE MEMBER_NO=#{memberNo}
 	</update>
 	

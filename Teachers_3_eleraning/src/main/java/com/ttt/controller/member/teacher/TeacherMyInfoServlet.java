@@ -32,7 +32,12 @@ public class TeacherMyInfoServlet extends HttpServlet {
 				String[] addressParts = address.split(":");
 				String addressNo = addressParts[0];
 				String addressRoad = addressParts[1];
-				String addressDetail = addressParts[2];
+				String addressDetail = "";
+				
+				// 상세 주소가 입력되었을 경우에만 상세 주소 가져오기
+				if(addressParts.length > 2) {
+					addressDetail = addressParts[2];
+				}
 				
 				request.setAttribute("addressNo", addressNo);
 				request.setAttribute("addressRoad", addressRoad);
