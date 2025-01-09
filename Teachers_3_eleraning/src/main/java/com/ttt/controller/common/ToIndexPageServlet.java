@@ -65,6 +65,7 @@ public class ToIndexPageServlet extends HttpServlet {
 
 	            // 수강 정보 로그 출력
 	            if(studentCourses != null && !studentCourses.isEmpty()) {
+	            	System.out.println(studentCourses);
 	                System.out.println("\n===== 학생 수강 정보 로그 =====");
 	                for(CourseRegister3 course : studentCourses) {
 	                    System.out.println("\n## 강좌 기본 정보 ##");
@@ -92,34 +93,35 @@ public class ToIndexPageServlet extends HttpServlet {
 				//List<Course3> teacherCourses = courseReisterService.selectTeacherCourses(loginMember.getMemberNo());
 				//request.setAttribute("teacherCourses", teacherCourses);
 			}
+		} else { // 로그인 세션 정보가 없을 경우 테스트용 더미 데이터를 넣는 로직.
+	    
+		    Map<String, Object> course1 = new HashMap<>();
+		    course1.put("courseRegisterNo", 1);                 // 변경: enrollmentNo → courseRegisterNo
+		    course1.put("course.courseTitle", "수학의 정석: 미적분 마스터");
+		    course1.put("teacherName", "김수학");
+		    course1.put("progressRate", 45);
+		    course1.put("nextLectureNo", 8);
+		    course1.put("nextLectureTitle", "미분 계수의 활용");
+		    course1.put("totalLectures", 20);
+		    course1.put("lastViewTime", new Date()); 			// 추가: 마지막 수강 시간
+		    course1.put("stopAt", 720);                         // 추가: 마지막 재생 위치(초)
+		    studentCoursesDummy.add(course1);
+		    
+		    Map<String, Object> course2 = new HashMap<>();
+		    course1.put("courseRegisterNo", 2);                 // 변경: enrollmentNo → courseRegisterNo
+		    course2.put("course.courseTitle", "국어 독해의 비밀");
+		    course2.put("teacherName", "박국어");
+		    course2.put("progressRate", 75);
+		    course2.put("nextLectureNo", 15);
+		    course2.put("nextLectureTitle", "비문학 독해 전략");
+		    course2.put("totalLectures", 20);
+		    course1.put("lastViewTime", new Date()); // 추가: 마지막 수강 시간
+		    course1.put("stopAt", 720);                         // 추가: 마지막 재생 위치(초)
+		    studentCoursesDummy.add(course2);
+	
+			request.setAttribute("studentCourses", studentCoursesDummy);
+		
 		}
-
-	    
-	    Map<String, Object> course1 = new HashMap<>();
-	    course1.put("courseRegisterNo", 1);                 // 변경: enrollmentNo → courseRegisterNo
-	    course1.put("courseTitle", "수학의 정석: 미적분 마스터");
-	    course1.put("teacherName", "김수학");
-	    course1.put("progressRate", 45);
-	    course1.put("nextLectureNo", 8);
-	    course1.put("nextLectureTitle", "미분 계수의 활용");
-	    course1.put("totalLectures", 20);
-	    course1.put("lastViewTime", new Date()); 			// 추가: 마지막 수강 시간
-	    course1.put("stopAt", 720);                         // 추가: 마지막 재생 위치(초)
-	    studentCoursesDummy.add(course1);
-	    
-	    Map<String, Object> course2 = new HashMap<>();
-	    course1.put("courseRegisterNo", 2);                 // 변경: enrollmentNo → courseRegisterNo
-	    course2.put("courseTitle", "국어 독해의 비밀");
-	    course2.put("teacherName", "박국어");
-	    course2.put("progressRate", 75);
-	    course2.put("nextLectureNo", 15);
-	    course2.put("nextLectureTitle", "비문학 독해 전략");
-	    course2.put("totalLectures", 20);
-	    course1.put("lastViewTime", new Date()); // 추가: 마지막 수강 시간
-	    course1.put("stopAt", 720);                         // 추가: 마지막 재생 위치(초)
-	    studentCoursesDummy.add(course2);
-
-		request.setAttribute("studentCourses", studentCoursesDummy);
 		
 	    // (더미데이터) 교사용 업로드 중인 강좌
 	    List<Map<String, Object>> teacherCourses = new ArrayList<>();

@@ -23,6 +23,7 @@ public class CourseRegister3 {
 	private int memberNo;         // 자동부여
 	
 	private Course3 course;
+	private String courseTitle;
 	private String teacherSubjectName;
 	private String teacherName;
 }

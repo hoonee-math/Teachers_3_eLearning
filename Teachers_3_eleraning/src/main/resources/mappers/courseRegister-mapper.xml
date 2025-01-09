@@ -14,6 +14,7 @@
 		<result column="teacher_subject_name" property="teacherSubjectName"/>
 		
 		<result column="MEMBER_NAME" property="teacherName"/>
+		<result column="COURSE_TITLE" property="courseTitle"/>
 		<association property="course" resultMap="course.courseMap"/>
 	</resultMap>
 	
