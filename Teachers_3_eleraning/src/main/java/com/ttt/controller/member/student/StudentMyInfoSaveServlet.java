@@ -23,6 +23,10 @@ public class StudentMyInfoSaveServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		Member3 loginMember = (Member3)session.getAttribute("loginMember");
 		if(loginMember != null) {
@@ -55,63 +59,53 @@ public class StudentMyInfoSaveServlet extends HttpServlet {
 			m.setAddress(loginMember.getAddress());
 			m.setSchoolNo(loginMember.getSchoolNo());
 			
-			//업데이트 완료(1)또는 실패(0)을 받는 함수
-			int updateCount = 0;
-			
 			//새로 들어온 정보와 세션 정보가 일치하지 않으면 새정보 저장
-			if(!memberPw.equals(m.getMemberPw()) && memberPw != null ) {
+			if(memberPw != null && !memberPw.isEmpty()) {
 				m.setMemberPw(memberPw);
+				//password 암호화를 위한 설정
+				request.setAttribute("encryptPassword", true);
 			}
-			if(!phone.equals(m.getPhone()) && phone != null) {
+			if(phone != null && !phone.isEmpty()) {
 				m.setPhone(phone);
 			}
-			if(!address.equals(m.getAddress()) && address != null) {
+			if(address != null && !address.isEmpty()) {
 				m.setAddress(address);
 			}
 			
 			try {
-			if(schoolNo != null && !schoolNo.trim().isEmpty()) {
-                int newSchoolNo = Integer.parseInt(schoolNo);
-                if(m.getSchool() != null) {
-                    if(m.getSchool().getSchoolNo() != newSchoolNo) {
-                        m.getSchool().setSchoolNo(newSchoolNo);
-                    }
-                } else {
-                    School12 school = new School12();
-                    school.setSchoolNo(newSchoolNo);
-                    m.setSchool(school);
-                    System.out.println("학교번호가져옴");
-                }
-            }
-			}catch(Exception e) {
+				if(schoolNo != null && !schoolNo.trim().isEmpty()) {
+	                int newSchoolNo = Integer.parseInt(schoolNo);
+	                if(m.getSchool() != null) {
+	                    if(m.getSchool().getSchoolNo() != newSchoolNo) {
+	                        m.getSchool().setSchoolNo(newSchoolNo);
+	                    }
+	                } else {
+	                    School12 school = new School12();
+	                    school.setSchoolNo(newSchoolNo);
+	                    m.setSchool(school);
+	                    System.out.println("학교번호가져옴");
+	                }
+	            }
+			} catch(Exception e) {
 				System.out.println("학교 번호파싱 오류");
 			}
 			
+			int result = new MemberService().updateMember(m);
+			
 			String msg, loc = "/";
 			
-			updateCount = new MemberService().updateMember(m);
-			if(updateCount > 0) {
-//					MemberService service = new MemberService();
-				session.setAttribute("loginMember", m);
-				msg = "회원정보 수정이 성공적으로 수정되었습니다.";
-				loc = "/";
-			}else {
-				msg = "변경된 내용이 없거나 저장에 실패하였습니다. 다시 시도해주세요.";
-				loc = "/student/myinfo";
+			if(result > 0) {
+				Member3 updateMember = new MemberService().selectMemberById(loginMember.getMemberId());
+				session.setAttribute("loginMember", updateMember);
+				msg = "회원 정보 수정에 성공하였습니다.";
+				loc = "/member/student/myinfo";
+			} else {
+				msg = "회원 정보 수정에 실패하였습니다.";
+				loc = "/member/student/myinfo";
 			}
-			
-			
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
-			
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
-			
 		}
-		
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
 }
