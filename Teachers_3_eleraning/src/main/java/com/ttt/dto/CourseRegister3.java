@@ -2,6 +2,15 @@ package com.ttt.dto;
 
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
 public class CourseRegister3 {
 	private int courseRegisterNo;  // 수강신청고유번호
 	private Date courseRegisterDate; // 수강신청일

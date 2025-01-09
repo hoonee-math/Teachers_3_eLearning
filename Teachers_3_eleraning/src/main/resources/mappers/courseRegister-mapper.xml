@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="courseRegister">
 	<resultMap id="courseRegisterMap" type="courseRegister3">
-		<id column="course_no" property="courseRegisterNo"/>
-		<result column="course_title" property="courseRegisterDate"/>
-		<result column="course_desc" property="progressRate"/>
-		<result column="course_category_no" property="lastViewTime"/>
-		<result column="grade" property="completionStatus"/>
-		<result column="course_price" property="courseNo"/>
-		<result column="course_price_sale" property="courseScore"/>
-		<result column="course_period" property="reviewContent"/>
-		<result column="member_no" property="memberNo"/>
+        <id column="COURSE_REGISTER_NO" property="courseRegisterNo"/>
+        <result column="COURSE_REGISTER_DATE" property="courseRegisterDate"/>
+        <result column="PROGRESS_RATE" property="progressRate"/>
+        <result column="LAST_VIEW_TIME" property="lastViewTime"/>
+        <result column="COMPLETION_STATUS" property="completionStatus"/>
+        <result column="COURSE_NO" property="courseNo"/>
+        <result column="COURSE_SCORE" property="courseScore"/>
+        <result column="REVIEW_CONTENT" property="reviewContent"/>
+        <result column="MEMBER_NO" property="memberNo"/>
 		<result column="teacher_subject_name" property="teacherSubjectName"/>
 		
 		<association property="Course3" resultMap="course.courseMap"/>
