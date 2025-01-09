@@ -61,17 +61,21 @@ function updateTeacherMegaMenu() {
 		// reduce() 메서드의 두번째 파라미터 : 초기값 (여기서는 빈 객체 {})
 		{}
 	);
-	console.log('교사 메가메뉴 업데이트');
-	const menuHTML = Object.entries(teacherData).map(([subject, teachers]) => {
-		return '<div class="mega-menu-subject-group">' +
-			'<div class="mega-menu-subject-title">' + subject + '</div>' +
-			'<div class="mega-menu-teacher-list">' +
-			teachers.map(teacher => {
-				const badge = teacher.badge ? '<span class="mega-menu-teacher-badge">' + teacher.badge + '</span>' : '';
-				return '<a href="' + path + '/teacherListAndDetail?teacherName=' + teacher.name + '" class="mega-menu-teacher-item">' +
-					teacher.name + badge + '</a>';
-			}).join('') +
-			'</div></div>';
+	const menuHTML = subjects.map(subject => {
+	        const subjectTeachers = teachersBySubject[subject] || [];
+	        return `
+	            <div class="mega-menu-subject-group">
+	                <div class="mega-menu-subject-title">${subject}</div>
+	                <div class="mega-menu-teacher-list">
+	                    ${subjectTeachers.map(teacher => `
+	                        <a href="${path}/teacher/detail/${teacher.memberNo}" 
+	                           class="mega-menu-teacher-item">
+	                            ${teacher.memberName} 선생님
+	                        </a>
+	                    `).join('')}
+	                </div>
+	            </div>
+	        `;
 	}).join('');
 	$('#teacherMegaMenuContent').html(menuHTML);
 }
@@ -91,3 +95,10 @@ function updateCourseMegaMenu() {
 	}).join('');
 	$('#courseMegaMenuContent').html(menuHTML);
 }
+
+
+// 페이지 로드시 메가메뉴 초기화
+$(document).ready(function() {
+    updateTeacherMegaMenu();
+    updateCourseMegaMenu();
+});
