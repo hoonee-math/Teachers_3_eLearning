@@ -189,4 +189,9 @@
 	    FROM COURSE3 
 	    WHERE MEMBER_NO = #{memberNo}
 	</select>
+	
+	<!-- 학생이 수강 중인 강좌 목록 조회 -->
+	<select id="selectStudentCourses" parameterType="_int" resultType="map">
+		
+	</select>
 </mapper>
