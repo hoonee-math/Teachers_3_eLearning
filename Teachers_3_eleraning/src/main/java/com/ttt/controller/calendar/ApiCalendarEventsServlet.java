@@ -36,9 +36,10 @@ public class ApiCalendarEventsServlet extends HttpServlet {
             
 			// 응답 데이터 준비
 			Map<String, Object> responseData = new HashMap<>();
-
+			responseData.put("grade", grade);
+			
 			// 1. 해당 학년의 전체 강의 일정 조회
-			List<Map<String, Object>> events = lectureService.selectEventsByGrade(grade);
+			List<Map<String, Object>> events = lectureService.selectEventsByGrade(responseData);
 			responseData.put("events", events);
             
 			// 2. 로그인한 경우 수강 중인 강좌 번호 목록 추가
@@ -59,7 +60,7 @@ public class ApiCalendarEventsServlet extends HttpServlet {
 			// JSON 응답 설정
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(gson.toJson(events));
+			response.getWriter().write(gson.toJson(responseData));
 
 		} catch (Exception e) {
 			e.printStackTrace();

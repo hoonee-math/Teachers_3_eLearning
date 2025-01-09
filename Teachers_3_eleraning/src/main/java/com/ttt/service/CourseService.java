@@ -132,4 +132,25 @@ public class CourseService {
 		SqlSession session = getSession();
 	    return dao.selectAllCategories(session);
 	}
+	
+	
+	// 학생이 수강 중인 강좌 번호 목록 조회
+    public List<Integer> selectEnrolledCourseNos(int memberNo) {
+        SqlSession session = getSession();
+        try {
+            return dao.selectEnrolledCourseNos(session, memberNo);
+        } finally {
+            session.close();
+        }
+    }
+
+    // 교사가 가르치는 강좌 번호 목록 조회
+    public List<Integer> selectTeachingCourseNos(int memberNo) {
+        SqlSession session = getSession();
+        try {
+            return dao.selectTeachingCourseNos(session, memberNo);
+        } finally {
+            session.close();
+        }
+    }
 }
