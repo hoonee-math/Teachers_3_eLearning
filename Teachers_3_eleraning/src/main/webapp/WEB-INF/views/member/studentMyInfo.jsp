@@ -50,12 +50,12 @@
 					</td>
 				</tr>
 				<tr>
-					<th>패스워드 *</th>
+					<th>패스워드</th>
 					<td><input type="password" name="memberPw" id="password_" placeholder="대소문자, 숫자, 특수문자 포함"><br>
 					</td>
 				</tr>
 				<tr>
-					<th>패스워드확인 *</th>
+					<th>패스워드확인</th>
 					<td><input type="password" id="password_2"><br>
 						<span id="checkResult"></span></td>
 				</tr>

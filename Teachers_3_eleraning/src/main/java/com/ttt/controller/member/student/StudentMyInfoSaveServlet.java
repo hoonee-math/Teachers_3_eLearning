@@ -30,48 +30,43 @@ public class StudentMyInfoSaveServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		Member3 loginMember = (Member3)session.getAttribute("loginMember");
 		if(loginMember != null) {
-			String memberPw = request.getParameter("memberPw");
-			String phone = request.getParameter("phone");
-			
-			String addressNo = request.getParameter("addressNo");
-			String addressRoad = request.getParameter("addressRoad");
-			String addressDetail = request.getParameter("addressDetail");
-			
-			String address = addressNo+":"+addressRoad+":"+addressDetail;
-	
-			String schoolNo = request.getParameter("schoolNo");
-			System.out.println(schoolNo);
-			
 			//Member 객체 업데이트 
 			Member3 m = new Member3();
 			
-			// 로그인된 회원의 기본 정보 설정
+			// 입력받은 정보들 중 null이 있을 수 있으니까, 모든 정보를 기본 정보로 설정
 			m.setMemberNo(loginMember.getMemberNo());
 			m.setMemberId(loginMember.getMemberId());
 			m.setMemberName(loginMember.getMemberName());
 			m.setEmail(loginMember.getEmail());
-			m.setMemberType(loginMember.getMemberType());  // 중요! memberType 설정
+			m.setMemberType(loginMember.getMemberType());
 			m.setEnrollDate(loginMember.getEnrollDate());
-			
-			// 입력받은 정보들 중 null이 있을 수 있으니까, 모든 정보를 기본 정보로 설정
 			m.setMemberPw(loginMember.getMemberPw());
 			m.setPhone(loginMember.getPhone());
 			m.setAddress(loginMember.getAddress());
 			m.setSchoolNo(loginMember.getSchoolNo());
 			
-			//새로 들어온 정보와 세션 정보가 일치하지 않으면 새정보 저장
+			// 수정된 정보만 업데이트
+			String memberPw = request.getParameter("memberPw");
 			if(memberPw != null && !memberPw.isEmpty()) {
 				m.setMemberPw(memberPw);
 				//password 암호화를 위한 설정
 				request.setAttribute("encryptPassword", true);
+
 			}
+			String phone = request.getParameter("phone");
 			if(phone != null && !phone.isEmpty()) {
 				m.setPhone(phone);
 			}
-			if(address != null && !address.isEmpty()) {
-				m.setAddress(address);
-			}
 			
+			String addressNo = request.getParameter("addressNo");
+			String addressRoad = request.getParameter("addressRoad");
+			String addressDetail = request.getParameter("addressDetail");
+			if(addressNo != null && addressRoad != null && !addressNo.isEmpty() && !addressRoad.isEmpty()) {
+                String address = addressNo+":"+addressRoad+":"+addressDetail;
+                m.setAddress(address);
+            }
+	
+			String schoolNo = request.getParameter("schoolNo");
 			try {
 				if(schoolNo != null && !schoolNo.trim().isEmpty()) {
 	                int newSchoolNo = Integer.parseInt(schoolNo);
@@ -90,13 +85,13 @@ public class StudentMyInfoSaveServlet extends HttpServlet {
 				System.out.println("학교 번호파싱 오류");
 			}
 			
+			// 서비스 호출하여 DB 업데이트
 			int result = new MemberService().updateMember(m);
 			
 			String msg, loc = "/";
 			
 			if(result > 0) {
-				Member3 updateMember = new MemberService().selectMemberById(loginMember.getMemberId());
-				session.setAttribute("loginMember", updateMember);
+				session.setAttribute("loginMember", m);
 				msg = "회원 정보 수정에 성공하였습니다.";
 				loc = "/member/student/myinfo";
 			} else {
