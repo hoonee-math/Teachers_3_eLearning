@@ -20,6 +20,7 @@
 		<result column="teacher_subject" property="teacherSubject"/>
 		<result column="teacher_info_title" property="teacherInfoTitle"/>
 		<result column="teacher_info_content" property="teacherInfoContent"/>
+		<result column="subject_name" property="teacherSubjectName"/>
 		<association property="image" resultMap="image.imageMap"/>
 		<!-- School12와 연결 -->
 		<association property="school" resultMap="school.schoolMap"/>
@@ -100,10 +101,10 @@
 	</select>
 	<!-- teacherListAndDetail 페이지의 리스트에 교사 출력용 -->
 	<select id="selectAllTeachers" resultMap="memberMap">
-		SELECT M.MEMBER_NO, M.MEMBER_NAME, M.ENROLL_DATE, T.*, S.SUBJECT_NAME
+		SELECT M.MEMBER_NO, M.MEMBER_NAME, M.ENROLL_DATE, T.*, S.*
 		FROM MEMBER3 M
 		JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
-		JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.SUBJECTNO
+		JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
 		ORDER BY M.MEMBER_NO
 	</select>
 	<select id="selectTeachersBySubject" parameterType="map" resultMap="memberMap">
@@ -112,10 +113,10 @@
             SELECT ROWNUM AS RNUM, SUB.*
             FROM (
                 SELECT M.MEMBER_NO, M.MEMBER_NAME, M.ENROLL_DATE, 
-                       T.TEACHER_SUBJECT, T.TEACHER_INFO_TITLE, T.TEACHER_INFO_CONTENT, S.SUBJECT_NAME
+                       T.TEACHER_SUBJECT, T.TEACHER_INFO_TITLE, T.TEACHER_INFO_CONTENT, S.*
                 FROM MEMBER3 M
                 JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
-				JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.SUBJECTNO
+				JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
                 WHERE T.TEACHER_SUBJECT = #{teacherSubject}
                 ORDER BY M.MEMBER_NO
             ) SUB
