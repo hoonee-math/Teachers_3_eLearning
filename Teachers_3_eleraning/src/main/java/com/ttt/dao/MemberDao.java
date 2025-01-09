@@ -22,6 +22,28 @@ public class MemberDao {
 	
 	/* 회원정보 조회-업데이트 관련 */
 	public Member3 selectMemberById(SqlSession session, String memberId) {
+		Member3 member = session.selectOne("member.selectMemberById", memberId);
+		
+		if(member != null) {
+			if(member.getMemberType() == 1) { //학생
+				Member3 student = session.selectOne("member.selectStudentById", memberId);
+				if(student != null && student.getSchool() != null) {
+					member.setSchool(student.getSchool());
+					member.setGrade(student.getGrade());
+				}
+			} else if (member.getMemberType() == 2) { //교사
+				Member3 teacher = session.selectOne("member.selectTeacherById", memberId);
+				if(teacher != null) {
+					member.setTeacherInfoTitle(teacher.getTeacherInfoTitle());
+					member.setTeacherInfoContent(teacher.getTeacherInfoContent());
+					member.setImage(teacher.getImage());
+				}
+			}
+		} 
+		
+		
+		
+		
 		return session.selectOne("member.selectMemberById",memberId);
 	}
 	public int updatePassword(SqlSession session, Member3 m) {
