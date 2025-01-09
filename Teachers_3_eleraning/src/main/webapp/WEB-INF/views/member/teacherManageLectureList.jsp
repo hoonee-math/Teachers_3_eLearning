@@ -24,9 +24,13 @@
 			<section class="main-section">
 				<!-- 강좌 기본 정보 -->
 				<div class="course-info">
-					<h2>${course.courseTitle}</h2>
+					<div style="display:flex; justify-content: space-between;">
+						<p style="font-size: 30px; font-weight: bold; margin-bottom:10px;">${course.courseTitle}</p>
+						<a href="${path }/member/teacher/mypage/course">강좌 목록 보기</a>
+					</div>
+					
 					<hr style="border: 2px solid #FAB350;">
-					<div class="info-box">
+					<div class="info-box" style="padding-top:10px">
 						<p><strong>총 강의 수:</strong> <span id="totalLectures">0</span>회</p>
 						<p><strong>강좌 기간:</strong> 
 							<fmt:formatDate value="${course.beginDate}" pattern="yyyy.MM.dd"/> ~ 
