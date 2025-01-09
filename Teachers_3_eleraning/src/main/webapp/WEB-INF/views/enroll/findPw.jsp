@@ -43,6 +43,7 @@
 	}
     
     #find-content {
+    	height:550px;
 	    width: 610px;
         border: 1px solid #ddd;
         border-radius: 20px;
@@ -85,7 +86,7 @@
         font-size: 14px;
         color: #666;
         height: 300px;
-        margin-top: 100px;
+        margin-top: 50px;
     }
     #input-id,
     #input-email {
@@ -130,6 +131,7 @@
 						<div id="find-pw">비밀번호 찾기</div>
 					</div>
 					<div id="input-info">
+						<div><img src="${path}/resources/images/common/HoneyT_logo_vertical.png" style="width:100px; height:100px; margin-bottom:30px;"></div>
 						<h3>가입시 입력한 이메일을 통해 찾으실 수 있습니다.</h3>
 						<br>
 						<input type="text" id="input-id" placeholder="아이디를 입력하세요.">
