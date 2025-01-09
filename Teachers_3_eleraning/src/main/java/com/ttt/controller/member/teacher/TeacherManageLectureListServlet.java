@@ -68,7 +68,7 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/views/member/teacherManageLectureList.jsp").forward(request, response);
+		//request.getRequestDispatcher("/WEB-INF/views/member/teacherManageLectureList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -18,17 +18,30 @@
 		<result column="total_lectures" property="totalLectures"/>
 		<result column="member_no" property="memberNo"/>
 	</resultMap>
+	<!-- 카테고리 조회를 위한 resultMap -->
+	<resultMap id="categoryMap" type="Course3">
+		<id column="course_category_no" property="courseCategoryNo"/>
+		<result column="course_category_title" property="courseCategoryTitle"/>
+		<result column="course_category_desc" property="courseCategoryDesc"/>
+	</resultMap>
 	
+	<!-- 카테고리 목록 조회 -->
+	<select id="selectAllCategories" resultType="string">
+	    SELECT COURSE_CATEGORY_TITLE
+	    FROM COURSE_CATEGORY3
+	    ORDER BY COURSE_CATEGORY_NO
+	</select>
+		
 	<!-- 새 강좌 등록 로직 -->
 	<insert id="insertNewCourse" parameterType="Course3">
 		INSERT INTO COURSE3 (
 			COURSE_NO, 				
 			COURSE_TITLE, 	COURSE_DESC, 	COURSE_CATEGORY_NO,  GRADE, 
-			COURSE_PRICE,	COURSE_PRICE_SALE,	BEGIN_DATE,		CREATE_AT,	   MEMBER_NO
+			COURSE_PRICE,	COURSE_PRICE_SALE,	BEGIN_DATE,		CREATED_AT,	   MEMBER_NO
 		) VALUES (
 			SEQ_COURSE3_NO.NEXTVAL, 
 			#{courseTitle},	#{courseDesc},	#{courseCategoryNo}, #{grade},
-			#{coursePrice},	#{coursePriceSale},	#{beginDate},	#{createdAt},  #{memberNo},
+			#{coursePrice},	#{coursePriceSale},	#{beginDate},	#{createdAt},  #{memberNo}
 		)
 		
 	</insert>
@@ -92,7 +105,7 @@
 	</update>
 	
 	<!-- 특정 교사의 강좌 상태별 조회 -->
-	<select id="selectCoursesByStatus" parameterType="map" resultType="Course3">
+	<select id="selectCoursesByStatus" parameterType="map" resultMap="courseMap">
 		SELECT * FROM COURSE3 
 		WHERE MEMBER_NO = #{memberNo}
 		<choose>
@@ -114,25 +127,25 @@
 	
 	<!-- 각 상태별 강좌 수 조회 -->
 	<select id="selectCourseStatusCount" parameterType="int" resultType="map">
-		SELECT
-			COUNT(*) as total, <!-- Map 으로 받아올때 as 를 key 로 사용하는데, 항상 대문자로 처리해서 key값을 가져옴 -->
-			SUM(CASE 
-				WHEN COURSE_STATUS = 0 OR BEGIN_DATE > SYSDATE THEN 1 
-				ELSE 0 
-			END) as preparing,
-			SUM(CASE 
-				WHEN COURSE_STATUS = 1 
-				AND SYSDATE >= BEGIN_DATE
-				AND (END_DATE IS NULL OR END_DATE >= SYSDATE) THEN 1 
-				ELSE 0 
-			END) as inProgress,
-			SUM(CASE 
-				WHEN COURSE_STATUS = 2 
-				AND SYSDATE > END_DATE THEN 1 
-				ELSE 0 
-			END) as completed
-		FROM COURSE3
-		WHERE MEMBER_NO = #{memberNo}
+		SELECT 
+	        COUNT(*) as TOTAL,
+	        SUM(CASE 
+	            WHEN COURSE_STATUS = 0 OR BEGIN_DATE > SYSDATE THEN 1 
+	            ELSE 0 
+	        END) as PREPARING,
+	        SUM(CASE 
+	            WHEN COURSE_STATUS = 1 
+	            AND SYSDATE >= BEGIN_DATE 
+	            AND (END_DATE IS NULL OR END_DATE >= SYSDATE) THEN 1 
+	            ELSE 0 
+	        END) as INPROGRESS,
+	        SUM(CASE 
+	            WHEN COURSE_STATUS = 2 
+	            AND SYSDATE > END_DATE THEN 1 
+	            ELSE 0 
+	        END) as COMPLETED
+	    FROM COURSE3
+	    WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 	<!-- 교사의 강좌 목록 조회 (상태별 카운트 포함) -->
