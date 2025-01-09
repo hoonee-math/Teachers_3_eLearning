@@ -258,7 +258,7 @@ function schoolSearch(e) {
     const select = $("#school-name");
     select.html("<option value=''>학교명</option>");
     const district = $(e.target).val();
-    const schoolType = $("#school-type").val();
+    const schoolType = 3;
 	
 	console.log(district,schoolType);
     
