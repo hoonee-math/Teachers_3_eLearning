@@ -103,16 +103,29 @@
 							<div class="lecture-item" data-lecture-no="${lecture.lectureNo}">
 								<div class="lecture-header">
 									<h4>${lecture.lectureOrder}차시</h4>
-									<input type="date" value="${lecture.scheduleEvent.eventStart}" class="lecture-date" readonly>
-									<div class="lecture-time-group">
-										<fmt:formatDate value="${lecture.scheduleEvent.eventStart}" pattern="HH:mm" var="startTime"/>
-										<fmt:formatDate value="${lecture.scheduleEvent.eventEnd}" pattern="HH:mm" var="endTime"/>
-										<input type="text" value="${startTime} ~ ${endTime}" readonly>
+									<div class="lecture-actions">
+										<button type="button" class="btn-edit-lecture">수정</button>
+										<button type="button" class="btn-delete-lecture">삭제</button>
 									</div>
 								</div>
 								<div class="lecture-content">
 									<input type="text" class="lecture-title" value="${lecture.lectureTitle}" readonly>
-									<input type="url" class="video-url" value="${lecture.scheduleEvent.videoUrl}" readonly>
+									<input type="date" value="${lecture.scheduleEvent.eventStart}" class="lecture-date" readonly>
+									<details>
+										<summary>강의 정보</summary>
+										<div class="optional-inputs">
+					                        <input type="date" class="lecture-date" value="${lecture.scheduleEvent.eventStart}" readonly>
+					                        <div class="lecture-time-group">
+												<fmt:formatDate value="${lecture.scheduleEvent.eventStart}" pattern="HH:mm" var="startTime"/>
+												<fmt:formatDate value="${lecture.scheduleEvent.eventEnd}" pattern="HH:mm" var="endTime"/>
+												<input type="time" value="${startTime}" class="lecture-start-time" readonly>
+												<span>~</span>
+												<input type="time" value="${endTime}" class="lecture-end-time" readonly>
+											</div>
+											<input type="url" class="video-url"  value="${lecture.scheduleEvent.videoUrl}" readonly>
+										</div>
+									</details>
+									</div>
 								</div>
 							</div>
 						</c:forEach>

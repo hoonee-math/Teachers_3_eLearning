@@ -28,17 +28,26 @@ function createLectureTemplate(index, date = '', startTime = '', endTime = '') {
 		<div class="lecture-item" data-index="${index}">
 			<div class="lecture-header">
 				<h4>${index}차시</h4>
-				<input type="date" value="${date}" class="lecture-date">
-				<div class="lecture-time-group">
-					<input type="time" value="${startTime}" class="lecture-start-time">
-					<span>~</span>
-					<input type="time" value="${endTime}" class="lecture-end-time">
+				<div class="lecture-actions">
+					<button type="button" class="btn-save-lecture">저장</button>
+					<button type="button" class="btn-delete-lecture">삭제</button>
 				</div>
 			</div>
 			<div class="lecture-content">
-				<input type="text" class="lecture-title" placeholder="강의 제목" value="${index}차시 강의">
-				<input type="url" class="video-url" placeholder="강의 영상 URL">
-			</div>
+				<input type="text" class="lecture-title" placeholder="${index}차시 강의">
+				<details>
+					<summary>추가 정보 입력 (선택사항)</summary>
+					<div class="optional-inputs">
+                    	<input type="date" class="lecture-date" value="${date}">
+                    	<div class="lecture-time-group">
+                        	<input type="time" class="lecture-start-time" value="${startTime}">
+                        	<span>~</span>
+                        	<input type="time" class="lecture-end-time" value="${endTime}">
+                        </div>
+                    	<input type="url" class="video-url" placeholder="강의 영상 URL">
+                	</div>
+            	</details>
+            </div>
 		</div>
 	`;
 }
