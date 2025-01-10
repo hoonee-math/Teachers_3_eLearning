@@ -93,60 +93,62 @@
     
     <!-- 강의 등록 -->
     <insert id="insertLecture" parameterType="Lecture3">
-        <selectKey keyProperty="lectureNo" resultType="int" order="BEFORE">
-            SELECT SEQ_LECTURE3_NO.NEXTVAL FROM DUAL
-        </selectKey>
-        INSERT INTO LECTURE3 (
-            lecture_no, lecture_title, lecture_order,
-            lecture_desc, lecture_status, course_no,
-            created_at, updated_at
-        ) VALUES (
-            #{lectureNo}, #{lectureTitle}, #{lectureOrder},
-            #{lectureDesc}, #{lectureStatus}, #{courseNo},
-            SYSDATE, SYSDATE
-        )
-    </insert>
+    <selectKey keyProperty="lectureNo" resultType="int" order="BEFORE">
+        SELECT SEQ_LECTURE3_NO.NEXTVAL FROM DUAL
+    </selectKey>
+		INSERT INTO LECTURE3 (
+			LECTURE_NO, LECTURE_TITLE, LECTURE_ORDER,
+			LECTURE_STATUS, COURSE_NO, CREATED_AT
+		) VALUES (
+			#{lectureNo}, #{lectureTitle}, #{lectureOrder},
+			'1', #{courseNo}, SYSDATE
+		)
+	</insert>
     
     <!-- 강의 일정 등록 -->
     <insert id="insertScheduleEvent" parameterType="ScheduleEvent3">
-        <selectKey keyProperty="eventNo" resultType="int" order="BEFORE">
-            SELECT SEQ_SCHEDULE_EVENT3_NO.NEXTVAL FROM DUAL
-        </selectKey>
-        INSERT INTO SCHEDULE_EVENT3 (
-            event_no, calendar_id, event_category,
-            event_title, event_start, event_end,
-            lecture_no, video_url, created_at
-        ) VALUES (
-            #{eventNo}, #{calendarId}, 'time',
-            #{eventTitle}, #{eventStart}, #{eventEnd},
-            #{lectureNo}, #{videoUrl}, SYSDATE
-        )
+		INSERT INTO SCHEDULE_EVENT3 (
+			EVENT_NO, CALENDAR_ID, LECTURE_NO,
+			EVENT_TITLE, EVENT_START, EVENT_END,
+			VIDEO_URL, EVENT_CATEGORY, CREATED_AT
+	    ) VALUES (
+			SEQ_SCHEDULE_EVENT3_NO.NEXTVAL,
+			'lecture',
+			#{lectureNo},
+			#{eventTitle, jdbcType=VARCHAR},
+			#{eventStart, jdbcType=TIMESTAMP},
+			#{eventEnd, jdbcType=TIMESTAMP},
+			#{videoUrl, jdbcType=VARCHAR},
+			'time',
+			SYSDATE
+	    )
     </insert>
     
     <!-- 강의 수정 -->
     <update id="updateLecture" parameterType="Lecture3">
-        UPDATE LECTURE3 SET
-            lecture_title = #{lectureTitle},
-            lecture_order = #{lectureOrder},
-            lecture_desc = #{lectureDesc},
-            lecture_status = #{lectureStatus},
-            updated_at = SYSDATE
-        WHERE lecture_no = #{lectureNo}
+		UPDATE LECTURE3 SET
+			LECTURE_TITLE = #{lectureTitle},
+			LECTURE_ORDER = #{lectureOrder},
+			UPDATED_AT = SYSDATE
+		WHERE lecture_no = #{lectureNo}
     </update>
     
     <!-- 일정 수정 -->
 	<update id="updateScheduleEvent" parameterType="ScheduleEvent3">
         UPDATE SCHEDULE_EVENT3 SET
-            event_title = #{eventTitle},
-            event_start = #{eventStart},
-            event_end = #{eventEnd},
-            video_url = #{videoUrl}
+	        EVENT_TITLE = #{eventTitle},
+	        EVENT_START = #{eventStart, jdbcType=TIMESTAMP},
+	        EVENT_END = #{eventEnd, jdbcType=TIMESTAMP},
+	        VIDEO_URL = #{videoUrl, jdbcType=VARCHAR}
         WHERE lecture_no = #{lectureNo}
     </update>
     
     <!-- 강의 삭제 (cascade 설정되어 있다고 가정) -->
     <delete id="deleteLecture" parameterType="int">
-        DELETE FROM LECTURE3 WHERE lecture_no = #{lectureNo}
+		UPDATE LECTURE3 SET
+			LECTURE_STATUS = '2',
+			UPDATED_AT = SYSDATE
+		WHERE LECTURE_NO = #{lectureNo}
     </delete>
     
     <!-- 강의 일정 조회 -->
