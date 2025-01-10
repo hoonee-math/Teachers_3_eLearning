@@ -40,3 +40,6 @@
 <link rel="stylesheet" href="${path}/resources/css/components/modal.css">
 <link rel="stylesheet" href="${path}/resources/css/components/buttons.css">
 <%-- <link rel="stylesheet" href="${path}/resources/css/components/footer.css"> --%>
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

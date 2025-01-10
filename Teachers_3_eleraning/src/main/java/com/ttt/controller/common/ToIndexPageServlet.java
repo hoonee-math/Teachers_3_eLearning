@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ttt.dto.CourseRegister3;
+import com.ttt.dto.Member3;
+import com.ttt.service.CourseRegisterService;
+
 @WebServlet(urlPatterns = {"","/home"}, name="indexPage")
 public class ToIndexPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,10 +29,9 @@ public class ToIndexPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         // 세션 체크 
-        HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
+        Member3 loginMember = (Member3)session.getAttribute("loginMember");
         
-        //System.out.println("현재 로그인 세션 정보 : "+session.getAttribute("loginMember"));
-
 		// (더미데이터) 섹션1: 광고 슬라이드
 		List<Map<String, String>> mainSlides = new ArrayList<>();
 
@@ -39,7 +42,7 @@ public class ToIndexPageServlet extends HttpServlet {
 		slide1.put("description", "5월까지 전 강좌 30% 할인된 가격으로 수강하세요.");
 		slide1.put("link", request.getContextPath() + "/event/early-bird");
 		mainSlides.add(slide1);
-
+		
 		// 두 번째 슬라이드
 		Map<String, String> slide2 = new HashMap<>();
 		slide2.put("imageUrl", request.getContextPath() + "/resources/images/common/HoneyT_logo_horizontal.png");
@@ -51,36 +54,75 @@ public class ToIndexPageServlet extends HttpServlet {
 		// request에 데이터 저장
 		request.setAttribute("mainSlides", mainSlides);
 
-		// 콘솔에 전달된 데이터 확인
-		//System.out.println("메인 슬라이드 데이터 설정: " + mainSlides);
-		
 	    // (더미데이터) 학생용 수강중인 강좌
-	    List<Map<String, Object>> studentCourses = new ArrayList<>();
+	    List<Map<String, Object>> studentCoursesDummy = new ArrayList<>();
+        
+		if(loginMember != null) {
+			// 학생인 경우
+			if(loginMember.getMemberType() == 1) {
+				int memberNo=loginMember.getMemberNo();
+				List<CourseRegister3> studentCourses =  new CourseRegisterService().selectIngCourse(memberNo);
+
+	            // 수강 정보 로그 출력
+	            if(studentCourses != null && !studentCourses.isEmpty()) {
+	            	System.out.println(studentCourses);
+	                System.out.println("\n===== 학생 수강 정보 로그 =====");
+	                for(CourseRegister3 course : studentCourses) {
+	                    System.out.println("\n## 강좌 기본 정보 ##");
+	                    System.out.println("courseRegisterNo: " + course.getCourseRegisterNo());
+	                    System.out.println("courseTitle: " + course.getCourse().getCourseTitle());
+	                    System.out.println("teacherName: " + course.getCourse().getTeacherName());
+	                    
+	                    System.out.println("\n## 학습 진행 정보 ##");
+	                    System.out.println("progressRate: " + course.getProgressRate() + "%");
+	                    System.out.println("lastViewTime: " + course.getLastViewTime());
+	                    System.out.println("totalLectures: " + course.getCourse().getTotalLectures());
+	                    
+	                    System.out.println("\n## 수강 평가 정보 ##");
+	                    System.out.println("courseScore: " + course.getCourseScore());
+	                    System.out.println("completionStatus: " + course.getCompletionStatus());
+	                    System.out.println("================================\n");
+	                }
+	            } else {
+	                System.out.println("수강 중인 강좌가 없거나 데이터를 가져오는데 실패했습니다.");
+	            }
+				request.setAttribute("studentCourses", studentCourses);
+			}
+			// 교사인 경우
+			else if(loginMember.getMemberType() == 2) {
+				//List<Course3> teacherCourses = courseReisterService.selectTeacherCourses(loginMember.getMemberNo());
+				//request.setAttribute("teacherCourses", teacherCourses);
+			}
+		} else { // 로그인 세션 정보가 없을 경우 테스트용 더미 데이터를 넣는 로직.
 	    
-	    Map<String, Object> course1 = new HashMap<>();
-	    course1.put("courseRegisterNo", 1);                 // 변경: enrollmentNo → courseRegisterNo
-	    course1.put("courseTitle", "수학의 정석: 미적분 마스터");
-	    course1.put("teacherName", "김수학");
-	    course1.put("progressRate", 45);
-	    course1.put("nextLectureNo", 8);
-	    course1.put("nextLectureTitle", "미분 계수의 활용");
-	    course1.put("totalLectures", 20);
-	    course1.put("lastViewTime", new Date()); 			// 추가: 마지막 수강 시간
-	    course1.put("stopAt", 720);                         // 추가: 마지막 재생 위치(초)
-	    studentCourses.add(course1);
-
-	    Map<String, Object> course2 = new HashMap<>();
-	    course1.put("courseRegisterNo", 2);                 // 변경: enrollmentNo → courseRegisterNo
-	    course2.put("courseTitle", "국어 독해의 비밀");
-	    course2.put("teacherName", "박국어");
-	    course2.put("progressRate", 75);
-	    course2.put("nextLectureNo", 15);
-	    course2.put("nextLectureTitle", "비문학 독해 전략");
-	    course2.put("totalLectures", 20);
-	    course1.put("lastViewTime", new Date()); // 추가: 마지막 수강 시간
-	    course1.put("stopAt", 720);                         // 추가: 마지막 재생 위치(초)
-	    studentCourses.add(course2);
-
+		    Map<String, Object> course1 = new HashMap<>();
+		    course1.put("courseRegisterNo", 1);                 // 변경: enrollmentNo → courseRegisterNo
+		    course1.put("course.courseTitle", "수학의 정석: 미적분 마스터");
+		    course1.put("teacherName", "김수학");
+		    course1.put("progressRate", 45);
+		    course1.put("nextLectureNo", 8);
+		    course1.put("nextLectureTitle", "미분 계수의 활용");
+		    course1.put("totalLectures", 20);
+		    course1.put("lastViewTime", new Date()); 			// 추가: 마지막 수강 시간
+		    course1.put("stopAt", 720);                         // 추가: 마지막 재생 위치(초)
+		    studentCoursesDummy.add(course1);
+		    
+		    Map<String, Object> course2 = new HashMap<>();
+		    course1.put("courseRegisterNo", 2);                 // 변경: enrollmentNo → courseRegisterNo
+		    course2.put("course.courseTitle", "국어 독해의 비밀");
+		    course2.put("teacherName", "박국어");
+		    course2.put("progressRate", 75);
+		    course2.put("nextLectureNo", 15);
+		    course2.put("nextLectureTitle", "비문학 독해 전략");
+		    course2.put("totalLectures", 20);
+		    course1.put("lastViewTime", new Date()); // 추가: 마지막 수강 시간
+		    course1.put("stopAt", 720);                         // 추가: 마지막 재생 위치(초)
+		    studentCoursesDummy.add(course2);
+	
+			request.setAttribute("studentCourses", studentCoursesDummy);
+		
+		}
+		
 	    // (더미데이터) 교사용 업로드 중인 강좌
 	    List<Map<String, Object>> teacherCourses = new ArrayList<>();
 	    
@@ -94,7 +136,6 @@ public class ToIndexPageServlet extends HttpServlet {
 	    uploadCourse1.put("endDate", "2024-05-30");
 	    teacherCourses.add(uploadCourse1);
 
-	    request.setAttribute("studentCourses", studentCourses);
 	    request.setAttribute("teacherCourses", teacherCourses);
 	    
 	    //System.out.println("학생 강좌 데이터 설정: " + studentCourses);

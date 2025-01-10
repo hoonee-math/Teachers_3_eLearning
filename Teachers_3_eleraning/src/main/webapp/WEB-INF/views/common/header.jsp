@@ -5,6 +5,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<%@ page import="com.google.gson.Gson" %>
+<!-- 메가메뉴 데이터 전달을 위한 스크립트 추가 -->
+<%
+    Gson gson = new Gson();
+    String teachersJson = gson.toJson(request.getAttribute("megaMenuTeachers"));
+    String subjectsJson = gson.toJson(request.getAttribute("megaMenuSubjects"));
+%>
+<script>
+    const megaMenuTeachers = <%= teachersJson != null ? teachersJson : "[]" %>;
+    const megaMenuSubjects = <%= subjectsJson != null ? subjectsJson : "[]" %>;
+</script>
 
 <!-- 헤더 -->
 <header class="header-container">
@@ -136,5 +147,4 @@
 			<!-- 여기는 JavaScript로 동적 생성 -->
 		</div>
 	</div>
-	
 </header>

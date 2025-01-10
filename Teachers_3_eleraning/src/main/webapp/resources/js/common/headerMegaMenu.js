@@ -2,7 +2,7 @@
  * 
  */
 // 더미 교사 데이터
-const teacherData = {
+/*const teacherData = {
 	'국어': [
 		{name: '최영주', id: 1},
 		{name: '김현아', id: 2, badge: 'HOT'},
@@ -27,7 +27,7 @@ const courseData = {
 		{name: '수2 문제풀이', id: 5},
 		{name: '확률과 통계', id: 6, badge: 'HOT'}
 	]
-};
+};*/
 
 // subNav 업데이트 함수
 function updateSubNav(grade) {
@@ -41,19 +41,54 @@ function updateSubNav(grade) {
 
 // 메가메뉴 생성 함수
 function updateTeacherMegaMenu() {
-	console.log('교사 메가메뉴 업데이트');
-	const menuHTML = Object.entries(teacherData).map(([subject, teachers]) => {
-		return '<div class="mega-menu-subject-group">' +
-			'<div class="mega-menu-subject-title">' + subject + '</div>' +
-			'<div class="mega-menu-teacher-list">' +
-			teachers.map(teacher => {
-				const badge = teacher.badge ? '<span class="mega-menu-teacher-badge">' + teacher.badge + '</span>' : '';
-				return '<a href="' + path + '/teacherListAndDetail?teacherName=' + teacher.name + '" class="mega-menu-teacher-item">' +
-					teacher.name + badge + '</a>';
-			}).join('') +
-			'</div></div>';
+	try {
+		// 서버에서 전달받은 데이터를 활용 (JSP에서 전달)
+		const teachers = (typeof megaMenuTeachers !== 'undefined') ? megaMenuTeachers : [];
+		const subjects = (typeof megaMenuSubjects !== 'undefined') ? megaMenuSubjects : [];
+		
+	
+		if (teachers.length === 0 || subjects.length === 0) {
+			console.log('메가메뉴 데이터가 아직 로드되지 않았습니다.');
+			return;
+		}
+
+	// 과목별로 교사 데이터 그룹화
+	const teachersBySubject = teachers.reduce(
+		// reduce() 메서드의 첫번째 콜백 함수 파라미터 : (acc, teacher) => { ... }
+		// acc: 누적값 (accumulator), teacher: 현재 처리중인 배열 요소
+		(acc, teacher) => { 
+			
+			const subject = teacher.teacherSubjectName;
+			if (!acc[subject]) {
+				acc[subject] = [];
+			}
+			acc[subject].push(teacher);
+			return acc;
+		}, 
+		// reduce() 메서드의 두번째 파라미터 : 초기값 (여기서는 빈 객체 {})
+		{}
+	);
+	const menuHTML = subjects.map(subject => {
+	        const subjectTeachers = teachersBySubject[subject] || [];
+	        return `
+	            <div class="mega-menu-subject-group">
+	                <div class="mega-menu-subject-title">${subject}</div>
+	                <div class="mega-menu-teacher-list">
+	                    ${subjectTeachers.map(teacher => `
+	                        <a href="${path}/teacher/detail/${teacher.memberNo}" 
+	                           class="mega-menu-teacher-item">
+	                            ${teacher.memberName} 선생님
+	                        </a>
+	                    `).join('')}
+	                </div>
+	            </div>
+	        `;
 	}).join('');
 	$('#teacherMegaMenuContent').html(menuHTML);
+	
+	} catch (error) {
+		console.error('메가메뉴 업데이트 중 오류 발생:', error);
+	}
 }
 
 function updateCourseMegaMenu() {
@@ -71,3 +106,4 @@ function updateCourseMegaMenu() {
 	}).join('');
 	$('#courseMegaMenuContent').html(menuHTML);
 }
+

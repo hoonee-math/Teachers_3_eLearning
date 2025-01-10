@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="courseRegister">
+	<resultMap id="courseRegisterMap" type="courseRegister3">
+        <id column="COURSE_REGISTER_NO" property="courseRegisterNo"/>
+        <result column="COURSE_REGISTER_DATE" property="courseRegisterDate"/>
+        <result column="PROGRESS_RATE" property="progressRate"/>
+        <result column="LAST_VIEW_TIME" property="lastViewTime"/>
+        <result column="COMPLETION_STATUS" property="completionStatus"/>
+        <result column="COURSE_NO" property="courseNo"/>
+        <result column="COURSE_SCORE" property="courseScore"/>
+        <result column="REVIEW_CONTENT" property="reviewContent"/>
+        <result column="MEMBER_NO" property="memberNo"/>
+		<result column="teacher_subject_name" property="teacherSubjectName"/>
+		
+		<result column="MEMBER_NAME" property="teacherName"/>
+		<result column="COURSE_TITLE" property="courseTitle"/>
+		<association property="course" resultMap="course.courseMap"/>
+	</resultMap>
+	
+    <!-- 진행중인 강좌 조회 쿼리 -->
+	<select id="selectIngCourse" parameterType="int" resultMap="courseRegisterMap">
+		SELECT 
+			CR.COURSE_REGISTER_NO,
+			CR.COURSE_REGISTER_DATE,
+			CR.PROGRESS_RATE,
+			CR.LAST_VIEW_TIME,
+			CR.COMPLETION_STATUS,
+			CR.COURSE_NO,
+			CR.COURSE_SCORE,
+			CR.REVIEW_CONTENT,
+			CR.MEMBER_NO,
+			C.COURSE_TITLE,
+			C.TOTAL_LECTURES,
+			M.MEMBER_NAME AS TEACHER_NAME,
+			S.TEACHER_SUBJECT_NAME
+		FROM 
+			COURSE_REGISTER3 CR
+			JOIN COURSE3 C ON CR.COURSE_NO = C.COURSE_NO
+			JOIN TEACHERS3 T ON C.MEMBER_NO = T.MEMBER_NO
+			JOIN MEMBER3 M ON T.MEMBER_NO = M.MEMBER_NO
+			JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
+		WHERE 
+			CR.COMPLETION_STATUS = 0
+			AND CR.MEMBER_NO = #{memberNo}
+    </select>
+</mapper>
