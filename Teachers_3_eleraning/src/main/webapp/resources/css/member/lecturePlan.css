@@ -1,6 +1,4 @@
-@charset "UTF-8";
-
-/* lecturePlan.css */
+/* 강좌 정보 영역 */
 .course-info {
 	background: #f8f9fa;
 	padding: 20px;
@@ -13,8 +11,19 @@
 	gap: 20px;
 }
 
+/* 일괄 등록 설정 영역 */
 .batch-settings {
+	background: #f8f9fa;
+	border-radius: 8px;
+	padding: 20px;
 	margin: 30px 0;
+}
+
+.batch-settings summary {
+	font-size: 1.1em;
+	color: #333;
+	cursor: pointer;
+	padding: 10px 0;
 }
 
 .settings-grid {
@@ -42,181 +51,17 @@
 	gap: 5px;
 }
 
+.time-selects {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+/* 강의 목록 영역 */
 .lecture-list {
 	margin-top: 30px;
 }
 
-.add-lecture-btn {
-	background: none;
-	border: 2px dashed #FAB350;
-	color: #FAB350;
-	padding: 10px 20px;
-	border-radius: 5px;
-	margin-bottom: 20px;
-	cursor: pointer;
-	width: 100%;
-}
-
-.lecture-item {
-	background: white;
-	padding: 15px;
-	border-radius: 8px;
-	margin-bottom: 10px;
-	border: 1px solid #e1e1e1;
-    display: block; 
-    width: 100%; 
-	justify-content: space-between;
-	align-items: center;
-}
-
-.lecture-header {
-	display: flex;
-	gap: 15px;
-	align-items: center;
-    padding: 0 10px; 
-}
-
-.remove-lecture {
-    padding: 0 10px; 
-	background: none;
-	border: none;
-	color: #dc3545;
-	cursor: pointer;
-}
-
-
-/* 강의 아이템 스타일 */
-.lecture-item {
-	background: white;
-	padding: 20px;
-	border-radius: 8px;
-	margin-bottom: 15px;
-	border: 1px solid #e1e1e1;
-	transition: box-shadow 0.3s ease;
-}
-
-.lecture-item:hover {
-	box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.lecture-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 15px;
-}
-
-.lecture-header h4 {
-	font-size: 1.1em;
-	color: #333;
-	margin: 0;
-}
-
-.lecture-actions {
-	display: flex;
-	gap: 10px;
-}
-
-.lecture-actions button {
-	padding: 6px 12px;
-	border-radius: 4px;
-	cursor: pointer;
-	font-size: 0.9em;
-	transition: all 0.2s ease;
-}
-
-.btn-save-lecture {
-	background: #FAB350;
-	color: white;
-	border: none;
-}
-
-.btn-save-lecture:hover {
-	background: #f9a62b;
-}
-
-.btn-edit-lecture {
-	background: #4CAF50;
-	color: white;
-	border: none;
-}
-
-.btn-edit-lecture:hover {
-	background: #45a049;
-}
-
-.btn-delete-lecture {
-	background: white;
-	color: #dc3545;
-	border: 1px solid #dc3545;
-}
-
-.btn-delete-lecture:hover {
-	background: #dc3545;
-	color: white;
-}
-
-/* 강의 컨텐츠 영역 */
-.lecture-content {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
-}
-
-.lecture-content input[type="text"] {
-	width: 100%;
-	padding: 8px 12px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	font-size: 1em;
-}
-
-/* 추가 정보 영역 (details) */
-.lecture-content details {
-	background: #f8f9fa;
-	border-radius: 4px;
-	padding: 1px;
-}
-
-.lecture-content summary {
-	padding: 10px 15px;
-	cursor: pointer;
-	color: #666;
-	font-weight: 500;
-}
-
-.lecture-content summary:hover {
-	color: #FAB350;
-}
-
-.optional-inputs {
-	padding: 15px;
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
-}
-
-/* 날짜/시간 입력 그룹 */
-.lecture-time-group {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-}
-
-.lecture-time-group input {
-	padding: 6px 10px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	font-size: 0.9em;
-}
-
-/* 읽기 전용 상태 스타일 */
-.lecture-item input[readonly] {
-	background-color: #f8f9fa;
-	border-color: transparent;
-}
-
-/* 새 강의 추가 버튼 */
 .add-lecture-btn {
 	background: none;
 	border: 2px dashed #FAB350;
@@ -240,4 +85,138 @@
 
 .add-lecture-btn i {
 	font-size: 1.2em;
+}
+
+/* 강의 아이템 */
+.lecture-item {
+	background: white;
+	padding: 20px;
+	border-radius: 8px;
+	margin-bottom: 15px;
+	border: 1px solid #e1e1e1;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	transition: box-shadow 0.3s ease;
+}
+
+.lecture-item:hover {
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.lecture-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.lecture-header h4 {
+	font-size: 1.1em;
+	color: #333;
+	margin: 0;
+}
+
+.lecture-actions {
+	display: flex;
+	gap: 10px;
+}
+
+/* 버튼 스타일 */
+.btn-save-lecture, .btn-edit-lecture, .btn-delete-lecture {
+	padding: 6px 12px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 0.9em;
+	transition: all 0.2s ease;
+}
+
+.btn-save-lecture, .btn-edit-lecture {
+	background: #FAB350;
+	color: white;
+	border: none;
+}
+
+.btn-save-lecture:hover, .btn-edit-lecture:hover {
+	background: #f9a62b;
+}
+
+.btn-delete-lecture {
+	background: white;
+	color: #dc3545;
+	border: 1px solid #dc3545;
+}
+
+.btn-delete-lecture:hover {
+	background: #dc3545;
+	color: white;
+}
+
+/* 강의 컨텐츠 */
+.lecture-content {
+	padding: 0 10px;
+}
+
+.lecture-content input[type="text"] {
+	width: 100%;
+	padding: 8px 12px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 1em;
+}
+
+/* 추가 정보 영역 */
+.lecture-content details {
+	margin-top: 15px;
+	background: #f8f9fa;
+	border-radius: 4px;
+	padding: 1px;
+}
+
+.lecture-content summary {
+	padding: 10px 15px;
+	cursor: pointer;
+	color: #666;
+	font-weight: 500;
+}
+
+.lecture-content summary:hover {
+	color: #FAB350;
+}
+
+.optional-inputs {
+	padding: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	background: white;
+	border-radius: 0 0 4px 4px;
+}
+
+/* 날짜/시간 입력 */
+.lecture-time-group {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.lecture-time-group input {
+	padding: 6px 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 0.9em;
+}
+
+/* 읽기 전용 상태 */
+.lecture-item input[readonly] {
+	background-color: #f8f9fa;
+	border-color: transparent;
+	cursor: default;
+}
+
+/* 버튼 그룹 */
+.button-group {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 30px;
+	padding: 20px 0;
 }

@@ -41,8 +41,8 @@
 				</div>
 				
 				<!-- 일괄 등록 설정 -->
-				<div class="batch-settings">
-					<h3>일괄 등록 설정</h3>
+				<details class="batch-settings">
+        		<summary>일괄 등록 설정</summary>
 					<div class="settings-grid">
 						<div class="setting-group">
 							<label>시작 날짜</label>
@@ -91,7 +91,7 @@
 						
 						<button type="button" class="btn-primary" onclick="generateSchedule()">일정 생성</button>
 					</div><!-- /.setting-grid -->
-				</div><!-- /일괄 등록 설정 -->
+				</details><!-- /일괄 등록 설정 -->
 
 				<!-- 강의 목록 -->
 				<div class="lecture-list">
