@@ -50,8 +50,6 @@ public class CookieCheckFilter extends HttpFilter implements Filter {
 	        }
 	    }
 		
-		
-		
 		chain.doFilter(request, response);
 	}
 

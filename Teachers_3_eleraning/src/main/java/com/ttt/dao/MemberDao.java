@@ -48,7 +48,6 @@ public class MemberDao {
 		return session.update("member.updatePassword", m);
 	}
 	public int updateMember(SqlSession session, Member3 m) {
-		System.out.println("m : "+m);
 		return session.update("member.updateMember", m);
 	}
 	public int updateStudent(SqlSession session,Member3 m) {

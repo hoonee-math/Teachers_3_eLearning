@@ -68,8 +68,6 @@ public class MemberService {
 	    int result = 0;
 	    try {
 	    	result = dao.updateMember(session, m);
-	    	System.out.println(result);
-	    	System.out.println(m);
 	        if(result > 0) {
 	        	if(m.getMemberType() == 1) {  // 학생
 	                result = dao.updateStudent(session, m);
