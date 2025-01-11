@@ -111,7 +111,7 @@ public class AdminManageSiteSaveServlet extends HttpServlet {
 					request.setAttribute("msg", "회원 정보 수정에 실패하였습니다.");
 				}
 				
-				request.setAttribute("loc", "/member/teacher/profile");
+				request.setAttribute("loc", "/admin/manage/site");
 				request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
