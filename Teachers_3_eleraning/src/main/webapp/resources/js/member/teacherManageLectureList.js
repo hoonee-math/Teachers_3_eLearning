@@ -139,8 +139,12 @@ function saveLecture(lectureItem) {
 // 강의 수정 모드 전환
 function enableEdit(lectureItem) {
 	// 모든 input 요소의 readonly 속성 제거
+	// 수정 모드 진입 시 현재 값을 defaultValue로 설정
 	const inputs = lectureItem.querySelectorAll('input');
-	inputs.forEach(input => input.removeAttribute('readonly'));
+	inputs.forEach(input => {
+		input.defaultValue = input.value; // 현재 값을 기본값으로 저장
+		input.removeAttribute('readonly')
+	});
 
 	// 수정 버튼을 저장 버튼으로 변경
 	const editBtn = lectureItem.querySelector('.btn-edit-lecture');
@@ -156,19 +160,56 @@ function updateLecture(lectureItem) {
 		return;
 	}
 
-	const date = lectureItem.querySelector('.lecture-date').value;
-	const startTime = lectureItem.querySelector('.lecture-start-time').value;
-	const endTime = lectureItem.querySelector('.lecture-end-time').value;
+	// 기존 값들 (readonly 속성이 있는 input의 초기값)
+	const originalValues = {
+		title: lectureItem.querySelector('.lecture-title').defaultValue,
+		date: lectureItem.querySelector('.lecture-date').defaultValue,
+		startTime: lectureItem.querySelector('.lecture-start-time').defaultValue,
+		endTime: lectureItem.querySelector('.lecture-end-time').defaultValue,
+		videoUrl: lectureItem.querySelector('.video-url').defaultValue
+	};
 
+	// 현재 값들
+	const currentValues = {
+		title: lectureItem.querySelector('.lecture-title').value.trim(),
+		date: lectureItem.querySelector('.lecture-date').value,
+		startTime: lectureItem.querySelector('.lecture-start-time').value,
+		endTime: lectureItem.querySelector('.lecture-end-time').value,
+		videoUrl: lectureItem.querySelector('.video-url').value.trim()
+	};
+
+	// 변경된 데이터만 포함하는 객체 생성
 	const lectureData = {
 		lectureNo: parseInt(lectureNo),
 		courseNo: courseNo,
-		lectureOrder: parseInt(lectureItem.getAttribute('data-index')),
-		lectureTitle: lectureItem.querySelector('.lecture-title').value,
-		eventStart: date && startTime ? combineDateTime(date, startTime) : null,
-		eventEnd: date && endTime ? combineDateTime(date, endTime) : null,
-		videoUrl: lectureItem.querySelector('.video-url').value || null
+		lectureOrder: parseInt(lectureItem.querySelector('h4').textContent.replace('차시', ''))
 	};
+
+	// 제목이 변경된 경우만 포함
+	if (currentValues.title !== originalValues.title) {
+		lectureData.lectureTitle = currentValues.title;
+	}
+
+	// 일정이 변경된 경우만 포함
+	if (currentValues.date !== originalValues.date ||
+		currentValues.startTime !== originalValues.startTime ||
+		currentValues.endTime !== originalValues.endTime) {
+		if (currentValues.date && currentValues.startTime && currentValues.endTime) {
+			lectureData.eventStart = combineDateTime(currentValues.date, currentValues.startTime);
+			lectureData.eventEnd = combineDateTime(currentValues.date, currentValues.endTime);
+		}
+	}
+
+	// 동영상 URL이 변경된 경우만 포함
+	if (currentValues.videoUrl !== originalValues.videoUrl) {
+		lectureData.videoUrl = currentValues.videoUrl;
+	}
+
+	// 변경된 데이터가 있는지 확인
+	if (Object.keys(lectureData).length <= 3) { // lectureNo, courseNo, lectureOrder만 있는 경우
+		alert('변경된 내용이 없습니다.');
+		return;
+	}
 	console.log(lectureData)
 
 	fetch(`${path}/member/teacher/mypage/lecture/update`, {
