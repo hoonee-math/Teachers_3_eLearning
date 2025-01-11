@@ -88,7 +88,7 @@ section {
 
 
 			<!-- 섹션2: 학생 수강 현황 (memberType == 1) -->
-			<c:if test="${sessionScope.loginMember.memberType != 5}">
+			<c:if test="${sessionScope.loginMember.memberType == 1}">
 				<section id="studentCourses" class="course-section">
 					<div class="section-container">
 						<h2 class="section-title">나의 학습 현황</h2>
@@ -124,7 +124,7 @@ section {
 			</c:if><!-- / 섹션2: 학생 수강 현황 (memberType == 1) -->
 
 			<!-- 섹션3: 교사 강좌 업로드 현황 (memberType == 2) -->
-			<c:if test="${sessionScope.loginMember.memberType != 5}">
+			<c:if test="${sessionScope.loginMember.memberType == 2}">
 				<section id="teacherCourses" class="course-section">
 					<div class="section-container">
 						<h2 class="section-title">강좌 업로드 현황</h2>
