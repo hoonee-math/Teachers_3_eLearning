@@ -114,19 +114,19 @@
 								</div>
 								<div class="lecture-content">
 									<input type="text" class="lecture-title" value="${lecture.lectureTitle}" readonly>
-									<input type="date" value="${lecture.scheduleEvent.eventStart}" class="lecture-date" readonly>
-									<details>
+									<details style="border:1px solid #FAB350">
 										<summary>강의 정보</summary>
 										<div class="optional-inputs">
-					                        <input type="date" class="lecture-date" value="${lecture.scheduleEvent.eventStart}" readonly>
+					                        <label>강의 날짜: </label>
+					                        	<input type="date" class="lecture-date" value="${lecture.scheduleEvent.eventStart}" readonly>
+					                        <label>강의 시간: </label>
 					                        <div class="lecture-time-group">
 												<input type="time" value="${lecture.scheduleEvent.eventStart.format(timeFormatter)}" class="lecture-start-time" readonly>
 												<input type="time" value="${lecture.scheduleEvent.eventEnd.format(timeFormatter)}" class="lecture-end-time" readonly>
-												<input type="time" value="${startTime}" class="lecture-start-time" readonly>
-												<span>~</span>
-												<input type="time" value="${endTime}" class="lecture-end-time" readonly>
 											</div>
+					                        <label>동영상 url: </label>
 											<input type="url" class="video-url"  value="${lecture.scheduleEvent.videoUrl}" readonly>
+					                        
 										</div>
 									</details>
 								</div>

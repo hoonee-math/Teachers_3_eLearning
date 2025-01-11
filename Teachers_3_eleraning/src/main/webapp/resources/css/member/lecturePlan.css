@@ -208,7 +208,7 @@
 /* 읽기 전용 상태 */
 .lecture-item input[readonly] {
 	background-color: #f8f9fa;
-	border-color: transparent;
+	border-color: #c0c0c0;
 	cursor: default;
 }
 
