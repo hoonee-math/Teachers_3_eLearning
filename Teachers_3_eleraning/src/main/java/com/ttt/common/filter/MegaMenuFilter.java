@@ -31,16 +31,16 @@ public class MegaMenuFilter extends HttpFilter implements Filter {
 				request.setAttribute("megaMenuTeachers", teachers);
         	}
 
-//            if (request.getAttribute("megaMenuSubjects") == null) {
-//            	// request에 데이터 저장
-//				List<String> subjects = new MemberService().selectSubjects();
-//				request.setAttribute("megaMenuSubjects", subjects);
-//            }
+            if (request.getAttribute("megaMenuSubjects") == null) {
+            	// request에 데이터 저장
+				List<String> subjects = new MemberService().selectSubjects();
+				request.setAttribute("megaMenuSubjects", subjects);
+            }
 
 		} catch (Exception e) {
             // 오류 발생시 빈 리스트로 초기화
             request.setAttribute("megaMenuTeachers", new ArrayList<>());
-//            request.setAttribute("megaMenuSubjects", new ArrayList<>());
+            request.setAttribute("megaMenuSubjects", new ArrayList<>());
 			//e.printStackTrace();
 		}
         

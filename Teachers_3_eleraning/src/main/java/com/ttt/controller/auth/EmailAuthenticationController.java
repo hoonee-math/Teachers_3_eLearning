@@ -32,7 +32,7 @@ public class EmailAuthenticationController extends HttpServlet {
         
     	// 서블릿 주소 요청 주소에 따라서 분기처리
         String pathInfo = request.getPathInfo();
-        System.out.println(pathInfo);
+//        System.out.println(pathInfo);
         
         switch (pathInfo) {
             case "/sendEmail":
@@ -138,7 +138,7 @@ public class EmailAuthenticationController extends HttpServlet {
 	        searchType=request.getParameter("searchType"); // 이메일 중복검사로 회원가입, 비밀번호, 아이디 찾기 기능 구현
 	    	memberName=request.getParameter("memberName"); // 아이디,비밀번호 찾기시 필요
 
-			System.out.println(searchType + "," + email + ","+ memberName);
+//			System.out.println(searchType + "," + email + ","+ memberName);
         } catch(Exception e ) {
         	System.out.println("이메일 중보검사중 파라미터를 받아오지 못한 값이 존재함");
         }
@@ -149,15 +149,15 @@ public class EmailAuthenticationController extends HttpServlet {
         	Member3 m= new Member3();
         	Member3 result = new Member3();
     		switch(searchType) {
-    		case "emailDuplicate" : m.setEmail(email); System.out.println(m); 
+    		case "emailDuplicate" : m.setEmail(email);
     			result = new EmailAuthenticationService().checkEmailDuplicateByEmail(m); break;
-    		case "searchPassword" : m.setEmail(email); m.setMemberName(memberName);; System.out.println(m); 
+    		case "searchPassword" : m.setEmail(email); m.setMemberName(memberName);
     			result = new EmailAuthenticationService().selectMemberByNameAndEmail(m); break;
     		}
     		
-        	System.out.println("result : "+result);
+//        	System.out.println("result : "+result);
         	boolean exists = (result!=null);
-        	System.out.println("exists : "+exists);
+//        	System.out.println("exists : "+exists);
 
             response.setContentType("application/json");
             response.getWriter().write("{\"exists\": " + exists + "}");

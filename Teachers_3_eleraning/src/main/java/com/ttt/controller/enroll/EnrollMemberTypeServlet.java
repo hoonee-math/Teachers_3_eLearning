@@ -25,15 +25,15 @@ public class EnrollMemberTypeServlet extends HttpServlet {
 	            request.getParameter("checked2"),
 	            request.getParameter("checked3")
 	        };
-		System.out.println("EnrollMemberTypeServlet - checked List : "+values[0]+","+values[1]+","+values[2]);
+//		System.out.println("EnrollMemberTypeServlet - checked List : "+values[0]+","+values[1]+","+values[2]);
 		
 		// 하나라도 null이면 동의하지 않은 것으로 처리 -> js 에서 처리하면 보안상 위험이 있을까?
 		int i=0;
 		try {
 			if (values[0].equals("on")) ++i;
-			System.out.println(values[0].equals("on")+", "+i);
+//			System.out.println(values[0].equals("on")+", "+i);
 			if (values[1].equals("on")) ++i;
-			System.out.println(values[0].equals("on")+", "+i);
+//			System.out.println(values[0].equals("on")+", "+i);
 			if (i==2) {
 				if(values[2] == null); // (보류) 광고성 정보 수신 동의에 대해서 정보 저장이 필요함.
 				request.getRequestDispatcher("/WEB-INF/views/enroll/enrollMemberType.jsp").forward(request, response);

@@ -84,7 +84,7 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 		try {
 			HttpSession session = request.getSession();
 			Member3 teacher = (Member3)session.getAttribute("loginMember");
-			System.out.println("선생님 정보 : "+teacher);
+//			System.out.println("선생님 정보 : "+teacher);
 						
 			// 1. 요청 데이터 읽기
 			BufferedReader reader = request.getReader();
@@ -93,15 +93,15 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 			while ((line = reader.readLine()) != null) {
 				buffer .append(line);
 			}
-			System.out.println("받은 JSON 데이터: " + buffer .toString());
+//			System.out.println("받은 JSON 데이터: " + buffer .toString());
 
 			// 2. JSON 파싱
 			JsonObject jsonObject = new Gson().fromJson(buffer.toString(), JsonObject.class);
 			int courseNo = jsonObject.get("courseNo").getAsInt();
 			JsonArray lecturesArray = jsonObject.get("lectures").getAsJsonArray();
 
-			System.out.println("jsonObject: " + jsonObject);
-			System.out.println("lecturesArray: " + lecturesArray);
+//			System.out.println("jsonObject: " + jsonObject);
+//			System.out.println("lecturesArray: " + lecturesArray);
 
 			// 3. 데이터 변환 및 저장을 위한 리스트 준비
 			List<Lecture3> lectures = new ArrayList<>();
@@ -134,8 +134,8 @@ public class TeacherManageLectureListServlet extends HttpServlet {
 	            lectures.add(lectureObj);
 	            events.add(eventObj);
 			}
-			System.out.println("lectures: "+lectures);
-			System.out.println("events: "+events);
+//			System.out.println("lectures: "+lectures);
+//			System.out.println("events: "+events);
 			// 4. 서비스 호출하여 저장
 			int result = lectureService.insertLecturesWithSchedules(lectures, events);
 			

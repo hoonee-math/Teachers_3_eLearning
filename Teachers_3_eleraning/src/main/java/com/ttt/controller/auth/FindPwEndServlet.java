@@ -24,12 +24,12 @@ public class FindPwEndServlet extends HttpServlet {
 		String email=request.getParameter("email");
 		String memberId=request.getParameter("memberId");
 		
-	    System.out.println("Received parameters:");
-	    System.out.println("searchType: " + searchType);
-	    System.out.println("email: " + email);
-	    System.out.println("memberId: " + memberId);
+//	    System.out.println("Received parameters:");
+//	    System.out.println("searchType: " + searchType);
+//	    System.out.println("email: " + email);
+//	    System.out.println("memberId: " + memberId);
 		
-		System.out.println(searchType + "," + email + ","+ memberId);
+//		System.out.println(searchType + "," + email + ","+ memberId);
 		
 		Member3 m = new Member3();
 		switch(searchType) {
@@ -38,7 +38,7 @@ public class FindPwEndServlet extends HttpServlet {
 		}
 		
 		Member3 result=new MemberService().selectMemberByIdAndEmail(m);
-		System.out.println("Query result: " + result);
+//		System.out.println("Query result: " + result);
 
         response.setContentType("application/json");
         response.getWriter().write("{\"exists\": " + (result != null) + "}");

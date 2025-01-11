@@ -56,12 +56,10 @@ public class ToTeacherServlet extends HttpServlet {
             
             List<Member3> teachers = new MemberService().selectAllTeachers(params);
 
-            System.out.println("hello"+teachers);
-            
 			// 전체 데이터 수
 			int totalData = new MemberService().getTotalTeacherCount(teacherSubject); // 전체 데이터 수를 DB에서 직접 조회
 			// teachers.size()를 사용하면 현재 페이지의 데이터 수만 세게 됨
-			System.out.println(totalData+","+teachers.size());
+			System.out.println("데이터 수: " +totalData+","+teachers.size());
 			// 전체 페이지 수 계산
 			int totalPage = (int) Math.ceil((double) totalData / numPerPage);
 

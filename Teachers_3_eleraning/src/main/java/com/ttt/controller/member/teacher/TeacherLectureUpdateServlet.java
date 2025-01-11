@@ -95,8 +95,8 @@ public class TeacherLectureUpdateServlet extends HttpServlet {
 						.build();
 			}
             
-            System.out.println("강의 업데이트를 위해 받아온 강의: "+lecture);
-            System.out.println("강의 업데이트를 위해 받아온 스케줄: "+event);
+            System.out.println("강의 업데이트를 위해 받아온 강의: ");
+            System.out.println("강의 업데이트를 위해 받아온 스케줄: ");
             
             // 6. 서비스 호출하여 수정
             int result = new LectureService().updateLectureWithSchedule(lecture, event);

@@ -73,7 +73,7 @@ public class EnrollFormSubmitServlet extends HttpServlet {
 		String msg, loc="/";
 		
 		try {
-			System.out.println("디비저장시작 m : "+m.toString());
+			System.out.println("디비저장시작");
 			int result = new MemberService().insertMember(m);
 			msg="회원가입에 성공했습니다!";
 		}catch(Exception e) {

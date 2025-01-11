@@ -128,7 +128,6 @@ public class MemberService {
 	public Member3 selectMemberByIdAndEmail(Member3 m) {
 		SqlSession session=getSession();
 	    Member3 result = dao.selectMemberByIdAndEmail(session, m);
-	    System.out.println("Service layer result: " + result);
 	    return result;
 	}
 	

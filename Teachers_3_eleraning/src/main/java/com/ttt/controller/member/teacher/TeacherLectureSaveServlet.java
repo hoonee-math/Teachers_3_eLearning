@@ -85,8 +85,8 @@ public class TeacherLectureSaveServlet extends HttpServlet {
 				}
 			}
 			
-			System.out.println(lecture);
-			System.out.println(event);
+//			System.out.println(lecture);
+//			System.out.println(event);
 			// 6. 서비스 호출하여 저장
 			int result = lectureService.insertLectureWithSchedule(lecture, event);
 

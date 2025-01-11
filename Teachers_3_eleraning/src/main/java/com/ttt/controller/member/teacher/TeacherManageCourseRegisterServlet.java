@@ -38,7 +38,7 @@ public class TeacherManageCourseRegisterServlet extends HttpServlet {
 	        // 파라미터 로깅
 	        System.out.println("Received parameters:");
 	        request.getParameterMap().forEach((key, value) -> {
-	            System.out.println(key + ": " + Arrays.toString(value));
+//	            System.out.println(key + ": " + Arrays.toString(value));
 	        });
 
 	        // 1. 필수값 검증
@@ -91,7 +91,7 @@ public class TeacherManageCourseRegisterServlet extends HttpServlet {
 	                .build();
 
 	        // 디버깅 로그
-	        System.out.println("Creating course: " + course);
+//	        System.out.println("Creating course: " + course);
 
 	        // 6. 서비스 호출
 	        int result = new CourseService().insertNewCourse(course);

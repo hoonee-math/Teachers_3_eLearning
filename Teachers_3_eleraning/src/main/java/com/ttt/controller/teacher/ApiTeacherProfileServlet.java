@@ -29,7 +29,7 @@ public class ApiTeacherProfileServlet extends HttpServlet {
 		
         // memberNo 파라미터 받기
         String memberNo = request.getParameter("memberNo");
-        System.out.println("Requested memberNo: " + memberNo);
+        System.out.println("Requested memberNo: ");
 		
 		// 실제 DB 연동 코드 (추후 구현)
         /*

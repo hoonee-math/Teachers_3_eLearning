@@ -29,7 +29,7 @@ public class TeacherManageCourseServlet extends HttpServlet {
 		int numPerPage = 10; // 기본값
 		String status = request.getParameter("status"); // status 유형에 따른 totalData 계산
 	    if(status == null) status = "all"; // 기본값
-	    System.out.println(status);
+//	    System.out.println(status);
 		
 		try { cpage = Integer.parseInt(request.getParameter("cpage"));
 		} catch (NumberFormatException e) {}

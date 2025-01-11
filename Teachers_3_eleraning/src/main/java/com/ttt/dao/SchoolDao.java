@@ -11,7 +11,6 @@ import com.ttt.dto.School12;
 public class SchoolDao {
 	
 	public List<School12> selectNameAndCode(SqlSession session, Map<String,Object> inputSchoolInfo){
-		System.out.println(inputSchoolInfo);
 		return session.selectList("school.selectNameAndCode",inputSchoolInfo);
 	}
 	
