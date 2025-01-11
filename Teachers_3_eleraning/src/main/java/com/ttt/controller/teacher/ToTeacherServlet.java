@@ -42,7 +42,8 @@ public class ToTeacherServlet extends HttpServlet {
             int i=0;
             for(Member3 m : allTeachers) {
             	++i;
-            	System.out.println("image renamed[i]: "+m.getImage());
+            	System.out.println("memberName: "+m.getMemberName());
+            	System.out.println("image renamed[i]: "+m.getImage().getRenamed());
             }
             request.setAttribute("teachers", allTeachers);
             request.setAttribute("subjectData", subjectData);
