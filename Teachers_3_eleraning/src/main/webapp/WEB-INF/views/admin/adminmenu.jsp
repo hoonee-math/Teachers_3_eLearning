@@ -96,6 +96,21 @@
 								<a href="${path}/admin/board">게시판 관리하기</a>
 							</div>
 						</div>
+						<!-- 게시판 관리 카드 -->
+						<div class="mypage-card">
+							<h3>사이트 관리</h3>
+							<div>
+								<i class="bi bi-gear-wide-connected"
+									style="font-size: 10rem; color: #FAB350;"></i>
+							</div>
+							<div>
+								<p>홈페이지 정보를</p>
+								<p>관리할 수 있습니다.</p>
+							</div>
+							<div>
+								<a href="${path}/admin/manage/site">게시판 관리하기</a>
+							</div>
+						</div>
 					</div>
 				</section>
 			</div>

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.ttt.dto.Member3;
 
-@WebFilter("/member/admin/*")
+@WebFilter("/admin/*")
 public class AdminCheckFilter extends HttpFilter implements Filter {
        
     public AdminCheckFilter() {

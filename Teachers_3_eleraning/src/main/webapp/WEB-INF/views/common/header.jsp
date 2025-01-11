@@ -93,7 +93,7 @@
 					
 				    <c:if test="${not empty loginMember}">
 						<c:if test="${sessionScope.loginMember.memberType == 0}">
-							<a href="${path}/member/admin/menu">관리자페이지</a>
+							<a href="${path}/admin/menu">관리자페이지</a>
 						</c:if>
 						<c:if test="${sessionScope.loginMember.memberType == 1}">
 							<a href="${path}/member/student/mypage/menu">마이페이지</a>
