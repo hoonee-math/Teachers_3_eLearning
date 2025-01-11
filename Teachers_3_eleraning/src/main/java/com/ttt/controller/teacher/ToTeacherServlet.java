@@ -95,7 +95,7 @@ public class ToTeacherServlet extends HttpServlet {
             e.printStackTrace();
         }
         
-        request.getRequestDispatcher("/WEB-INF/views/teacher/teacherListAndDetail.jsp")
+        request.getRequestDispatcher("/WEB-INF/views/teacher/teacherList.jsp")
                .forward(request, response);
 	}
 

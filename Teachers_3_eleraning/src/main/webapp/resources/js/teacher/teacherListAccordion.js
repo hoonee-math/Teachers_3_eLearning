@@ -63,7 +63,7 @@ function updateTeacherList(teachers) {
 	$teacherList.empty();
 
 	teachers.forEach(teacher => {
-		const imageUrl = teacher.image?.renamed
+		const imageUrl = (teacher.image && teacher.image.renamed)
 			? `${path}/resources/images/profile/${teacher.image.renamed}`
 			: `${path}/resources/images/profile/default.png`;
 

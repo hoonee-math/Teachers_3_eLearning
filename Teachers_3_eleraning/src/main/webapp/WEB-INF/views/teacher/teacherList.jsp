@@ -11,7 +11,7 @@
 <head>
 <jsp:include page="/WEB-INF/views/common/head.jsp" />
 <title>선생님 | Honey T</title>
-<link rel="stylesheet" href="${path}/resources/css/pages/teacherListAndDetail.css">
+<link rel="stylesheet" href="${path}/resources/css/teacher/teacherList.css">
 <link rel="stylesheet" href="${path}/resources/css/pages/courseList.css">
 <link rel="stylesheet" href="${path}/resources/css/teacher/teacherBoardCommon.css">
 
@@ -121,7 +121,7 @@
 	</div>
 
 	<jsp:include page="/WEB-INF/views/common/scripts.jsp" />
-<script src="${path}/resources/js/teacher/teacherListAndDetailAccordion.js"></script>
+<script src="${path}/resources/js/teacher/teacherListAccordion.js"></script>
 <script src="${path}/resources/js/api/teacherApi.js"></script>
 <script src="${path}/resources/js/teacher/teacherBoard.js"></script>
 
