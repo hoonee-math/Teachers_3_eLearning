@@ -169,6 +169,7 @@ function updateLecture(lectureItem) {
 		eventEnd: date && endTime ? combineDateTime(date, endTime) : null,
 		videoUrl: lectureItem.querySelector('.video-url').value || null
 	};
+	console.log(lectureData)
 
 	fetch(`${path}/member/teacher/mypage/lecture/update`, {
 		method: 'POST',

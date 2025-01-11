@@ -67,4 +67,9 @@ public class LectureDao {
 	public List<Map<String, Object>> selectEventsByGrade(SqlSession session, Map<String, Object> params) {
 		return session.selectList("lecture.selectEventsByGrade"); 
 	}
+	// 일정 존재 여부 확인
+	public boolean checkScheduleEventExists(SqlSession session, int lectureNo) {
+		int result=session.selectOne("lecture.checkScheduleEventExists", lectureNo);
+	    return  result > 0;
+	}
 }

@@ -104,7 +104,7 @@
 					<c:if test="${not empty lectures}">
 						<div id="existingLectureList">
 						<c:forEach items="${lectures}" var="lecture">
-							<div class="lecture-item" data-lecture-no="${lecture.lectureNo}">
+							<div class="lecture-item" data-lecture-no="${lecture.lectureNo}" data-index="${lecture.lectureOrder}">
 								<div class="lecture-header">
 									<h4>${lecture.lectureOrder}차시</h4>
 									<div class="lecture-actions">

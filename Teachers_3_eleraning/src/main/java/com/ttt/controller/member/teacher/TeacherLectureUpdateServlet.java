@@ -24,11 +24,11 @@ import com.ttt.service.LectureService;
 @WebServlet("/member/teacher/mypage/lecture/update")
 public class TeacherLectureUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-	
-    public TeacherLectureUpdateServlet() {
-        super();
-    }
+	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+	public TeacherLectureUpdateServlet() {
+		super();
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
@@ -64,25 +64,39 @@ public class TeacherLectureUpdateServlet extends HttpServlet {
                     .lectureOrder(lectureOrder)
                     .build();
             
-            // 5. ScheduleEvent3 객체 생성 (있는 경우)
-            ScheduleEvent3 event = null;
-            String eventStart = (String)data.get("eventStart");
-            String eventEnd = (String)data.get("eventEnd");
+			// 5. 데이터 파싱 및 검증
+			LocalDateTime parsedStart = null;
+			LocalDateTime parsedEnd = null;
+			String videoUrl = (String) data.get("videoUrl");
+
+			// 날짜 파싱
+			try {
+				String eventStart = (String) data.get("eventStart");
+				String eventEnd = (String) data.get("eventEnd");
+
+				if (eventStart != null && !eventStart.trim().isEmpty() && eventEnd != null
+						&& !eventEnd.trim().isEmpty()) {
+					parsedStart = LocalDateTime.parse(eventStart.trim(), formatter);
+					parsedEnd = LocalDateTime.parse(eventEnd.trim(), formatter);
+				}
+			} catch (DateTimeParseException e) {
+				throw new Exception("날짜 형식이 올바르지 않습니다.");
+			}
+
+			// 6. ScheduleEvent3 객체 생성 (일정이나 영상 URL이 있는 경우에만)
+			ScheduleEvent3 event = null;
+			if (parsedStart != null || (videoUrl != null && !videoUrl.trim().isEmpty())) {
+				event = ScheduleEvent3.builder()
+						.lectureNo(lectureNo)
+						.eventTitle(lectureTitle)
+						.eventStart(parsedStart)
+						.eventEnd(parsedEnd)
+						.videoUrl(videoUrl)
+						.build();
+			}
             
-            if (eventStart != null && eventEnd != null 
-                && !eventStart.trim().isEmpty() && !eventEnd.trim().isEmpty()) {
-                try {
-                    event = ScheduleEvent3.builder()
-                            .lectureNo(lectureNo)
-                            .eventTitle(lectureTitle)
-                            .eventStart(LocalDateTime.parse(eventStart.trim(), formatter))
-                            .eventEnd(LocalDateTime.parse(eventEnd.trim(), formatter))
-                            .videoUrl((String)data.get("videoUrl"))
-                            .build();
-                } catch (DateTimeParseException e) {
-                    throw new Exception("날짜 형식이 올바르지 않습니다.");
-                }
-            }
+            System.out.println("강의 업데이트를 위해 받아온 강의: "+lecture);
+            System.out.println("강의 업데이트를 위해 받아온 스케줄: "+event);
             
             // 6. 서비스 호출하여 수정
             int result = new LectureService().updateLectureWithSchedule(lecture, event);

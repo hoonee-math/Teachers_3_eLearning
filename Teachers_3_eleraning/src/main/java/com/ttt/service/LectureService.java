@@ -86,15 +86,28 @@ public class LectureService {
 		SqlSession session = getSession();
 		int result = 0;
 		try {
+	        // 1. 강의 정보 수정
 			result = dao.updateLecture(session, lecture);
-			if(result > 0 && event != null) {
-				result = dao.updateScheduleEvent(session, event);
-				if(result > 0) {
-					session.commit();
-				} else {
-					session.rollback();
-				}
-			}
+	        if(result <= 0) {
+	            throw new RuntimeException("강의 수정 실패");
+	        }
+
+	        // 2. 일정 처리
+	        boolean hasExistingEvent = dao.checkScheduleEventExists(session, lecture.getLectureNo());
+	        
+	        if (event != null) { // 새로운 일정이 있는 경우
+	            if (hasExistingEvent) {
+	                // 기존 일정 있으면 업데이트
+	                result = dao.updateScheduleEvent(session, event);
+	            } else {
+	                // 기존 일정 없으면 새로 등록
+	                result = dao.insertScheduleEvent(session, event);
+	            }
+	            if(result <= 0) {
+	                throw new RuntimeException("일정 처리 실패");
+	            }
+	        }
+	        
 		} catch(Exception e) {
 			session.rollback();
 			throw e;

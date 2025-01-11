@@ -222,4 +222,10 @@
 	    ORDER BY 
 	        SE.EVENT_START
 	</select>
+	
+	<!-- 강의 번호로 일정 존재 여부 확인 -->
+	<select id="checkScheduleEventExists" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM SCHEDULE_EVENT3 WHERE LECTURE_NO = #{lectureNo}
+	</select>
+	
 </mapper>
