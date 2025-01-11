@@ -51,21 +51,37 @@ public class ToTeacherServlet extends HttpServlet {
 			params.put("end", end);
 			params.put("teacherSubject", teacherSubject); // null이면 전체 조회
             
-            List<Member3> allTeachers = new MemberService().selectAllTeachers(params);
-            int totalCount = new MemberService().getTotalTeacherCount(teacherSubject);
-            
-            
+            List<Member3> teachers = new MemberService().selectAllTeachers(params);
+
+			// 전체 데이터 수
+			int totalData = teachers.size();
+
+			// 전체 페이지 수 계산
+			int totalPage = (int) Math.ceil((double) totalData / numPerPage);
+
+			// 페이지 바 사이즈
+			int pageBarSize = 5;
+
+			// 페이지 바 시작 번호
+			int pageStart = (((cpage - 1) / pageBarSize) * pageBarSize) + 1;
+
+			// 페이지 바 종료 번호
+			int pageEnd = pageStart + pageBarSize - 1;
+			if (pageEnd > totalPage) {
+				pageEnd = totalPage;
+			}
             
             // 과목 목록
             List<String> subjectData = new MemberService().selectSubjects();
-            int i=0;
-            for(Member3 m : allTeachers) {
-            	++i;
-            	System.out.println("memberName: "+m.getMemberName());
-            	System.out.println("image renamed[i]: "+m.getImage().getRenamed());
-            }
-            //request.setAttribute("teachers", allTeachers);
-            //request.setAttribute("subjectData", subjectData);
+
+            // request에 데이터 저장
+            request.setAttribute("teachers", teachers);
+            request.setAttribute("subjectData", subjectData);
+            request.setAttribute("pageStart", pageStart);
+            request.setAttribute("pageEnd", pageEnd);
+            request.setAttribute("totalPage", totalPage);
+            request.setAttribute("cpage", cpage);
+            request.setAttribute("selectedSubject", teacherSubject);
             
         } catch(Exception e) {
             e.printStackTrace();
