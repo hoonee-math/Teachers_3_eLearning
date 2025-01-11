@@ -54,23 +54,31 @@ public class LectureService {
 		SqlSession session = getSession();
 		int result = 0;
 		try {
+	        // 1. 강의 등록
 			result = dao.insertLecture(session, lecture);
-			if(result > 0 && event != null) {
+			if (result <= 0) {
+				throw new RuntimeException("강의 등록 실패");
+			}
+			
+	        // 2. 일정이 있는 경우 일정 등록
+			if (event != null) {
 				event.setLectureNo(lecture.getLectureNo()); // 생성된 lectureNo 설정
 				result = dao.insertScheduleEvent(session, event);
-				if(result > 0) {
-					session.commit();
-				} else {
-					session.rollback();
+				if (result <= 0) {
+					throw new RuntimeException("스케줄 등록 중 일정 등록 실패");
 				}
 			}
+
+			// 3. 모든 작업이 성공적으로 완료되면 커밋
+			session.commit();
+			return result;
+			
 		} catch(Exception e) {
 			session.rollback();
 			throw e;
 		} finally {
 			session.close();
 		}
-		return result;
 	}
 	
 	// 강의 수정 (일정 포함)
