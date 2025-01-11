@@ -1,33 +1,6 @@
 /**
- * 
+ * 메가 메뉴에 선생님, 강좌 리스트를 출력해주는 script
  */
-// 더미 교사 데이터
-/*const teacherData = {
-	'국어': [
-		{name: '최영주', id: 1},
-		{name: '김현아', id: 2, badge: 'HOT'},
-		{name: '손경화', id: 3, badge: 'NEW'}
-	],
-	'수학': [
-		{name: '박정은', id: 4},
-		{name: '윤송실', id: 5, badge: 'HOT'},
-		{name: '김승겸', id: 6}
-	]
-};
-
-// 더미 강좌 데이터
-const courseData = {
-	'국어': [
-		{name: '문학 기초', id: 1},
-		{name: '독서 심화', id: 2},
-		{name: '화법과 작문', id: 3, badge: 'NEW'}
-	],
-	'수학': [
-		{name: '수1 개념완성', id: 4},
-		{name: '수2 문제풀이', id: 5},
-		{name: '확률과 통계', id: 6, badge: 'HOT'}
-	]
-};*/
 
 // subNav 업데이트 함수
 function updateSubNav(grade) {
@@ -52,12 +25,11 @@ function updateTeacherMegaMenu() {
 			return;
 		}
 
-	// 과목별로 교사 데이터 그룹화
-	const teachersBySubject = teachers.reduce(
+		// 과목별로 교사 데이터 그룹화
+		const teachersBySubject = teachers.reduce(
 		// reduce() 메서드의 첫번째 콜백 함수 파라미터 : (acc, teacher) => { ... }
 		// acc: 누적값 (accumulator), teacher: 현재 처리중인 배열 요소
 		(acc, teacher) => { 
-			
 			const subject = teacher.teacherSubjectName;
 			if (!acc[subject]) {
 				acc[subject] = [];
@@ -68,6 +40,11 @@ function updateTeacherMegaMenu() {
 		// reduce() 메서드의 두번째 파라미터 : 초기값 (여기서는 빈 객체 {})
 		{}
 	);
+	
+	// 전역으로 데이터 공유
+	window.teachersBySubject = teachersBySubject;
+	
+	// 메가메뉴 HTML 생성
 	const menuHTML = subjects.map(subject => {
 	        const subjectTeachers = teachersBySubject[subject] || [];
 	        return `
@@ -107,3 +84,53 @@ function updateCourseMegaMenu() {
 	$('#courseMegaMenuContent').html(menuHTML);
 }
 
+
+const TeacherDataManager = {
+    // 버전 관리를 위한 해시 생성
+    generateHash(data) {
+        return data.map(t => `${t.memberNo}-${t.teacherSubject}`).sort().join('|');
+    },
+
+    // 로컬 스토리지에 데이터 저장
+    saveToStorage(teachers) {
+        const hash = this.generateHash(teachers);
+        const data = {
+            timestamp: new Date().getTime(),
+            hash: hash,
+            teachers: teachers
+        };
+        localStorage.setItem('teacherData', JSON.stringify(data));
+    },
+
+    // 데이터가 유효한지 확인
+    isDataValid(serverHash) {
+        try {
+            const stored = JSON.parse(localStorage.getItem('teacherData'));
+            if (!stored) return false;
+
+            // 24시간 이상 지났거나 해시가 다르면 무효
+            const isExpired = (new Date().getTime() - stored.timestamp) > 24 * 60 * 60 * 1000;
+            const hashChanged = stored.hash !== serverHash;
+
+            return !isExpired && !hashChanged;
+        } catch (e) {
+            return false;
+        }
+    },
+
+    // 데이터 로드
+    async loadTeachers() {
+        // 서버에서 현재 해시값만 먼저 받아옴
+        const serverHash = await this.getServerHash();
+        
+        if (this.isDataValid(serverHash)) {
+            const stored = JSON.parse(localStorage.getItem('teacherData'));
+            return stored.teachers;
+        }
+
+        // 유효하지 않으면 전체 데이터 다시 로드
+        const teachers = megaMenuTeachers; // 서버에서 새로 받아온 데이터
+        this.saveToStorage(teachers);
+        return teachers;
+    }
+};
