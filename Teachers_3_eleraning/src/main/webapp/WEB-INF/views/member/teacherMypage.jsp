@@ -92,7 +92,6 @@
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <!-- API/Ajax 관련 JavaScript -->
-<script src="${path}/resources/js/api/teacherApi.js"></script>
 
 </body>
 

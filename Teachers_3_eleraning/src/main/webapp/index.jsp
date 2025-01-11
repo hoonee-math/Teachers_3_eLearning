@@ -302,8 +302,6 @@ section {
 	<jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 	<!-- 페이지별 JavaScript -->
 	<!-- 6-2. API/Ajax 관련 JavaScript -->
-	<script src="${path}/resources/js/api/teacherApi.js"></script>
-	<script src="${path}/resources/js/api/calendarApi.js"></script>
 	<!-- 6-3. 컴포넌트 JavaScript -->
 	<script src="${path}/resources/js/components/dDay.js"></script>
 	<!-- 6-4. 페이지별 JavaScript -->

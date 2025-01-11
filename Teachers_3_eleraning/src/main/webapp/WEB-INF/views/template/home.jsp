@@ -77,9 +77,6 @@
 <script src="${path}/resources/js/common/utils.js"></script>
 
 <!-- 9. API/Ajax 관련 JavaScript -->
-<script src="${path}/resources/js/api/apiConfig.js"></script>
-<script src="${path}/resources/js/api/teacherApi.js"></script>
-<script src="${path}/resources/js/api/courseApi.js"></script>
 
 <!-- 10. 컴포넌트 JavaScript -->
 <script src="${path}/resources/js/components/modal.js"></script>
