@@ -16,6 +16,6 @@
     const path = '${pageContext.request.contextPath}';
 </script>
 <script src="${path}/resources/js/components/modal.js"></script>
-<script src="${path}/resources/js/common/headerBanner.js"></script>
+<%-- <script src="${path}/resources/js/common/headerBanner.js"></script> --%>
 <script src="${path}/resources/js/common/headerMenu.js"></script>
 <script src="${path}/resources/js/common/headerMegaMenu.js"></script>
