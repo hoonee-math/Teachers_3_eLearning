@@ -112,7 +112,7 @@
 					LEFT JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
 					LEFT JOIN IMAGE3 I ON T.IMG_NO = I.IMG_NO
 				WHERE M.MEMBER_TYPE = 2
-	            <if test="teacherSubjectName != null and teacherSubjectName != 'all'">
+	            <if test="teacherSubject != null and teacherSubject != 'all'">
 					AND S.TEACHER_SUBJECT = #{teacherSubject}
 				</if>
 				ORDER BY M.MEMBER_NO

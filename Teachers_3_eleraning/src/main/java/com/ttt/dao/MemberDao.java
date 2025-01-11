@@ -70,7 +70,7 @@ public class MemberDao {
 		return session.selectList("member.selectSubjects");
 	}
 	public List<Member3> selectAllTeachers(SqlSession session, Map<String, Object> params){
-		return session.selectList("member.selectAllTeachers");
+		return session.selectList("member.selectAllTeachers",params);
 	}
 	public List<Member3> selectAllTeachersOnMegaMenu(SqlSession session){
  		return session.selectList("member.selectAllTeachersOnMegaMenu");

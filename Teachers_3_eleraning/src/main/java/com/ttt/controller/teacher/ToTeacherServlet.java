@@ -44,6 +44,9 @@ public class ToTeacherServlet extends HttpServlet {
             // 과목 파라미터 처리 - 초기값을 'all'로 설정
             String teacherSubject = request.getParameter("subject");
             // subject 파라미터가 없으면 전체 교사를 보여줌
+            if(teacherSubject==null) {
+            	teacherSubject="all";
+            }
             
 			// 데이터 조회를 위한 파라미터 맵 생성
 			Map<String, Object> params = new HashMap<>();
@@ -53,8 +56,11 @@ public class ToTeacherServlet extends HttpServlet {
             
             List<Member3> teachers = new MemberService().selectAllTeachers(params);
 
+            System.out.println("hello"+teachers);
+            
 			// 전체 데이터 수
-			int totalData = teachers.size();
+			int totalData = new MemberService().getTotalTeacherCount(teacherSubject); // 전체 데이터 수를 DB에서 직접 조회
+			// teachers.size()를 사용하면 현재 페이지의 데이터 수만 세게 됨
 
 			// 전체 페이지 수 계산
 			int totalPage = (int) Math.ceil((double) totalData / numPerPage);
