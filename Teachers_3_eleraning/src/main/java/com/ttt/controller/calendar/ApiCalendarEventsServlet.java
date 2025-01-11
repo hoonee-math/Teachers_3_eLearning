@@ -21,19 +21,19 @@ import com.ttt.service.LectureService;
 @WebServlet("/api/calendar/events")
 public class ApiCalendarEventsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private LectureService lectureService = new LectureService();
-    private CourseService courseService = new CourseService();
-    private Gson gson = new Gson();
-       
-    public ApiCalendarEventsServlet() {
-        super();
-    }
+	private LectureService lectureService = new LectureService();
+	private CourseService courseService = new CourseService();
+	private Gson gson = new Gson();
+	   
+	public ApiCalendarEventsServlet() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-            // 파라미터 받기
-            int grade = Integer.parseInt(request.getParameter("grade"));
-            
+			// 파라미터 받기
+			int grade = Integer.parseInt(request.getParameter("grade"));
+			
 			// 응답 데이터 준비
 			Map<String, Object> responseData = new HashMap<>();
 			responseData.put("grade", grade);
@@ -41,7 +41,7 @@ public class ApiCalendarEventsServlet extends HttpServlet {
 			// 1. 해당 학년의 전체 강의 일정 조회
 			List<Map<String, Object>> events = lectureService.selectEventsByGrade(responseData);
 			responseData.put("events", events);
-            
+			
 			// 2. 로그인한 경우 수강 중인 강좌 번호 목록 추가
 			HttpSession session = request.getSession();
 			Member3 loginMember = (Member3) session.getAttribute("loginMember");
