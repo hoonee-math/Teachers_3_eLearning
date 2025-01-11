@@ -128,8 +128,8 @@
 			LEFT JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
 			LEFT JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
 		WHERE M.MEMBER_TYPE = 2
-	    <if test="value != null and value != 'all'">
-			AND S.TEACHER_SUBJECT = #{value}
+	    <if test="teacherSubject != null and teacherSubject != 'all'">
+			AND S.TEACHER_SUBJECT = #{teacherSubject}
 		</if>
 	</select>
 	

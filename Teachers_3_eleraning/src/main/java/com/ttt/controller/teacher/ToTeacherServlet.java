@@ -35,7 +35,7 @@ public class ToTeacherServlet extends HttpServlet {
 				cpage = Integer.parseInt(request.getParameter("cpage"));
 			} catch (NumberFormatException e) { }
 
-			int numPerPage = 2; // 한 페이지당 데이터 수
+			int numPerPage = 5; // 한 페이지당 데이터 수
 
 			// 현재 페이지에 해당하는 데이터만 추출
 			int start = (cpage - 1) * numPerPage;
@@ -61,7 +61,7 @@ public class ToTeacherServlet extends HttpServlet {
 			// 전체 데이터 수
 			int totalData = new MemberService().getTotalTeacherCount(teacherSubject); // 전체 데이터 수를 DB에서 직접 조회
 			// teachers.size()를 사용하면 현재 페이지의 데이터 수만 세게 됨
-
+			System.out.println(totalData+","+teachers.size());
 			// 전체 페이지 수 계산
 			int totalPage = (int) Math.ceil((double) totalData / numPerPage);
 
@@ -80,6 +80,8 @@ public class ToTeacherServlet extends HttpServlet {
             // 과목 목록
             List<String> subjectData = new MemberService().selectSubjects();
 
+            System.out.println(pageStart+","+pageEnd+","+totalPage+","+cpage+","+teacherSubject);
+            
             // request에 데이터 저장
             request.setAttribute("teachers", teachers);
             request.setAttribute("subjectData", subjectData);
