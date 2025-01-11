@@ -75,7 +75,6 @@
 
 	<!-- 8. 공통 JavaScript -->
 	<!-- 9. API/Ajax 관련 JavaScript -->
-	<script src="$${path}/resources/js/api/teacherApi.js"></script>
 
 	<!-- 10. 컴포넌트 JavaScript -->
 	<script src="$${path}/resources/js/components/modal.js"></script>
