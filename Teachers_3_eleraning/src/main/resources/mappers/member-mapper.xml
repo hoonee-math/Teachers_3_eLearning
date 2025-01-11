@@ -96,7 +96,7 @@
 			I.IMG_NO, I.RENAMED
 		FROM MEMBER3 M
 		LEFT JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
-		LEFT JOIN IMAGE3 I ON T.IMAGE_NO = I.IMG_NO
+		LEFT JOIN IMAGE3 I ON T.IMG_NO = I.IMG_NO
 		WHERE M.MEMBER_ID=#{memberId}
 	</select>
 	<!-- teacherListAndDetail 페이지의 리스트에 교사 출력용 -->
@@ -105,7 +105,7 @@
 		FROM MEMBER3 M
 		JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
 		JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
-		JOIN IMAGE3 I ON M.MEMBER_NO = I.MEMBER_NO
+		JOIN IMAGE3 I ON T.IMG_NO = I.IMG_NO
 		ORDER BY M.MEMBER_NO
 	</select>
 	<select id="selectTeachersBySubject" parameterType="map" resultMap="memberMap">
@@ -159,7 +159,7 @@
 	<update id="updateTeacher" parameterType="member3">
 		UPDATE TEACHERS3 SET
 			TEACHER_INFO_TITLE=#{teacherInfoTitle},
-			TEACHER_INFO_CONTENT=#{teacherInfoContent}, IMAGE_NO=#{image.imgNo}
+			TEACHER_INFO_CONTENT=#{teacherInfoContent}, IMG_NO=#{image.imgNo}
 		WHERE MEMBER_NO=#{memberNo}
 	</update>
 	
