@@ -49,24 +49,22 @@ public class MemberService {
 	}
 	
 	/* teacherListAndDetail 페이지의 리스트에 교사 출력용 */
-	public List<Member3> selectAllTeachers(){
-		SqlSession session=getSession();
+	public List<Member3> selectAllTeachers(Map<String, Object> params) {
+		SqlSession session = getSession();
 		try {
-	        session = getSession();
-	        return dao.selectAllTeachers(session);
+			return dao.selectAllTeachers(session, params);
 		} finally {
-	        if(session != null) {
-	            session.close();
-	        }
-	    }
+			session.close();
+		}
 	}
-	public List<Member3> selectTeachersBySubject(Map<String, Object> param){
-		SqlSession session=getSession();
-		return dao.selectTeachersBySubject(session, param);
-	}
-	public int selectTeachersCount(Map<String, Object> param){
-		SqlSession session=getSession();
-		return dao.selectTeachersCount(session, param);
+
+	public int getTotalTeacherCount(String teacherSubject) {
+		SqlSession session = getSession();
+		try {
+			return dao.getTotalTeacherCount(session, teacherSubject);
+		} finally {
+			session.close();
+		}
 	}
 	
 	/* 학생의 회원 정보 수정 서비스*/
@@ -115,12 +113,15 @@ public class MemberService {
 	}
 	
 	//비밀번호 찾기 
-		public Member3 selectMemberByIdAndEmail(Member3 m) {
-			SqlSession session=getSession();
-		    Member3 result = dao.selectMemberByIdAndEmail(session, m);
-		    System.out.println("Service layer result: " + result);
-		    return result;
-		}
+	public Member3 selectMemberByIdAndEmail(Member3 m) {
+		SqlSession session=getSession();
+	    Member3 result = dao.selectMemberByIdAndEmail(session, m);
+	    System.out.println("Service layer result: " + result);
+	    return result;
+	}
+	
+	
+	
 	
 }
 	

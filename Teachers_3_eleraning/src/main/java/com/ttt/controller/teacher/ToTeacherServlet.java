@@ -40,14 +40,21 @@ public class ToTeacherServlet extends HttpServlet {
 			// 현재 페이지에 해당하는 데이터만 추출
 			int start = (cpage - 1) * numPerPage;
 			int end = start + numPerPage;
-    		
-            String teacherSubjectName = request.getParameter("subject");
-            if (teacherSubjectName==null) {
-            	teacherSubjectName="국어";
-            }
+
+            // 과목 파라미터 처리 - 초기값을 'all'로 설정
+            String teacherSubject = request.getParameter("subject");
+            // subject 파라미터가 없으면 전체 교사를 보여줌
             
-            List<Member3> allTeachers = new MemberService().selectAllTeachers();
-            //System.out.println("선생님 목록"+ allTeachers.toString());
+			// 데이터 조회를 위한 파라미터 맵 생성
+			Map<String, Object> params = new HashMap<>();
+			params.put("start", start);
+			params.put("end", end);
+			params.put("teacherSubject", teacherSubject); // null이면 전체 조회
+            
+            List<Member3> allTeachers = new MemberService().selectAllTeachers(params);
+            int totalCount = new MemberService().getTotalTeacherCount(teacherSubject);
+            
+            
             
             // 과목 목록
             List<String> subjectData = new MemberService().selectSubjects();

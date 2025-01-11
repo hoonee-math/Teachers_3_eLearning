@@ -63,16 +63,13 @@ public class MemberDao {
 	
 	
 	/* teacherListAndDetail 페이지의 리스트에 교사 출력용 */
-	public List<Member3> selectTeachersBySubject(SqlSession session, Map<String, Object> param){
-		return session.selectList("member.selectTeachersBySubject", param);
-	}
-	public int selectTeachersCount(SqlSession session, Map<String, Object> param){
-		return session.selectOne("member.selectTeachersCount", param);
+	public int getTotalTeacherCount(SqlSession session, String teacherSubject){
+		return session.selectOne("member.getTotalTeacherCount", teacherSubject);
 	}
 	public List<String> selectSubjects(SqlSession session){
 		return session.selectList("member.selectSubjects");
 	}
-	public List<Member3> selectAllTeachers(SqlSession session){
+	public List<Member3> selectAllTeachers(SqlSession session, Map<String, Object> params){
 		return session.selectList("member.selectAllTeachers");
 	}
 	
