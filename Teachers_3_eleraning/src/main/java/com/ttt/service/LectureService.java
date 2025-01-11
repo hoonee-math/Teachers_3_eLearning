@@ -107,6 +107,7 @@ public class LectureService {
 	                throw new RuntimeException("일정 처리 실패");
 	            }
 	        }
+	        session.commit();
 	        
 		} catch(Exception e) {
 			session.rollback();
