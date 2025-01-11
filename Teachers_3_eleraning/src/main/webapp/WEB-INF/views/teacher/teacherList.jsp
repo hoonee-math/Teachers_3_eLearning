@@ -12,8 +12,9 @@
 <jsp:include page="/WEB-INF/views/common/head.jsp" />
 <title>선생님 | Honey T</title>
 <link rel="stylesheet" href="${path}/resources/css/teacher/teacherList.css">
-<link rel="stylesheet" href="${path}/resources/css/pages/courseList.css">
 <link rel="stylesheet" href="${path}/resources/css/teacher/teacherBoardCommon.css">
+<link rel="stylesheet" href="${path}/resources/css/pages/courseList.css">
+<link rel="stylesheet" href="${path}/resources/css/course/courseListBySubject.css">
 
 </head>
 <body>
