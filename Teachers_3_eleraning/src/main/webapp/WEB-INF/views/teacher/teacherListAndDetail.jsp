@@ -150,7 +150,25 @@
     	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
 
-<jsp:include page="/WEB-INF/views/common/scripts.jsp" />
+	<script>
+    // 페이지 로드 시 선생님 데이터를 전역 변수로 설정
+    const teachersData = [
+        <c:forEach items="${teachers}" var="teacher" varStatus="status">
+            {
+                memberNo: "${teacher.memberNo}",
+                memberName: "${teacher.memberName}",
+                teacherSubject: "${teacher.teacherSubject}",
+                teacherSubjectName: "${teacher.teacherSubjectName}",
+                teacherInfoTitle: "${teacher.teacherInfoTitle}",
+                teacherInfoContent: "${teacher.teacherInfoContent}",
+                image: {
+                    renamed: "${teacher.image.renamed}"
+                }
+            }<c:if test="${!status.last}">,</c:if>
+        </c:forEach>
+    ];
+</script>
+	<jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <script src="${path}/resources/js/teacher/teacherListAndDetailAccordion.js"></script>
 <script src="${path}/resources/js/api/teacherApi.js"></script>
 <script src="${path}/resources/js/teacher/teacherBoard.js"></script>

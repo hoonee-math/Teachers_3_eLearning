@@ -35,7 +35,7 @@ public class ToTeacherServlet extends HttpServlet {
             }
             
             List<Member3> allTeachers = new MemberService().selectAllTeachers();
-            System.out.println("선생님 목록"+ allTeachers.toString());
+            //System.out.println("선생님 목록"+ allTeachers.toString());
             
             // 과목 목록
             List<String> subjectData = new MemberService().selectSubjects();
@@ -45,8 +45,8 @@ public class ToTeacherServlet extends HttpServlet {
             	System.out.println("memberName: "+m.getMemberName());
             	System.out.println("image renamed[i]: "+m.getImage().getRenamed());
             }
-            request.setAttribute("teachers", allTeachers);
-            request.setAttribute("subjectData", subjectData);
+            //request.setAttribute("teachers", allTeachers);
+            //request.setAttribute("subjectData", subjectData);
             
         } catch(Exception e) {
             e.printStackTrace();
