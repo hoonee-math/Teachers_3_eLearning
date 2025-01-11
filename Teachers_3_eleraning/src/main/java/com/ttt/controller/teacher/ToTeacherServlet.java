@@ -29,9 +29,21 @@ public class ToTeacherServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
     	try {
-            String teacherSubject = request.getParameter("subject");
-            if (teacherSubject==null) {
-            	teacherSubject="국어";
+    		// 페이징 처리를 위한 현재 페이지 정보
+			int cpage = 1;
+			try {
+				cpage = Integer.parseInt(request.getParameter("cpage"));
+			} catch (NumberFormatException e) { }
+
+			int numPerPage = 2; // 한 페이지당 데이터 수
+
+			// 현재 페이지에 해당하는 데이터만 추출
+			int start = (cpage - 1) * numPerPage;
+			int end = start + numPerPage;
+    		
+            String teacherSubjectName = request.getParameter("subject");
+            if (teacherSubjectName==null) {
+            	teacherSubjectName="국어";
             }
             
             List<Member3> allTeachers = new MemberService().selectAllTeachers();
