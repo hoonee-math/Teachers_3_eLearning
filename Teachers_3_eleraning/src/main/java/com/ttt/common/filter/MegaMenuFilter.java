@@ -27,7 +27,7 @@ public class MegaMenuFilter extends HttpFilter implements Filter {
 		try {
         	if (request.getAttribute("megaMenuTeachers") == null) {
 				// 교사 목록과 과목 데이터를 가져옴
-				List<Member3> teachers = new MemberService().selectAllTeachers();
+				List<Member3> teachers = new MemberService().selectAllTeachersOnMegaMenu();
 				request.setAttribute("megaMenuTeachers", teachers);
         	}
 

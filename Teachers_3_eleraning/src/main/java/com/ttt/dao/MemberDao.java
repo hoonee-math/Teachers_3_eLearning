@@ -72,7 +72,9 @@ public class MemberDao {
 	public List<Member3> selectAllTeachers(SqlSession session, Map<String, Object> params){
 		return session.selectList("member.selectAllTeachers");
 	}
-	
+	public List<Member3> selectAllTeachersOnMegaMenu(SqlSession session){
+ 		return session.selectList("member.selectAllTeachersOnMegaMenu");
+ 	}
 	
 	/* 이메일 인증 관련 */
 	public Member3 checkEmailDuplicateByEmail(SqlSession session, Member3 m) {

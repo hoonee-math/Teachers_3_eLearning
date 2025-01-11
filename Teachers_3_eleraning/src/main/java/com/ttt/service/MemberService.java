@@ -57,7 +57,19 @@ public class MemberService {
 			session.close();
 		}
 	}
-
+	
+ 	/* 메가 메뉴용 페이지의 리스트에 교사 출력용 */
+ 	public List<Member3> selectAllTeachersOnMegaMenu(){
+ 		SqlSession session=getSession();
+		try {
+	        return dao.selectAllTeachersOnMegaMenu(session);
+		} finally {
+	        if(session != null) {
+	            session.close();
+	        }
+	    }
+ 	}
+ 	
 	public int getTotalTeacherCount(String teacherSubject) {
 		SqlSession session = getSession();
 		try {

@@ -134,6 +134,27 @@
 									</div>
 								</c:forEach>
 							</div>
+							<!-- 페이징 바 -->
+							<div class="pagination">
+								<c:if test="${pageStart > 1}">
+									<a href="${path}/teacher/list_and_detail?cpage=${pageStart-1}&subject=${selectedSubject}" class="page-arrow">&lt;</a>
+								</c:if>
+								<c:forEach var="i" begin="${pageStart}" end="${pageEnd}">
+									<c:choose>
+										<c:when test="${i == cpage}">
+											<span class="current-page">${i}</span>
+										</c:when>
+										<c:otherwise>
+											<a href="${path}/teacher/list_and_detail?cpage=${i}&subject=${selectedSubject}">${i}</a>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							
+								<c:if test="${pageEnd < totalPage}">
+									<a href="${path}/teacher/list_and_detail?cpage=${pageEnd+1}&subject=${selectedSubject}" 
+									   class="page-arrow">&gt;</a>
+								</c:if>
+							</div>
 							<!-- 데이터 확인용 디버깅 출력 -->
 							<div style="display: none;">
 							    <p>Teachers 데이터: ${teachers}</p>
