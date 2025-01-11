@@ -32,7 +32,8 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 파일 업로드 설정
-		String path = getServletContext().getRealPath("/resources/images/profile/");
+	    String configuredPath = request.getServletContext().getInitParameter("uploadPath");
+		String path = request.getServletContext().getRealPath(configuredPath);
 		int maxSize = 1024*1024*10;
 		String encoding = "UTF-8";
 		
@@ -140,5 +141,4 @@ public class TeacherMyInfoSaveServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		}
 	}
-
 }
