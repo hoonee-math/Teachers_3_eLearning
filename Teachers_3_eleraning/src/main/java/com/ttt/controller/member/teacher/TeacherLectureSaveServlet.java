@@ -84,7 +84,9 @@ public class TeacherLectureSaveServlet extends HttpServlet {
 					throw new Exception("날짜 형식이 올바르지 않습니다.");
 				}
 			}
-
+			
+			System.out.println(lecture);
+			System.out.println(event);
 			// 6. 서비스 호출하여 저장
 			int result = lectureService.insertLectureWithSchedule(lecture, event);
 

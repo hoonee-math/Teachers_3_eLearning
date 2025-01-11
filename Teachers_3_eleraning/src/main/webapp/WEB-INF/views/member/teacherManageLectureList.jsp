@@ -3,7 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-
+<!-- LocalDateTime 포맷팅을 위한 함수 정의 -->
+<%
+  java.time.format.DateTimeFormatter timeFormatter = java.time.format.DateTimeFormatter.ofPattern("HH:mm");
+  request.setAttribute("timeFormatter", timeFormatter);
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -116,8 +120,8 @@
 										<div class="optional-inputs">
 					                        <input type="date" class="lecture-date" value="${lecture.scheduleEvent.eventStart}" readonly>
 					                        <div class="lecture-time-group">
-												<fmt:formatDate value="${lecture.scheduleEvent.eventStart}" pattern="HH:mm" var="startTime"/>
-												<fmt:formatDate value="${lecture.scheduleEvent.eventEnd}" pattern="HH:mm" var="endTime"/>
+												<input type="time" value="${lecture.scheduleEvent.eventStart.format(timeFormatter)}" class="lecture-start-time" readonly>
+												<input type="time" value="${lecture.scheduleEvent.eventEnd.format(timeFormatter)}" class="lecture-end-time" readonly>
 												<input type="time" value="${startTime}" class="lecture-start-time" readonly>
 												<span>~</span>
 												<input type="time" value="${endTime}" class="lecture-end-time" readonly>
@@ -125,12 +129,12 @@
 											<input type="url" class="video-url"  value="${lecture.scheduleEvent.videoUrl}" readonly>
 										</div>
 									</details>
-									</div>
 								</div>
 							</div>
 						</c:forEach>
 						</div>
 					</c:if><!-- /기존 강의 목록 표시 -->
+				</div>
 					
 					
 					 <!-- 새로운 강의 추가 영역 -->
