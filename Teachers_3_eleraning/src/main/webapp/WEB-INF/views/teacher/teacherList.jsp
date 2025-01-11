@@ -122,8 +122,6 @@
 
 	<jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <script src="${path}/resources/js/teacher/teacherListAccordion.js"></script>
-<script src="${path}/resources/js/api/teacherApi.js"></script>
-<script src="${path}/resources/js/teacher/teacherBoard.js"></script>
 
 </body>
 </html>

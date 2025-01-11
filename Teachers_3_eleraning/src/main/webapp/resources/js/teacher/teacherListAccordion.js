@@ -2,7 +2,8 @@
  * 선생님 목록 아코디언 메뉴 및 페이징 처리
  */
 $(document).ready(function() {
-	const teacherListContent = $('.teacher-list-content');
+	// 초기 상태 설정
+	$('.accordion-content').hide();
 
 	// 아코디언 메뉴 기능
 	$('.accordion-header').click(function() {
@@ -20,6 +21,9 @@ $(document).ready(function() {
 			content.slideDown(300);
 			// 선생님 목록 로드
 			loadTeachersBySubject(subject, 1);
+
+			// 오른쪽 섹션 상단 과목 타이틀 업데이트
+			$('.list-title').text(subject + ' 선생님');
 		}
 	});
 
@@ -37,14 +41,12 @@ $(document).ready(function() {
 function loadTeachersBySubject(subject, page) {
 	$.ajax({
 		url: `${path}/teacher/list_and_detail`,
+		method: 'GET',
 		data: {
 			subject: subject,
 			cpage: page
 		},
 		success: function(response) {
-			// 리스트 타이틀 업데이트
-			$('.list-title').text(`${subject} 선생님`);
-
 			// 선생님 카드 리스트 업데이트
 			updateTeacherList(response.teachers);
 
@@ -84,24 +86,28 @@ function updateTeacherList(teachers) {
 }
 
 // 페이징 바 업데이트 함수
-function updatePagination({ pageStart, pageEnd, totalPage, cpage }) {
-	const $pagination = $('.pagination');
-	let html = '';
+function updatePagination(response) {
+	var $pagination = $('.pagination');
+	var pageStart = response.pageStart;
+	var pageEnd = response.pageEnd;
+	var totalPage = response.totalPage;
+	var cpage = response.cpage;
+	var html = '';
 
 	if (pageStart > 1) {
-		html += `<a href="#" class="page-arrow" data-page="${pageStart - 1}">&lt;</a>`;
+		html += '<a href="#" class="page-arrow" data-page="' + (pageStart - 1) + '">&lt;</a>';
 	}
 
-	for (let i = pageStart; i <= pageEnd; i++) {
+	for (var i = pageStart; i <= pageEnd; i++) {
 		if (i === cpage) {
-			html += `<span class="current-page">${i}</span>`;
+			html += '<span class="current-page">' + i + '</span>';
 		} else {
-			html += `<a href="#" data-page="${i}">${i}</a>`;
+			html += '<a href="#" data-page="' + i + '">' + i + '</a>';
 		}
 	}
 
 	if (pageEnd < totalPage) {
-		html += `<a href="#" class="page-arrow" data-page="${pageEnd + 1}">&gt;</a>`;
+		html += '<a href="#" class="page-arrow" data-page="' + (pageEnd+1) + '">&gt;</a>';
 	}
 
 	$pagination.html(html);
