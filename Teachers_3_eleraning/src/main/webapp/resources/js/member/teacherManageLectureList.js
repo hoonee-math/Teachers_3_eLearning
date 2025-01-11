@@ -138,12 +138,59 @@ function saveLecture(lectureItem) {
 
 // 강의 수정 모드 전환
 function enableEdit(lectureItem) {
+	// 모든 input 요소의 readonly 속성 제거
 	const inputs = lectureItem.querySelectorAll('input');
 	inputs.forEach(input => input.removeAttribute('readonly'));
 
+	// 수정 버튼을 저장 버튼으로 변경
 	const editBtn = lectureItem.querySelector('.btn-edit-lecture');
 	editBtn.textContent = '저장';
-	editBtn.onclick = () => saveLectureChanges(lectureItem);
+	editBtn.onclick = () => updateLecture(lectureItem);
+}
+
+// 강의 수정 저장
+function updateLecture(lectureItem) {
+	const lectureNo = lectureItem.getAttribute('data-lecture-no');
+	if (!lectureNo) {
+		alert('잘못된 접근입니다.');
+		return;
+	}
+
+	const date = lectureItem.querySelector('.lecture-date').value;
+	const startTime = lectureItem.querySelector('.lecture-start-time').value;
+	const endTime = lectureItem.querySelector('.lecture-end-time').value;
+
+	const lectureData = {
+		lectureNo: parseInt(lectureNo),
+		courseNo: courseNo,
+		lectureOrder: parseInt(lectureItem.getAttribute('data-index')),
+		lectureTitle: lectureItem.querySelector('.lecture-title').value,
+		eventStart: date && startTime ? combineDateTime(date, startTime) : null,
+		eventEnd: date && endTime ? combineDateTime(date, endTime) : null,
+		videoUrl: lectureItem.querySelector('.video-url').value || null
+	};
+
+	fetch(`${path}/member/teacher/mypage/lecture/update`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(lectureData)
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.success) {
+			alert('강의가 수정되었습니다.');
+			makeReadonly(lectureItem);
+			convertEditToSave(lectureItem);
+		} else {
+			alert(data.message || '수정 중 오류가 발생했습니다.');
+		}
+	})
+	.catch(error => {
+		console.error('Error:', error);
+		alert('수정 중 오류가 발생했습니다.');
+	});
 }
 
 // 읽기 전용 모드 전환
@@ -152,12 +199,19 @@ function makeReadonly(lectureItem) {
 	inputs.forEach(input => input.setAttribute('readonly', true));
 }
 
-// 버튼 상태 변경
+// 버튼 상태 변경 - 강의 등록시 강의 저장 버튼을 수정
 function convertSaveToEdit(lectureItem) {
 	const saveBtn = lectureItem.querySelector('.btn-save-lecture');
 	saveBtn.textContent = '수정';
 	saveBtn.className = 'btn-edit-lecture';
 	saveBtn.onclick = () => enableEdit(lectureItem);
+}
+
+// 저장 버튼을 수정 버튼으로 변경 - 강의 수정시 저장 버튼을 수정
+function convertEditToSave(lectureItem) {
+    const saveBtn = lectureItem.querySelector('.btn-edit-lecture');
+    saveBtn.textContent = '수정';
+    saveBtn.onclick = () => enableEdit(lectureItem);
 }
 
 // 강의 삭제
