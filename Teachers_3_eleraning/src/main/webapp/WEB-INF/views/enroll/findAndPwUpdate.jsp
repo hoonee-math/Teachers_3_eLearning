@@ -157,20 +157,11 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
 <!-- 8. 공통 JavaScript -->
 <script src="${path}/resources/js/common/utils.js"></script>
-
 <!-- 9. API/Ajax 관련 JavaScript -->
-<script src="${path}/resources/js/api/apiConfig.js"></script>
-<script src="${path}/resources/js/api/teacherApi.js"></script>
-<script src="${path}/resources/js/api/courseApi.js"></script>
-
 <!-- 10. 컴포넌트 JavaScript -->
 <script src="${path}/resources/js/components/modal.js"></script>
-<script src="${path}/resources/js/components/navigation.js"></script>
-<script src="${path}/resources/js/components/accordion.js"></script>
-<script src="${path}/resources/js/components/tabs.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/enroll/enrollForm.js"></script>
 
 <!-- 11. 페이지별 JavaScript -->

@@ -80,7 +80,9 @@ public class ToTeacherServlet extends HttpServlet {
             // 과목 목록
             List<String> subjectData = new MemberService().selectSubjects();
 
-            System.out.println(pageStart+","+pageEnd+","+totalPage+","+cpage+","+teacherSubject);
+            // 요청 헤더 확인
+            String requestedWith = request.getHeader("X-Requested-With");
+            boolean isAjax = "XMLHttpRequest".equals(requestedWith);
             
             // request에 데이터 저장
             request.setAttribute("teachers", teachers);
@@ -90,13 +92,20 @@ public class ToTeacherServlet extends HttpServlet {
             request.setAttribute("totalPage", totalPage);
             request.setAttribute("cpage", cpage);
             request.setAttribute("selectedSubject", teacherSubject);
+
+            if(isAjax) {
+                // AJAX 요청시 필요한 부분만 JSP로 전달
+                request.getRequestDispatcher("/WEB-INF/views/teacher/teacherListAjax.jsp")
+                       .forward(request, response);
+            } else {
+                // 일반 요청시 전체 페이지 반환
+                request.getRequestDispatcher("/WEB-INF/views/teacher/teacherList.jsp")
+                       .forward(request, response);
+            }
             
         } catch(Exception e) {
             e.printStackTrace();
         }
-        
-        request.getRequestDispatcher("/WEB-INF/views/teacher/teacherList.jsp")
-               .forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

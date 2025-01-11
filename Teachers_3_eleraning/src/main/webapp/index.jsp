@@ -111,11 +111,11 @@ section {
 									</div>
 									<div class="next-lecture">
 										<h4>다음 강의</h4>
-										<p>Chapter ${course.nextLectureNo}.${course.nextLectureTitle}</p>
-										<span class="lecture-count">(${course.nextLectureNo}/${course.totalLectures}강)</span>
-										<span class="resume-time">이어보기: ${course.stopAt div 60}분 ${course.stopAt mod 60}초</span>
+										<%-- <p>Chapter ${course.nextLectureNo} ${course.nextLectureTitle}</p>
+										<span class="lecture-count">(${course.nextLectureNo} ${course.totalLectures}강)</span>
+										<span class="resume-time">이어보기: ${course.stopAt div 60}분 ${course.stopAt mod 60}초</span> --%>
 									</div>
-									<a href="${path}/course/detail/${course.courseRegisterNo}" class="course-link">이어서 학습하기</a>
+									<a href="${path}" class="course-link">이어서 학습하기</a>
 								</div>
 							</c:forEach>
 						</div><!-- /.course-grid -->

@@ -40,7 +40,7 @@ public class ToIndexPageServlet extends HttpServlet {
 		slide1.put("imageUrl", request.getContextPath() + "/resources/images/common/HoneyT_logo_horizontal.png");
 		slide1.put("title", "2026 수능 대비 얼리버드 할인!");
 		slide1.put("description", "5월까지 전 강좌 30% 할인된 가격으로 수강하세요.");
-		slide1.put("link", request.getContextPath() + "/event/early-bird");
+		slide1.put("link", request.getContextPath() + "/");
 		mainSlides.add(slide1);
 		
 		// 두 번째 슬라이드
@@ -48,7 +48,7 @@ public class ToIndexPageServlet extends HttpServlet {
 		slide2.put("imageUrl", request.getContextPath() + "/resources/images/common/HoneyT_logo_horizontal.png");
 		slide2.put("title", "인기 강사 신규 강의 오픈!");
 		slide2.put("description", "수학의 신! 김수학 선생님의 새로운 강의를 만나보세요.");
-		slide2.put("link", request.getContextPath() + "/course/new-math");
+		slide2.put("link", request.getContextPath() + "/");
 		mainSlides.add(slide2);
 
 		// request에 데이터 저장
