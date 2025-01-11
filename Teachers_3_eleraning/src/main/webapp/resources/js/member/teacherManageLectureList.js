@@ -178,39 +178,37 @@ function updateLecture(lectureItem) {
 		videoUrl: lectureItem.querySelector('.video-url').value.trim()
 	};
 
-	// 변경된 데이터만 포함하는 객체 생성
-	const lectureData = {
-		lectureNo: parseInt(lectureNo),
-		courseNo: courseNo,
-		lectureOrder: parseInt(lectureItem.querySelector('h4').textContent.replace('차시', ''))
-	};
-
-	// 제목이 변경된 경우만 포함
-	if (currentValues.title !== originalValues.title) {
-		lectureData.lectureTitle = currentValues.title;
-	}
-
-	// 일정이 변경된 경우만 포함
-	if (currentValues.date !== originalValues.date ||
+	// 변경 사항이 있는지 확인
+	const hasChanges =
+		currentValues.title !== originalValues.title ||
+		currentValues.date !== originalValues.date ||
 		currentValues.startTime !== originalValues.startTime ||
-		currentValues.endTime !== originalValues.endTime) {
-		if (currentValues.date && currentValues.startTime && currentValues.endTime) {
-			lectureData.eventStart = combineDateTime(currentValues.date, currentValues.startTime);
-			lectureData.eventEnd = combineDateTime(currentValues.date, currentValues.endTime);
-		}
-	}
+		currentValues.endTime !== originalValues.endTime ||
+		currentValues.videoUrl !== originalValues.videoUrl;
 
-	// 동영상 URL이 변경된 경우만 포함
-	if (currentValues.videoUrl !== originalValues.videoUrl) {
-		lectureData.videoUrl = currentValues.videoUrl;
-	}
-
-	// 변경된 데이터가 있는지 확인
-	if (Object.keys(lectureData).length <= 3) { // lectureNo, courseNo, lectureOrder만 있는 경우
+	if (!hasChanges) {
 		alert('변경된 내용이 없습니다.');
 		return;
 	}
-	console.log(lectureData)
+
+	// 변경 사항이 있다면 모든 현재 데이터를 포함하여 전송
+	const lectureData = {
+		lectureNo: parseInt(lectureNo),
+		courseNo: courseNo,
+		lectureOrder: parseInt(lectureItem.querySelector('h4').textContent.replace('차시', '')),
+		lectureTitle: currentValues.title
+	};
+
+	// 일정 데이터 추가 (모든 데이터가 있는 경우에만)
+	if (currentValues.date && currentValues.startTime && currentValues.endTime) {
+		lectureData.eventStart = combineDateTime(currentValues.date, currentValues.startTime);
+		lectureData.eventEnd = combineDateTime(currentValues.date, currentValues.endTime);
+	}
+
+	// 동영상 URL 추가
+	lectureData.videoUrl = currentValues.videoUrl;
+
+	console.log('수정 요청 데이터:', lectureData);
 
 	fetch(`${path}/member/teacher/mypage/lecture/update`, {
 		method: 'POST',
