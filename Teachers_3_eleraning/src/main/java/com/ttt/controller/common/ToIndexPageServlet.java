@@ -14,9 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ttt.dto.Course3;
 import com.ttt.dto.CourseRegister3;
 import com.ttt.dto.Member3;
 import com.ttt.service.CourseRegisterService;
+import com.ttt.service.CourseService;
+import com.ttt.service.MemberService;
 
 @WebServlet(urlPatterns = {"","/home"}, name="indexPage")
 public class ToIndexPageServlet extends HttpServlet {
@@ -65,23 +68,7 @@ public class ToIndexPageServlet extends HttpServlet {
 
 	            // 수강 정보 로그 출력
 	            if(studentCourses != null && !studentCourses.isEmpty()) {
-	            	System.out.println(studentCourses);
-	                System.out.println("\n===== 학생 수강 정보 로그 =====");
 	                for(CourseRegister3 course : studentCourses) {
-	                    System.out.println("\n## 강좌 기본 정보 ##");
-	                    System.out.println("courseRegisterNo: " + course.getCourseRegisterNo());
-	                    System.out.println("courseTitle: " + course.getCourse().getCourseTitle());
-	                    System.out.println("teacherName: " + course.getCourse().getTeacherName());
-	                    
-	                    System.out.println("\n## 학습 진행 정보 ##");
-	                    System.out.println("progressRate: " + course.getProgressRate() + "%");
-	                    System.out.println("lastViewTime: " + course.getLastViewTime());
-	                    System.out.println("totalLectures: " + course.getCourse().getTotalLectures());
-	                    
-	                    System.out.println("\n## 수강 평가 정보 ##");
-	                    System.out.println("courseScore: " + course.getCourseScore());
-	                    System.out.println("completionStatus: " + course.getCompletionStatus());
-	                    System.out.println("================================\n");
 	                }
 	            } else {
 	                System.out.println("수강 중인 강좌가 없거나 데이터를 가져오는데 실패했습니다.");
@@ -90,75 +77,27 @@ public class ToIndexPageServlet extends HttpServlet {
 			}
 			// 교사인 경우
 			else if(loginMember.getMemberType() == 2) {
-				//List<Course3> teacherCourses = courseReisterService.selectTeacherCourses(loginMember.getMemberNo());
-				//request.setAttribute("teacherCourses", teacherCourses);
 			}
 		} else { // 로그인 세션 정보가 없을 경우 테스트용 더미 데이터를 넣는 로직.
-	    
-		    Map<String, Object> course1 = new HashMap<>();
-		    course1.put("courseRegisterNo", 1);                 // 변경: enrollmentNo → courseRegisterNo
-		    course1.put("course.courseTitle", "수학의 정석: 미적분 마스터");
-		    course1.put("teacherName", "김수학");
-		    course1.put("progressRate", 45);
-		    course1.put("nextLectureNo", 8);
-		    course1.put("nextLectureTitle", "미분 계수의 활용");
-		    course1.put("totalLectures", 20);
-		    course1.put("lastViewTime", new Date()); 			// 추가: 마지막 수강 시간
-		    course1.put("stopAt", 720);                         // 추가: 마지막 재생 위치(초)
-		    studentCoursesDummy.add(course1);
-		    
-		    Map<String, Object> course2 = new HashMap<>();
-		    course1.put("courseRegisterNo", 2);                 // 변경: enrollmentNo → courseRegisterNo
-		    course2.put("course.courseTitle", "국어 독해의 비밀");
-		    course2.put("teacherName", "박국어");
-		    course2.put("progressRate", 75);
-		    course2.put("nextLectureNo", 15);
-		    course2.put("nextLectureTitle", "비문학 독해 전략");
-		    course2.put("totalLectures", 20);
-		    course1.put("lastViewTime", new Date()); // 추가: 마지막 수강 시간
-		    course1.put("stopAt", 720);                         // 추가: 마지막 재생 위치(초)
-		    studentCoursesDummy.add(course2);
-	
-			request.setAttribute("studentCourses", studentCoursesDummy);
 		
 		}
 		
-	    // (더미데이터) 교사용 업로드 중인 강좌
-	    List<Map<String, Object>> teacherCourses = new ArrayList<>();
-	    
-	    Map<String, Object> uploadCourse1 = new HashMap<>();
-	    uploadCourse1.put("courseNo", 3);
-	    uploadCourse1.put("courseTitle", "2025 수능 대비 화학I");
-	    uploadCourse1.put("uploadedLectures", 5);
-	    uploadCourse1.put("totalLectures", 30);
-	    uploadCourse1.put("uploadProgress", 16);
-	    uploadCourse1.put("beginDate", "2024-03-15");
-	    uploadCourse1.put("endDate", "2024-05-30");
-	    teacherCourses.add(uploadCourse1);
+	    // (실제 데이터) 교사용 업로드 중인 강좌
+		if(loginMember != null && loginMember.getMemberType() == 2) {
+			// 학생인 경우
+			int memberNo=loginMember.getMemberNo();
+		    Map<String,Object> params = new HashMap();
+		    params.put("status", "inProgress");
+		    List<Course3> teacherCourses = new CourseService().selectCoursesByStatus(params,memberNo);
+		    System.out.println(teacherCourses);
+		    request.setAttribute("teacherCourses", teacherCourses);
+		}
 
-	    request.setAttribute("teacherCourses", teacherCourses);
-	    
-	    //System.out.println("학생 강좌 데이터 설정: " + studentCourses);
-	    //System.out.println("교사 강좌 데이터 설정: " + teacherCourses);
-	    
-	    
-
-	    // (더미데이터) 대표 강사진 생성
-	    List<Map<String, Object>> mainTeachers = new ArrayList<>();
 	    String[] subjects = {"국어", "수학", "영어", "과학", "사회", "국어", "수학", "영어"}; // 8명
 	    
-	    for(int i = 0; i < 8; i++) {
-	        Map<String, Object> teacher = new HashMap<>();
-	        teacher.put("memberNo", i + 1);
-	        teacher.put("memberName", "강사" + (i + 1));
-	        teacher.put("teacherSubject", subjects[i]);
-	        teacher.put("teacherInfoTitle", "열정적인 " + subjects[i] + " 선생님");
-	        teacher.put("imageUrl", request.getContextPath() + "/resources/images/common/HoneyT_logo_vertical.png");
-	        mainTeachers.add(teacher);
-	    }
-	    
-	    request.setAttribute("mainTeachers", mainTeachers);
-	    //System.out.println("대표 강사진 데이터 설정: " + mainTeachers);
+	    // (실제 데이터) 대표 강사진 생성
+		List<Member3> mainTeachers = new MemberService().selectMainTeachers();
+		request.setAttribute("mainTeachers", mainTeachers);
 	    
 	    
 	    // (더미데이터) 인기 강좌 메인 화면에 출력할 데이터
@@ -174,6 +113,9 @@ public class ToIndexPageServlet extends HttpServlet {
 	    List<Map<String, Object>> popularCourses = new ArrayList<>();
 		/* String[] subjects = {"국어", "수학", "영어", "과학", "사회"}; */
 	    String[] teacherNames = {"김선생", "이선생", "박선생", "정선생", "최선생"};
+	    
+	    
+	    
 	    
 	    // 각 카테고리별로 5개씩 강좌 생성
 	    for(int category = 1; category <= 4; category++) {

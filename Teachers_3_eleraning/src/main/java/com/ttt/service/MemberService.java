@@ -132,7 +132,10 @@ public class MemberService {
 	    return result;
 	}
 	
-	
+	public List<Member3> selectMainTeachers() {
+		SqlSession session = getSession();
+		return dao.selectMainTeachers(session);
+	}
 	
 	
 }

@@ -99,5 +99,8 @@ public class MemberDao {
 	   return session.selectOne("member.selectMemberByIdAndEmail", m);
 	}
 	
+	public List<Member3> selectMainTeachers(SqlSession session) {
+		return session.selectList("member.selectMainTeachers");
+	}
 	
 }

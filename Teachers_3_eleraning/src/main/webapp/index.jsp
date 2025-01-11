@@ -201,11 +201,11 @@ section {
 								<div class="teacher-slide">
 									<div class="teacher-card">
 										<div class="teacher-image">
-											<img src="${teacher.imageUrl}" alt="${teacher.memberName} 선생님">
+											<img src="${path }/resources/images/profile/${teacher.image.renamed }" alt="${teacher.memberName} 선생님">
 										</div>
 										<div class="teacher-info">
-											<h3>${teacher.memberName}선생님</h3>
-											<p class="subject">${teacher.teacherSubject}</p>
+											<h3>${teacher.memberName} 선생님</h3>
+											<p class="subject">${teacher.teacherSubjectName}</p>
 											<p class="title">${teacher.teacherInfoTitle}</p>
 										</div>
 									</div>
