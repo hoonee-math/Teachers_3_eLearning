@@ -61,4 +61,8 @@ public class CourseDao {
 	public List<Integer> selectTeachingCourseNos(SqlSession session, int memberNo) {
 		return session.selectList("course.selectTeachingCourseNos", memberNo);
 	}
+	
+	public List<Course3> selectMainCourses(SqlSession session){
+		return session.selectList("course.selectMainCourses");
+	}
 }

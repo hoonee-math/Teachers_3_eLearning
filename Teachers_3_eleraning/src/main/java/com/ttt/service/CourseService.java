@@ -153,4 +153,9 @@ public class CourseService {
             session.close();
         }
     }
+    
+    public List<Course3> selectMainCourses(){
+    	SqlSession session = getSession();
+    	return dao.selectMainCourses(session);
+    }
 }

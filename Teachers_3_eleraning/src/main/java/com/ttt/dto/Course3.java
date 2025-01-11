@@ -36,12 +36,17 @@ public class Course3 {
     private String teacherSubject;  // 교사 과목
     private String teacherSubjectName;  // 교사 과목
     private String teacherName;     // 교사 이름
+    private String teacherInfoTitle;
 	
 	// 조회 결과를 담기 위한 추가 필드들
 	private int totalCount; 		// 전체 강좌 수
 	private int preparingCount; 	// 준비중인 강좌 수
 	private int inProgressCount; 	// 진행중인 강좌 수
 	private int completedCount; 	// 완료된 강좌 수
+	
+	private int studentCount; // 강좌를 등록한 학생수
+	
+	private String renamed; //이미지를 가져올 때 사용
 	
 	// 카테고리를 join 해서 사용할 정보들
 	private String courseCategoryTitle;

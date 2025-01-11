@@ -20,6 +20,10 @@
 		
 		<result column="member_name" property="teacherName"/>
 		<result column="teacher_subject_name" property="teacherSubjectName"/>
+		<result column="teacher_info_title" property="teacherInfoTitle"/>
+		<result column="course_category_title" property="courseCategoryTitle"/>
+		<result column="course_category_desc" property="courseCategoryDesc"/>
+		<result column="student_count" property="studentCount"/>
 	</resultMap>
 	<!-- 카테고리 조회를 위한 resultMap -->
 	<resultMap id="categoryMap" type="Course3">
@@ -198,5 +202,27 @@
 	<!-- 학생이 수강 중인 강좌 목록 조회 -->
 	<select id="selectStudentCourses" parameterType="_int" resultType="map">
 		
+	</select>
+	
+	<select id="selectMainCourses" resultMap="courseMap">
+		WITH RandomCourses AS (
+		    SELECT * 
+		    FROM (
+		        SELECT c.*, ROW_NUMBER() OVER (PARTITION BY c.COURSE_CATEGORY_NO ORDER BY DBMS_RANDOM.VALUE) AS rn
+		        FROM COURSE3 c
+		    )
+		    WHERE  3 >= rn
+		)
+		SELECT C.COURSE_NO, C.COURSE_TITLE, C.COURSE_CATEGORY_NO, C.GRADE, C.COURSE_DESC, C.COURSE_PRICE, C.COURSE_PRICE_SALE,
+	       M.MEMBER_NAME,  CR.COURSE_CATEGORY_DESC, CR.COURSE_CATEGORY_TITLE,
+	       T.TEACHER_INFO_TITLE, S.TEACHER_SUBJECT_NAME, 
+	       I.RENAMED
+		FROM RandomCourses C
+            LEFT JOIN COURSE_CATEGORY3 CR ON C.COURSE_CATEGORY_NO = CR.COURSE_CATEGORY_NO
+			LEFT JOIN MEMBER3 M ON C.MEMBER_NO = M.MEMBER_NO
+			LEFT JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
+			LEFT JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
+			LEFT JOIN IMAGE3 I ON T.IMG_NO = I.IMG_NO
+		ORDER BY C.COURSE_NO
 	</select>
 </mapper>

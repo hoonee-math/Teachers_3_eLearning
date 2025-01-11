@@ -240,25 +240,34 @@ section {
 										<c:if test="${course.courseCategoryNo == categoryId}">
 											<div class="popular-course-card">
 												<div class="popular-course-image">
-													<img
-														src="${path}/resources/images/common/HoneyT_logo_vertical.png"
-														alt="${course.courseTitle}">
+													<c:choose>
+														<c:when test="${course.renamed != null && course.renamed != ''}">
+															<img src="${path}/resources/images/profile/${course.renamed}" alt="${course.courseCategoryTitle}">
+														</c:when>
+														<c:otherwise>
+															<img src="${path}/resources/images/common/HoneyT_logo_vertical.png" alt="${course.courseCategoryTitle}">
+														</c:otherwise>
+													</c:choose>
+
 													<span class="popular-grade-badge">
 														고${course.grade}
 													</span>
 													<div class="popular-course-overlay">
-														<p>${course.courseDesc}</p>
+														<p>${course.courseCategoryDesc}</p>
 													</div>
 												</div>
 												<div class="popular-course-content">
-													<h3 class="popular-course-title">${course.course.courseTitle}</h3>
+													<h3 class="popular-course-title">${course.courseTitle}</h3>
 													<p class="popular-teacher-name">${course.teacherName} 선생님</p>
-													<p class="popular-teacher-info">${course.teacherInfo}</p>
+													<p class="popular-teacher-info">${course.teacherInfoTitle}</p>
 													<div class="popular-course-info">
 														<div class="popular-rating">
 															<i class="bi bi-star-fill"></i>
 															<span>
-																<fmt:formatNumber value="${course.rating}" pattern="#.0" />
+																<% // Java 코드로 랜덤값 생성
+																	double randomRating = 4.0 + (Math.random() * 1.0);
+																	request.setAttribute("randomRating", randomRating); %>
+																<fmt:formatNumber value="${randomRating}" pattern="#.0" />
 															</span>
 														</div>
 														<div class="popular-student-count">
