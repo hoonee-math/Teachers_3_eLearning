@@ -118,19 +118,21 @@ const TeacherDataManager = {
         }
     },
 
-    // 데이터 로드
-    async loadTeachers() {
-        // 서버에서 현재 해시값만 먼저 받아옴
-        const serverHash = await this.getServerHash();
-        
-        if (this.isDataValid(serverHash)) {
-            const stored = JSON.parse(localStorage.getItem('teacherData'));
-            return stored.teachers;
-        }
+	// 데이터 로드 함수
+	loadTeachers() {
+	    // 서버에서 현재 해시값 먼저 받아옴
+	    return this.getServerHash().then(serverHash => {
+	        if (this.isDataValid(serverHash)) {
+	            const stored = JSON.parse(localStorage.getItem('teacherData'));
+	            return stored.teachers;
+	        }
 
-        // 유효하지 않으면 전체 데이터 다시 로드
-        const teachers = megaMenuTeachers; // 서버에서 새로 받아온 데이터
-        this.saveToStorage(teachers);
-        return teachers;
-    }
+	        // 유효하지 않으면 전체 데이터 다시 로드
+	        const teachers = megaMenuTeachers; // 서버에서 새로 받아온 데이터
+	        this.saveToStorage(teachers);
+	        return teachers;
+	    }).catch(error => {
+	        console.error("Error loading teachers:", error);
+	    });
+	}
 };
