@@ -1,6 +1,13 @@
 /**
  * calendar API implementation for Toast UI Calendar v2.1.3
  */
+// 공통 URL 설정 예시
+const EXTERNAL_URLS = {
+    COURSE_DETAIL: "https://us04web.zoom.us/j/7867964543?pwd=RFI5Vk5lSEtaMmJtZmVlbWx0VXE5UT09&omn=74834074218", // 강의 상세정보 기본 URL
+    LECTURE_ROOM: "https://us04web.zoom.us/j/7867964543?pwd=RFI5Vk5lSEtaMmJtZmVlbWx0VXE5UT09&omn=74834074218",   // 강의실 입장 기본 URL
+    VIDEO_STREAM: "https://us04web.zoom.us/j/7867964543?pwd=RFI5Vk5lSEtaMmJtZmVlbWx0VXE5UT09&omn=74834074218"          // 영상 스트리밍 기본 URL
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOMContentLoaded 이벤트 발생');
 
@@ -372,9 +379,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		               <span class="label">장소:</span> ${event.location || '온라인'}
 		           </div>
 		           <div class="button-container">
-		               <a href="${path}/course/detail/${event.id}" class="lecture-button" target="_blank">강의 상세보기</a>
-		               <a href="${path}/course/enter/${event.id}" class="lecture-button" target="_blank">강의실 입장</a>
-		           </div>
+				       <a href="${EXTERNAL_URLS.COURSE_DETAIL}/${event.id}" class="lecture-button" target="_blank">강의 상세보기</a>
+				       <a href="${EXTERNAL_URLS.LECTURE_ROOM}/${event.id}" class="lecture-button" target="_blank">강의실 입장</a>
+				   </div>
 		       </body>
 		       </html>
 		   `;
