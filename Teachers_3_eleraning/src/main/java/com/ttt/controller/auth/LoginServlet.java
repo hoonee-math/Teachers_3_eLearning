@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.ttt.dto.Member3;
 import com.ttt.service.MemberService;
 
-@WebServlet("/auth/login.do")
+@WebServlet(name="loginServlet",urlPatterns = "/auth/login.do")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
