@@ -127,7 +127,6 @@
 				            <select class="child_school" id="school-type" onchange="schoolSearch({target:document.getElementById('district')});" style="width:108px">
 				                <option value="고등학교">고등학교</option>
 				            </select>
-				            <!-- name에 standardCode 를 입력하여 회원정보에는 학교 코드가 저장되도록 설정 -->
 				            <select class="child_school" id="school-name" name="schoolNo" style="width:186px">
 				                <option value="">학교명</option>
 				            </select>
@@ -176,7 +175,7 @@
 </script>
 <!-- 6. 페이지별 스크립트 APi-컴포넌트-페이지 순 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음 우편번호 서비스 -->
-<script src="${pageContext.request.contextPath}/resources/js/enroll/enrollForm.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/enroll/enrollMember.js"></script>
 	
 	
 </body>
