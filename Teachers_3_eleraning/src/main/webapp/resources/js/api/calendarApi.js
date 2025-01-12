@@ -7,10 +7,212 @@ document.addEventListener('DOMContentLoaded', function() {
     // 캘린더 컨테이너
     const container = document.getElementById('calendar');
     console.log('캘린더 컨테이너:', container);
+	
+	// 현재 시간 기준 변수 설정
+	const now = new Date();
+	console.log('현재 시간:', now);
+	
+	// 샘플 일정 데이터 - TUI Calendar 형식에 맞춰 수정
+	// v2.1.3 객체 정보로 수정
+	// 샘플 일정 데이터 - 현재 시점(2025년) 기준으로 수정
+	const events = [{
+		id: '1',
+		calendarId: 'cal1',
+		title: '수학 기초 개념 학습',
+		category: 'time',
+		start: new Date('2025-01-13T10:00:00'),  // 2024 -> 2025
+		end: new Date('2025-01-13T12:00:00'),	// 2024 -> 2025
+		isAllday: false,
+		state: 'busy',
+		raw: {
+			class: 'public'
+		},
+		location: '온라인',
+		attendees: ['학생1'],
+		color: '#ffffff',
+		backgroundColor: '#FAB350'
+	}, {
+		id: '2',
+		calendarId: 'cal1',
+		title: '영어 문법 스터디',
+		category: 'time',
+		start: new Date('2025-01-05T14:00:00'),  // 2024 -> 2025
+		end: new Date('2025-01-05T14:00:00'),	// 2024 -> 2025
+		isAllday: false,
+		state: 'busy',
+		raw: {
+			class: 'public'
+		},
+		location: '온라인',
+		attendees: ['학생1'],
+		color: '#ffffff',
+		backgroundColor: '#4A90E2'
+	}, {
+		id: '3',
+		calendarId: 'cal1',
+		title: '과학 실험 보고서 작성',
+		category: 'time',
+		start: new Date('2025-01-16T13:00:00'),  // 2024 -> 2025
+		end: new Date('2025-01-16T15:00:00'),	// 2024 -> 2025
+		isAllday: false,
+		state: 'busy',
+		raw: {
+			class: 'public'
+		},
+		location: '온라인',
+		attendees: ['학생1'],
+		color: '#ffffff',
+		backgroundColor: '#50B766'
+	},
+	{
+	    id: '4',
+	    calendarId: '국어',
+	    title: '고전문학 특강',
+	    category: 'time',
+	    start: new Date('2025-01-13T09:00:00'),
+	    end: new Date('2025-01-13T11:00:00'),
+	    isAllday: false,
+	    state: 'busy',
+	    raw: { class: 'public' },
+	    location: '온라인',
+	    attendees: ['학생1'],
+	    color: '#ffffff',
+	    backgroundColor: '#FF9AA2'
+	}, {
+	    id: '5',
+	    calendarId: '영어',
+	    title: '토익 실전 모의고사',
+	    category: 'time',
+	    start: new Date('2025-01-13T13:00:00'),
+	    end: new Date('2025-01-13T15:00:00'),
+	    isAllday: false,
+	    state: 'busy',
+	    raw: { class: 'public' },
+	    location: '온라인',
+	    attendees: ['학생1'],
+	    color: '#ffffff',
+	    backgroundColor: '#FFB7B2'
+	}, {
+	    id: '6',
+	    calendarId: '수학',
+	    title: '미적분 개념 정리',
+	    category: 'time',
+	    start: new Date('2025-01-14T10:00:00'),
+	    end: new Date('2025-01-14T12:00:00'),
+	    isAllday: false,
+	    state: 'busy',
+	    raw: { class: 'public' },
+	    location: '온라인',
+	    attendees: ['학생1'],
+	    color: '#ffffff',
+	    backgroundColor: '#FFDAC1'
+	}, {
+	    id: '7',
+	    calendarId: '과학',
+	    title: '생명과학 실험 특강',
+	    category: 'time',
+	    start: new Date('2025-01-14T14:00:00'),
+	    end: new Date('2025-01-14T16:00:00'),
+	    isAllday: false,
+	    state: 'busy',
+	    raw: { class: 'public' },
+	    location: '온라인',
+	    attendees: ['학생1'],
+	    color: '#ffffff',
+	    backgroundColor: '#B5EAD7'
+	}, {
+	    id: '8',
+	    calendarId: '사회',
+	    title: '한국사 심화 특강',
+	    category: 'time',
+	    start: new Date('2025-01-15T09:30:00'),
+	    end: new Date('2025-01-15T11:30:00'),
+	    isAllday: false,
+	    state: 'busy',
+	    raw: { class: 'public' },
+	    location: '온라인',
+	    attendees: ['학생1'],
+	    color: '#ffffff',
+	    backgroundColor: '#C7CEEA'
+	}, {
+	    id: '9',
+	    calendarId: '국어',
+	    title: '현대문학 작품 분석',
+	    category: 'time',
+	    start: new Date('2025-01-15T13:30:00'),
+	    end: new Date('2025-01-15T15:30:00'),
+	    isAllday: false,
+	    state: 'busy',
+	    raw: { class: 'public' },
+	    location: '온라인',
+	    attendees: ['학생1'],
+	    color: '#ffffff',
+	    backgroundColor: '#FF9AA2'
+	}, {
+	    id: '10',
+	    calendarId: '영어',
+	    title: '영문법 마스터 클래스',
+	    category: 'time',
+	    start: new Date('2025-01-16T10:00:00'),
+	    end: new Date('2025-01-16T12:00:00'),
+	    isAllday: false,
+	    state: 'busy',
+	    raw: { class: 'public' },
+	    location: '온라인',
+	    attendees: ['학생1'],
+	    color: '#ffffff',
+	    backgroundColor: '#FFB7B2'
+	}, {
+	    id: '11',
+	    calendarId: '수학',
+	    title: '기하와 벡터 특강',
+	    category: 'time',
+	    start: new Date('2025-01-16T14:00:00'),
+	    end: new Date('2025-01-16T16:00:00'),
+	    isAllday: false,
+	    state: 'busy',
+	    raw: { class: 'public' },
+	    location: '온라인',
+	    attendees: ['학생1'],
+	    color: '#ffffff',
+	    backgroundColor: '#FFDAC1'
+	}, {
+	    id: '12',
+	    calendarId: '과학',
+	    title: '화학 실전 문제 풀이',
+	    category: 'time',
+	    start: new Date('2025-01-17T09:00:00'),
+	    end: new Date('2025-01-17T11:00:00'),
+	    isAllday: false,
+	    state: 'busy',
+	    raw: { class: 'public' },
+	    location: '온라인',
+	    attendees: ['학생1'],
+	    color: '#ffffff',
+	    backgroundColor: '#B5EAD7'
+	}, {
+	    id: '13',
+	    calendarId: '사회',
+	    title: '세계사 주요 테마 정리',
+	    category: 'time',
+	    start: new Date('2025-01-17T13:00:00'),
+	    end: new Date('2025-01-17T15:00:00'),
+	    isAllday: false,
+	    state: 'busy',
+	    raw: { class: 'public' },
+	    location: '온라인',
+	    attendees: ['학생1'],
+	    color: '#ffffff',
+	    backgroundColor: '#C7CEEA'
+	}
 
+	];
+
+	let calendar;
+		
     try {
         // 캘린더 초기화, 캘린더 인스턴스 생성
-        const calendar = new tui.Calendar(container, {
+        calendar = new tui.Calendar(container, {
             defaultView: 'week',
             usageStatistics: false,
             isReadOnly: true,
@@ -23,8 +225,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 showNowIndicator: true,
                 taskView: false,      // Task 행 제거
                 eventView: ['time'],  // 시간별 일정만 표시
+				taskView: false,      // Removes the task row
+				eventView: ['time'],  // Only shows time-based events
+				milestoneView: false  // Removes the milestone row
             },
-            gridSelection: false,      // 그리드 선택 기능 비활성화
+            //gridSelection: false,      // 그리드 선택 기능
             // 캘린더 테마 설정
             theme: {
                 common: {
@@ -55,132 +260,130 @@ document.addEventListener('DOMContentLoaded', function() {
                 {id: '사회', name: '사회', color: '#ffffff', backgroundColor: '#C7CEEA'}
             ]
         });
+		
+		// 일정 추가 시도
+		try {
+			// 이벤트 추가 전 확인
+			console.log('calendar 인스턴스:', calendar);
 
-        // 초기 데이터 로드
-        loadEvents();
+			// calendar의 모든 메서드 확인
+			console.log('calendar methods:', Object.getOwnPropertyNames(Object.getPrototypeOf(calendar)));
 
-        // 토글 버튼 이벤트 리스너 설정
-        const viewToggle = document.getElementById('viewToggle');
-        if (viewToggle) {
-            viewToggle.addEventListener('change', function(e) {
-                loadEvents(e.target.checked ? 'my' : 'all');
-            });
-        }
+			// 이벤트 추가
+			calendar.createEvents(events); // createSchedules 대신 createEvents 사용
+			console.log('일정 추가 성공');
 
-        // 학년 필터 변경 이벤트 리스너
-        const gradeFilter = document.getElementById('gradeFilter');
-        if (gradeFilter) {
-            gradeFilter.addEventListener('change', function(e) {
-                sessionStorage.setItem('gradeNum', e.target.value);
-                loadEvents();
-            });
-        }
+			try {
+				// TUI Calendar v2.1.3에서는 다음 메서드들을 사용
+				// 현재 뷰에 표시된 이벤트 가져오기
+				const currentEvents = calendar.getDisplayEvents();
+				console.log('현재 표시된 이벤트:', currentEvents);
 
-        // 일정 데이터 로드 함수
-        function loadEvents(viewType = 'all') {
-            console.log('=== 일정 데이터 로드 시작 ===');
+				// 특정 날짜의 이벤트 가져오기
+				const targetDate = new Date('2025-01-05');
+				const eventsInRange = calendar.getEventsByRange(
+					targetDate,
+					new Date(targetDate.getTime() + 24 * 60 * 60 * 1000)
+				);
+				console.log('2024-01-05의 이벤트:', eventsInRange);
+			} catch (error) {
+				console.error('이벤트 조회 중 에러:', error);
+			}
 
-            const grade = sessionStorage.getItem('gradeNum') || '1';
-            const params = new URLSearchParams({
-                grade: grade,
-                view: viewType
-            });
+			// 날짜 이동
+			calendar.setDate(now);
+			console.log('날짜 설정 성공');
+		} catch (error) {
+			console.error('일정 추가 중 에러:', error);
+		}
 
-            fetch(`${path}/api/calendar/events?${params}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('서버 응답 오류: ' + response.status);
-                    }
-                    console.log('서버 응답 성공');
-                    return response.json();
-                })
-                .then(data => {
-                    if (!data || !data.events) {
-                        console.warn('유효한 이벤트 데이터가 없습니다');
-                        return;
-                    }
-                    
-                    calendar.clear();
-                    const events = transformEvents(data);
-                    if (events && events.length > 0) {
-                        calendar.createEvents(events);
-                        console.log(`${events.length}개의 이벤트가 로드되었습니다`);
-                    }
-                })
-                .catch(error => {
-                    console.error('일정 로드 중 오류:', error);
-                    // 기본 alert로 대체
-                    alert('일정을 불러오는 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
-                });
-        }
+	} catch (error) {
+		console.error('캘린더 에러:', error);
+	}
 
-        // 이벤트 데이터 변환 함수
-        function transformEvents(data) {
-            console.log('원본 데이터:', data);
-
-            return data.events.map(event => ({
-                id: String(event.EVENT_NO),
-                calendarId: event.TEACHER_SUBJECT,
-                title: event.EVENT_TITLE,
-                start: event.EVENT_START,
-                end: event.EVENT_END,
-                category: 'time',
-                isReadOnly: true,
-                raw: {
-                    EVENT_NO: event.EVENT_NO,
-                    EVENT_TITLE: event.EVENT_TITLE,
-                    COURSE_NO: event.COURSE_NO,
-                    COURSE_TITLE: event.COURSE_TITLE,
-                    TEACHER_NAME: event.TEACHER_NAME,
-                    TEACHER_SUBJECT: event.TEACHER_SUBJECT,
-                    VIDEO_URL: event.VIDEO_URL,
-                    isEnrolled: data.enrolledCourses ? 
-                               data.enrolledCourses.includes(event.COURSE_NO) : 
-                               false
-                }
-            }));
-        }
-
-        // 시간 포맷팅 함수
-        function formatTime(date) {
-            return new Date(date).toLocaleTimeString('ko-KR', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        }
-
-        // 일정 클릭 이벤트 핸들러
-        calendar.on('clickEvent', function(eventObj) {
-            const event = eventObj.event;
-            const raw = event.raw;
-            const now = new Date();
-            const startTime = new Date(event.start);
-            const canAccess = raw.isEnrolled && 
-                ((startTime - now) <= 30 * 60 * 1000); // 30분 이내
-
-            const modalContent = `
-               <div class="event-detail-modal">
-                   <h3>${event.title}</h3>
-                   <p><strong>강좌:</strong> ${raw.COURSE_TITLE}</p>
-                   <p><strong>강사:</strong> ${raw.TEACHER_NAME}</p>
-                   <p><strong>과목:</strong> ${raw.TEACHER_SUBJECT}</p>
-                   <p><strong>시간:</strong> ${formatTime(event.start)} ~ ${formatTime(event.end)}</p>
-                   ${raw.VIDEO_URL ?
-                    canAccess ?
-                        `<a href="${raw.VIDEO_URL}" target="_blank" class="video-link">강의 입장하기</a>` :
-                        `<span class="video-link disabled">강의 시작 30분 전부터 입장 가능합니다</span>`
-                    : ''}
-               </div>
-           `;
-
-            Swal.fire({
-                html: modalContent,
-                showConfirmButton: false,
-                showCloseButton: true
-            });
-        });
-
-    } catch (error) {
-        console.error('캘린더 초기화 중 오류:', error);
-    }
+	// 일정 클릭 이벤트
+	// Change from clickSchedule to clickEvent
+	calendar.on('clickEvent', function(eventObj) {
+	    console.log('Event clicked:', eventObj); // Debug log
+	    
+	    const event = eventObj.event; // Note: it's eventObj.event, not eventObj.schedule
+	    const width = 400;
+		const height = 350; // 버튼 추가를 위해 높이 약간 증가
+	    const left = (window.innerWidth - width) / 2;
+	    const top = (window.innerHeight - height) / 2;
+	    
+	    const popupContent = 		`
+		       <!DOCTYPE html>
+		       <html>
+		       <head>
+		           <title>강의 상세 정보</title>
+		           <style>
+		               body { 
+		                   font-family: Arial, sans-serif; 
+		                   padding: 20px; 
+		               }
+		               h2 { 
+		                   color: #333; 
+		                   margin-bottom: 20px; 
+		               }
+		               .info-row { 
+		                   margin-bottom: 10px; 
+		               }
+		               .label { 
+		                   font-weight: bold; 
+		                   color: #666; 
+		               }
+		               .button-container {
+		                   margin-top: 20px;
+		                   text-align: center;
+		               }
+		               .lecture-button {
+		                   background-color: #FAB350;
+		                   color: white;
+		                   padding: 10px 20px;
+		                   border: none;
+		                   border-radius: 5px;
+		                   cursor: pointer;
+		                   text-decoration: none;
+		                   display: inline-block;
+		                   margin: 0 5px;
+		               }
+		               .lecture-button:hover {
+		                   background-color: #e59d3b;
+		               }
+		               .lecture-button.disabled {
+		                   background-color: #cccccc;
+		                   cursor: not-allowed;
+		               }
+		           </style>
+		       </head>
+		       <body>
+		           <h2>${event.title}</h2>
+		           <div class="info-row">
+		               <span class="label">과목:</span> ${event.calendarId}
+		           </div>
+		           <div class="info-row">
+		               <span class="label">시작:</span> ${event.start.toLocaleString()}
+		           </div>
+		           <div class="info-row">
+		               <span class="label">종료:</span> ${event.end.toLocaleString()}
+		           </div>
+		           <div class="info-row">
+		               <span class="label">장소:</span> ${event.location || '온라인'}
+		           </div>
+		           <div class="button-container">
+		               <a href="${path}/course/detail/${event.id}" class="lecture-button" target="_blank">강의 상세보기</a>
+		               <a href="${path}/course/enter/${event.id}" class="lecture-button" target="_blank">강의실 입장</a>
+		           </div>
+		       </body>
+		       </html>
+		   `;
+		   
+		   const popup = window.open('', 'eventPopup', 
+		       `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`);
+		       
+		   popup.document.write(popupContent);
+		   popup.document.close();
+	});
+		
 });
