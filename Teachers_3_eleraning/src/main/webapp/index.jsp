@@ -308,5 +308,6 @@ section {
 	<script src="${path}/resources/js/index/slider.js"></script>
 	<script src="${path}/resources/js/index/teacherSlider.js"></script>
 	<script src="${path}/resources/js/index/popularCourses.js"></script>
+-	<script src="${path}/resources/js/api/calendarApi.js"></script>
 </body>
 </html>

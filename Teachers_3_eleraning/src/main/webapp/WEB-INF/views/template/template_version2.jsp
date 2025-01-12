@@ -7,15 +7,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
 <!-- 1. 공통 head 요소/공통 CSS 포함 -->
 <jsp:include page="/WEB-INF/views/common/head.jsp" />
-
 <!-- 2. 페이지별 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/pages/courseList.css">
 <link rel="stylesheet" href="${path}/resources/css/pages/teacherListAndDetail.css">
-<%-- <link rel="stylesheet" href="${path}/resources/css/페이지명.css"> --%>
-
+<link rel="stylesheet" href="${path}/resources/css/teacher/teacherBoardCommon.css">
 <title>Honey T</title>
 	
 </head>
@@ -29,10 +26,9 @@
 <main>
 <!-- (삭제 x)  본문 섹션 wrapper div -->
 <div class="sections-wrapper">
-
 	<!-- : 섹션 1,2,3,4,5 중 사용할 섹션만 남기고 삭제  --> 
 	${cursor }
-	
+
 	<!-- 섹션 1: 3단 그리드 레이아웃 -->
 	<section id="layout-section-1">
 		<!-- 실제 콘텐츠 wrapper div -->
@@ -60,7 +56,6 @@
 			</div>
 		</div> <!-- /실제 콘텐츠 wrapper div -->
 	</section> <!-- /섹션 1: 3단 그리드 레이아웃 -->
-	
 	<!-- 섹션 2: 자동 조절 그리드 -->
 	<section id="layout-section-2">
 		<!-- 실제 콘텐츠 wrapper div -->
@@ -83,7 +78,6 @@
 			</div>
 		</div> <!-- /실제 콘텐츠 wrapper div -->
 	</section> <!-- /섹션 2: 자동 조절 그리드 -->
-	
 	<!-- 섹션 3: 복합 레이아웃 -->
 	<section id="layout-section-3">
 		<!-- 실제 콘텐츠 wrapper div -->
@@ -111,7 +105,6 @@
 			</div>
 		</div> <!-- /실제 콘텐츠 wrapper div -->
 	</section> <!-- /섹션 3: 복합 레이아웃 -->
-	
 	<!-- 섹션 4: 강사/강좌 목록 섹션 -->
 	<section id="teacher-section">
 		<!-- wrapper div 추가 -->
@@ -162,7 +155,6 @@
 			</div> <!-- /실제 콘텐츠 wrapper div -->
   			</div> <!-- /wrapper div 추가 -->
 	</section> <!-- /섹션 4: 강사/강좌 목록 섹션 -->
-	
 	<!-- 섹션5 : 선생님 상세 페이지 -->
 	<section id="teacher-detail-section">
 		<!-- wrapper div .teacher-detail-container -->
@@ -228,8 +220,6 @@
 		</div> <!-- /wrapper div .teacher-detail-container -->
 	</section> <!-- /섹션5 : 선생님 상세 페이지 -->
 
-
-
 </div> <!-- (삭제 x) /본문 섹션 wrapper div -->
 </main> <!-- /메인 콘텐츠 -->
 <!-- 5. 푸터 영역 -->
@@ -239,7 +229,6 @@
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <!-- 6. 페이지별 스크립트 APi-컴포넌트-페이지 순 -->
-<%-- <script src="${path}/resources/js/-"></script> --%>
-	
 </body>
 </html>
+
