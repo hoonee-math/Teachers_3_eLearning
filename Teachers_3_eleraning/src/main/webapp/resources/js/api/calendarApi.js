@@ -303,10 +303,22 @@ document.addEventListener('DOMContentLoaded', function() {
 		} catch (error) {
 			console.error('일정 추가 중 에러:', error);
 		}
-
 	} catch (error) {
 		console.error('캘린더 에러:', error);
 	}
+
+	// 캘린더 초기화 코드...
+	// 이벤트 추가 코드...
+	// 날짜를 한글 형식으로 변환하는 함수
+	function formatDateToKorean(date) {
+	    const month = date.getMonth() + 1;  // getMonth()는 0부터 시작
+	    const day = date.getDate();
+	    const hours = date.getHours().toString().padStart(2, '0');
+	    const minutes = date.getMinutes().toString().padStart(2, '0');
+	    
+	    return `${month}월 ${day}일 ${hours}시 ${minutes}분`;
+	}
+	// 클릭 이벤트 처리 코드...
 
 	// 일정 클릭 이벤트
 	// Change from clickSchedule to clickEvent
@@ -370,10 +382,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		               <span class="label">과목:</span> ${event.calendarId}
 		           </div>
 		           <div class="info-row">
-		               <span class="label">시작:</span> ${event.start.toLocaleString()}
+				   <span class="label">시작:</span> ${formatDateToKorean(event.start)}
 		           </div>
 		           <div class="info-row">
-		               <span class="label">종료:</span> ${event.end.toLocaleString()}
+				   <span class="label">종료:</span> ${formatDateToKorean(event.end)}
 		           </div>
 		           <div class="info-row">
 		               <span class="label">장소:</span> ${event.location || '온라인'}
