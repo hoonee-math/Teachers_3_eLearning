@@ -30,6 +30,8 @@ public class ApiCalendarEventsServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("=== Calendar Events API 호출 시작 ===");
+
 		try {
 			// 파라미터 받기
 			int grade = Integer.parseInt(request.getParameter("grade"));
@@ -38,6 +40,7 @@ public class ApiCalendarEventsServlet extends HttpServlet {
 			Map<String, Object> responseData = new HashMap<>();
 			responseData.put("grade", grade);
 			
+			System.out.println("요청된 학년: " + grade);
 			// 1. 해당 학년의 전체 강의 일정 조회
 			List<Map<String, Object>> events = lectureService.selectEventsByGrade(responseData);
 			responseData.put("events", events);
@@ -60,7 +63,10 @@ public class ApiCalendarEventsServlet extends HttpServlet {
 			// JSON 응답 설정
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(gson.toJson(responseData));
+			String jsonResponse = gson.toJson(responseData);
+			System.out.println("응답 데이터: " + jsonResponse);
+			System.out.println("=== Calendar Events API 호출 완료 ===");
+			response.getWriter().write(jsonResponse);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 showNowIndicator: true,
                 taskView: false,      // Task 행 제거
                 eventView: ['time'],  // 시간별 일정만 표시
-				milestoneView: false  // Removes the milestone row
             },
             gridSelection: false,      // 그리드 선택 기능 비활성화
             // 캘린더 테마 설정
@@ -79,6 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 일정 데이터 로드 함수
         function loadEvents(viewType = 'all') {
+            console.log('=== 일정 데이터 로드 시작 ===');
+
             const grade = sessionStorage.getItem('gradeNum') || '1';
             const params = new URLSearchParams({
                 grade: grade,
@@ -90,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!response.ok) {
                         throw new Error('서버 응답 오류: ' + response.status);
                     }
+                    console.log('서버 응답 성공');
                     return response.json();
                 })
                 .then(data => {
@@ -107,17 +109,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .catch(error => {
                     console.error('일정 로드 중 오류:', error);
-                    // 사용자에게 에러 알림
-                    Swal.fire({
-                        icon: 'error',
-                        title: '일정 로드 실패',
-                        text: '일정을 불러오는 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.'
-                    });
+                    // 기본 alert로 대체
+                    alert('일정을 불러오는 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
                 });
         }
 
         // 이벤트 데이터 변환 함수
         function transformEvents(data) {
+            console.log('원본 데이터:', data);
+
             return data.events.map(event => ({
                 id: String(event.EVENT_NO),
                 calendarId: event.TEACHER_SUBJECT,
