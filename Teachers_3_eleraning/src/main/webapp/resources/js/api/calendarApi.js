@@ -294,87 +294,98 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// 일정 클릭 이벤트
 	// Change from clickSchedule to clickEvent
+	// calendarApi.js 수정
 	calendar.on('clickEvent', function(eventObj) {
-	    console.log('Event clicked:', eventObj); // Debug log
+	    console.log('Event clicked:', eventObj);
 	    
-	    const event = eventObj.event; // Note: it's eventObj.event, not eventObj.schedule
+	    const event = eventObj.event;
 	    const width = 400;
-		const height = 350; // 버튼 추가를 위해 높이 약간 증가
+	    const height = 350;
 	    const left = (window.innerWidth - width) / 2;
 	    const top = (window.innerHeight - height) / 2;
 	    
-	    const popupContent = 		`
-		       <!DOCTYPE html>
-		       <html>
-		       <head>
-		           <title>강의 상세 정보</title>
-		           <style>
-		               body { 
-		                   font-family: Arial, sans-serif; 
-		                   padding: 20px; 
-		               }
-		               h2 { 
-		                   color: #333; 
-		                   margin-bottom: 20px; 
-		               }
-		               .info-row { 
-		                   margin-bottom: 10px; 
-		               }
-		               .label { 
-		                   font-weight: bold; 
-		                   color: #666; 
-		               }
-		               .button-container {
-		                   margin-top: 20px;
-		                   text-align: center;
-		               }
-		               .lecture-button {
-		                   background-color: #FAB350;
-		                   color: white;
-		                   padding: 10px 20px;
-		                   border: none;
-		                   border-radius: 5px;
-		                   cursor: pointer;
-		                   text-decoration: none;
-		                   display: inline-block;
-		                   margin: 0 5px;
-		               }
-		               .lecture-button:hover {
-		                   background-color: #e59d3b;
-		               }
-		               .lecture-button.disabled {
-		                   background-color: #cccccc;
-		                   cursor: not-allowed;
-		               }
-		           </style>
-		       </head>
-		       <body>
-		           <h2>${event.title}</h2>
-		           <div class="info-row">
-		               <span class="label">과목:</span> ${event.calendarId}
-		           </div>
-		           <div class="info-row">
-				   <span class="label">시작:</span> ${formatDateToKorean(event.start)}
-		           </div>
-		           <div class="info-row">
-				   <span class="label">종료:</span> ${formatDateToKorean(event.end)}
-		           </div>
-		           <div class="info-row">
-		               <span class="label">장소:</span> ${event.location || '온라인'}
-		           </div>
-		           <div class="button-container">
-				       <a href="${EXTERNAL_URLS.COURSE_DETAIL}/${event.id}" class="lecture-button" target="_blank">강의 상세보기</a>
-				       <a href="${EXTERNAL_URLS.LECTURE_ROOM}/${event.id}" class="lecture-button" target="_blank">강의실 입장</a>
-				   </div>
-		       </body>
-		       </html>
-		   `;
-		   
-		   const popup = window.open('', 'eventPopup', 
-		       `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`);
-		       
-		   popup.document.write(popupContent);
-		   popup.document.close();
+	    // 버튼 HTML을 조건부로 생성
+	    const buttonHtml = isLoggedIn ? `
+	        <div class="button-container">
+	            <a href="${EXTERNAL_URLS.COURSE_DETAIL}/${event.id}" class="lecture-button" target="_blank">강의 상세보기</a>
+	            <a href="${EXTERNAL_URLS.LECTURE_ROOM}/${event.id}" class="lecture-button" target="_blank">강의실 입장</a>
+	        </div>
+	    ` : `
+	        <div class="button-container">
+	            <p style="color: #666; text-align: center;">강의 정보를 보려면 로그인이 필요합니다.</p>
+	            <a href="#" class="lecture-button" onclick="window.opener.Modal.show('login'); window.close();">로그인하기</a>
+	        </div>
+	    `;
+
+	    const popupContent = `
+	        <!DOCTYPE html>
+	        <html>
+	        <head>
+	            <title>강의 상세 정보</title>
+	            <style>
+	                body { 
+	                    font-family: Arial, sans-serif; 
+	                    padding: 20px; 
+	                }
+	                h2 { 
+	                    color: #333; 
+	                    margin-bottom: 20px; 
+	                }
+	                .info-row { 
+	                    margin-bottom: 10px; 
+	                }
+	                .label { 
+	                    font-weight: bold; 
+	                    color: #666; 
+	                }
+	                .button-container {
+	                    margin-top: 20px;
+	                    text-align: center;
+	                }
+	                .lecture-button {
+	                    background-color: #FAB350;
+	                    color: white;
+	                    padding: 10px 20px;
+	                    border: none;
+	                    border-radius: 5px;
+	                    cursor: pointer;
+	                    text-decoration: none;
+	                    display: inline-block;
+	                    margin: 0 5px;
+	                }
+	                .lecture-button:hover {
+	                    background-color: #e59d3b;
+	                }
+	                .lecture-button.disabled {
+	                    background-color: #cccccc;
+	                    cursor: not-allowed;
+	                }
+	            </style>
+	        </head>
+	        <body>
+	            <h2>${event.title}</h2>
+	            <div class="info-row">
+	                <span class="label">과목:</span> ${event.calendarId}
+	            </div>
+	            <div class="info-row">
+	                <span class="label">시작:</span> ${formatDateToKorean(event.start)}
+	            </div>
+	            <div class="info-row">
+	                <span class="label">종료:</span> ${formatDateToKorean(event.end)}
+	            </div>
+	            <div class="info-row">
+	                <span class="label">장소:</span> ${event.location || '온라인'}
+	            </div>
+	            ${buttonHtml}
+	        </body>
+	        </html>
+	    `;
+	       
+	    const popup = window.open('', 'eventPopup', 
+	        `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`);
+	        
+	    popup.document.write(popupContent);
+	    popup.document.close();
 	});
 		
 });

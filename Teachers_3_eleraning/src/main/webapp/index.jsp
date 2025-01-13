@@ -5,6 +5,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<script>
+    // loginMember 존재 여부를 전역변수로 설정
+    const isLoggedIn = ${not empty loginMember};
+    const loginMemberType = ${empty loginMember ? 0 : loginMember.memberType};
+</script>
 
 <!DOCTYPE html>
 <html lang="ko">
