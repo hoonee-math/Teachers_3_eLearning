@@ -11,7 +11,7 @@
 <jsp:include page="/WEB-INF/views/common/head.jsp" />
 <!-- 2. 페이지별 CSS -->
 <link rel="stylesheet" href="${path}/resources/css/pages/courseList.css">
-<link rel="stylesheet" href="${path}/resources/css/pages/teacherListAndDetail.css">
+<link rel="stylesheet" href="${path}/resources/css/teacher/teacherList.css">
 <link rel="stylesheet" href="${path}/resources/css/teacher/teacherBoardCommon.css">
 <title>Honey T</title>
 	
@@ -228,7 +228,6 @@
 </div> <!-- /콘텐츠 영역 -->
 
 <jsp:include page="/WEB-INF/views/common/scripts.jsp" />
-<!-- 6. 페이지별 스크립트 APi-컴포넌트-페이지 순 -->
 </body>
 </html>
 
