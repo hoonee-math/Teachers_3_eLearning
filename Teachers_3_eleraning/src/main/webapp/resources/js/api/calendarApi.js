@@ -269,40 +269,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 		
 		// 일정 추가 시도
-		try {
-			// 이벤트 추가 전 확인
-			console.log('calendar 인스턴스:', calendar);
+		calendar.createEvents(events); // createSchedules 대신 createEvents 사용
+		console.log('일정 추가 성공');
 
-			// calendar의 모든 메서드 확인
-			console.log('calendar methods:', Object.getOwnPropertyNames(Object.getPrototypeOf(calendar)));
-
-			// 이벤트 추가
-			calendar.createEvents(events); // createSchedules 대신 createEvents 사용
-			console.log('일정 추가 성공');
-
-			try {
-				// TUI Calendar v2.1.3에서는 다음 메서드들을 사용
-				// 현재 뷰에 표시된 이벤트 가져오기
-				const currentEvents = calendar.getDisplayEvents();
-				console.log('현재 표시된 이벤트:', currentEvents);
-
-				// 특정 날짜의 이벤트 가져오기
-				const targetDate = new Date('2025-01-05');
-				const eventsInRange = calendar.getEventsByRange(
-					targetDate,
-					new Date(targetDate.getTime() + 24 * 60 * 60 * 1000)
-				);
-				console.log('2024-01-05의 이벤트:', eventsInRange);
-			} catch (error) {
-				console.error('이벤트 조회 중 에러:', error);
-			}
-
-			// 날짜 이동
-			calendar.setDate(now);
-			console.log('날짜 설정 성공');
-		} catch (error) {
-			console.error('일정 추가 중 에러:', error);
-		}
+		// 날짜 이동
+		calendar.setDate(now);
+		console.log('날짜 설정 성공');
 	} catch (error) {
 		console.error('캘린더 에러:', error);
 	}

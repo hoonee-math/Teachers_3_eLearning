@@ -31,7 +31,7 @@ function handleEmailSelect() {
 
 // 회원가입 폼 유효성 검사
 function fn_invalidate() {
-	/*// 아이디 중복검사에 사용된 아이디 사용
+	// 아이디 중복검사에 사용된 아이디 사용
     const memberId = $("#memberId_").val();
     if(memberId.length < 4) {
         alert("아이디는 4글자 이상 입력해 주세요.");
@@ -52,7 +52,7 @@ function fn_invalidate() {
         alert("비밀번호는 영문자,숫자,특수기호(!@#$%^&*())를 포함한 8글자 이상으로 입력해 주세요");
         return false;
     }
-    return true;*/
+    return true;
 }
 
 // 비밀번호 일치 확인
@@ -288,6 +288,6 @@ function schoolSearch(e) {
 }
 
 function cancelEnroll(e) {
-	alert("양식을 초기화하고 초기화면으로 아가시겠습니까?");
+	alert("양식을 초기화하고 초기화면으로 돌아가시겠습니까?");
 	location.assign(path);
 }

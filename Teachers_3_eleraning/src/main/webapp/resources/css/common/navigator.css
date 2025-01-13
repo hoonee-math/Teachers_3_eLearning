@@ -207,7 +207,7 @@
 	
 	/* 컨텐츠 여백 추가 (모바일 헤더 높이만큼) */
 	.header-container {
-		padding-top: 50px; /* mobile-btn-section 높이만큼 여백 */
+		margin-bottom: -10px;
 	}
 	
 	.mobile-btn-section {
@@ -284,6 +284,5 @@
 	}
 	
 	.dday-container {
-		margin-top: 50px;
 	}
 }

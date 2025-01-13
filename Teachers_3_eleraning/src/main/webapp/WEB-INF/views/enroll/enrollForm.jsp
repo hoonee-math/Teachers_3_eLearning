@@ -175,7 +175,7 @@
 </script>
 <!-- 6. 페이지별 스크립트 APi-컴포넌트-페이지 순 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음 우편번호 서비스 -->
-<script src="${pageContext.request.contextPath}/resources/js/enroll/enrollMember.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/enroll/enrollForm.js"></script>
 	
 	
 </body>
