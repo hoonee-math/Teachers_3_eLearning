@@ -163,7 +163,7 @@ section {
 			<!-- 섹션4: 캘린더 섹션 -->
 			<section id="calendarSection" class="calendar-section">
 				<!-- 캘린더 컨트롤러 -->
-				<div class="calendar-controls">
+				<%-- <div class="calendar-controls">
 					<!-- 현재 선택된 학년 표시 -->
 					<div class="current-grade">
 						<span>고${gradeNum} 강의 일정</span>
@@ -188,7 +188,7 @@ section {
 							</select>
 						</div><!-- /.view-toggles -->
 					</c:if>
-				</div><!-- /.calendar-controls -->
+				</div> --%><!-- /.calendar-controls -->
 				<div class="calendar-container">
 					<h2 class="section-title">학습 일정</h2>
 					<div id="calendar" style="height: 600px;"></div>

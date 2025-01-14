@@ -5,12 +5,22 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<!-- JSP/JSTL 태그 라이브러리 선언 바로 아래에 추가 -->
+<%@ page import="com.google.gson.Gson" %>
+
 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <jsp:include page="/WEB-INF/views/common/head.jsp" />
 <title>선생님 | Honey T</title>
+<!-- </title> 태그 아래에 추가 -->
+<script>
+    // 전체 교사 데이터를 JavaScript 객체로 변환
+    const allTeachers = <%= new Gson().toJson(request.getAttribute("teachers")) %>;
+    const itemsPerPage = 5; // 페이지당 표시할 항목 수
+    const path = '${pageContext.request.contextPath}'; // 컨텍스트 경로 추가
+</script>
 <link rel="stylesheet" href="${path}/resources/css/teacher/teacherList.css">
 <link rel="stylesheet" href="${path}/resources/css/teacher/teacherBoardCommon.css">
 <link rel="stylesheet" href="${path}/resources/css/pages/courseList.css">
@@ -85,25 +95,9 @@
 								</c:forEach>
 							</div>
 							<!-- 페이징 바 -->
-							<div class="pagination">
-								<c:if test="${pageStart > 1}">
-									<a href="${path}/teacher/list_and_detail?cpage=${pageStart-1}&subject=${selectedSubject}" class="page-arrow">&lt;</a>
-								</c:if>
-								<c:forEach var="i" begin="${pageStart}" end="${pageEnd}">
-									<c:choose>
-										<c:when test="${i == cpage}">
-											<span class="current-page">${i}</span>
-										</c:when>
-										<c:otherwise>
-											<a href="${path}/teacher/list_and_detail?cpage=${i}&subject=${selectedSubject}">${i}</a>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							
-								<c:if test="${pageEnd < totalPage}">
-									<a href="${path}/teacher/list_and_detail?cpage=${pageEnd+1}&subject=${selectedSubject}" 
-									   class="page-arrow">&gt;</a>
-								</c:if>
+							<!-- <div class="pagination"> 부분을 아래 코드로 교체 -->
+							<div class="pagination" id="teacherPagination">
+								<!-- 페이징 버튼은 JavaScript로 동적 생성됩니다 -->
 							</div>
 							<!-- 데이터 확인용 디버깅 출력 -->
 							<div style="display: none;">
@@ -123,6 +117,8 @@
 
 	<jsp:include page="/WEB-INF/views/common/scripts.jsp" />
 <script src="${path}/resources/js/teacher/teacherListAccordion.js"></script>
+<!-- 기존 scripts.jsp include 아래에 추가 -->
+<script src="${path}/resources/js/teacher/teacherPaging.js"></script>
 
 </body>
 </html>

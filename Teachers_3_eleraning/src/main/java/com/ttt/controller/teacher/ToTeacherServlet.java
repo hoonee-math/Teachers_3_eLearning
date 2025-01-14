@@ -36,10 +36,10 @@ public class ToTeacherServlet extends HttpServlet {
 			} catch (NumberFormatException e) { }
 
 			int numPerPage = 5; // 한 페이지당 데이터 수
-
-			// 현재 페이지에 해당하는 데이터만 추출
-			int start = (cpage - 1) * numPerPage;
-			int end = start + numPerPage;
+//
+//			// 현재 페이지에 해당하는 데이터만 추출
+//			int start = (cpage - 1) * numPerPage;
+//			int end = start + numPerPage;
 
             // 과목 파라미터 처리 - 초기값을 'all'로 설정
             String teacherSubject = request.getParameter("subject");
@@ -50,8 +50,8 @@ public class ToTeacherServlet extends HttpServlet {
             
 			// 데이터 조회를 위한 파라미터 맵 생성
 			Map<String, Object> params = new HashMap<>();
-			params.put("start", start);
-			params.put("end", end);
+//			params.put("start", start);
+//			params.put("end", end);
 			params.put("teacherSubject", teacherSubject); // null이면 전체 조회
             
             List<Member3> teachers = new MemberService().selectAllTeachers(params);
@@ -59,6 +59,11 @@ public class ToTeacherServlet extends HttpServlet {
 			// 전체 데이터 수
 			int totalData = new MemberService().getTotalTeacherCount(teacherSubject); // 전체 데이터 수를 DB에서 직접 조회
 			// teachers.size()를 사용하면 현재 페이지의 데이터 수만 세게 됨
+			
+
+	        // 전체 데이터 수
+	        totalData = teachers.size();
+	        
 			System.out.println("데이터 수: " +totalData+","+teachers.size());
 			// 전체 페이지 수 계산
 			int totalPage = (int) Math.ceil((double) totalData / numPerPage);

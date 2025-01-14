@@ -101,25 +101,20 @@
 	</select>
 	<!-- teacherListAndDetail 페이지의 리스트에 교사 출력용 -->
 	<select id="selectAllTeachers" parameterType="map" resultMap="memberMap">
-		SELECT * FROM (
-	        SELECT ROWNUM AS RNUM, A.* FROM (
-				SELECT M.MEMBER_NO, M.MEMBER_NAME, M.ENROLL_DATE,
-					T.TEACHER_SUBJECT, T.TEACHER_INFO_TITLE, T.TEACHER_INFO_CONTENT,
-					S.TEACHER_SUBJECT_NAME,
-					I.IMG_NO, I.RENAMED
-				FROM MEMBER3 M
-					LEFT JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
-					LEFT JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
-					LEFT JOIN IMAGE3 I ON T.IMG_NO = I.IMG_NO
-				WHERE M.MEMBER_TYPE = 2
-	            <if test="teacherSubject != null and teacherSubject != 'all'">
-					AND S.TEACHER_SUBJECT = #{teacherSubject}
-				</if>
-				ORDER BY M.MEMBER_NO
-			) A
-			WHERE #{end} >= ROWNUM
-		)
-		WHERE RNUM >= #{start}
+		 SELECT 
+        M.MEMBER_NO, M.MEMBER_NAME, M.ENROLL_DATE,
+        T.TEACHER_SUBJECT, T.TEACHER_INFO_TITLE, T.TEACHER_INFO_CONTENT,
+        S.TEACHER_SUBJECT_NAME,
+        I.IMG_NO, I.RENAMED
+    FROM MEMBER3 M
+        LEFT JOIN TEACHERS3 T ON M.MEMBER_NO = T.MEMBER_NO
+        LEFT JOIN SUBJECT3 S ON T.TEACHER_SUBJECT = S.TEACHER_SUBJECT
+        LEFT JOIN IMAGE3 I ON T.IMG_NO = I.IMG_NO
+    WHERE M.MEMBER_TYPE = 2
+    <if test="teacherSubject != null and teacherSubject != 'all'">
+        AND S.TEACHER_SUBJECT = #{teacherSubject}
+    </if>
+    ORDER BY M.MEMBER_NO
 	</select>
 	<!-- 전체 교사 수를 totlaCount 페이징 처리용 쿼리 -->
 	<select id="getTotalTeacherCount" parameterType="string" resultType="int">

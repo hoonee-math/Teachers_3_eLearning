@@ -5,38 +5,24 @@ $(document).ready(function() {
     // 초기 상태 설정
     $('.accordion-content').hide();
 
-    // 아코디언 메뉴 기능 
-    $('.accordion-header').click(function() {
-        const content = $(this).next('.accordion-content');
-        const isActive = $(this).hasClass('active');
-        const subject = $(this).data('subject');
+	$('.accordion-header').click(function() {
+	    const content = $(this).next('.accordion-content');
+	    const isActive = $(this).hasClass('active');
+	    const subject = $(this).data('subject');
 
-        // 다른 모든 아코디언 닫기
-        $('.accordion-header').removeClass('active');
-        $('.accordion-content').slideUp(300);
+	    // 다른 모든 아코디언 닫기
+	    $('.accordion-header').removeClass('active');
+	    $('.accordion-content').slideUp(300);
 
-        // 클릭된 아코디언 토글
-        if (!isActive) {
-            $(this).addClass('active');
-            content.slideDown(300);
-            
-            // 과목 선택시 해당 과목의 1페이지로 이동
-            location.href = `${path}/teacher/list_and_detail?subject=${subject}&cpage=1`;
-            
-            // 오른쪽 섹션 상단 과목 타이틀 업데이트
-            $('.list-title').text(subject + ' 선생님');
-        }
-
-			// window.teachersBySubject 데이터 활용
-			updateAccordionContent(subject, content);
-
-			// 선생님 목록 로드 (1페이지부터)
-			loadTeachersBySubject(subject, 1);
-			console.log(subject);
-
-			// 오른쪽 섹션 상단 과목 타이틀 업데이트
-			$('.list-title').text(subject + ' 선생님');
-		})
+	    // 클릭된 아코디언 토글
+	    if (!isActive) {
+	        $(this).addClass('active');
+	        content.slideDown(300);
+	        
+	        // 과목별 필터링 함수 호출
+	        filterBySubject(subject);
+	    }
+	});
 	});
 /*
 	// 페이지네이션 클릭 이벤트 위임
@@ -67,7 +53,7 @@ function updateAccordionContent(subject, contentElement) {
         contentElement.html(html);
     }*/
 }
-
+/*
 // 과목별 선생님 목록 로드 함수
 function loadTeachersBySubject(subject, page) {
 	$.ajax({
@@ -94,7 +80,7 @@ function loadTeachersBySubject(subject, page) {
 			console.error('선생님 목록 로드 중 오류 발생:', error);
 		}
 	});
-}
+}*/
 
 // 선생님 카드 클릭 이벤트 위임
 $(document).on('click', '.teacher-card', function() {
